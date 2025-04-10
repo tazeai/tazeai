@@ -1,0 +1,29 @@
+{
+  "name": "@tazeai/core",
+  "version": "0.0.1",
+  "license": "Apache-2.0",
+  "type": "module",
+  "exports": {
+    ".": "./index.ts",
+    "./envs": "./envs.ts",
+    "./server": "./server/index.ts"
+  },
+  "scripts": {
+    "clean": "rimraf dist .turbo"
+  },
+  "dependencies": {
+    "@t3-oss/env-nextjs": "^0.12.0",
+    "@tazeai/auth": "workspace:*",
+    "@tazeai/database": "workspace:*",
+    "dayjs": "^1.11.13",
+    "defu": "^6.1.4",
+    "hono": "^4.7.5",
+    "pino": "^9.6.0",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "@tazeai/typescript-config": "workspace:*",
+    "typescript": "catalog:"
+  }
+}

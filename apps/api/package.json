@@ -1,0 +1,28 @@
+{
+  "name": "@tazeai/api",
+  "type": "module",
+  "scripts": {
+    "build": "pnpm with-env tsup",
+    "clean": "rimraf dist .turbo dist",
+    "deploy": "vercel",
+    "deploy:vercel": "vercel",
+    "dev": "pnpm with-env tsx watch src/index.ts",
+    "vercel-build": "pnpm with-env tsup",
+    "with-env": "dotenv -e ../../.env --"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.14.0",
+    "@t3-oss/env-nextjs": "^0.12.0",
+    "@tazeai/auth": "workspace:*",
+    "@tazeai/core": "workspace:*",
+    "@tazeai/database": "workspace:*",
+    "hono": "^4.7.5"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "@tazeai/typescript-config": "workspace:*",
+    "tsup": "^8.4.0",
+    "tsx": "^4.19.3",
+    "typescript": "catalog:"
+  }
+}

@@ -1,0 +1,79 @@
+import { Hono } from 'hono';
+import { contextStorage } from 'hono/context-storage';
+import { prettyJSON } from 'hono/pretty-json';
+import { requestId } from 'hono/request-id';
+import { cors } from 'hono/cors';
+import { db, type Database } from '@tazeai/database';
+import { compress } from 'hono/compress';
+import { languageDetector } from 'hono/language';
+import type { HonoOptions } from 'hono/hono-base';
+import { auth } from '@tazeai/auth';
+import user from './routes/user';
+
+type Variables = {
+  db: Database;
+  session?: Awaited<ReturnType<typeof auth.api.getSession>>;
+};
+
+type Env = {
+  Variables: Variables;
+};
+
+export interface ServerOptions extends HonoOptions<Env> {
+  prefix?: string;
+}
+
+export class TazeAIServer extends Hono<Env> {
+  private db: Database;
+  // fix for hono base path
+  private _basePath: string;
+
+  constructor(options: ServerOptions) {
+    const { prefix, ...rest } = options;
+    super(rest);
+    this._basePath = prefix ?? '/';
+    this.db = db;
+
+    // Middleware
+    this.use(contextStorage());
+    this.use(prettyJSON());
+    this.use(requestId());
+    this.use(cors());
+    this.use(compress());
+    this.use(
+      languageDetector({
+        supportedLanguages: ['en', 'zh'], // Must include fallback
+        fallbackLanguage: 'en', // Required
+        lookupCookie: 'lang',
+        cookieOptions: {
+          path: '/',
+          httpOnly: true,
+          secure: process.env.NODE_ENV === 'production',
+          sameSite: 'Lax',
+          domain: process.env.NODE_ENV === 'production' ? '.tazeai.com' : undefined,
+        },
+      }),
+    );
+
+    this.use('*', async (c, next) => {
+      const session = await auth.api.getSession({ headers: c.req.raw.headers });
+      console.log('session', session);
+      c.set('session', session);
+      return next();
+    });
+    // Database
+    this.use('*', async (c, next) => {
+      c.set('db', this.db);
+      await next();
+    });
+
+    // Routes
+    this.route('/users', user);
+
+    this.get('/health', (c) => {
+      return c.json({ message: 'OK' });
+    });
+  }
+}
+
+export { handle as vercel } from 'hono/vercel';
