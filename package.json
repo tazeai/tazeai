@@ -7,14 +7,15 @@
     "url": "https://github.com/tazeai/tazeai"
   },
   "license": "Apache-2.0",
-  "type": "module",
   "scripts": {
     "build": "turbo build --filter=\"./packages/**\"",
     "changeset": "changeset",
     "clean": "turbo run clean --parallel",
+    "postinstall": "manypkg fix",
     "coverage": "vitest --coverage",
     "dev": "NODE_ENV=development turbo dev --parallel --filter=\"./apps/website\"",
     "format": "biome format --write",
+    "generate": "turbo gen",
     "lint": "biome check",
     "prepare": "husky",
     "start": "turbo run start --filter=\"./apps/*\"",
@@ -26,12 +27,11 @@
       "pnpm format"
     ]
   },
-  "dependencies": {
-    "@turbo/gen": "^2.5.0"
-  },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@changesets/cli": "^2.28.1",
+    "@manypkg/cli": "^0.23.0",
+    "@turbo/gen": "^2.5.0",
     "@types/fs-extra": "^11.0.4",
     "@types/lodash-es": "^4.17.12",
     "@types/node": "catalog:",

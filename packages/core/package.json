@@ -6,7 +6,7 @@
   "exports": {
     ".": "./index.ts",
     "./envs": "./envs.ts",
-    "./server": "./server/index.ts"
+    "./server": "./server.ts"
   },
   "scripts": {
     "clean": "rimraf dist .turbo"
@@ -17,13 +17,13 @@
     "@tazeai/database": "workspace:*",
     "dayjs": "^1.11.13",
     "defu": "^6.1.4",
-    "hono": "^4.7.5",
+    "hono": "^4.7.6",
     "pino": "^9.6.0",
     "zod": "^3.24.2"
   },
   "devDependencies": {
-    "@types/node": "catalog:",
     "@tazeai/typescript-config": "workspace:*",
+    "@types/node": "catalog:",
     "typescript": "catalog:"
   }
 }

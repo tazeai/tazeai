@@ -28,8 +28,8 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
-    "@types/lodash-es": "^4.17.12",
     "@tazeai/typescript-config": "workspace:*",
+    "@types/lodash-es": "^4.17.12",
     "dotenv-cli": "^8.0.0",
     "drizzle-kit": "^0.30.6",
     "tsx": "^4.19.3",

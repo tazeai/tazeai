@@ -21,6 +21,10 @@
     "clean": {
       "cache": false,
       "outputLogs": "none"
+    },
+    "generate": {
+      "cache": false,
+      "outputLogs": "none"
     }
   }
 }

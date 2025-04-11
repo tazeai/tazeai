@@ -26,7 +26,6 @@
     "better-auth": "^1.2.5",
     "lucide-react": "catalog:",
     "nanoid": "^5.1.5",
-    "nanostores": "^0.11.4",
     "react-hook-form": "^7.55.0",
     "react-i18next": "^15.4.1",
     "server-only": "^0.0.1",
@@ -35,10 +34,10 @@
     "zustand": "^5.0.3"
   },
   "devDependencies": {
+    "@tazeai/typescript-config": "workspace:*",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "@tazeai/typescript-config": "workspace:*",
     "typescript": "catalog:"
   }
 }

@@ -62,11 +62,7 @@ const config: BetterAuthOptions = {
       },
     },
   },
-  plugins: [
-    organization(),
-    apiKey(),
-    admin(),
-  ],
+  plugins: [organization(), apiKey(), admin()],
 };
 
 export const auth = betterAuth(config);

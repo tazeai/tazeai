@@ -11,16 +11,16 @@
     "with-env": "dotenv -e ../../.env --"
   },
   "dependencies": {
-    "@hono/node-server": "^1.14.0",
+    "@hono/node-server": "^1.14.1",
     "@t3-oss/env-nextjs": "^0.12.0",
     "@tazeai/auth": "workspace:*",
     "@tazeai/core": "workspace:*",
     "@tazeai/database": "workspace:*",
-    "hono": "^4.7.5"
+    "hono": "^4.7.6"
   },
   "devDependencies": {
-    "@types/node": "catalog:",
     "@tazeai/typescript-config": "workspace:*",
+    "@types/node": "catalog:",
     "tsup": "^8.4.0",
     "tsx": "^4.19.3",
     "typescript": "catalog:"
