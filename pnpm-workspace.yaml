@@ -5,10 +5,10 @@ packages:
 
 catalog:
   '@heroui/react': ^2.7.6
-  '@types/node': ^22.14.0
+  '@types/node': ^22.14.1
   "@types/react-dom": ^19.1.2
-  "@types/react": ^19.1.0
-  lucide-react: ^0.487.0
+  "@types/react": ^19.1.1
+  lucide-react: ^0.488.0
   next: latest
   react-dom: ^19.1.0
   react: ^19.1.0

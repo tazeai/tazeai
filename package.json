@@ -39,7 +39,7 @@
     "fast-glob": "^3.3.3",
     "fs-extra": "^11.3.0",
     "husky": "^9.1.7",
-    "lint-staged": "^15.5.0",
+    "lint-staged": "^15.5.1",
     "lodash-es": "^4.17.21",
     "pathe": "^2.0.3",
     "picocolors": "^1.1.1",
