@@ -1,1 +1,1 @@
-export const name = 'i18n';
+export * from './create-i18n-settings';

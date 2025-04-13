@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "with-env": "dotenv -e ../../.env --",
-    "dev": "pnpm with-env next dev --turbopack",
     "build": "pnpm with-env next build",
+    "dev": "pnpm with-env next dev --turbopack",
+    "lint": "pnpm with-env next lint",
     "start": "pnpm with-env next start",
-    "lint": "pnpm with-env next lint"
+    "with-env": "dotenv -e ../../.env --"
   },
   "dependencies": {
     "@tazeai/ui": "workspace:*",

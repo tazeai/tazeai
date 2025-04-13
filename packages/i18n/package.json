@@ -1,16 +1,12 @@
 {
   "name": "@tazeai/i18n",
-  "private": true,
   "version": "0.0.1",
+  "private": true,
   "exports": {
-    ".": "./index.ts"
-  },
-  "typesVersions": {
-    "*": {
-      "*": [
-        "src/*"
-      ]
-    }
+    ".": "./src/index.ts",
+    "./server": "./src/i18n.server.ts",
+    "./client": "./src/i18n.client.ts",
+    "./provider": "./src/i18n-provider.tsx"
   },
   "scripts": {
     "clean": "rimraf dist .turbo"
@@ -18,7 +14,8 @@
   "dependencies": {
     "i18next": "^24.2.3",
     "i18next-browser-languagedetector": "^8.0.4",
-    "i18next-resources-to-backend": "^1.2.1"
+    "i18next-resources-to-backend": "^1.2.1",
+    "react-i18next": "^15.4.1"
   },
   "devDependencies": {
     "@tazeai/typescript-config": "workspace:*",
