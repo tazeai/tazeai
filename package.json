@@ -13,6 +13,7 @@
     "clean": "turbo run clean --parallel",
     "postinstall": "manypkg fix",
     "coverage": "vitest --coverage",
+    "bump-ui": "pnpx shadcn@canary add --all --overwrite -c packages/ui && pnpm format",
     "dev": "NODE_ENV=development turbo dev --parallel --filter=\"./apps/website\"",
     "format": "biome format --write",
     "generate": "turbo gen",

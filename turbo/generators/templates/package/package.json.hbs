@@ -3,17 +3,12 @@
   "private": true,
   "version": "0.0.1",
   "exports": {
-    ".": "./index.ts"
-  },
-  "typesVersions": {
-    "*": {
-      "*": [
-        "src/*"
-      ]
-    }
+    ".": "./src/index.ts"
   },
   "scripts": {
     "clean": "rimraf dist .turbo"
+  },
+  "dependencies": {
   },
   "devDependencies": {
     "@tazeai/typescript-config": "workspace:*",

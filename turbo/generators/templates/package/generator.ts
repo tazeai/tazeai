@@ -37,11 +37,6 @@ export function createPackageGenerator(plop: PlopTypes.NodePlopAPI) {
       },
       {
         type: 'add',
-        path: 'packages/{{ name }}/index.ts',
-        template: "export * from './src';",
-      },
-      {
-        type: 'add',
         path: 'packages/{{ name }}/src/index.ts',
         template: "export const name = '{{ name }}';",
       },
@@ -52,9 +47,9 @@ export function createPackageGenerator(plop: PlopTypes.NodePlopAPI) {
           const pkg = JSON.parse(content);
 
           for (const dep of answers.deps.split(' ').filter(Boolean)) {
-            const version = await fetch(`https://registry.npmjs.org/-/package/${dep}/dist-tags`)
-              .then((res) => res.json())
-              .then((json) => json.latest);
+            const version = await fetch(`https://registry.npmjs.org/-/package/${dep}/dist-tags`).then(
+              (res) => (res.json() as unknown as { latest: string }).latest,
+            );
 
             pkg.dependencies![dep] = `^${version}`;
           }
