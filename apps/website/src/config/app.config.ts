@@ -6,12 +6,12 @@ const AppConfigSchema = z
   .object({
     name: z
       .string({
-        description: `This is the name of your SaaS. Ex. "VizoAI"`,
+        description: `This is the name of your SaaS. Ex. "TazeAI"`,
         required_error: `Please provide the variable NEXT_PUBLIC_PRODUCT_NAME`,
       })
       .min(1)
       .optional()
-      .default('VizoAI'),
+      .default('TazeAI'),
     title: z
       .string({
         description: `This is the default title tag of your SaaS.`,
@@ -19,14 +19,14 @@ const AppConfigSchema = z
       })
       .min(1)
       .optional()
-      .default('VizoAI'),
+      .default('TazeAI'),
     description: z
       .string({
         description: `This is the default description of your SaaS.`,
         required_error: `Please provide the variable NEXT_PUBLIC_SITE_DESCRIPTION`,
       })
       .optional()
-      .default('VizoAI'),
+      .default('TazeAI'),
     url: z
       .string({
         required_error: `Please provide the variable NEXT_PUBLIC_SITE_URL`,
@@ -35,7 +35,7 @@ const AppConfigSchema = z
         message: `You are deploying a production build but have entered a NEXT_PUBLIC_SITE_URL variable using http instead of https. It is very likely that you have set the incorrect URL. The build will now fail to prevent you from from deploying a faulty configuration. Please provide the variable NEXT_PUBLIC_SITE_URL with a valid URL, such as: 'https://example.com'`,
       })
       .optional()
-      .default('https://vizoai.com'),
+      .default('https://tazeai.com'),
     locale: z
       .string({
         description: `This is the default locale of your SaaS.`,
@@ -74,10 +74,10 @@ const AppConfigSchema = z
   );
 
 const appConfig = {
-  name: 'VizoAI',
-  title: 'VizoAI',
-  description: 'VizoAI',
-  url: 'https://vizoai.com',
+  name: 'TazeAI',
+  title: 'TazeAI',
+  description: 'TazeAI',
+  url: 'https://tazeai.com',
   locale: 'en',
   theme: 'system',
   themeColor: '#000000',

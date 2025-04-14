@@ -4,7 +4,6 @@ import { cn } from '@tazeai/ui/lib/utils';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@tazeai/ui/components/card';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@tazeai/ui/components/form';
 import { Button } from '@tazeai/ui/components/button';
-import { Icon } from '@iconify/react';
 import { useTranslation } from 'react-i18next';
 import { signIn } from '@tazeai/auth/client';
 import { Loader2 } from 'lucide-react';
@@ -12,6 +11,7 @@ import { useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { FaGithub, FaGoogle } from 'react-icons/fa';
 import { Input } from '@tazeai/ui/components/input';
 import { toast } from 'sonner';
 import { useSearchParams } from 'next/navigation';
@@ -98,7 +98,7 @@ export function SignInForm({ className, ...props }: React.ComponentPropsWithoutR
                 disabled={isLoading}
                 onClick={() => onSocialLogin('github')}
               >
-                <Icon icon="fe:github" className="size-4" />
+                <FaGithub className="size-4" />
                 Login with Github
               </Button>
               <Button
@@ -107,7 +107,7 @@ export function SignInForm({ className, ...props }: React.ComponentPropsWithoutR
                 disabled={isLoading}
                 onClick={() => onSocialLogin('google')}
               >
-                <Icon icon="fe:google" className="size-4" />
+                <FaGoogle className="size-4" />
                 Login with Google
               </Button>
             </div>

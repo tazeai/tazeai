@@ -10,9 +10,9 @@ export default function SignInPage() {
       <div className="flex w-full max-w-sm flex-col gap-6">
         <Link href="/" className="flex items-center gap-2 self-center font-medium">
           <div className="flex h-6 w-6 items-center justify-center rounded-md bg-primary text-primary-foreground">
-            <Image src="/images/logo.png" alt="VizoAI" width={16} height={16} />
+            <Image src="/images/logo.png" alt="TazeAI" width={16} height={16} />
           </div>
-          VizoAI
+          TazeAI
         </Link>
         <SignInForm />
       </div>

@@ -10,11 +10,11 @@ export const siteConfig = {
     },
     {
       label: 'Docs',
-      href: 'https://docs.vizoai.com',
+      href: 'https://docs.tazeai.com',
     },
     {
       label: 'Status',
-      href: 'https://status.vizoai.com',
+      href: 'https://status.tazeai.com',
     },
   ],
   navMenuItems: [
@@ -52,7 +52,7 @@ export const siteConfig = {
     },
   ],
   links: {
-    github: 'https://github.com/vizoai/vizoai',
-    docs: 'https://docs.vizoai.com',
+    github: 'https://github.com/tazeai/tazeai',
+    docs: 'https://docs.tazeai.com',
   },
 };
