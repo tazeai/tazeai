@@ -4,8 +4,9 @@ import { z } from 'zod';
 export const envs = () =>
   createEnv({
     shared: {
-      isProd: z.boolean(),
       NEXT_PUBLIC_AUTH_URL: z.string().min(1).url(),
+      NEXT_PUBLIC_AUTH_GITHUB_ENABLED: z.string().optional(),
+      NEXT_PUBLIC_AUTH_GOOGLE_ENABLED: z.string().optional(),
     },
     server: {
       AUTH_GITHUB_ID: z.string().min(1).optional(),
@@ -22,9 +23,10 @@ export const envs = () =>
       AUTH_RESEND_KEY: process.env.AUTH_RESEND_KEY,
       AUTH_SECRET: process.env.AUTH_SECRET,
       AUTH_DOMAIN: process.env.AUTH_DOMAIN,
-      isProd: process.env.NODE_ENV === 'production',
       NEXT_PUBLIC_AUTH_URL: process.env.NEXT_PUBLIC_AUTH_URL,
       AUTH_GOOGLE_ID: process.env.AUTH_GOOGLE_ID,
       AUTH_GOOGLE_SECRET: process.env.AUTH_GOOGLE_SECRET,
+      NEXT_PUBLIC_AUTH_GITHUB_ENABLED: process.env.NEXT_PUBLIC_AUTH_GITHUB_ENABLED,
+      NEXT_PUBLIC_AUTH_GOOGLE_ENABLED: process.env.NEXT_PUBLIC_AUTH_GOOGLE_ENABLED,
     },
   });

@@ -10,6 +10,12 @@
     "with-env": "dotenv -e ../../.env --"
   },
   "dependencies": {
+    "@radix-ui/react-icons": "^1.3.2",
+    "@t3-oss/env-nextjs": "^0.12.0",
+    "@tazeai/auth": "workspace:*",
+    "@tazeai/core": "workspace:*",
+    "@tazeai/i18n": "workspace:*",
+    "@tazeai/shared": "workspace:*",
     "@tazeai/ui": "workspace:*",
     "next": "15.2.5",
     "react": "^19.1.0",

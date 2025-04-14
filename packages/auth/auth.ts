@@ -1,13 +1,12 @@
 import { db, schemas, nanoid, uuidv7 } from '@tazeai/database';
 import { betterAuth, type BetterAuthOptions } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
-import { magicLink, admin, organization, apiKey } from 'better-auth/plugins';
+import { admin, organization, apiKey } from 'better-auth/plugins';
 import { envs } from './envs';
 
 const env = envs();
 
 const config: BetterAuthOptions = {
-  appName: 'TazeAI',
   emailAndPassword: {
     enabled: true,
     autoSignIn: true,
@@ -15,12 +14,12 @@ const config: BetterAuthOptions = {
   baseURL: env.NEXT_PUBLIC_AUTH_URL,
   socialProviders: {
     github: {
-      enabled: !!(env.AUTH_GITHUB_ID && env.AUTH_GITHUB_SECRET),
+      enabled: !!(env.AUTH_GITHUB_ID && env.AUTH_GITHUB_SECRET && env.NEXT_PUBLIC_AUTH_GITHUB_ENABLED === 'true'),
       clientId: env.AUTH_GITHUB_ID ?? '',
       clientSecret: env.AUTH_GITHUB_SECRET ?? '',
     },
     google: {
-      enabled: !!(env.AUTH_GOOGLE_ID && env.AUTH_GOOGLE_SECRET),
+      enabled: !!(env.AUTH_GOOGLE_ID && env.AUTH_GOOGLE_SECRET && env.NEXT_PUBLIC_AUTH_GOOGLE_ENABLED === 'true'),
       clientId: env.AUTH_GOOGLE_ID ?? '',
       clientSecret: env.AUTH_GOOGLE_SECRET ?? '',
     },
