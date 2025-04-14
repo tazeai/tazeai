@@ -3,8 +3,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "@tazeai/ui/*": ["../../packages/ui/src/*"]
+      "@/*": ["./src/*"]
     },
     "plugins": [
       {
