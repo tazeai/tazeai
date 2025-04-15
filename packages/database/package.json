@@ -4,7 +4,8 @@
   "license": "Apache-2.0",
   "type": "module",
   "exports": {
-    ".": "./index.ts"
+    ".": "./index.ts",
+    "./envs": "./envs.ts"
   },
   "scripts": {
     "clean": "rimraf dist .turbo",

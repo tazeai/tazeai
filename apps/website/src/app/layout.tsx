@@ -3,6 +3,7 @@ import { Providers } from './providers';
 import { createI18nServerInstance } from '@/locales/i18n.server';
 import { getTheme } from '@/libs/theme';
 import { getFontsClassName } from '@/libs/fonts';
+import { Toaster } from '@tazeai/ui/components/sonner';
 import '../styles/globals.css';
 
 export const metadata: Metadata = {
@@ -24,6 +25,7 @@ export default async function RootLayout({
     <html lang={language} className={className} suppressHydrationWarning>
       <body>
         <Providers lang={language} themeProps={{ attribute: 'class', defaultTheme: theme }}>
+          <Toaster />
           {children}
         </Providers>
       </body>

@@ -1,22 +1,20 @@
 'use client';
 
 import { cn } from '@tazeai/ui/lib/utils';
+import { Button } from '@tazeai/ui/components/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@tazeai/ui/components/card';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@tazeai/ui/components/form';
-import { Button } from '@tazeai/ui/components/button';
+import Link from 'next/link';
+import { Input } from '@tazeai/ui/components/input';
 import { useTranslation } from 'react-i18next';
-import { signIn } from '@tazeai/auth/client';
-import { Loader2 } from 'lucide-react';
 import { useState } from 'react';
+import { signUp, signIn } from '@tazeai/auth/client';
+import { FaGithub, FaGoogle } from 'react-icons/fa';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { FaGithub, FaGoogle } from 'react-icons/fa';
-import { Input } from '@tazeai/ui/components/input';
 import { toast } from 'sonner';
 import { useSearchParams } from 'next/navigation';
-import { Label } from '@tazeai/ui/components/label';
-import Link from 'next/link';
 import { env } from '@/env';
 
 const formSchema = z.object({
@@ -28,7 +26,7 @@ const formSchema = z.object({
   }),
 });
 
-export function SignInForm({ className, ...props }: React.ComponentPropsWithoutRef<'div'>) {
+export function SignUpForm({ className, ...props }: React.ComponentPropsWithoutRef<'div'>) {
   const { t } = useTranslation('auth');
   const params = useSearchParams();
   const [isLoading, setIsLoading] = useState(false);
@@ -36,6 +34,7 @@ export function SignInForm({ className, ...props }: React.ComponentPropsWithoutR
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: '',
+      password: '',
     },
   });
 
@@ -52,12 +51,12 @@ export function SignInForm({ className, ...props }: React.ComponentPropsWithoutR
         if (res.data.redirect && res.data.url) {
           window.location.href = res.data.url;
         } else {
-          toast.success('Sign in successful');
-          window.location.href = params.get('redirect') || window.location.href;
+          toast.success('Sign up successful');
+          window.location.href = params.get('redirect') || '/';
         }
       }
     } catch (error) {
-      toast.error('Sign in failed');
+      toast.error('Sign up failed');
     } finally {
       setIsLoading(false);
     }
@@ -66,18 +65,20 @@ export function SignInForm({ className, ...props }: React.ComponentPropsWithoutR
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       setIsLoading(true);
-      const res = await signIn.email({
+      const res = await signUp.email({
         email: values.email,
         password: values.password,
+        name: '',
+        image: '',
       });
       if (res.error) {
         toast.error(res.error.message);
       } else {
-        toast.success('Sign in successful');
+        toast.success('Sign up successful');
         window.location.href = params.get('redirect') || '/';
       }
     } catch (error) {
-      toast.error('Sign in failed');
+      toast.error('Sign up failed');
     } finally {
       setIsLoading(false);
     }
@@ -87,40 +88,40 @@ export function SignInForm({ className, ...props }: React.ComponentPropsWithoutR
     <div className={cn('flex flex-col gap-6', className)} {...props}>
       <Card>
         <CardHeader className="text-center">
-          <CardTitle className="text-xl">Welcome back</CardTitle>
-          <CardDescription>Login with your Social or Email account</CardDescription>
+          <CardTitle className="text-xl">Get Started</CardTitle>
+          <CardDescription>Create an account with your email and password</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid gap-6">
-            <div className="flex flex-col gap-4">
-              {env.NEXT_PUBLIC_AUTH_GITHUB_ENABLED && (
-                <Button
-                  variant="outline"
-                  className="w-full gap-2"
-                  disabled={isLoading}
-                  onClick={() => onSocialLogin('github')}
-                >
-                  <FaGithub className="size-4" />
-                  Login with Github
-                </Button>
-              )}
-              {env.NEXT_PUBLIC_AUTH_GOOGLE_ENABLED && (
-                <Button
-                  variant="outline"
-                  className="w-full gap-2"
-                  disabled={isLoading}
-                  onClick={() => onSocialLogin('google')}
-                >
-                  <FaGoogle className="size-4" />
-                  Login with Google
-                </Button>
-              )}
-            </div>
-            <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
-              <span className="relative z-10 bg-background px-2 text-muted-foreground">Or continue with</span>
-            </div>
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)}>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)}>
+              <div className="grid gap-6">
+                <div className="flex flex-col gap-4">
+                  {env.NEXT_PUBLIC_AUTH_GITHUB_ENABLED && (
+                    <Button
+                      variant="outline"
+                      className="w-full gap-2"
+                      disabled={isLoading}
+                      onClick={() => onSocialLogin('github')}
+                    >
+                      <FaGithub className="size-4" />
+                      Sign up with Github
+                    </Button>
+                  )}
+                  {env.NEXT_PUBLIC_AUTH_GOOGLE_ENABLED && (
+                    <Button
+                      variant="outline"
+                      className="w-full gap-2"
+                      disabled={isLoading}
+                      onClick={() => onSocialLogin('google')}
+                    >
+                      <FaGoogle className="size-4" />
+                      Sign up with Google
+                    </Button>
+                  )}
+                </div>
+                <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
+                  <span className="relative z-10 bg-background px-2 text-muted-foreground">Or continue with</span>
+                </div>
                 <div className="grid gap-6">
                   <FormField
                     control={form.control}
@@ -140,17 +141,7 @@ export function SignInForm({ className, ...props }: React.ComponentPropsWithoutR
                     name="password"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>
-                          <div className="flex items-center">
-                            <Label htmlFor="password">Password</Label>
-                            <Link
-                              href="/forgot-password"
-                              className="ml-auto text-sm underline-offset-4 hover:underline"
-                            >
-                              Forgot your password?
-                            </Link>
-                          </div>
-                        </FormLabel>
+                        <FormLabel>Password</FormLabel>
                         <FormControl>
                           <Input placeholder="********" type="password" {...field} />
                         </FormControl>
@@ -158,20 +149,19 @@ export function SignInForm({ className, ...props }: React.ComponentPropsWithoutR
                       </FormItem>
                     )}
                   />
-                  <Button type="submit" className="w-full" disabled={isLoading}>
-                    {isLoading && <Loader2 className="animate-spin h-4 w-4 mr-2" />}
-                    {t('signIn')}
+                  <Button type="submit" className="w-full">
+                    {t('signUp')}
                   </Button>
                 </div>
-              </form>
-            </Form>
-            <div className="text-center text-sm">
-              Don&apos;t have an account?{' '}
-              <Link href="/sign-up" className="underline underline-offset-4">
-                Sign up
-              </Link>
-            </div>
-          </div>
+                <div className="text-center text-sm">
+                  Already have an account?{' '}
+                  <Link href="/sign-in" className="underline underline-offset-4">
+                    Sign in
+                  </Link>
+                </div>
+              </div>
+            </form>
+          </Form>
         </CardContent>
       </Card>
       <div className="text-balance text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 [&_a]:hover:text-primary  ">

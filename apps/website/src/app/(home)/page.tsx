@@ -3,6 +3,7 @@
 import { Button } from '@tazeai/ui/components/button';
 import Link from 'next/link';
 import { ThemeSwitcher } from '@tazeai/ui/components/theme-switch';
+import LanguageSwitcher from '@/components/language-switcher';
 
 export default function HomePage() {
   return (
@@ -11,6 +12,7 @@ export default function HomePage() {
       <Link href="/sign-in">
         <Button color="primary">Sign in</Button>
       </Link>
+      <LanguageSwitcher />
       <ThemeSwitcher />
     </div>
   );

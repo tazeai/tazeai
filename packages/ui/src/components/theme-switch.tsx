@@ -48,9 +48,7 @@ export function ThemeSwitcher() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="icon">
-          {currentTheme?.icon && (
-            <currentTheme.icon className="h-[1.2rem] w-[1.2rem] transition-all" />
-          )}
+          {currentTheme?.icon && <currentTheme.icon className="h-[1.2rem] w-[1.2rem] transition-all" />}
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>

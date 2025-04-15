@@ -6,7 +6,7 @@ packages:
 catalog:
   '@types/node': ^22.14.1
   "@types/react-dom": ^19.1.2
-  "@types/react": ^19.1.1
+  "@types/react": ^19.1.2
   lucide-react: ^0.488.0
   next: latest
   react-dom: ^19.1.0

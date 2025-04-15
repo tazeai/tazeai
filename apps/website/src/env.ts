@@ -1,6 +1,6 @@
 import { createEnv } from '@t3-oss/env-nextjs';
-import { envs as auth } from '@tazeai/auth';
-import { envs as database } from '@tazeai/database';
+import { envs as auth } from '@tazeai/auth/envs';
+import { envs as database } from '@tazeai/database/envs';
 // import { envs as email } from '@tazeai/mailers/envs';
 // import { envs as sentry } from '@tazeai/sentry/envs';
 
