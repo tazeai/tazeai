@@ -9,10 +9,28 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@tazeai/ui/components/dropdown-menu';
-import { Moon, Sun, Laptop } from 'lucide-react';
+import { LuSun, LuMoon, LuLaptop } from 'react-icons/lu';
+
+const themes = [
+  {
+    label: 'Light',
+    value: 'light',
+    icon: LuSun,
+  },
+  {
+    label: 'Dark',
+    value: 'dark',
+    icon: LuMoon,
+  },
+  {
+    label: 'System',
+    value: 'system',
+    icon: LuLaptop,
+  },
+];
 
 export function ThemeSwitcher() {
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   // useEffect only runs on the client, so now we can safely show the UI
@@ -24,28 +42,25 @@ export function ThemeSwitcher() {
     return null;
   }
 
+  const currentTheme = themes.find((theme) => theme.value === resolvedTheme);
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="icon">
-          <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-          <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+          {currentTheme?.icon && (
+            <currentTheme.icon className="h-[1.2rem] w-[1.2rem] transition-all" />
+          )}
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme('light')}>
-          <Sun className="mr-2 h-4 w-4" />
-          <span>Light</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('dark')}>
-          <Moon className="mr-2 h-4 w-4" />
-          <span>Dark</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('system')}>
-          <Laptop className="mr-2 h-4 w-4" />
-          <span>System</span>
-        </DropdownMenuItem>
+        {themes.map((theme) => (
+          <DropdownMenuItem key={theme.value} onClick={() => setTheme(theme.value)}>
+            <theme.icon className="mr-2 h-4 w-4" />
+            <span>{theme.label}</span>
+          </DropdownMenuItem>
+        ))}
       </DropdownMenuContent>
     </DropdownMenu>
   );
