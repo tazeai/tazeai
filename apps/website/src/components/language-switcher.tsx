@@ -8,8 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@tazeai/ui/components/dropdown-menu';
-// import { Icon } from '@iconify/react';
-import { FaGlobe } from 'react-icons/fa';
+import { LuGlobe } from 'react-icons/lu';
 
 const languages = [
   { code: 'en', label: 'English' },
@@ -23,12 +22,14 @@ export default function LanguageSwitcher() {
     i18n.changeLanguage(lng);
   };
 
+  const currentLanguage = languages.find((lang) => lang.code === i18n.language);
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon">
-          <FaGlobe className="h-4 w-4" />
-          <span className="sr-only">Switch language</span>
+        <Button variant="outline">
+          <LuGlobe className="h-4 w-4" />
+          {currentLanguage?.label}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
