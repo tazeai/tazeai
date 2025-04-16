@@ -11,7 +11,12 @@ import superjson from 'superjson';
  * @returns The unserialized data, or null if the input is invalid.
  */
 export function unserialize<T>(value: string): T | null {
-  return isNumber(value) ? (toNumber(value) as T) : superjson.parse<T>(value);
+  if (isNumber(value)) {
+    return toNumber(value) as T;
+  } else if (typeof value === 'string') {
+    return superjson.parse<T>(value);
+  }
+  return value as T;
 }
 
 /**

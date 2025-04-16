@@ -3,5 +3,6 @@ export const authConfig = {
     signIn: '/signin',
     signUp: '/signup',
     forgotPassword: '/forgot-password',
+    resetPassword: '/reset-password',
   },
 };

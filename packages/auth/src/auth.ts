@@ -1,9 +1,10 @@
 import { db, schemas, nanoid, uuidv7 } from '@tazeai/database';
 import { betterAuth, type BetterAuthOptions } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
-import { admin, organization, apiKey } from 'better-auth/plugins';
+import { admin, organization, apiKey, emailOTP } from 'better-auth/plugins';
 import { envs } from './envs';
 import { createCache } from '@tazeai/cache';
+import { resend } from '@tazeai/email';
 
 const env = envs();
 
@@ -13,14 +14,18 @@ const config: BetterAuthOptions = {
   emailAndPassword: {
     enabled: true,
     autoSignIn: true,
+    sendResetPassword: async (data, request) => {
+      // TODO: Implement sendResetPassword
+      console.log('sendResetPassword', data, request);
+    },
   },
   secondaryStorage: {
     get: async (key) => {
       const value = await cache.get<string>(key);
       return value;
     },
-    set: async (key, value) => {
-      await cache.set(key, value);
+    set: async (key, value, ttl) => {
+      await cache.set(key, value, ttl);
     },
     delete: async (key) => {
       await cache.delete(key);
@@ -76,7 +81,22 @@ const config: BetterAuthOptions = {
       },
     },
   },
-  plugins: [organization(), apiKey(), admin()],
+  plugins: [
+    organization(),
+    apiKey(),
+    admin(),
+    emailOTP({
+      sendVerificationOTP: async (data, request) => {
+        const { email, otp } = data;
+        await resend.emails.send({
+          from: env.RESEND_FROM,
+          to: email,
+          subject: 'Verify your email',
+          html: `Verify your email with the code: ${otp}`,
+        });
+      },
+    }),
+  ],
 };
 
 export const auth = betterAuth(config);

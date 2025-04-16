@@ -7,7 +7,13 @@ export const config = {
   matcher: ['/((?!_next/static|_next/image|images|locales|assets|favicon.ico|api/*).*)'],
 };
 
-const publicRoutes = [authConfig.pages.signIn, authConfig.pages.signUp, '/'];
+const publicRoutes = [
+  authConfig.pages.signIn,
+  authConfig.pages.signUp,
+  authConfig.pages.forgotPassword,
+  authConfig.pages.resetPassword,
+  '/',
+];
 
 function setRequestId(request: Request) {
   request.headers.set('x-correlation-id', crypto.randomUUID());

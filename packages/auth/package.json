@@ -23,6 +23,7 @@
     "@t3-oss/env-nextjs": "^0.12.0",
     "@tazeai/cache": "workspace:*",
     "@tazeai/database": "workspace:*",
+    "@tazeai/email": "workspace:*",
     "bcrypt-ts": "^6.0.0",
     "better-auth": "^1.2.7",
     "lucide-react": "catalog:",
