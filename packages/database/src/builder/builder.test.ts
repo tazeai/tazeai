@@ -1,4 +1,4 @@
-import { db, schemas } from '..';
+import { db, schemas } from '../index';
 import { Builder } from '.';
 import { describe, it, expect } from 'vitest';
 

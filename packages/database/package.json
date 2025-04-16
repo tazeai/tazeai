@@ -4,8 +4,9 @@
   "license": "Apache-2.0",
   "type": "module",
   "exports": {
-    ".": "./index.ts",
-    "./envs": "./envs.ts"
+    ".": "./src/index.ts",
+    "./envs": "./src/envs.ts",
+    "./schemas": "./src/schemas.ts"
   },
   "scripts": {
     "clean": "rimraf dist .turbo",
@@ -19,7 +20,7 @@
   "dependencies": {
     "@neondatabase/serverless": "^1.0.0",
     "@t3-oss/env-nextjs": "^0.12.0",
-    "drizzle-orm": "^0.41.0",
+    "drizzle-orm": "^0.42.0",
     "drizzle-seed": "^0.3.1",
     "drizzle-zod": "^0.7.1",
     "lodash-es": "^4.17.21",
@@ -32,7 +33,7 @@
     "@tazeai/typescript-config": "workspace:*",
     "@types/lodash-es": "^4.17.12",
     "dotenv-cli": "^8.0.0",
-    "drizzle-kit": "^0.30.6",
+    "drizzle-kit": "^0.31.0",
     "tsx": "^4.19.3",
     "typescript": "catalog:"
   }

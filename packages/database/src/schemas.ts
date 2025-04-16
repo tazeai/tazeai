@@ -1,7 +1,7 @@
 import { pgTableCreator, uuid, text } from 'drizzle-orm/pg-core';
 import { snakeCase } from 'lodash-es';
 import { envs } from './envs';
-import { uuidv7 } from './utils';
+import { uuidv7 } from './src/utils';
 
 export type { PgColumn, PgTableWithColumns } from 'drizzle-orm/pg-core';
 
