@@ -1,10 +1,17 @@
 // import { Redis } from 'ioredis';
 import { Redis } from '@upstash/redis';
 import { isNil, transform } from 'lodash-es';
-import json from './utils/json';
-import { envs } from './envs';
+// import json from './utils/json';
 
-const env = envs();
+// TODO: Use superjson
+const json = {
+  serialize: (value: unknown): string | number => {
+    return value as string | number;
+  },
+  unserialize: <T>(value: string | null): T | null => {
+    return value as T;
+  },
+};
 
 // Define the constant for successful Redis operation response
 export const REDIS_SUCCESS = 'OK';
