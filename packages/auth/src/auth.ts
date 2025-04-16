@@ -14,24 +14,17 @@ const config: BetterAuthOptions = {
   emailAndPassword: {
     enabled: true,
     autoSignIn: true,
-    sendResetPassword: async (data, request) => {
-      // TODO: Implement sendResetPassword
-      console.log('sendResetPassword', data, request);
-    },
   },
   secondaryStorage: {
     get: async (key) => {
       const value = await cache.get<string>(key);
-      console.log('get', key, value);
       return JSON.stringify(value);
     },
     set: async (key, value, ttl) => {
       await cache.set(key, value, ttl);
-      console.log('set', key, value, ttl);
     },
     delete: async (key) => {
       await cache.delete(key);
-      console.log('delete', key);
     },
   },
   baseURL: env.NEXT_PUBLIC_AUTH_URL,
@@ -93,12 +86,14 @@ const config: BetterAuthOptions = {
     emailOTP({
       sendVerificationOTP: async (data, request) => {
         const { email, otp } = data;
-        await resend.emails.send({
+        console.log('sendVerificationOTP', data, request);
+        const result = await resend.emails.send({
           from: env.RESEND_FROM,
           to: email,
           subject: 'Verify your email',
           html: `Verify your email with the code: ${otp}`,
         });
+        console.log('sendVerificationOTP result', result.data);
       },
     }),
   ],
