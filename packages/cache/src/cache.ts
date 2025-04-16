@@ -42,9 +42,12 @@ export class Cache {
    */
   constructor(urlOrRedis: string | Redis, opts: CacheOptions = {}) {
     if (typeof urlOrRedis === 'string') {
+      const url = new URL(urlOrRedis);
+      const token = url.searchParams.get('token')!;
+      url.searchParams.delete('token');
       this.redis = new Redis({
-        url: urlOrRedis,
-        token: env.REDIS_TOKEN,
+        url: url.toString(),
+        token,
       });
     } else if (urlOrRedis instanceof Redis) {
       this.redis = urlOrRedis;

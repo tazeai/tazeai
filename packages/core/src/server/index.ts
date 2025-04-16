@@ -7,12 +7,17 @@ import { db, type Database } from '@tazeai/database';
 import { compress } from 'hono/compress';
 import { languageDetector } from 'hono/language';
 import type { HonoOptions } from 'hono/hono-base';
+import { Cache } from '@tazeai/cache';
 import { auth } from '@tazeai/auth';
 import user from './routes/user';
+import { envs } from '../envs';
+
+const env = envs();
 
 type Variables = {
   db: Database;
   session?: Awaited<ReturnType<typeof auth.api.getSession>>;
+  cache: Cache;
 };
 
 type Env = {
@@ -33,6 +38,7 @@ export class TazeAIServer extends Hono<Env> {
     super(rest);
     this._basePath = prefix ?? '/';
     this.db = db;
+    const cache = new Cache(env.REDIS_URL);
 
     // Middleware
     this.use(contextStorage());
@@ -64,11 +70,24 @@ export class TazeAIServer extends Hono<Env> {
     // Database
     this.use('*', async (c, next) => {
       c.set('db', this.db);
+      c.set('cache', cache);
       await next();
     });
 
     // Routes
     this.route('/users', user);
+
+    this.get('/redis', async (c) => {
+      const cache = c.get('cache');
+      const data = await cache.remember(
+        'redis_status',
+        () => {
+          return Date.now();
+        },
+        30,
+      );
+      return c.json({ message: 'OK', data });
+    });
 
     this.get('/health', (c) => {
       return c.json({ message: 'OK' });
