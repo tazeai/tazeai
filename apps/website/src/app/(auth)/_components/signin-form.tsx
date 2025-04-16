@@ -18,6 +18,7 @@ import { useSearchParams } from 'next/navigation';
 import { Label } from '@tazeai/ui/components/label';
 import Link from 'next/link';
 import { env } from '@/env';
+import { authConfig } from '@/config/auth';
 
 const formSchema = z.object({
   email: z.string().email({
@@ -167,7 +168,7 @@ export function SignInForm({ className, ...props }: React.ComponentPropsWithoutR
             </Form>
             <div className="text-center text-sm">
               Don&apos;t have an account?{' '}
-              <Link href="/sign-up" className="underline underline-offset-4">
+              <Link href={authConfig.pages.signUp} className="underline underline-offset-4">
                 Sign up
               </Link>
             </div>

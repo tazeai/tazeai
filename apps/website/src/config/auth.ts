@@ -1,5 +1,7 @@
-export const pages = {
-  signIn: '/sign-in',
-  signUp: '/sign-up',
-  forgotPassword: '/forgot-password',
+export const authConfig = {
+  pages: {
+    signIn: '/signin',
+    signUp: '/signup',
+    forgotPassword: '/forgot-password',
+  },
 };

@@ -16,6 +16,7 @@ import { z } from 'zod';
 import { toast } from 'sonner';
 import { useSearchParams } from 'next/navigation';
 import { env } from '@/env';
+import { authConfig } from '@/config/auth';
 
 const formSchema = z.object({
   email: z.string().email({
@@ -155,7 +156,7 @@ export function SignUpForm({ className, ...props }: React.ComponentPropsWithoutR
                 </div>
                 <div className="text-center text-sm">
                   Already have an account?{' '}
-                  <Link href="/sign-in" className="underline underline-offset-4">
+                  <Link href={authConfig.pages.signIn} className="underline underline-offset-4">
                     Sign in
                   </Link>
                 </div>

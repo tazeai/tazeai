@@ -1,6 +1,6 @@
 'use client';
 
-import { useSession } from '@tazeai/auth/client';
+import { useSession, signOut } from '@tazeai/auth/client';
 import Link from 'next/link';
 import { LayoutDashboard, User, Settings, HelpCircle, LogOut } from 'lucide-react';
 import {
@@ -33,7 +33,7 @@ export function UserButton() {
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="flex items-center gap-2 rounded-full h-auto p-1 pr-4">
           <Avatar className="h-8 w-8">
-            <AvatarImage src={data.user.image || '/placeholder.svg'} alt={data.user.name} />
+            <AvatarImage src={data.user.image || '/images/logo.png'} alt={data.user.name} />
             <AvatarFallback>{initials}</AvatarFallback>
           </Avatar>
           <span className="text-sm font-medium">{data.user.name}</span>
@@ -74,7 +74,7 @@ export function UserButton() {
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="text-red-500 focus:text-red-500 focus:bg-red-50">
+        <DropdownMenuItem className="text-red-500 focus:text-red-500 focus:bg-red-50" onClick={() => signOut()}>
           <LogOut className="mr-2 h-4 w-4" />
           <span>Logout</span>
         </DropdownMenuItem>
