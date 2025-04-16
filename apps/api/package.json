@@ -16,7 +16,7 @@
     "@tazeai/auth": "workspace:*",
     "@tazeai/core": "workspace:*",
     "@tazeai/database": "workspace:*",
-    "hono": "^4.7.6"
+    "hono": "^4.7.7"
   },
   "devDependencies": {
     "@tazeai/typescript-config": "workspace:*",

@@ -27,7 +27,7 @@ export default function LanguageSwitcher() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline">
+        <Button variant="ghost">
           <LuGlobe className="h-4 w-4" />
           {currentLanguage?.label}
         </Button>

@@ -1,0 +1,29 @@
+import { isNumber, toNumber } from 'lodash-es';
+import superjson from 'superjson';
+
+/**
+ * Unserialize the value.
+ *
+ * This function takes a string representation of a serialized value, and returns the unserialized data.
+ * If the input string is empty or null, the function returns null.
+ *
+ * @param value The serialized data string.
+ * @returns The unserialized data, or null if the input is invalid.
+ */
+export function unserialize<T>(value: string): T | null {
+  return isNumber(value) ? (toNumber(value) as T) : superjson.parse<T>(value);
+}
+
+/**
+ * Serialize the value.
+ *
+ * @param value - The value to be serialized, with a type of unknown, can be any type of data.
+ * @returns Returns the serialized string.
+ */
+export function serialize(value: unknown): string | number {
+  return isNumber(value) ? toNumber(value) : superjson.stringify(value);
+}
+
+export const json = { unserialize, serialize };
+
+export default json;

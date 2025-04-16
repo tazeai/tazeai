@@ -4,17 +4,17 @@
   "license": "Apache-2.0",
   "type": "module",
   "exports": {
-    ".": "./index.ts",
-    "./envs": "./envs.ts",
-    "./types": "./types/index.ts",
-    "./client": "./client.ts",
-    "./server": "./server.ts",
-    "./middleware": "./middleware.ts",
-    "./components/*": "./components/*.tsx"
+    ".": "./src/index.ts",
+    "./envs": "./src/envs.ts",
+    "./types": "./src/types/index.ts",
+    "./client": "./src/client.ts",
+    "./server": "./src/server.ts",
+    "./middleware": "./src/middleware.ts",
+    "./components/*": "./src/components/*.tsx"
   },
   "scripts": {
     "clean": "rimraf dist .turbo",
-    "generate": "pnpm with-env pnpx @better-auth/cli generate --config=auth.ts",
+    "generate": "pnpm with-env pnpx @better-auth/cli generate --config=src/auth.ts",
     "with-env": "dotenv -e ../../.env --"
   },
   "dependencies": {
