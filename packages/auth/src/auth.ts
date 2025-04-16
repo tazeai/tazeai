@@ -22,13 +22,16 @@ const config: BetterAuthOptions = {
   secondaryStorage: {
     get: async (key) => {
       const value = await cache.get<string>(key);
-      return value;
+      console.log('get', key, value);
+      return JSON.stringify(value);
     },
     set: async (key, value, ttl) => {
       await cache.set(key, value, ttl);
+      console.log('set', key, value, ttl);
     },
     delete: async (key) => {
       await cache.delete(key);
+      console.log('delete', key);
     },
   },
   baseURL: env.NEXT_PUBLIC_AUTH_URL,
