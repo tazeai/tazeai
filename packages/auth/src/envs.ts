@@ -1,8 +1,10 @@
 import { createEnv } from '@t3-oss/env-nextjs';
 import { z } from 'zod';
+import { envs as cache } from '@tazeai/cache/envs';
 
 export const envs = () =>
   createEnv({
+    extends: [cache()],
     shared: {
       NEXT_PUBLIC_AUTH_URL: z.string().min(1).url(),
       NEXT_PUBLIC_AUTH_GITHUB_ENABLED: z.string().optional(),

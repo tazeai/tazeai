@@ -3,13 +3,28 @@ import { betterAuth, type BetterAuthOptions } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 import { admin, organization, apiKey } from 'better-auth/plugins';
 import { envs } from './envs';
+import { createCache } from '@tazeai/cache';
 
 const env = envs();
+
+const cache = createCache();
 
 const config: BetterAuthOptions = {
   emailAndPassword: {
     enabled: true,
     autoSignIn: true,
+  },
+  secondaryStorage: {
+    get: async (key) => {
+      const value = await cache.get<string>(key);
+      return value;
+    },
+    set: async (key, value) => {
+      await cache.set(key, value);
+    },
+    delete: async (key) => {
+      await cache.delete(key);
+    },
   },
   baseURL: env.NEXT_PUBLIC_AUTH_URL,
   socialProviders: {

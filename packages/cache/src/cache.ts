@@ -25,6 +25,7 @@ export type CacheClosure<T> = () => Promiseable<T>;
 
 type CacheOptions = {
   prefix?: string;
+  db?: number;
 };
 
 /**
