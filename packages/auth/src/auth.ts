@@ -58,7 +58,9 @@ const config: BetterAuthOptions = {
     schema: schemas,
   }),
   advanced: {
-    generateId: () => uuidv7(),
+    database: {
+      generateId: () => uuidv7(),
+    },
     crossSubDomainCookies: {
       enabled: !!env.AUTH_DOMAIN,
       domain: env.AUTH_DOMAIN,

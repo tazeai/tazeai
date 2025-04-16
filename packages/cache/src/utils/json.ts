@@ -26,7 +26,12 @@ export function unserialize<T>(value: string): T | null {
  * @returns Returns the serialized string.
  */
 export function serialize(value: unknown): string | number {
-  return isNumber(value) ? toNumber(value) : superjson.stringify(value);
+  if (isNumber(value)) {
+    return toNumber(value);
+  } else if (typeof value === 'string') {
+    return value;
+  }
+  return superjson.stringify(value);
 }
 
 export const json = { unserialize, serialize };
