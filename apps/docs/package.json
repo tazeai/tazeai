@@ -1,0 +1,33 @@
+{
+  "name": "@tazeai/docs",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev --turbo",
+    "start": "next start",
+    "postinstall": "fumadocs-mdx"
+  },
+  "dependencies": {
+    "@t3-oss/env-nextjs": "^0.12.0",
+    "@tazeai/ui": "workspace:*",
+    "fumadocs-core": "^15.2.7",
+    "fumadocs-mdx": "^11.6.0",
+    "fumadocs-ui": "^15.2.7",
+    "next": "^15.3.0",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.4",
+    "@tazeai/typescript-config": "workspace:*",
+    "@types/mdx": "^2.0.13",
+    "@types/node": "22.14.0",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.1.4",
+    "typescript": "catalog:"
+  }
+}
