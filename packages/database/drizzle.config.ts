@@ -7,7 +7,7 @@ const env = envs();
 assert(env.DATABASE_URL, 'Missing DATABASE_URL');
 
 const config: Config = {
-  schema: './src/schemas.ts',
+  schema: './src/schemas/**/*.ts',
   dialect: 'postgresql',
   dbCredentials: { url: env.DATABASE_URL },
   casing: 'snake_case',

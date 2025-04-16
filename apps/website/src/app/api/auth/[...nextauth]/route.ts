@@ -34,4 +34,4 @@ export const HEAD = handler;
 
 export const config = { api: { bodyParser: false } };
 
-export const runtime = 'nodejs';
+export const runtime = 'edge';
