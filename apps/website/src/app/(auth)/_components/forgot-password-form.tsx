@@ -26,6 +26,9 @@ const otpFormSchema = z.object({
   otp: z.string().length(6, {
     message: 'Invalid OTP.',
   }),
+  email: z.string().email({
+    message: 'Invalid email address.',
+  }),
 });
 
 export function ForgotPasswordForm({ className, ...props }: React.ComponentPropsWithoutRef<'div'>) {
@@ -59,6 +62,7 @@ export function ForgotPasswordForm({ className, ...props }: React.ComponentProps
       } else {
         toast.success('Send email link successful');
         setShowOtpForm(true);
+        otpForm.setValue('email', values.email);
       }
     } catch (error) {
       toast.error('Send email link failed');
@@ -68,7 +72,23 @@ export function ForgotPasswordForm({ className, ...props }: React.ComponentProps
   };
 
   const onOtpSubmit = async (values: z.infer<typeof otpFormSchema>) => {
-    console.log(values);
+    try {
+      setIsLoading(true);
+      const res = await emailOtp.verifyEmail({
+        email: values.email,
+        otp: values.otp,
+      });
+      if (res.error) {
+        toast.error(res.error.message);
+      } else {
+        toast.success('Verify email successful');
+        setShowOtpForm(false);
+      }
+    } catch (error) {
+      toast.error('Verify email failed');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -90,7 +110,7 @@ export function ForgotPasswordForm({ className, ...props }: React.ComponentProps
         <CardContent>
           <div className="grid gap-6">
             {showOtpForm ? (
-              <Form {...otpForm}>
+              <Form {...otpForm} key="otp-form">
                 <form onSubmit={otpForm.handleSubmit(onOtpSubmit)}>
                   <div className="grid gap-6">
                     <FormField
@@ -99,13 +119,23 @@ export function ForgotPasswordForm({ className, ...props }: React.ComponentProps
                       render={({ field }) => (
                         <FormItem>
                           <FormControl>
-                            <InputOTP maxLength={6} {...field}>
+                            <InputOTP maxLength={6} {...field} containerClassName="w-full justify-center">
                               <InputOTPGroup>
                                 <InputOTPSlot index={0} />
+                              </InputOTPGroup>
+                              <InputOTPGroup>
                                 <InputOTPSlot index={1} />
+                              </InputOTPGroup>
+                              <InputOTPGroup>
                                 <InputOTPSlot index={2} />
+                              </InputOTPGroup>
+                              <InputOTPGroup>
                                 <InputOTPSlot index={3} />
+                              </InputOTPGroup>
+                              <InputOTPGroup>
                                 <InputOTPSlot index={4} />
+                              </InputOTPGroup>
+                              <InputOTPGroup>
                                 <InputOTPSlot index={5} />
                               </InputOTPGroup>
                             </InputOTP>
@@ -122,7 +152,7 @@ export function ForgotPasswordForm({ className, ...props }: React.ComponentProps
                 </form>
               </Form>
             ) : (
-              <Form {...form}>
+              <Form {...form} key="form">
                 <form onSubmit={form.handleSubmit(onSubmit)}>
                   <div className="grid gap-6">
                     <FormField
