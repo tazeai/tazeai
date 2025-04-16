@@ -32,6 +32,4 @@ export const DELETE = handler;
 export const OPTIONS = handler;
 export const HEAD = handler;
 
-export const config = { api: { bodyParser: false } };
-
-export const runtime = 'edge';
+// export const config = { api: { bodyParser: false } };
