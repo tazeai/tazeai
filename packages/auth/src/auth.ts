@@ -85,6 +85,7 @@ const config: BetterAuthOptions = {
     admin(),
     emailOTP({
       sendVerificationOTP: async (data, request) => {
+        console.log('sendVerificationOTP', data, request);
         const { email, otp } = data;
         console.log('sendVerificationOTP', data, request);
         const result = await resend.emails.send({
