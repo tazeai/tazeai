@@ -16,4 +16,4 @@ export const HEAD = handler;
 
 export const config = { api: { bodyParser: false } };
 
-export const runtime = 'edge';
+// export const runtime = 'edge';
