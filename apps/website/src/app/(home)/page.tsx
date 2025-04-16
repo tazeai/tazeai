@@ -4,6 +4,7 @@ import { Button } from '@tazeai/ui/components/button';
 import Link from 'next/link';
 import { ThemeSwitcher } from '@tazeai/ui/components/theme-switch';
 import LanguageSwitcher from '@/components/language-switcher';
+import UserButton from '@/components/user-button';
 
 export default function HomePage() {
   return (
@@ -14,6 +15,7 @@ export default function HomePage() {
       </Link>
       <LanguageSwitcher />
       <ThemeSwitcher />
+      <UserButton />
     </div>
   );
 }
