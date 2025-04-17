@@ -31,6 +31,8 @@ const otpFormSchema = z.object({
   }),
 });
 
+const otpLength = 6;
+
 export function ForgotPasswordForm({ className, ...props }: React.ComponentPropsWithoutRef<'div'>) {
   const { t } = useTranslation('auth');
   const params = useSearchParams();
@@ -96,9 +98,14 @@ export function ForgotPasswordForm({ className, ...props }: React.ComponentProps
       <Card>
         {showOtpForm ? (
           <CardHeader className="text-center">
-            <CardTitle className="text-xl">Verification</CardTitle>
+            <CardTitle className="text-xl">
+              <Button variant="link" size="sm" onClick={() => setShowOtpForm(false)}>
+                Back
+              </Button>
+              Verification
+            </CardTitle>
             <CardDescription>
-              {`If you have an account, we have sent a code to ${form.getValues('email')}. Enter it below.`}
+              If you have an account, we have sent a code to <span className="font-bold">{otpForm.getValues('email')}</span>. Enter it below.
             </CardDescription>
           </CardHeader>
         ) : (
@@ -119,25 +126,12 @@ export function ForgotPasswordForm({ className, ...props }: React.ComponentProps
                       render={({ field }) => (
                         <FormItem>
                           <FormControl>
-                            <InputOTP maxLength={6} {...field} containerClassName="w-full justify-center">
-                              <InputOTPGroup>
-                                <InputOTPSlot index={0} />
-                              </InputOTPGroup>
-                              <InputOTPGroup>
-                                <InputOTPSlot index={1} />
-                              </InputOTPGroup>
-                              <InputOTPGroup>
-                                <InputOTPSlot index={2} />
-                              </InputOTPGroup>
-                              <InputOTPGroup>
-                                <InputOTPSlot index={3} />
-                              </InputOTPGroup>
-                              <InputOTPGroup>
-                                <InputOTPSlot index={4} />
-                              </InputOTPGroup>
-                              <InputOTPGroup>
-                                <InputOTPSlot index={5} />
-                              </InputOTPGroup>
+                            <InputOTP maxLength={otpLength} {...field} containerClassName="w-full justify-center">
+                              {Array.from({ length: otpLength }).map((_, index) => (
+                                <InputOTPGroup key={index}>
+                                  <InputOTPSlot index={index} />
+                                </InputOTPGroup>
+                              ))}
                             </InputOTP>
                           </FormControl>
                           <FormMessage />
@@ -146,7 +140,7 @@ export function ForgotPasswordForm({ className, ...props }: React.ComponentProps
                     />
                     <Button type="submit" className="w-full" disabled={isLoading}>
                       {isLoading && <Loader2 className="animate-spin h-4 w-4 mr-2" />}
-                      {t('verify')}
+                      {t('forgotPasswordVerify')}
                     </Button>
                   </div>
                 </form>
