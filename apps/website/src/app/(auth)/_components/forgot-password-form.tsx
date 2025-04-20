@@ -105,7 +105,8 @@ export function ForgotPasswordForm({ className, ...props }: React.ComponentProps
               Verification
             </CardTitle>
             <CardDescription>
-              If you have an account, we have sent a code to <span className="font-bold">{otpForm.getValues('email')}</span>. Enter it below.
+              If you have an account, we have sent a code to{' '}
+              <span className="font-bold">{otpForm.getValues('email')}</span>. Enter it below.
             </CardDescription>
           </CardHeader>
         ) : (
