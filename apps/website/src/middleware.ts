@@ -20,18 +20,18 @@ function setRequestId(request: Request) {
 }
 
 export default async function middleware(request: NextRequest) {
-  setRequestId(request);
-  const response = NextResponse.next();
-  try {
-    if (publicRoutes.includes(request.nextUrl.pathname)) {
-      return response;
-    }
-    if (!checkSessionCookie(request)) {
-      return NextResponse.redirect(new URL(authConfig.pages.signIn, request.url));
-    }
-  } catch (error) {
-    console.error(error);
-    return NextResponse.redirect(new URL(authConfig.pages.signIn, request.url));
-  }
-  return response;
+  // setRequestId(request);
+  // const response = NextResponse.next();
+  // try {
+  //   if (publicRoutes.includes(request.nextUrl.pathname)) {
+  //     return response;
+  //   }
+  //   if (!checkSessionCookie(request)) {
+  //     return NextResponse.redirect(new URL(authConfig.pages.signIn, request.url));
+  //   }
+  // } catch (error) {
+  //   console.error(error);
+  //   return NextResponse.redirect(new URL(authConfig.pages.signIn, request.url));
+  // }
+  // return response;
 }
