@@ -9,5 +9,5 @@ app.get('/', (c) => {
 
 serve({
   ...app,
-  port: 3003,
+  port: 3004,
 });

@@ -1,5 +1,5 @@
 {
-  "name": "tzai-monorepo",
+  "name": "tzai",
   "private": true,
   "homepage": "https://tazeai.com",
   "repository": {
@@ -13,7 +13,7 @@
     "changeset": "changeset",
     "clean": "turbo run clean --parallel",
     "coverage": "vitest --coverage",
-    "dev": "NODE_ENV=development turbo dev --parallel --filter=\"./apps/website\"",
+    "dev": "NODE_ENV=development turbo dev --parallel",
     "format": "biome format --write",
     "generate": "turbo gen",
     "postinstall": "manypkg fix",

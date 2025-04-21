@@ -16,6 +16,9 @@ export default function HomePage() {
       <Link href={authConfig.pages.signIn}>
         <Button color="primary">{t('signIn', 'auth')}</Button>
       </Link>
+      <Link href="https://docs.tazeai.com">
+        <Button color="primary">Docs</Button>
+      </Link>
       <LanguageSwitcher />
       <ThemeSwitcher />
       <UserButton />

@@ -7,7 +7,7 @@ import { db, type Database } from '@tazeai/database';
 import { compress } from 'hono/compress';
 import { languageDetector } from 'hono/language';
 import type { HonoOptions } from 'hono/hono-base';
-import { Cache } from '@tazeai/cache';
+import { type Cache, createCache } from '@tazeai/cache';
 import { auth } from '@tazeai/auth';
 import user from './routes/user';
 import { envs } from '../envs';
@@ -38,7 +38,7 @@ export class TazeAIServer extends Hono<Env> {
     super(rest);
     this._basePath = prefix ?? '/';
     this.db = db;
-    const cache = new Cache(env.REDIS_URL);
+    const cache = createCache();
 
     // Middleware
     this.use(contextStorage());
