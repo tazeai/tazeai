@@ -577,7 +577,7 @@ export default function UserManagementList() {
         isSubmitDisabled={!editingUser || !editingUser.name || !editingUser.email}
         onSubmit={handleUpdateUser}
       >
-        {editingUser && <UserForm data={editingUser} onChange={setEditingUser} isEdit />}
+        {editingUser && <UserForm data={editingUser} onChange={(user) => setEditingUser(user as User)} isEdit={true} />}
       </FormDialog>
     </div>
   );
