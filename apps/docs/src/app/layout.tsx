@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import type { ReactNode } from 'react';
 import './styles/globals.css';
 import type { Translations } from 'fumadocs-ui/i18n';
+import type { Metadata } from 'next';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -23,6 +24,14 @@ const locales = [
     locale: 'zh',
   },
 ];
+
+export const metadata: Metadata = {
+  title: {
+    default: 'TazeAI Docs',
+    template: '%s | TazeAI Docs',
+  },
+  description: 'TazeAI Docs',
+};
 
 export default async function Layout({ children, params }: { children: ReactNode; params: Promise<{ lang: string }> }) {
   const lang = (await params).lang;

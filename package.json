@@ -48,9 +48,9 @@
     "turbo": "^2.5.0",
     "type-fest": "^4.40.0",
     "typescript": "catalog:",
-    "vitest": "^3.1.1"
+    "vitest": "^3.1.2"
   },
-  "packageManager": "pnpm@10.8.1",
+  "packageManager": "pnpm@10.9.0",
   "engines": {
     "node": "^20 || >=22",
     "pnpm": ">=9.10.0"

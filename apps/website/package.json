@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "build": "pnpm with-env next build",
+    "clean": "rimraf dist .turbo .next",
     "dev": "pnpm with-env next dev --turbopack --hostname 0.0.0.0",
     "lint": "pnpm with-env next lint",
     "start": "pnpm with-env next start",
