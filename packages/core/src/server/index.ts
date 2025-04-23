@@ -89,7 +89,7 @@ export class TazeAIServer extends Hono<Env> {
       return c.json({ message: 'OK', data });
     });
 
-    this.get('/health', (c) => {
+    this.get('/health', async (c) => {
       return c.json({ message: 'OK' });
     });
   }

@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import './styles/globals.css';
 import type { Translations } from 'fumadocs-ui/i18n';
 import type { Metadata } from 'next';
+import { locales } from '@/lib/i18n';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -13,17 +14,6 @@ const cn: Partial<Translations> = {
   search: 'Translated Content',
   // other translations
 };
-
-const locales = [
-  {
-    name: 'English',
-    locale: 'en',
-  },
-  {
-    name: 'Chinese',
-    locale: 'zh',
-  },
-];
 
 export const metadata: Metadata = {
   title: {

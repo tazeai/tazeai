@@ -1,11 +1,11 @@
-// import Redis from 'ioredis';
 import { envs } from './envs';
 import { Redis } from '@upstash/redis';
 import { Cache } from './cache';
 
-const env = envs();
+// const env = envs();
 
 export const createRedis = () => {
+  const env = envs();
   const url = new URL(env.REDIS_URL);
   const token = url.searchParams.get('token')!;
   url.searchParams.delete('token');
@@ -17,6 +17,7 @@ export const createRedis = () => {
 };
 
 export const createCache = () => {
+  const env = envs();
   return new Cache(env.REDIS_URL, {
     prefix: 'auth_session_',
   });

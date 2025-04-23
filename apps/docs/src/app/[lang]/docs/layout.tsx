@@ -7,7 +7,7 @@ export default async function Layout({ children, params }: { children: ReactNode
   const { lang } = await params;
 
   return (
-    <DocsLayout tree={source.pageTree[lang]!} {...baseOptions(lang)}>
+    <DocsLayout tree={source.pageTree[lang]!} {...baseOptions(lang)} sidebar={{ enabled: true }}>
       {children}
     </DocsLayout>
   );
