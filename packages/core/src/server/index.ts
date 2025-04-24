@@ -11,6 +11,7 @@ import { type Cache, createCache } from '@tazeai/cache';
 import { auth } from '@tazeai/auth';
 import user from './routes/user';
 import { envs } from '../envs';
+import ai from './routes/ai';
 
 const env = envs();
 
@@ -76,6 +77,7 @@ export class TazeAIServer extends Hono<Env> {
 
     // Routes
     this.route('/users', user);
+    this.route('/ai', ai);
 
     this.get('/redis', async (c) => {
       const cache = c.get('cache');

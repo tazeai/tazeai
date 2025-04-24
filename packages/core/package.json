@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@t3-oss/env-nextjs": "^0.12.0",
+    "@tazeai/ai": "workspace:*",
     "@tazeai/auth": "workspace:*",
     "@tazeai/cache": "workspace:*",
     "@tazeai/database": "workspace:*",
