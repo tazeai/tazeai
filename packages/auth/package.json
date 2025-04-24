@@ -19,7 +19,7 @@
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
     "@iconify/react": "^5.2.1",
-    "@t3-oss/env-nextjs": "^0.12.0",
+    "@t3-oss/env-nextjs": "catalog:",
     "@tazeai/cache": "workspace:*",
     "@tazeai/database": "workspace:*",
     "@tazeai/email": "workspace:*",

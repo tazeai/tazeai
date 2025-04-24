@@ -13,9 +13,9 @@
     "@langchain/core": "^0.3.47",
     "@langchain/deepseek": "^0.0.1",
     "@langchain/openai": "^0.5.6",
-    "@t3-oss/env-nextjs": "^0.12.0",
+    "@t3-oss/env-nextjs": "catalog:",
     "ai": "^4.3.9",
-    "langchain": "^0.3.23",
+    "langchain": "^0.3.24",
     "openai": "^4.96.0",
     "zod": "^3.24.3"
   },
