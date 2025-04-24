@@ -2,7 +2,7 @@ export * from 'drizzle-orm/sql';
 export { alias } from 'drizzle-orm/pg-core';
 import { envs } from './envs';
 import * as schemas from './schemas';
-import { createClient } from './adapters/neon';
+import { createClient } from './adapters/postgres';
 export * from './utils';
 
 const env = envs();
