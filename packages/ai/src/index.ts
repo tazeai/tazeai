@@ -10,7 +10,7 @@ export enum ProviderType {
   DEEPSEEK = 'deepseek',
 }
 
-export class TazeAIProviderManager {
+export class ProviderManager {
   constructor() {
     //
   }
@@ -55,18 +55,3 @@ export class TazeAIProviderManager {
     return result;
   }
 }
-
-// 异步执行链条，并打印生成结果
-async function main(type: ProviderType | null = null) {
-  try {
-    const manager = new TazeAIProviderManager();
-    const result = await manager.generate(type, '请用简洁的语言描述一下 {topic} 的意义。', { topic: '人工智能' });
-    console.log('生成结果：', result.text);
-    return result;
-  } catch (error) {
-    console.error('处理请求时出错：', error);
-    return null;
-  }
-}
-
-export default main;
