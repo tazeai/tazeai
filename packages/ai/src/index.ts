@@ -15,33 +15,43 @@ export class ProviderManager {
     //
   }
 
-  getProvider(type: ProviderType) {
+  getProvider(type: ProviderType, modelName: string) {
     if (type === ProviderType.OPENAI) {
       const apiKey = env.OPENAI_API_KEY;
+      console.log('apiKey', apiKey);
       const llm = new ChatOpenAI({
-        modelName: 'gpt-4o-mini',
+        modelName,
         apiKey,
         configuration: {
           apiKey,
           baseURL: env.OPENAI_PROXY_URL,
         },
         temperature: 0.7,
+        streaming: true,
       });
       return llm;
     } else if (type === ProviderType.DEEPSEEK) {
       const apiKey = env.DEEPSEEK_API_KEY;
+      console.log('apiKey', apiKey);
       const llm = new ChatDeepSeek({
-        modelName: 'deepseek-ai/DeepSeek-R1-Distill-Qwen-7B',
+        modelName,
         apiKey,
         configuration: {
           apiKey,
           baseURL: env.DEEPSEEK_PROXY_URL,
         },
         temperature: 0.7,
+        streaming: true,
       });
       return llm;
     }
     return null;
+  }
+
+  prompt(prompt: string, variables: Record<string, string>) {
+    const promptTemplate = ChatPromptTemplate.fromTemplate(prompt);
+    // return promptTemplate.pipe(this.getProvider(ProviderType.OPENAI));
+    return promptTemplate.invoke(variables);
   }
 
   async generate(type: ProviderType, prompt: string, variables: Record<string, string>) {
@@ -52,6 +62,7 @@ export class ProviderManager {
     const promptTemplate = ChatPromptTemplate.fromTemplate(prompt);
     const chain = promptTemplate.pipe(llm);
     const result = await chain.invoke(variables);
+    console.log('result', result);
     return result;
   }
 }

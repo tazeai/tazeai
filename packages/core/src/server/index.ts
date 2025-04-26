@@ -2,6 +2,7 @@ import { Hono } from 'hono';
 import { contextStorage } from 'hono/context-storage';
 import { prettyJSON } from 'hono/pretty-json';
 import { requestId } from 'hono/request-id';
+import { logger } from 'hono/logger';
 import { cors } from 'hono/cors';
 import { db, type Database } from '@tazeai/database';
 import { compress } from 'hono/compress';
@@ -12,6 +13,7 @@ import { auth } from '@tazeai/auth';
 import user from './routes/user';
 import { envs } from '../envs';
 import ai from './routes/ai';
+import chat from './routes/chat';
 
 const env = envs();
 
@@ -47,6 +49,7 @@ export class TazeAIServer extends Hono<Env> {
     this.use(requestId());
     this.use(cors());
     this.use(compress());
+    this.use(logger());
     this.use(
       languageDetector({
         supportedLanguages: ['en', 'zh'], // Must include fallback
@@ -78,6 +81,7 @@ export class TazeAIServer extends Hono<Env> {
     // Routes
     this.route('/users', user);
     this.route('/ai', ai);
+    this.route('/chat', chat);
 
     this.get('/redis', async (c) => {
       const cache = c.get('cache');
@@ -93,6 +97,16 @@ export class TazeAIServer extends Hono<Env> {
 
     this.get('/health', async (c) => {
       return c.json({ message: 'OK' });
+    });
+
+    this.notFound((c) => {
+      console.log('Not Found', c.req.path);
+      return c.json({ message: 'Not Found' }, 404);
+    });
+
+    this.onError((err, c) => {
+      console.error(err);
+      return c.json({ message: 'Internal Server Error' }, 500);
     });
   }
 }
