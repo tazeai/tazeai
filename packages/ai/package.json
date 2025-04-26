@@ -10,10 +10,12 @@
     "clean": "rimraf dist .turbo"
   },
   "dependencies": {
+    "@langchain/community": "^0.3.41",
     "@langchain/core": "^0.3.49",
     "@langchain/deepseek": "^0.0.1",
     "@langchain/openai": "^0.5.7",
     "@t3-oss/env-nextjs": "catalog:",
+    "@tazeai/cache": "workspace:*",
     "ai": "^4.3.10",
     "langchain": "^0.3.24",
     "openai": "^4.96.0",

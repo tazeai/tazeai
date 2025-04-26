@@ -23,4 +23,6 @@ export const createCache = () => {
   });
 };
 
+export { Redis };
+
 export * from './cache';

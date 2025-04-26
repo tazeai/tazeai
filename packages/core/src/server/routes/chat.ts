@@ -1,7 +1,7 @@
 import { Hono } from 'hono';
 import type { Env } from '../types';
-import { ProviderType, ProviderManager } from '@tazeai/ai';
-import { streamSSE, streamText } from 'hono/streaming';
+import { type ProviderType, ProviderManager } from '@tazeai/ai';
+import { streamSSE } from 'hono/streaming';
 
 const app = new Hono<Env>();
 // body {
@@ -23,35 +23,38 @@ app.post('/completions', async (c) => {
       content: string;
     }[];
   } = await c.req.json();
-  console.log('data', data);
-  const type = c.req.query('type') || 'deepseek';
-  try {
-    const manager = new ProviderManager();
-    return streamSSE(c, async (stream) => {
-      // const prompt = await manager.prompt('请用简洁的语言描述一下 {topic} 的意义。', { topic: '人工智能' });
-      const llm = manager.getProvider(type as ProviderType, data.model);
-      if (!llm) {
-        throw new Error('Model not found');
-      }
-      const result = await llm.stream(data.messages);
-      for await (const chunk of result) {
-        console.log('chunk', chunk);
+  const type = c.req.query('type');
+  return streamSSE(
+    c,
+    async (stream) => {
+      try {
+        const manager = new ProviderManager();
+        const llm = manager.getProvider(type as ProviderType, data.model);
+        if (!llm) {
+          throw new Error('Model not found');
+        }
+        const result = await llm.stream(data.messages);
+        for await (const chunk of result) {
+          await stream.writeSSE({
+            data: JSON.stringify(chunk),
+          });
+        }
+      } catch (error: unknown) {
         await stream.writeSSE({
           data: JSON.stringify({
-            type: 'data',
-            data: chunk.content,
+            error: 'An error occurred while processing your request:' + (error as Error).message,
           }),
         });
+      } finally {
+        stream.close();
       }
-    });
-    // return c.json({
-    //   result,
-    // });
-  } catch (error: unknown) {
-    return c.json({
-      error: (error as Error).message,
-    });
-  }
+    },
+    (error: Error) => {
+      // captureException(error)
+      console.error('error', error);
+      return Promise.resolve();
+    },
+  );
 });
 
 export default app;

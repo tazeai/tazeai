@@ -1,6 +1,9 @@
 import { ChatPromptTemplate } from '@langchain/core/prompts';
-import { ChatOpenAI } from '@langchain/openai';
+import { ChatOpenAI, OpenAIEmbeddings } from '@langchain/openai';
 import { ChatDeepSeek } from '@langchain/deepseek';
+import { UpstashRedisCache } from '@langchain/community/caches/upstash_redis';
+import { createRedis } from '@tazeai/cache';
+import { MemoryVectorStore } from 'langchain/vectorstores/memory';
 import { envs } from './envs';
 
 const env = envs();
@@ -11,8 +14,11 @@ export enum ProviderType {
 }
 
 export class ProviderManager {
+  private cache: UpstashRedisCache;
   constructor() {
-    //
+    this.cache = new UpstashRedisCache({
+      client: createRedis(),
+    });
   }
 
   getProvider(type: ProviderType, modelName: string) {
@@ -28,6 +34,7 @@ export class ProviderManager {
         },
         temperature: 0.7,
         streaming: true,
+        cache: this.cache,
       });
       return llm;
     } else if (type === ProviderType.DEEPSEEK) {
@@ -42,6 +49,7 @@ export class ProviderManager {
         },
         temperature: 0.7,
         streaming: true,
+        cache: this.cache,
       });
       return llm;
     }
@@ -52,17 +60,5 @@ export class ProviderManager {
     const promptTemplate = ChatPromptTemplate.fromTemplate(prompt);
     // return promptTemplate.pipe(this.getProvider(ProviderType.OPENAI));
     return promptTemplate.invoke(variables);
-  }
-
-  async generate(type: ProviderType, prompt: string, variables: Record<string, string>) {
-    const llm = this.getProvider(type);
-    if (!llm) {
-      throw new Error('Provider not found');
-    }
-    const promptTemplate = ChatPromptTemplate.fromTemplate(prompt);
-    const chain = promptTemplate.pipe(llm);
-    const result = await chain.invoke(variables);
-    console.log('result', result);
-    return result;
   }
 }
