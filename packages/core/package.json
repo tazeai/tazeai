@@ -11,11 +11,11 @@
     "clean": "rimraf dist .turbo"
   },
   "dependencies": {
-    "@t3-oss/env-nextjs": "catalog:",
     "@tazeai/ai": "workspace:*",
     "@tazeai/auth": "workspace:*",
     "@tazeai/cache": "workspace:*",
     "@tazeai/database": "workspace:*",
+    "@tazeai/env": "workspace:*",
     "dayjs": "^1.11.13",
     "defu": "^6.1.4",
     "hono": "^4.7.7",

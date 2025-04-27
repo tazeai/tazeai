@@ -1,10 +1,14 @@
-import { createEnv } from '@t3-oss/env-nextjs';
+import { createEnv, z } from '@tazeai/env';
 import { envs as cache } from '@tazeai/cache/envs';
 import { envs as database } from '@tazeai/database/envs';
 
 export const envs = () =>
   createEnv({
     extends: [cache(), database()],
-    server: {},
-    runtimeEnv: {},
+    server: {
+      NODE_ENV: z.string().optional(),
+    },
+    runtimeEnv: {
+      NODE_ENV: process.env.NODE_ENV,
+    },
   });

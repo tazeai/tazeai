@@ -1,5 +1,4 @@
-import { createEnv } from '@t3-oss/env-nextjs';
-import { z } from 'zod';
+import { createEnv, z } from '@tazeai/env';
 import { envs as cache } from '@tazeai/cache/envs';
 import { envs as email } from '@tazeai/email/envs';
 

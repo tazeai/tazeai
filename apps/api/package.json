@@ -12,11 +12,11 @@
   },
   "dependencies": {
     "@hono/node-server": "^1.14.1",
-    "@t3-oss/env-nextjs": "catalog:",
     "@tazeai/auth": "workspace:*",
     "@tazeai/cache": "workspace:*",
     "@tazeai/core": "workspace:*",
     "@tazeai/database": "workspace:*",
+    "@tazeai/env": "workspace:*",
     "hono": "^4.7.7"
   },
   "devDependencies": {

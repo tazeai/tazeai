@@ -44,7 +44,6 @@ app.post('/completions', async (c) => {
       }
     },
     (error: Error) => {
-      // captureException(error)
       console.error('error', error);
       return Promise.resolve();
     },

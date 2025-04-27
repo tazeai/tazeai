@@ -11,7 +11,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@t3-oss/env-nextjs": "catalog:",
+    "@tazeai/env": "workspace:*",
     "@tazeai/ui": "workspace:*",
     "fumadocs-core": "^15.2.11",
     "fumadocs-mdx": "^11.6.1",

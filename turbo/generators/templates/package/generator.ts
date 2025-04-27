@@ -47,9 +47,9 @@ export function createPackageGenerator(plop: PlopTypes.NodePlopAPI) {
           const pkg = JSON.parse(content);
 
           for (const dep of answers.deps.split(' ').filter(Boolean)) {
-            const version = await fetch(`https://registry.npmjs.org/-/package/${dep}/dist-tags`).then(
-              (res) => (res.json() as unknown as { latest: string }).latest,
-            );
+            const url = `https://registry.npmjs.org/-/package/${dep}/dist-tags`;
+            const versions = await fetch(url).then((res) => res.json() as unknown as { latest: string });
+            const version = versions.latest;
 
             pkg.dependencies![dep] = `^${version}`;
           }

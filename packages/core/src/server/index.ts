@@ -13,7 +13,7 @@ import { auth } from '@tazeai/auth';
 import user from './routes/user';
 import { envs } from '../envs';
 import ai from './routes/ai';
-import chat from './routes/chat';
+import langchain from './routes/langchain';
 
 const env = envs();
 
@@ -81,8 +81,7 @@ export class TazeAIServer extends Hono<Env> {
     // Routes
     this.route('/users', user);
     this.route('/ai', ai);
-    this.route('/chat', chat);
-
+    this.route('/langchain', langchain);
     this.get('/redis', async (c) => {
       const cache = c.get('cache');
       const data = await cache.remember(
