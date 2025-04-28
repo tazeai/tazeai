@@ -4,7 +4,7 @@ packages:
   - "!**/__tests__/*"
 
 catalog:
-  "@types/node": ^22.15.2
+  "@types/node": ^22.15.3
   "@types/react-dom": ^19.1.2
   "@types/react": ^19.1.2
   lucide-react: ^0.503.0

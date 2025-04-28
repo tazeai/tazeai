@@ -50,7 +50,7 @@
     "typescript": "catalog:",
     "vitest": "^3.1.2"
   },
-  "packageManager": "pnpm@10.9.0",
+  "packageManager": "pnpm@10.10.0",
   "engines": {
     "node": "^20 || >=22",
     "pnpm": ">=9.10.0"
