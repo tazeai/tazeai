@@ -8,12 +8,14 @@ export function createPackageGenerator(plop: PlopTypes.NodePlopAPI) {
       {
         type: 'input',
         name: 'name',
-        message: 'What is the name of the package? (You can skip the `@tazeai/` prefix)',
+        message:
+          'What is the name of the package? (You can skip the `@tazeai/` prefix)',
       },
       {
         type: 'input',
         name: 'deps',
-        message: 'Enter a space separated list of dependencies you would like to install',
+        message:
+          'Enter a space separated list of dependencies you would like to install',
       },
     ],
     actions: [
@@ -48,7 +50,9 @@ export function createPackageGenerator(plop: PlopTypes.NodePlopAPI) {
 
           for (const dep of answers.deps.split(' ').filter(Boolean)) {
             const url = `https://registry.npmjs.org/-/package/${dep}/dist-tags`;
-            const versions = await fetch(url).then((res) => res.json() as unknown as { latest: string });
+            const versions = await fetch(url).then(
+              (res) => res.json() as unknown as { latest: string },
+            );
             const version = versions.latest;
 
             pkg.dependencies![dep] = `^${version}`;

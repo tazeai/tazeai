@@ -30,17 +30,28 @@ const config: BetterAuthOptions = {
   baseURL: env.NEXT_PUBLIC_AUTH_URL,
   socialProviders: {
     github: {
-      enabled: !!(env.AUTH_GITHUB_ID && env.AUTH_GITHUB_SECRET && env.NEXT_PUBLIC_AUTH_GITHUB_ENABLED === 'true'),
+      enabled: !!(
+        env.AUTH_GITHUB_ID &&
+        env.AUTH_GITHUB_SECRET &&
+        env.NEXT_PUBLIC_AUTH_GITHUB_ENABLED === 'true'
+      ),
       clientId: env.AUTH_GITHUB_ID ?? '',
       clientSecret: env.AUTH_GITHUB_SECRET ?? '',
     },
     google: {
-      enabled: !!(env.AUTH_GOOGLE_ID && env.AUTH_GOOGLE_SECRET && env.NEXT_PUBLIC_AUTH_GOOGLE_ENABLED === 'true'),
+      enabled: !!(
+        env.AUTH_GOOGLE_ID &&
+        env.AUTH_GOOGLE_SECRET &&
+        env.NEXT_PUBLIC_AUTH_GOOGLE_ENABLED === 'true'
+      ),
       clientId: env.AUTH_GOOGLE_ID ?? '',
       clientSecret: env.AUTH_GOOGLE_SECRET ?? '',
     },
   },
-  trustedOrigins: (req) => [req.headers.get('origin') ?? '', req.headers.get('referer') ?? ''],
+  trustedOrigins: (req) => [
+    req.headers.get('origin') ?? '',
+    req.headers.get('referer') ?? '',
+  ],
   session: {
     cookieCache: {
       enabled: true,
@@ -68,7 +79,8 @@ const config: BetterAuthOptions = {
       create: {
         before: async (user) => {
           const name = user.name.trim() || user.email.split('@')[0] || nanoid();
-          const image = user.image || 'https://ui-avatars.com/api/?name=' + name;
+          const image =
+            user.image || 'https://ui-avatars.com/api/?name=' + name;
           return {
             data: {
               name,

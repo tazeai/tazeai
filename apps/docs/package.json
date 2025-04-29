@@ -25,7 +25,7 @@
     "@tailwindcss/postcss": "^4.1.4",
     "@tazeai/typescript-config": "workspace:*",
     "@types/mdx": "^2.0.13",
-    "@types/node": "22.14.0",
+    "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "postcss": "^8.5.3",

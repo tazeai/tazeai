@@ -15,7 +15,13 @@ const env = envs();
 // Create the client
 export const client = createAuthClient({
   baseURL: env.NEXT_PUBLIC_AUTH_URL,
-  plugins: [organizationClient(), magicLinkClient(), apiKeyClient(), adminClient(), emailOTPClient()],
+  plugins: [
+    organizationClient(),
+    magicLinkClient(),
+    apiKeyClient(),
+    adminClient(),
+    emailOTPClient(),
+  ],
 });
 
 // Export the client

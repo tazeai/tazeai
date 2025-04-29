@@ -27,7 +27,11 @@ export function createI18nSettings({
     lowerCaseLng: true as const,
     fallbackNS: ns,
     missingInterpolationHandler: (text, value, options) => {
-      console.debug(`Missing interpolation value for key: ${text}`, value, options);
+      console.debug(
+        `Missing interpolation value for key: ${text}`,
+        value,
+        options,
+      );
     },
     ns,
     react: {

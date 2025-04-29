@@ -110,7 +110,11 @@ export class Cache {
    * @param seconds Optional expiration time in seconds.
    * @returns Promise resolving to a boolean indicating success.
    */
-  set = async (key: string, value: unknown, seconds?: number): Promise<boolean> => {
+  set = async (
+    key: string,
+    value: unknown,
+    seconds?: number,
+  ): Promise<boolean> => {
     const cacheKey = this.getKey(key);
     const ttl = this.getSeconds(seconds);
     const res = await (ttl
@@ -126,7 +130,10 @@ export class Cache {
    * @param fn The function to execute if the cache key is not present.
    * @returns Promise resolving to the cached value or the result of the function.
    */
-  rememberForever = async <T>(key: string, fn: CacheClosure<T>): Promise<{ value: T | null; cached: boolean }> => {
+  rememberForever = async <T>(
+    key: string,
+    fn: CacheClosure<T>,
+  ): Promise<{ value: T | null; cached: boolean }> => {
     return await this.remember<T>(this.getKey(key), fn);
   };
 
@@ -217,7 +224,10 @@ export class Cache {
    * @param defaultVal The default value to return if a key is missing.
    * @returns Promise resolving to an object mapping keys to their values or the default value.
    */
-  getMultiple = async <T, R = Record<string, T | null>>(keys: string[], defaultVal: T | null = null): Promise<R> => {
+  getMultiple = async <T, R = Record<string, T | null>>(
+    keys: string[],
+    defaultVal: T | null = null,
+  ): Promise<R> => {
     const values = await this.redis.mget(keys.map(this.getKey));
     return values.reduce<R>(
       (results, value, idx) => {
@@ -256,12 +266,17 @@ export class Cache {
    * @param defaultVal The default value to return if the key is missing.
    * @returns Promise resolving to the cached value or the default value.
    */
-  get = async <T>(key: string, defaultVal: T | null = null): Promise<T | null> => {
+  get = async <T>(
+    key: string,
+    defaultVal: T | null = null,
+  ): Promise<T | null> => {
     const start = Date.now();
     const value = await this.redis.get(this.getKey(key));
     const end = Date.now();
     console.log(`Cache[${key}] get: ${end - start}ms`);
-    return (isNil(value) ? defaultVal : this.unserialize<T>(value as string)) as T | null;
+    return (
+      isNil(value) ? defaultVal : this.unserialize<T>(value as string)
+    ) as T | null;
   };
 
   /**
@@ -348,7 +363,11 @@ export class Cache {
    * @returns Promise resolving to a boolean indicating success.
    */
   putMany = async (values: Record<string, unknown>, seconds?: number) => {
-    const results = await Promise.all(Object.entries(values).map(([key, value]) => this.put(key, value, seconds)));
+    const results = await Promise.all(
+      Object.entries(values).map(([key, value]) =>
+        this.put(key, value, seconds),
+      ),
+    );
     return results.every(Boolean);
   };
 
@@ -379,7 +398,9 @@ export class Cache {
    * @returns Promise resolving to an object mapping keys to their values.
    */
   many = async (keys: Record<string, unknown>) => {
-    const values: (string | null)[] = await this.redis.mget(...Object.keys(keys).map(this.getKey));
+    const values: (string | null)[] = await this.redis.mget(
+      ...Object.keys(keys).map(this.getKey),
+    );
     return transform<string | null, Record<string, unknown>>(
       values,
       (results: Record<string, unknown>, value: string | null, key: number) => {
@@ -397,7 +418,11 @@ export class Cache {
    * @param seconds Optional expiration time in seconds.
    * @returns {Promise<boolean>} Promise resolving to a boolean indicating if the operation was successful.
    */
-  add = async <T>(key: string, value: T, seconds?: number): Promise<boolean> => {
+  add = async <T>(
+    key: string,
+    value: T,
+    seconds?: number,
+  ): Promise<boolean> => {
     const exist = await this.has(key);
     if (exist) return false;
     return await this.set(key, value, seconds);

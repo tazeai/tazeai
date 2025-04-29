@@ -48,13 +48,18 @@ export function ThemeSwitcher() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="icon">
-          {currentTheme?.icon && <currentTheme.icon className="h-[1.2rem] w-[1.2rem] transition-all" />}
+          {currentTheme?.icon && (
+            <currentTheme.icon className="h-[1.2rem] w-[1.2rem] transition-all" />
+          )}
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         {themes.map((theme) => (
-          <DropdownMenuItem key={theme.value} onClick={() => setTheme(theme.value)}>
+          <DropdownMenuItem
+            key={theme.value}
+            onClick={() => setTheme(theme.value)}
+          >
             <theme.icon className="mr-2 h-4 w-4" />
             <span>{theme.label}</span>
           </DropdownMenuItem>

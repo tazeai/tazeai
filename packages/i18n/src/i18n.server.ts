@@ -25,7 +25,10 @@ export async function initializeServerI18n(
 
             return callback(null, data);
           } catch (error) {
-            console.log(`Error loading i18n file: locales/${language}/${namespace}.json`, error);
+            console.log(
+              `Error loading i18n file: locales/${language}/${namespace}.json`,
+              error,
+            );
 
             return callback(null, {});
           }
@@ -42,7 +45,9 @@ export async function initializeServerI18n(
             iterations++;
 
             if (iterations > maxIterations) {
-              console.error(`i18next is not initialized after ${maxIterations} iterations`);
+              console.error(
+                `i18next is not initialized after ${maxIterations} iterations`,
+              );
 
               break;
             }
@@ -73,7 +78,9 @@ export async function initializeServerI18n(
     const startTime = Date.now();
 
     while (Date.now() - startTime < maxWaitTime) {
-      const allNamespacesLoaded = namespaces.every((ns) => loadedNamespaces.has(ns));
+      const allNamespacesLoaded = namespaces.every((ns) =>
+        loadedNamespaces.has(ns),
+      );
 
       if (allNamespacesLoaded) {
         return true;
@@ -88,7 +95,9 @@ export async function initializeServerI18n(
   const success = await waitForNamespaces();
 
   if (!success) {
-    console.warn(`Not all namespaces were loaded after ${maxWaitTime}ms. Initialization may be incomplete.`);
+    console.warn(
+      `Not all namespaces were loaded after ${maxWaitTime}ms. Initialization may be incomplete.`,
+    );
   }
 
   return i18nInstance;
@@ -132,7 +141,9 @@ export function parseAcceptLanguageHeader(
 
       // Return the locale if it's included in the accepted languages
       try {
-        return acceptedLanguages.includes(languageSegment) ? [languageSegment] : [];
+        return acceptedLanguages.includes(languageSegment)
+          ? [languageSegment]
+          : [];
       } catch {
         return [];
       }

@@ -10,8 +10,14 @@ app.get('/', async (c) => {
   try {
     const manager = new LangChain();
     return streamSSE(c, async (stream) => {
-      const prompt = await manager.prompt('请用简洁的语言描述一下 {topic} 的意义。', { topic: '人工智能' });
-      const model = manager.getProvider(type as ProviderType, 'deepseek-ai/DeepSeek-R1-Distill-Qwen-7B');
+      const prompt = await manager.prompt(
+        '请用简洁的语言描述一下 {topic} 的意义。',
+        { topic: '人工智能' },
+      );
+      const model = manager.getProvider(
+        type as ProviderType,
+        'deepseek-ai/DeepSeek-R1-Distill-Qwen-7B',
+      );
       const result = await model!.stream(prompt);
       for await (const chunk of result) {
         console.log('chunk', chunk);

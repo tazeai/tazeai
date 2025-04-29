@@ -4,7 +4,9 @@ import path from 'node:path';
 export namespace generator {
   export function loadAllEnvironmentVariables(basePath: string) {
     const sharedEnv = loadEnvironmentVariables(path.join(basePath, '.env'));
-    const productionEnv = loadEnvironmentVariables(path.join(basePath, '.env.production'));
+    const productionEnv = loadEnvironmentVariables(
+      path.join(basePath, '.env.production'),
+    );
 
     return {
       ...sharedEnv,

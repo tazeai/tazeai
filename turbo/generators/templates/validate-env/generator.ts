@@ -145,7 +145,9 @@ const Schema: Record<string, z.ZodType> = {
   }),
 };
 
-export function createEnvironmentVariablesValidatorGenerator(plop: PlopTypes.NodePlopAPI) {
+export function createEnvironmentVariablesValidatorGenerator(
+  plop: PlopTypes.NodePlopAPI,
+) {
   return plop.setGenerator('validate-env', {
     description: 'Validate the environment variables to be used in the app',
     actions: [

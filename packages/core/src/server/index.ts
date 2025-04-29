@@ -60,7 +60,8 @@ export class TazeAIServer extends Hono<Env> {
           httpOnly: true,
           secure: process.env.NODE_ENV === 'production',
           sameSite: 'Lax',
-          domain: process.env.NODE_ENV === 'production' ? '.tazeai.com' : undefined,
+          domain:
+            process.env.NODE_ENV === 'production' ? '.tazeai.com' : undefined,
         },
       }),
     );

@@ -51,7 +51,9 @@ function setupPreCommit(params: {
   try {
     const filePath = '.git/hooks/pre-commit';
 
-    const healthCheckCommands = params.setupHealthCheck ? `pnpm run lint:fix\npnpm run typecheck\n`.trim() : ``;
+    const healthCheckCommands = params.setupHealthCheck
+      ? `pnpm run lint:fix\npnpm run typecheck\n`.trim()
+      : ``;
 
     const licenseCommand = `pnpm run --filter license dev`;
     const fileContent = `#!/bin/bash\n${healthCheckCommands}${licenseCommand}`;
@@ -103,7 +105,9 @@ function setupRemote() {
       stdio: 'inherit',
     });
   } catch (error) {
-    console.error(`License script failed. Aborting package generation. Error: ${error}`);
+    console.error(
+      `License script failed. Aborting package generation. Error: ${error}`,
+    );
     process.exit(1);
   }
 }

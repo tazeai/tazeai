@@ -23,7 +23,10 @@ export const metadata: Metadata = {
   description: 'TazeAI Docs',
 };
 
-export default async function Layout({ children, params }: { children: ReactNode; params: Promise<{ lang: string }> }) {
+export default async function Layout({
+  children,
+  params,
+}: { children: ReactNode; params: Promise<{ lang: string }> }) {
   const lang = (await params).lang;
 
   return (

@@ -36,7 +36,9 @@ app.post('/completions', async (c) => {
       } catch (error: unknown) {
         await stream.writeSSE({
           data: JSON.stringify({
-            error: 'An error occurred while processing your request:' + (error as Error).message,
+            error:
+              'An error occurred while processing your request:' +
+              (error as Error).message,
           }),
         });
       } finally {

@@ -1,5 +1,10 @@
 import { count } from 'drizzle-orm/sql';
-import type { PgColumn, PgTable, SelectedFields, TableConfig } from 'drizzle-orm/pg-core';
+import type {
+  PgColumn,
+  PgTable,
+  SelectedFields,
+  TableConfig,
+} from 'drizzle-orm/pg-core';
 import type { SQL } from 'drizzle-orm';
 import type { Database } from '../index';
 

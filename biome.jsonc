@@ -6,7 +6,14 @@
     "useIgnoreFile": true
   },
   "files": {
-    "ignore": ["**/.turbo", "**/coverage", "**/dist", "**/pnpm-lock.yaml", "**/CHANGELOG.md", "**/package.json"]
+    "ignore": [
+      "**/.turbo",
+      "**/coverage",
+      "**/dist",
+      "**/pnpm-lock.yaml",
+      "**/CHANGELOG.md",
+      "**/package.json"
+    ]
   },
   "formatter": {
     "enabled": true,
@@ -14,7 +21,7 @@
     "indentStyle": "space",
     "indentWidth": 2,
     "lineEnding": "lf",
-    "lineWidth": 120,
+    "lineWidth": 80,
     "attributePosition": "auto"
   },
   "organizeImports": {

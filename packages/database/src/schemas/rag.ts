@@ -12,7 +12,8 @@ import {
 } from 'drizzle-orm/pg-core';
 import { user } from './auth';
 
-export const timestamptz = (name: string) => timestamp(name, { withTimezone: true });
+export const timestamptz = (name: string) =>
+  timestamp(name, { withTimezone: true });
 
 export const chunks = pgTable(
   'chunks',
@@ -44,5 +45,7 @@ export const embeddings = pgTable(
     clientId: text('client_id'),
     userId: uuid('user_id').references(() => user.id, { onDelete: 'cascade' }),
   },
-  (t) => [unique('embeddings_client_id_user_id_unique').on(t.clientId, t.userId)],
+  (t) => [
+    unique('embeddings_client_id_user_id_unique').on(t.clientId, t.userId),
+  ],
 );

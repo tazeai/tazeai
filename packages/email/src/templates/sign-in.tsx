@@ -1,4 +1,15 @@
-import { Body, Container, Head, Hr, Html, Preview, Section, Tailwind, Text, Link } from '@react-email/components';
+import {
+  Body,
+  Container,
+  Head,
+  Hr,
+  Html,
+  Preview,
+  Section,
+  Tailwind,
+  Text,
+  Link,
+} from '@react-email/components';
 
 type SignInTemplateProps = {
   readonly url: string;
@@ -13,7 +24,9 @@ export const SignInTemplate = ({ url }: SignInTemplateProps) => (
         <Container className="mx-auto py-12">
           <Section className="mt-8 rounded-md bg-zinc-200 p-px">
             <Section className="rounded-[5px] bg-white p-8">
-              <Text className="mt-0 mb-4 font-semibold text-2xl text-zinc-950">Your login request to VizoAI</Text>
+              <Text className="mt-0 mb-4 font-semibold text-2xl text-zinc-950">
+                Your login request to VizoAI
+              </Text>
               <Link href={url} target="_blank">
                 Login
               </Link>

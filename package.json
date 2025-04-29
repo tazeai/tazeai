@@ -21,7 +21,7 @@
     "prepare": "husky",
     "start": "turbo run start --filter=\"./apps/*\"",
     "test": "vitest",
-    "update": "pnpm update -r"
+    "update:deps": "pnpm update -r -i -L"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json}": [

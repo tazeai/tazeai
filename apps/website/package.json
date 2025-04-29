@@ -24,7 +24,7 @@
     "@tazeai/shared": "workspace:*",
     "@tazeai/ui": "workspace:*",
     "hono": "^4.7.8",
-    "i18next": "^25.0.1",
+    "i18next": "^25.0.2",
     "lucide-react": "catalog:",
     "next": "^15.3.1",
     "react": "catalog:",

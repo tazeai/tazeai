@@ -15,7 +15,13 @@ export function baseOptions(lang: string): BaseLayoutProps {
     nav: {
       title: (
         <>
-          <Image src="/images/logo.png" alt="TazeAI" width={24} height={24} className="rounded-full" />
+          <Image
+            src="/images/logo.png"
+            alt="TazeAI"
+            width={24}
+            height={24}
+            className="rounded-full"
+          />
           TazeAI
         </>
       ),

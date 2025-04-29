@@ -3,9 +3,12 @@ import { writeFileSync } from 'node:fs';
 
 import { generator } from '../../utils';
 
-const DOCS_URL = 'https://makerkit.dev/docs/next-supabase-turbo/environment-variables';
+const DOCS_URL =
+  'https://makerkit.dev/docs/next-supabase-turbo/environment-variables';
 
-export function createEnvironmentVariablesGenerator(plop: PlopTypes.NodePlopAPI) {
+export function createEnvironmentVariablesGenerator(
+  plop: PlopTypes.NodePlopAPI,
+) {
   const allVariables = generator.loadAllEnvironmentVariables('');
 
   if (allVariables) {
@@ -101,56 +104,83 @@ export function createEnvironmentVariablesGenerator(plop: PlopTypes.NodePlopAPI)
         type: 'confirm',
         name: 'values.NEXT_PUBLIC_ENABLE_PERSONAL_ACCOUNT_DELETION',
         message: `Do you want to enable personal account deletion? \nFor more info: ${getUrlToDocs('NEXT_PUBLIC_ENABLE_PERSONAL_ACCOUNT_DELETION')}\n`,
-        default: getBoolean(allVariables.NEXT_PUBLIC_ENABLE_PERSONAL_ACCOUNT_DELETION, true),
+        default: getBoolean(
+          allVariables.NEXT_PUBLIC_ENABLE_PERSONAL_ACCOUNT_DELETION,
+          true,
+        ),
       },
       {
         type: 'confirm',
         name: 'values.NEXT_PUBLIC_ENABLE_PERSONAL_ACCOUNT_BILLING',
         message: `Do you want to enable personal account billing? \nFor more info: ${getUrlToDocs('NEXT_PUBLIC_ENABLE_PERSONAL_ACCOUNT_BILLING')}\n`,
-        default: getBoolean(allVariables.NEXT_PUBLIC_ENABLE_PERSONAL_ACCOUNT_BILLING, true),
+        default: getBoolean(
+          allVariables.NEXT_PUBLIC_ENABLE_PERSONAL_ACCOUNT_BILLING,
+          true,
+        ),
       },
       {
         type: 'confirm',
         name: 'values.NEXT_PUBLIC_ENABLE_TEAM_ACCOUNTS',
         message: `Do you want to enable team accounts? \nFor more info: ${getUrlToDocs('NEXT_PUBLIC_ENABLE_TEAM_ACCOUNTS')}\n`,
-        default: getBoolean(allVariables.NEXT_PUBLIC_ENABLE_TEAM_ACCOUNTS, true),
+        default: getBoolean(
+          allVariables.NEXT_PUBLIC_ENABLE_TEAM_ACCOUNTS,
+          true,
+        ),
       },
       {
         type: 'confirm',
         name: 'values.NEXT_PUBLIC_ENABLE_TEAM_ACCOUNTS_DELETION',
         message: `Do you want to enable team account deletion? \nFor more info: ${getUrlToDocs('NEXT_PUBLIC_ENABLE_TEAM_ACCOUNTS_DELETION')}\n`,
-        default: getBoolean(allVariables.NEXT_PUBLIC_ENABLE_TEAM_ACCOUNTS_DELETION, true),
+        default: getBoolean(
+          allVariables.NEXT_PUBLIC_ENABLE_TEAM_ACCOUNTS_DELETION,
+          true,
+        ),
       },
       {
         type: 'confirm',
         name: 'values.NEXT_PUBLIC_ENABLE_TEAM_ACCOUNTS_BILLING',
         message: `Do you want to enable team account billing? \nFor more info: ${getUrlToDocs('NEXT_PUBLIC_ENABLE_TEAM_ACCOUNTS_BILLING')}\n`,
-        default: getBoolean(allVariables.NEXT_PUBLIC_ENABLE_TEAM_ACCOUNTS_BILLING, true),
+        default: getBoolean(
+          allVariables.NEXT_PUBLIC_ENABLE_TEAM_ACCOUNTS_BILLING,
+          true,
+        ),
       },
       {
         type: 'confirm',
         name: 'values.NEXT_PUBLIC_ENABLE_TEAM_ACCOUNTS_CREATION',
         message: `Do you want to enable team account creation? \nFor more info: ${getUrlToDocs('NEXT_PUBLIC_ENABLE_TEAM_ACCOUNTS_CREATION')}\n`,
-        default: getBoolean(allVariables.NEXT_PUBLIC_ENABLE_TEAM_ACCOUNTS_CREATION, true),
+        default: getBoolean(
+          allVariables.NEXT_PUBLIC_ENABLE_TEAM_ACCOUNTS_CREATION,
+          true,
+        ),
       },
       {
         type: 'confirm',
         name: 'values.NEXT_PUBLIC_ENABLE_NOTIFICATIONS',
         message: `Do you want to enable notifications? If not - we will hide the notifications bell from the UI. \nFor more info: ${getUrlToDocs('NEXT_PUBLIC_ENABLE_NOTIFICATIONS')}\n`,
-        default: getBoolean(allVariables.NEXT_PUBLIC_ENABLE_NOTIFICATIONS, true),
+        default: getBoolean(
+          allVariables.NEXT_PUBLIC_ENABLE_NOTIFICATIONS,
+          true,
+        ),
       },
       {
         when: (answers) => answers.values.NEXT_PUBLIC_ENABLE_NOTIFICATIONS,
         type: 'confirm',
         name: 'values.NEXT_PUBLIC_REALTIME_NOTIFICATIONS',
         message: `Do you want to enable realtime notifications? If yes, we will enable the realtime notifications from Supabase. If not - updated will be fetched lazily.\nFor more info: ${getUrlToDocs('NEXT_PUBLIC_REALTIME_NOTIFICATIONS')}\n`,
-        default: getBoolean(allVariables.NEXT_PUBLIC_REALTIME_NOTIFICATIONS, false),
+        default: getBoolean(
+          allVariables.NEXT_PUBLIC_REALTIME_NOTIFICATIONS,
+          false,
+        ),
       },
       {
         type: 'input',
         name: 'values.NEXT_PUBLIC_ENABLE_VERSION_UPDATER',
         message: `Do you want to enable the version updater popup? \nFor more info: ${getUrlToDocs('NEXT_PUBLIC_ENABLE_VERSION_UPDATER')}\n`,
-        default: getBoolean(allVariables.NEXT_PUBLIC_ENABLE_VERSION_UPDATER, false),
+        default: getBoolean(
+          allVariables.NEXT_PUBLIC_ENABLE_VERSION_UPDATER,
+          false,
+        ),
       },
       {
         type: 'input',
@@ -176,39 +206,45 @@ export function createEnvironmentVariablesGenerator(plop: PlopTypes.NodePlopAPI)
         default: allVariables.NEXT_PUBLIC_BILLING_PROVIDER ?? 'stripe',
       },
       {
-        when: (answers) => answers.values.NEXT_PUBLIC_BILLING_PROVIDER === 'stripe',
+        when: (answers) =>
+          answers.values.NEXT_PUBLIC_BILLING_PROVIDER === 'stripe',
         type: 'input',
         name: 'values.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY',
         message: `What is the Stripe publishable key?\nFor more info: ${getUrlToDocs('NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY')}\n`,
         default: allVariables.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
       },
       {
-        when: (answers) => answers.values.NEXT_PUBLIC_BILLING_PROVIDER === 'stripe',
+        when: (answers) =>
+          answers.values.NEXT_PUBLIC_BILLING_PROVIDER === 'stripe',
         type: 'input',
         name: 'values.STRIPE_SECRET_KEY',
         message: `What is the Stripe secret key? \nFor more info: ${getUrlToDocs('NEXT_PUBLIC_BILLING_PROVIDER')}\n`,
       },
       {
-        when: (answers) => answers.values.NEXT_PUBLIC_BILLING_PROVIDER === 'stripe',
+        when: (answers) =>
+          answers.values.NEXT_PUBLIC_BILLING_PROVIDER === 'stripe',
         type: 'input',
         name: 'values.STRIPE_WEBHOOK_SECRET',
         message: `What is the Stripe webhook secret? \nFor more info: ${getUrlToDocs('STRIPE_WEBHOOK_SECRET')}\n`,
       },
       {
-        when: (answers) => answers.values.NEXT_PUBLIC_BILLING_PROVIDER === 'lemon-squeezy',
+        when: (answers) =>
+          answers.values.NEXT_PUBLIC_BILLING_PROVIDER === 'lemon-squeezy',
         type: 'input',
         name: 'values.LEMON_SQUEEZY_SECRET_KEY',
         message: `What is the Lemon Squeezy secret key? \nFor more info: ${getUrlToDocs('LEMON_SQUEEZY_SECRET_KEY')}\n`,
       },
       {
-        when: (answers) => answers.values.NEXT_PUBLIC_BILLING_PROVIDER === 'lemon-squeezy',
+        when: (answers) =>
+          answers.values.NEXT_PUBLIC_BILLING_PROVIDER === 'lemon-squeezy',
         type: 'input',
         name: 'values.LEMON_SQUEEZY_STORE_ID',
         message: `What is the Lemon Squeezy store ID? \nFor more info: ${getUrlToDocs('LEMON_SQUEEZY_STORE_ID')}\n`,
         default: allVariables.LEMON_SQUEEZY_STORE_ID,
       },
       {
-        when: (answers) => answers.values.NEXT_PUBLIC_BILLING_PROVIDER === 'lemon-squeezy',
+        when: (answers) =>
+          answers.values.NEXT_PUBLIC_BILLING_PROVIDER === 'lemon-squeezy',
         type: 'input',
         name: 'values.LEMON_SQUEEZY_SIGNING_SECRET',
         message: `What is the Lemon Squeezy signing secret?\nFor more info: ${getUrlToDocs('LEMON_SQUEEZY_SIGNING_SECRET')}\n`,
