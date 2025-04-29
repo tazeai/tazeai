@@ -54,5 +54,10 @@
   "engines": {
     "node": "^20 || >=22",
     "pnpm": ">=9.10.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "prettier": "^3.5.3"
+    }
   }
 }
