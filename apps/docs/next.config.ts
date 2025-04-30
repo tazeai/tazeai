@@ -1,6 +1,6 @@
 import { createMDX } from 'fumadocs-mdx/next';
 import type { NextConfig } from 'next';
-import million from "@million/lint";
+import million from '@million/lint';
 
 const withMDX = createMDX();
 

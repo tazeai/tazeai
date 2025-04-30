@@ -21,5 +21,5 @@ export const defaultLanguage = languages[0]!;
 export const i18n: I18nConfig = {
   defaultLanguage,
   languages,
-  hideLocale: 'default-locale',
+  hideLocale: 'never',
 };

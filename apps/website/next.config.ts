@@ -1,6 +1,7 @@
 import type { NextConfig } from 'next';
+import million from '@million/lint';
 
-const otelRegex = /@opentelemetry\/instrumentation/;
+const withMillion = million.next({ rsc: true });
 
 const nextConfig: NextConfig = {
   /* config options here */
@@ -12,6 +13,9 @@ const nextConfig: NextConfig = {
     '@tazeai/shared',
     '@tazeai/ui',
   ],
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 
-export default nextConfig;
+export default withMillion(nextConfig);
