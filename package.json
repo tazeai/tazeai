@@ -16,7 +16,6 @@
     "dev": "NODE_ENV=development turbo dev --parallel",
     "format": "biome format --write",
     "generate": "turbo gen",
-    "postinstall": "manypkg fix",
     "lint": "biome check",
     "prepare": "husky",
     "start": "turbo run start --filter=\"./apps/*\"",
@@ -31,7 +30,6 @@
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@changesets/cli": "^2.29.2",
-    "@manypkg/cli": "^0.23.0",
     "@turbo/gen": "^2.5.2",
     "@types/fs-extra": "^11.0.4",
     "@types/lodash-es": "^4.17.12",
