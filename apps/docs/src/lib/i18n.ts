@@ -11,8 +11,10 @@ export const locales = [
   },
 ];
 
+export const defaultLanguage = 'en';
+
 export const i18n: I18nConfig = {
-  defaultLanguage: 'en',
+  defaultLanguage,
   languages: locales.map((locale) => locale.locale),
   hideLocale: 'never',
 };

@@ -3,7 +3,7 @@ import { Providers } from './providers';
 import { createI18nServerInstance } from '@/locales/i18n.server';
 import { getTheme } from '@/libs/theme';
 import { getFontsClassName } from '@/libs/fonts';
-import '../styles/globals.css';
+import '@/styles/globals.css';
 
 export const metadata: Metadata = {
   title: 'TazeAI',

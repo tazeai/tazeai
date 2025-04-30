@@ -17,12 +17,12 @@ export function baseOptions(lang: string): BaseLayoutProps {
         <>
           <Image
             src="/images/logo.png"
-            alt="TazeAI"
+            alt="Taze AI"
             width={24}
             height={24}
             className="rounded-full"
           />
-          TazeAI
+          Taze AI
         </>
       ),
     },
