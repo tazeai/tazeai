@@ -1,20 +1,12 @@
-import { RootProvider } from 'fumadocs-ui/provider';
 import { Inter } from 'next/font/google';
 import type { ReactNode } from 'react';
 import '@/styles/globals.css';
-import type { Translations } from 'fumadocs-ui/i18n';
 import type { Metadata } from 'next';
-import { locales } from '@/lib/i18n';
 import Providers from './providers';
 
 const inter = Inter({
   subsets: ['latin'],
 });
-
-const cn: Partial<Translations> = {
-  search: 'Translated Content',
-  // other translations
-};
 
 export const metadata: Metadata = {
   title: {

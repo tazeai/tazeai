@@ -10,7 +10,7 @@ export const locales = [
     locale: 'zh-cn',
   },
   {
-    name: '繁体中文',
+    name: '繁體中文',
     locale: 'zh-tw',
   },
 ];
@@ -21,5 +21,5 @@ export const defaultLanguage = languages[0]!;
 export const i18n: I18nConfig = {
   defaultLanguage,
   languages,
-  hideLocale: 'never',
+  hideLocale: 'default-locale',
 };

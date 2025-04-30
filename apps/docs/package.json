@@ -5,21 +5,29 @@
   "type": "module",
   "scripts": {
     "build": "next build",
-    "clean": "rimraf dist .turbo .next",
+    "clean": "rimraf dist .turbo .next .million",
     "dev": "next dev --turbo --port=3003",
     "postinstall": "fumadocs-mdx",
     "start": "next start"
   },
   "dependencies": {
+    "@million/lint": "^1.0.14",
     "@orama/tokenizers": "^3.1.6",
     "@tazeai/env": "workspace:*",
     "@tazeai/ui": "workspace:*",
+    "fast-glob": "^3.3.3",
     "fumadocs-core": "^15.2.12",
     "fumadocs-mdx": "^11.6.1",
     "fumadocs-ui": "^15.2.12",
+    "gray-matter": "^4.0.3",
     "next": "^15.3.1",
     "react": "catalog:",
     "react-dom": "catalog:",
+    "remark": "^15.0.1",
+    "remark-gfm": "^4.0.1",
+    "remark-mdx": "^3.1.0",
+    "remark-stringify": "^11.0.0",
+    "shiki": "^3.3.0",
     "zod": "^3.24.3"
   },
   "devDependencies": {

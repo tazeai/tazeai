@@ -3,13 +3,6 @@ import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
 import { ThemeSwitcher } from '@tazeai/ui/components/theme-switch';
 import { i18n } from '@/lib/i18n';
 
-/**
- * Shared layout configurations
- *
- * you can customise layouts individually from:
- * Home Layout: app/(home)/layout.tsx
- * Docs Layout: app/docs/layout.tsx
- */
 export function baseOptions(lang: string): BaseLayoutProps {
   return {
     nav: {
@@ -29,7 +22,7 @@ export function baseOptions(lang: string): BaseLayoutProps {
     links: [
       {
         text: 'Docs',
-        url: '/docs',
+        url: lang ? `/${lang}/docs` : '/docs',
         active: 'nested-url',
       },
     ],
