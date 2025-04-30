@@ -7,7 +7,11 @@ export const locales = [
   },
   {
     name: '简体中文',
-    locale: 'zh',
+    locale: 'zh-cn',
+  },
+  {
+    name: '繁体中文',
+    locale: 'zh-tw',
   },
 ];
 

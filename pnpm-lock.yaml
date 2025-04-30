@@ -235,6 +235,9 @@ importers:
 
   apps/docs:
     dependencies:
+      '@orama/tokenizers':
+        specifier: ^3.1.6
+        version: 3.1.6
       '@tazeai/env':
         specifier: workspace:*
         version: link:../../packages/env
@@ -2115,6 +2118,10 @@ packages:
   '@orama/orama@3.1.6':
     resolution: {integrity: sha512-qtSrqCqRU93SjEBedz987tvWao1YQSELjBhGkHYGVP7Dg0lBWP6d+uZEIt5gxTAYio/YWWlhivmRABvRfPLmnQ==}
     engines: {node: '>= 16.0.0'}
+
+  '@orama/tokenizers@3.1.6':
+    resolution: {integrity: sha512-WAvM0XAytTkWX27XvqHkEeiO8ev5+Dqo/6xGzHFrRegoYb+dEapR8M7ao97qR5ZaHLIqnC+JweBhkiToQ6Gkbw==}
+    engines: {node: '>= 18.0.0'}
 
   '@peculiar/asn1-android@2.3.16':
     resolution: {integrity: sha512-a1viIv3bIahXNssrOIkXZIlI2ePpZaNmR30d4aBL99mu2rO+mT9D6zBsp7H6eROWGtmwv0Ionp5olJurIo09dw==}
@@ -7581,6 +7588,10 @@ snapshots:
 
   '@orama/orama@3.1.6': {}
 
+  '@orama/tokenizers@3.1.6':
+    dependencies:
+      '@orama/orama': 3.1.6
+
   '@peculiar/asn1-android@2.3.16':
     dependencies:
       '@peculiar/asn1-schema': 2.3.15
@@ -8937,7 +8948,7 @@ snapshots:
   axios@1.9.0(debug@4.4.0):
     dependencies:
       follow-redirects: 1.15.9(debug@4.4.0)
-      form-data: 4.0.0
+      form-data: 4.0.2
       proxy-from-env: 1.1.0
     transitivePeerDependencies:
       - debug
@@ -10106,7 +10117,7 @@ snapshots:
       isstream: 0.1.2
       jsonwebtoken: 9.0.2
       mime-types: 2.1.35
-      retry-axios: 2.6.0(axios@1.9.0(debug@4.4.0))
+      retry-axios: 2.6.0(axios@1.9.0)
       tough-cookie: 4.1.4
     transitivePeerDependencies:
       - supports-color
@@ -11771,7 +11782,7 @@ snapshots:
       onetime: 7.0.0
       signal-exit: 4.1.0
 
-  retry-axios@2.6.0(axios@1.9.0(debug@4.4.0)):
+  retry-axios@2.6.0(axios@1.9.0):
     dependencies:
       axios: 1.9.0(debug@4.4.0)
 
