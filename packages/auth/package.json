@@ -18,12 +18,12 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
-    "@iconify/react": "^5.2.1",
+    "@iconify/react": "^6.0.0",
     "@tazeai/cache": "workspace:*",
     "@tazeai/database": "workspace:*",
     "@tazeai/email": "workspace:*",
     "@tazeai/env": "workspace:*",
-    "bcrypt-ts": "^6.0.0",
+    "bcrypt-ts": "^7.0.0",
     "better-auth": "^1.2.7",
     "lucide-react": "catalog:",
     "nanoid": "^5.1.5",
@@ -32,7 +32,7 @@
     "server-only": "^0.0.1",
     "sonner": "^2.0.3",
     "zod": "^3.24.3",
-    "zustand": "^5.0.3"
+    "zustand": "^5.0.4"
   },
   "devDependencies": {
     "@tazeai/typescript-config": "workspace:*",

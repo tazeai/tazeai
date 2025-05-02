@@ -11,11 +11,11 @@
     "clean": "rimraf dist .turbo"
   },
   "dependencies": {
-    "@react-email/components": "^0.0.36",
+    "@react-email/components": "^0.0.37",
     "@tazeai/env": "workspace:*",
     "react": "catalog:",
     "react-dom": "catalog:",
-    "resend": "^4.4.1",
+    "resend": "^4.5.0",
     "zod": "^3.24.3"
   },
   "devDependencies": {

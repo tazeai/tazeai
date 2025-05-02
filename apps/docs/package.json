@@ -11,7 +11,6 @@
     "start": "next start"
   },
   "dependencies": {
-    "@million/lint": "^1.0.14",
     "@orama/tokenizers": "^3.1.6",
     "@tazeai/env": "workspace:*",
     "@tazeai/ui": "workspace:*",
@@ -31,14 +30,15 @@
     "zod": "^3.24.3"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.1.4",
+    "@million/lint": "^1.0.14",
+    "@tailwindcss/postcss": "^4.1.5",
     "@tazeai/typescript-config": "workspace:*",
     "@types/mdx": "^2.0.13",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "postcss": "^8.5.3",
-    "tailwindcss": "^4.1.4",
+    "tailwindcss": "^4.1.5",
     "typescript": "catalog:"
   }
 }
