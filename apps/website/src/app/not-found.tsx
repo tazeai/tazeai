@@ -1,3 +1,5 @@
+'use client';
+
 import NotFoundError from '@/components/not-found-error';
 
 function NotFoundPage() {

@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@t3-oss/env-nextjs": "^0.13.4",
-    "zod": "^3.24.3"
+    "zod": "^3.24.4"
   },
   "devDependencies": {
     "@tazeai/typescript-config": "workspace:*",

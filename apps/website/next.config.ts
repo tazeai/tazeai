@@ -1,7 +1,4 @@
 import type { NextConfig } from 'next';
-import million from '@million/lint';
-
-const withMillion = million.next({ rsc: true });
 
 const nextConfig: NextConfig = {
   /* config options here */
@@ -18,4 +15,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default withMillion(nextConfig);
+export default nextConfig;

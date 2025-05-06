@@ -1,6 +1,4 @@
 import type { NextRequest } from 'next/server';
-import { NextResponse } from 'next/server';
-import { checkSessionCookie } from '@tazeai/auth/middleware';
 import { authConfig } from '@/config/auth';
 
 export const config = {

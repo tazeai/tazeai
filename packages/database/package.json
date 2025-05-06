@@ -27,13 +27,13 @@
     "nanoid": "^5.1.5",
     "postgres": "^3.4.5",
     "uuid": "^11.1.0",
-    "zod": "^3.24.3"
+    "zod": "^3.24.4"
   },
   "devDependencies": {
     "@tazeai/typescript-config": "workspace:*",
     "@types/lodash-es": "^4.17.12",
     "dotenv-cli": "^8.0.0",
-    "drizzle-kit": "^0.31.0",
+    "drizzle-kit": "^0.31.1",
     "tsx": "^4.19.4",
     "typescript": "catalog:"
   }
