@@ -31,14 +31,14 @@
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^15.3.2",
-    "@tailwindcss/postcss": "^4.1.5",
+    "@tailwindcss/postcss": "^4.1.6",
     "@tazeai/typescript-config": "workspace:*",
     "@types/mdx": "^2.0.13",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "postcss": "^8.5.3",
-    "tailwindcss": "^4.1.5",
+    "tailwindcss": "^4.1.6",
     "typescript": "catalog:"
   }
 }

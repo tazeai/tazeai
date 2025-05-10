@@ -5,6 +5,8 @@
     "paths": {
       "@/*": ["./src/*"]
     },
+    "types": ["@serwist/next/typings"],
+    "lib": ["webworker", "DOM"],
     "plugins": [
       {
         "name": "next"

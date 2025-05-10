@@ -65,3 +65,7 @@ next-env.d.ts
 
 # Docs
 apps/*/.source
+
+# Serwist
+public/sw*
+public/swe-worker*

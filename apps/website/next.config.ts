@@ -1,4 +1,7 @@
 import type { NextConfig } from 'next';
+import withSerwistInit from '@serwist/next';
+
+const isProduction = process.env.NODE_ENV === 'production';
 
 const nextConfig: NextConfig = {
   /* config options here */
@@ -15,4 +18,13 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+const withSerwist = isProduction
+  ? withSerwistInit({
+      // Note: This is only an example. If you use Pages Router,
+      // use something else that works, such as "service-worker/index.ts".
+      swSrc: 'src/app/sw.ts',
+      swDest: 'public/sw.js',
+    })
+  : (config: NextConfig) => config;
+
+export default withSerwist(nextConfig);
