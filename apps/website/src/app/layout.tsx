@@ -5,9 +5,20 @@ import { getTheme } from '@/libs/theme';
 import { getFontsClassName } from '@/libs/fonts';
 import '../styles/globals.css';
 
+const appName = 'TazeAI';
+
 export const metadata: Metadata = {
-  title: 'TazeAI',
-  description: 'TazeAI',
+  title: appName,
+  applicationName: appName,
+  description: appName,
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: appName,
+  },
+  icons: {
+    icon: '/images/logo.png',
+  },
 };
 
 export const dynamic = 'force-dynamic';
