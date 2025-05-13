@@ -74,6 +74,7 @@ export class TazeAIServer extends Hono<Env> {
     });
     // Database
     this.use('*', async (c, next) => {
+      await cache.connect();
       c.set('db', this.db);
       c.set('cache', cache);
       await next();

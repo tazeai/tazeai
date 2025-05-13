@@ -1,7 +1,6 @@
-// import { Redis } from 'ioredis';
-import { Redis } from '@upstash/redis';
+import type { Redis } from '@upstash/redis';
+import { createClient, type RedisClientType } from 'redis';
 import { isNil, transform } from 'lodash-es';
-// import json from './utils/json';
 
 // TODO: Use superjson
 const json = {
@@ -40,7 +39,7 @@ type CacheOptions = {
  */
 export class Cache {
   #prefix = ''; // Prefix for cache keys
-  protected readonly redis: Redis; // Redis client instance
+  protected readonly redis: RedisClientType; // Redis client instance
 
   /**
    * Construct a new instance of the CacheStore.
@@ -48,20 +47,10 @@ export class Cache {
    * @param urlOrRedis The Redis URL or Redis client instance to use.
    * @param opts Configuration options, including an optional prefix for cache keys.
    */
-  constructor(urlOrRedis: string | Redis, opts: CacheOptions = {}) {
-    if (typeof urlOrRedis === 'string') {
-      const url = new URL(urlOrRedis);
-      const token = url.searchParams.get('token')!;
-      url.searchParams.delete('token');
-      this.redis = new Redis({
-        url: url.toString(),
-        token,
-      });
-    } else if (urlOrRedis instanceof Redis) {
-      this.redis = urlOrRedis;
-    } else {
-      throw new Error('Invalid argument');
-    }
+  constructor(connection: string, opts: CacheOptions = {}) {
+    this.redis = createClient({
+      url: connection,
+    });
     this.#prefix = opts.prefix ?? '';
   }
 
@@ -87,14 +76,17 @@ export class Cache {
   };
 
   // Connect to the Redis server
-  connect = () => {
-    // this.redis.set('test', 'test');
-    // return this.redis.connect();
+  connect = async () => {
+    if (!this.redis.isOpen) {
+      await this.redis.connect();
+    }
   };
 
   // Disconnect from the Redis server
-  disconnect = () => {
-    // return this.redis.disconnect();
+  disconnect = async () => {
+    if (this.redis.isOpen) {
+      await this.redis.destroy();
+    }
   };
 
   // Get the Redis client instance
@@ -118,7 +110,12 @@ export class Cache {
     const cacheKey = this.getKey(key);
     const ttl = this.getSeconds(seconds);
     const res = await (ttl
-      ? this.redis.set(cacheKey, this.serialize(value), { ex: ttl })
+      ? this.redis.set(cacheKey, this.serialize(value), {
+          expiration: {
+            type: 'EX',
+            value: ttl,
+          },
+        })
       : this.redis.set(cacheKey, this.serialize(value)));
     return res === REDIS_SUCCESS;
   };
@@ -164,6 +161,7 @@ export class Cache {
     try {
       const start = Date.now();
       const value = await this.get<T>(key);
+      console.log(`Cache[${key}] value: ${value}`);
       if (value) {
         console.log(`Cache[${key}] hit: ${Date.now() - start}ms`);
         return { value, cached: true };
@@ -188,7 +186,7 @@ export class Cache {
    * @returns Promise resolving to the new value.
    */
   increment = async (key: string, value = 1) => {
-    const res = await this.redis.incrby(this.getKey(key), value);
+    const res = await this.redis.incrBy(this.getKey(key), value);
     return res as number;
   };
 
@@ -201,7 +199,7 @@ export class Cache {
    */
   decrement = async (key: string, value = 1) => {
     const cacheKey = this.getKey(key);
-    const res = await this.redis.decrby(cacheKey, value);
+    const res = await this.redis.decrBy(cacheKey, value);
     return res as number;
   };
 
@@ -228,7 +226,7 @@ export class Cache {
     keys: string[],
     defaultVal: T | null = null,
   ): Promise<R> => {
-    const values = await this.redis.mget(keys.map(this.getKey));
+    const values = await this.redis.mGet(keys.map(this.getKey));
     return values.reduce<R>(
       (results, value, idx) => {
         const key = keys[idx];
@@ -387,7 +385,7 @@ export class Cache {
    * @returns Promise resolving to a boolean indicating success.
    */
   flush = async (): Promise<boolean> => {
-    const res = await this.redis.flushdb();
+    const res = await this.redis.flushDb();
     return res === REDIS_SUCCESS;
   };
 
@@ -398,9 +396,8 @@ export class Cache {
    * @returns Promise resolving to an object mapping keys to their values.
    */
   many = async (keys: Record<string, unknown>) => {
-    const values: (string | null)[] = await this.redis.mget(
-      ...Object.keys(keys).map(this.getKey),
-    );
+    const cacheKeys: string[] = Object.keys(keys).map(this.getKey);
+    const values: (string | null)[] = await this.redis.mGet(cacheKeys);
     return transform<string | null, Record<string, unknown>>(
       values,
       (results: Record<string, unknown>, value: string | null, key: number) => {
@@ -466,8 +463,8 @@ export class Cache {
   };
 }
 
-export function cache(urlOrRedis: string | Redis, opts: CacheOptions = {}) {
-  return new Cache(urlOrRedis, opts);
+export function cache(connection: string, opts: CacheOptions = {}) {
+  return new Cache(connection, opts);
 }
 
 export default cache;
