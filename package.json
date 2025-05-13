@@ -55,7 +55,8 @@
   },
   "pnpm": {
     "overrides": {
-      "@types/node": "catalog:"
+      "@types/node": "catalog:",
+      "esbuild": ">=0.25.4"
     }
   }
 }
