@@ -60,12 +60,6 @@ next-env.d.ts
 .cursorrules
 .github/copilot-instructions.md
 
-# Clerk
-.clerk
-
-# Docs
-apps/*/.source
-
 # Serwist
 public/sw*
 public/swe-worker*

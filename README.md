@@ -1,5 +1,7 @@
 # TazeAI
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/tazeai/tazeai)
+
 [中文文档](./README.zh_CN.md)
 
 ## Features

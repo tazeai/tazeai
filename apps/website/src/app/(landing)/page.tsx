@@ -27,6 +27,12 @@ export default function HomePage() {
         <LanguageSwitcher />
         <ThemeSwitcher />
         <UserButton />
+        <iframe
+          src="https://status.tazeai.com/badge?theme=dark"
+          width="250"
+          height="30"
+          style={{ colorScheme: 'normal' }}
+        ></iframe>
       </div>
     </div>
   );
