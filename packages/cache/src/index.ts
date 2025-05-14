@@ -1,6 +1,6 @@
-import { envs } from './envs';
-import { Cache } from './cache';
 import { createClient, type RedisClientType } from 'redis';
+import { Cache } from './cache';
+import { envs } from './envs';
 
 export const createRedis = (): RedisClientType => {
   const env = envs();

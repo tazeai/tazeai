@@ -1,5 +1,5 @@
-import { createClient, type RedisClientType } from 'redis';
 import { isNil, transform } from 'lodash-es';
+import { createClient, type RedisClientType } from 'redis';
 import { MAX_COMMANDS_QUEUE_LENGTH } from './consts';
 
 // TODO: Use superjson
@@ -113,11 +113,11 @@ export class Cache {
     const ttl = this.getSeconds(seconds);
     const res = await (ttl
       ? this.redis.set(cacheKey, this.serialize(value), {
-        expiration: {
-          type: 'EX',
-          value: ttl,
-        },
-      })
+          expiration: {
+            type: 'EX',
+            value: ttl,
+          },
+        })
       : this.redis.set(cacheKey, this.serialize(value)));
     return res === REDIS_SUCCESS;
   };

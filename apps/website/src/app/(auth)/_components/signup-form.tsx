@@ -40,6 +40,31 @@ const formSchema = z.object({
   }),
 });
 
+const socials: {
+  provider: 'github' | 'google';
+  icon: React.ReactNode;
+  label: string;
+}[] = [
+  ...(env.NEXT_PUBLIC_AUTH_GITHUB_ENABLED
+    ? [
+        {
+          provider: 'github' as const,
+          icon: <FaGithub className="size-4" />,
+          label: 'Sign up with Github',
+        },
+      ]
+    : []),
+  ...(env.NEXT_PUBLIC_AUTH_GOOGLE_ENABLED
+    ? [
+        {
+          provider: 'google' as const,
+          icon: <FaGoogle className="size-4" />,
+          label: 'Sign up with Google',
+        },
+      ]
+    : []),
+];
+
 export function SignUpForm({
   className,
   ...props
@@ -114,35 +139,29 @@ export function SignUpForm({
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
               <div className="grid gap-6">
-                <div className="flex flex-col gap-4">
-                  {env.NEXT_PUBLIC_AUTH_GITHUB_ENABLED && (
-                    <Button
-                      variant="outline"
-                      className="w-full gap-2"
-                      disabled={isLoading}
-                      onClick={() => onSocialLogin('github')}
-                    >
-                      <FaGithub className="size-4" />
-                      Sign up with Github
-                    </Button>
-                  )}
-                  {env.NEXT_PUBLIC_AUTH_GOOGLE_ENABLED && (
-                    <Button
-                      variant="outline"
-                      className="w-full gap-2"
-                      disabled={isLoading}
-                      onClick={() => onSocialLogin('google')}
-                    >
-                      <FaGoogle className="size-4" />
-                      Sign up with Google
-                    </Button>
-                  )}
-                </div>
-                <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
-                  <span className="relative z-10 bg-background px-2 text-muted-foreground">
-                    Or continue with
-                  </span>
-                </div>
+                {socials?.length ? (
+                  <>
+                    <div className="flex flex-col gap-4">
+                      {socials.map((social) => (
+                        <Button
+                          key={social.provider}
+                          variant="outline"
+                          className="w-full gap-2"
+                          disabled={isLoading}
+                          onClick={() => onSocialLogin(social.provider)}
+                        >
+                          {social.icon}
+                          {social.label}
+                        </Button>
+                      ))}
+                    </div>
+                    <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
+                      <span className="relative z-10 bg-background px-2 text-muted-foreground">
+                        Or continue with
+                      </span>
+                    </div>
+                  </>
+                ) : null}
                 <div className="grid gap-6">
                   <FormField
                     control={form.control}
