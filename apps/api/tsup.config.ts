@@ -8,7 +8,6 @@ const tsupOptions: Options = {
   entry: ['src/index.ts', 'src/vercel.ts'],
   format: ['esm'],
   cjsInterop: true,
-  external: ['ioredis'],
   outExtension({ format }) {
     switch (format) {
       case 'cjs':

@@ -1,18 +1,12 @@
 'use client';
 
 import { useSession, signOut } from '@tazeai/auth/client';
-import Link from 'next/link';
 import {
-  LayoutDashboard,
-  User,
-  Settings,
-  HelpCircle,
   LogOut,
 } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -65,7 +59,7 @@ export function UserButton() {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuGroup>
+        {/* <DropdownMenuGroup>
           <DropdownMenuItem asChild>
             <Link
               href="/dashboard"
@@ -102,7 +96,7 @@ export function UserButton() {
               <span>Help</span>
             </Link>
           </DropdownMenuItem>
-        </DropdownMenuGroup>
+        </DropdownMenuGroup> */}
         <DropdownMenuSeparator />
         <DropdownMenuItem
           className="text-red-500 focus:text-red-500 focus:bg-red-50"

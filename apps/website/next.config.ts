@@ -13,6 +13,7 @@ const nextConfig: NextConfig = {
     '@tazeai/shared',
     '@tazeai/ui',
   ],
+  allowedDevOrigins: ['http://local.tazeai.com:3000'],
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -20,11 +21,11 @@ const nextConfig: NextConfig = {
 
 const withSerwist = isProduction
   ? withSerwistInit({
-      // Note: This is only an example. If you use Pages Router,
-      // use something else that works, such as "service-worker/index.ts".
-      swSrc: 'src/app/sw.ts',
-      swDest: 'public/sw.js',
-    })
+    // Note: This is only an example. If you use Pages Router,
+    // use something else that works, such as "service-worker/index.ts".
+    swSrc: 'src/app/sw.ts',
+    swDest: 'public/sw.js',
+  })
   : (config: NextConfig) => config;
 
 export default withSerwist(nextConfig);
