@@ -57,7 +57,7 @@
     "overrides": {
       "@types/node": "catalog:",
       "esbuild": ">=0.25.4",
-      "prettier": "3.5.3"
+      "prettier": "^3.5.3"
     }
   }
 }

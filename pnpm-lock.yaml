@@ -28,7 +28,7 @@ catalogs:
 overrides:
   '@types/node': ^22.15.18
   esbuild: '>=0.25.4'
-  prettier: 3.5.3
+  prettier: ^3.5.3
 
 importers:
 
@@ -8123,7 +8123,7 @@ snapshots:
   axios@1.9.0(debug@4.4.1):
     dependencies:
       follow-redirects: 1.15.9(debug@4.4.1)
-      form-data: 4.0.0
+      form-data: 4.0.2
       proxy-from-env: 1.1.0
     transitivePeerDependencies:
       - debug
