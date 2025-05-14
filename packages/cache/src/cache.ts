@@ -1,6 +1,6 @@
-import type { Redis } from '@upstash/redis';
 import { createClient, type RedisClientType } from 'redis';
 import { isNil, transform } from 'lodash-es';
+import { MAX_COMMANDS_QUEUE_LENGTH } from './consts';
 
 // TODO: Use superjson
 const json = {
@@ -50,6 +50,7 @@ export class Cache {
   constructor(connection: string, opts: CacheOptions = {}) {
     this.redis = createClient({
       url: connection,
+      commandsQueueMaxLength: MAX_COMMANDS_QUEUE_LENGTH,
     });
     this.#prefix = opts.prefix ?? '';
   }
@@ -83,9 +84,9 @@ export class Cache {
   };
 
   // Disconnect from the Redis server
-  disconnect = async () => {
+  disconnect = () => {
     if (this.redis.isOpen) {
-      await this.redis.destroy();
+      this.redis.destroy();
     }
   };
 
@@ -107,6 +108,7 @@ export class Cache {
     value: unknown,
     seconds?: number,
   ): Promise<boolean> => {
+    await this.connect();
     const cacheKey = this.getKey(key);
     const ttl = this.getSeconds(seconds);
     const res = await (ttl
@@ -159,6 +161,7 @@ export class Cache {
     seconds?: number,
   ): Promise<{ value: T | null; cached: boolean }> => {
     try {
+      await this.connect();
       const start = Date.now();
       const value = await this.get<T>(key);
       console.log(`Cache[${key}] value: ${value}`);
@@ -186,6 +189,7 @@ export class Cache {
    * @returns Promise resolving to the new value.
    */
   increment = async (key: string, value = 1) => {
+    await this.connect();
     const res = await this.redis.incrBy(this.getKey(key), value);
     return res as number;
   };
@@ -198,6 +202,7 @@ export class Cache {
    * @returns Promise resolving to the new value.
    */
   decrement = async (key: string, value = 1) => {
+    await this.connect();
     const cacheKey = this.getKey(key);
     const res = await this.redis.decrBy(cacheKey, value);
     return res as number;
@@ -211,6 +216,7 @@ export class Cache {
    * @returns Promise resolving to a boolean indicating success.
    */
   forever = async (key: string, value: unknown) => {
+    await this.connect();
     const res = await this.set(key, value);
     return res;
   };
@@ -226,6 +232,7 @@ export class Cache {
     keys: string[],
     defaultVal: T | null = null,
   ): Promise<R> => {
+    await this.connect();
     const values = await this.redis.mGet(keys.map(this.getKey));
     return values.reduce<R>(
       (results, value, idx) => {
@@ -271,6 +278,7 @@ export class Cache {
     const start = Date.now();
     const value = await this.redis.get(this.getKey(key));
     const end = Date.now();
+    await this.connect();
     console.log(`Cache[${key}] get: ${end - start}ms`);
     return (
       isNil(value) ? defaultVal : this.unserialize<T>(value as string)
@@ -284,6 +292,7 @@ export class Cache {
    * @returns Promise resolving to a boolean indicating success.
    */
   delete = async (key: string): Promise<boolean> => {
+    await this.redis.disconnect();
     const res = await this.redis.del(this.getKey(key));
     return res === 1;
   };
@@ -315,6 +324,7 @@ export class Cache {
    * @returns Promise resolving to a boolean indicating if the key exists.
    */
   has = async (key: string): Promise<boolean> => {
+    await this.connect();
     const exists = await this.redis.exists(key);
     return exists === 1;
   };
@@ -326,6 +336,7 @@ export class Cache {
    * @returns Promise resolving to the cached value, or null if not found.
    */
   pull = async <T>(key: string) => {
+    await this.connect();
     const cacheKey = this.getKey(key);
     const value = await this.redis.get(cacheKey);
     if (value) {
@@ -344,6 +355,7 @@ export class Cache {
    * @returns Promise resolving to a boolean indicating success.
    */
   put = async (key: string, value: unknown, seconds?: number) => {
+    await this.connect();
     const cacheKey = this.getKey(key);
     const res = await this.redis.set(cacheKey, this.serialize(value));
     const ttl = this.getSeconds(seconds);
@@ -361,6 +373,7 @@ export class Cache {
    * @returns Promise resolving to a boolean indicating success.
    */
   putMany = async (values: Record<string, unknown>, seconds?: number) => {
+    await this.connect();
     const results = await Promise.all(
       Object.entries(values).map(([key, value]) =>
         this.put(key, value, seconds),
@@ -375,7 +388,8 @@ export class Cache {
    * @param key The cache key.
    * @returns Promise resolving to the TTL in seconds, or null if the key does not exist.
    */
-  ttl = (key: string): Promise<number | null> => {
+  ttl = async (key: string): Promise<number | null> => {
+    await this.connect();
     return this.redis.ttl(key);
   };
 
@@ -385,6 +399,7 @@ export class Cache {
    * @returns Promise resolving to a boolean indicating success.
    */
   flush = async (): Promise<boolean> => {
+    await this.connect();
     const res = await this.redis.flushDb();
     return res === REDIS_SUCCESS;
   };
@@ -396,6 +411,7 @@ export class Cache {
    * @returns Promise resolving to an object mapping keys to their values.
    */
   many = async (keys: Record<string, unknown>) => {
+    await this.connect();
     const cacheKeys: string[] = Object.keys(keys).map(this.getKey);
     const values: (string | null)[] = await this.redis.mGet(cacheKeys);
     return transform<string | null, Record<string, unknown>>(
@@ -420,6 +436,7 @@ export class Cache {
     value: T,
     seconds?: number,
   ): Promise<boolean> => {
+    await this.connect();
     const exist = await this.has(key);
     if (exist) return false;
     return await this.set(key, value, seconds);

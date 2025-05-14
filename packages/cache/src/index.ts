@@ -1,19 +1,14 @@
 import { envs } from './envs';
-import { Redis } from '@upstash/redis';
 import { Cache } from './cache';
+import { createClient, type RedisClientType } from 'redis';
 
-// const env = envs();
-
-export const createRedis = () => {
+export const createRedis = (): RedisClientType => {
   const env = envs();
   const url = new URL(env.REDIS_URL);
-  const token = url.searchParams.get('token')!;
-  url.searchParams.delete('token');
-  const redis = new Redis({
+  const redis = createClient({
     url: url.toString(),
-    token,
   });
-  return redis;
+  return redis as RedisClientType;
 };
 
 export const createCache = () => {
@@ -22,7 +17,5 @@ export const createCache = () => {
     prefix: 'auth_session_',
   });
 };
-
-export { Redis };
 
 export * from './cache';

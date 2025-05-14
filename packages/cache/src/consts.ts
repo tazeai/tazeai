@@ -1,0 +1,1 @@
+export const MAX_COMMANDS_QUEUE_LENGTH = 1000;
