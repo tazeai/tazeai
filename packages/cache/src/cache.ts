@@ -113,11 +113,11 @@ export class Cache {
     const ttl = this.getSeconds(seconds);
     const res = await (ttl
       ? this.redis.set(cacheKey, this.serialize(value), {
-          expiration: {
-            type: 'EX',
-            value: ttl,
-          },
-        })
+        expiration: {
+          type: 'EX',
+          value: ttl,
+        },
+      })
       : this.redis.set(cacheKey, this.serialize(value)));
     return res === REDIS_SUCCESS;
   };
@@ -275,10 +275,10 @@ export class Cache {
     key: string,
     defaultVal: T | null = null,
   ): Promise<T | null> => {
+    await this.connect();
     const start = Date.now();
     const value = await this.redis.get(this.getKey(key));
     const end = Date.now();
-    await this.connect();
     console.log(`Cache[${key}] get: ${end - start}ms`);
     return (
       isNil(value) ? defaultVal : this.unserialize<T>(value as string)
@@ -292,7 +292,7 @@ export class Cache {
    * @returns Promise resolving to a boolean indicating success.
    */
   delete = async (key: string): Promise<boolean> => {
-    await this.redis.disconnect();
+    await this.connect();
     const res = await this.redis.del(this.getKey(key));
     return res === 1;
   };
@@ -313,6 +313,7 @@ export class Cache {
    * @returns Promise resolving to a boolean indicating success.
    */
   deleteMultiple = async (keys: string[]): Promise<boolean> => {
+    await this.connect();
     const results = await Promise.all(keys.map(this.delete));
     return results.every(Boolean);
   };
