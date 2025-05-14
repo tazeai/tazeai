@@ -20,11 +20,12 @@ const serwist = new Serwist({
   clientsClaim: true,
   navigationPreload: true,
   runtimeCaching: [
+    ...defaultCache,
     {
-      matcher: ({ url }) => url.pathname.startsWith('/api/auth'),
+      matcher: ({ url, sameOrigin }) =>
+        url.pathname.includes('/api/auth') && sameOrigin,
       handler: new NetworkOnly(),
     },
-    ...defaultCache,
   ],
 });
 
