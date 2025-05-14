@@ -1,19 +1,19 @@
 import { ChatPromptTemplate } from '@langchain/core/prompts';
 import { ChatOpenAI } from '@langchain/openai';
 import { ChatDeepSeek } from '@langchain/deepseek';
-import { UpstashRedisCache } from '@langchain/community/caches/upstash_redis';
-import { createRedis } from '@tazeai/cache';
+// import { RedisCache } from '@langchain/community/caches/redis';
+// import { createRedis } from '@tazeai/cache';
 import { envs } from './envs';
 import { ProviderType } from './types';
 
 const env = envs();
 
 export class LangChain {
-  private cache: UpstashRedisCache;
+  // private cache: RedisCache;
   constructor() {
-    this.cache = new UpstashRedisCache({
-      client: createRedis(),
-    });
+    // this.cache = new RedisCache({
+    //   client: createRedis(),
+    // });
   }
 
   getProvider(type: ProviderType, modelName: string) {
@@ -29,7 +29,7 @@ export class LangChain {
         },
         temperature: 0.7,
         streaming: true,
-        cache: this.cache,
+        // cache: this.cache,
       });
       return llm;
     } else if (type === ProviderType.DEEPSEEK) {
@@ -44,7 +44,7 @@ export class LangChain {
         },
         temperature: 0.7,
         streaming: true,
-        cache: this.cache,
+        // cache: this.cache,
       });
       return llm;
     }
