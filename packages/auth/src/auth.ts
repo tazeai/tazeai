@@ -68,6 +68,9 @@ const config: BetterAuthOptions = {
     database: {
       generateId: () => uuidv7(),
     },
+    ipAddress: {
+      ipAddressHeaders: ['x-forwarded-for', 'x-real-ip'],
+    },
     crossSubDomainCookies: {
       enabled: !!env.AUTH_DOMAIN,
       domain: env.AUTH_DOMAIN,
