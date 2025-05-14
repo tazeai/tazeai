@@ -1,6 +1,6 @@
 import { defaultCache } from '@serwist/next/worker';
 import type { PrecacheEntry, SerwistGlobalConfig } from 'serwist';
-import { ExpirationPlugin, NetworkOnly, Serwist } from 'serwist';
+import { NetworkOnly, Serwist } from 'serwist';
 
 // This declares the value of `injectionPoint` to TypeScript.
 // `injectionPoint` is the string that will be replaced by the
@@ -21,16 +21,8 @@ const serwist = new Serwist({
   navigationPreload: true,
   runtimeCaching: [
     {
-      matcher: /\/api\/auth\/.*/,
-      handler: new NetworkOnly({
-        plugins: [
-          new ExpirationPlugin({
-            maxEntries: 16,
-            maxAgeSeconds: 24 * 60 * 60, // 24 hours
-          }),
-        ],
-        networkTimeoutSeconds: 10, // fallback to cache if API does not response within 10 seconds
-      }),
+      matcher: ({ url }) => url.pathname.startsWith('/api/auth'),
+      handler: new NetworkOnly(),
     },
     ...defaultCache,
   ],
