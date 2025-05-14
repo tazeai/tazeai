@@ -15,18 +15,18 @@ const config: BetterAuthOptions = {
     enabled: true,
     autoSignIn: true,
   },
-  secondaryStorage: {
-    get: async (key) => {
-      const value = await cache.get<string>(key);
-      return JSON.stringify(value);
-    },
-    set: async (key, value, ttl) => {
-      await cache.set(key, value, ttl);
-    },
-    delete: async (key) => {
-      await cache.delete(key);
-    },
-  },
+  // secondaryStorage: {
+  //   get: async (key) => {
+  //     const value = await cache.get<string>(key);
+  //     return JSON.stringify(value);
+  //   },
+  //   set: async (key, value, ttl) => {
+  //     await cache.set(key, value, ttl);
+  //   },
+  //   delete: async (key) => {
+  //     await cache.delete(key);
+  //   },
+  // },
   baseURL: env.NEXT_PUBLIC_AUTH_URL,
   socialProviders: {
     github: {
