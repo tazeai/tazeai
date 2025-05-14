@@ -64,6 +64,9 @@ const config: BetterAuthOptions = {
     provider: 'pg',
     schema: schemas,
   }),
+  rateLimit: {
+    enabled: false,
+  },
   advanced: {
     database: {
       generateId: () => uuidv7(),
