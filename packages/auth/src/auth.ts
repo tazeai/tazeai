@@ -21,7 +21,7 @@ const config: BetterAuthOptions = {
       return typeof value === 'string' ? value : null;
     },
     set: async (key, value, ttl) => {
-      await cache.set(key, value, ttl ?? 60 * 60 * 1000);
+      await cache.set(key, value, ttl ?? 60 * 60);
     },
     delete: async (key) => {
       await cache.delete(key);
