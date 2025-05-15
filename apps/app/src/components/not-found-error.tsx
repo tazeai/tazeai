@@ -6,7 +6,7 @@ import { Button } from '@tazeai/ui/components/button';
 export default function NotFoundError() {
   const router = useRouter();
   return (
-    <div className="h-svh">
+    <div className="h-screen">
       <div className="m-auto flex h-full w-full flex-col items-center justify-center gap-2">
         <h1 className="text-[7rem] font-bold leading-tight">404</h1>
         <span className="font-medium">Oops! Page Not Found!</span>

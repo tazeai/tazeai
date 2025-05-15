@@ -24,14 +24,13 @@ import { useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { FaGithub, FaGoogle } from 'react-icons/fa';
 import { Input } from '@tazeai/ui/components/input';
 import { toast } from 'sonner';
 import { useSearchParams } from 'next/navigation';
 import { Label } from '@tazeai/ui/components/label';
 import Link from 'next/link';
-import { env } from '@/env';
 import { authConfig } from '@/config/auth';
+import { Social } from './social';
 
 const formSchema = z.object({
   email: z.string().email({
@@ -111,35 +110,7 @@ export function SignInForm({
         </CardHeader>
         <CardContent>
           <div className="grid gap-6">
-            <div className="flex flex-col gap-4">
-              {env.NEXT_PUBLIC_AUTH_GITHUB_ENABLED && (
-                <Button
-                  variant="outline"
-                  className="w-full gap-2"
-                  disabled={isLoading}
-                  onClick={() => onSocialLogin('github')}
-                >
-                  <FaGithub className="size-4" />
-                  Login with Github
-                </Button>
-              )}
-              {env.NEXT_PUBLIC_AUTH_GOOGLE_ENABLED && (
-                <Button
-                  variant="outline"
-                  className="w-full gap-2"
-                  disabled={isLoading}
-                  onClick={() => onSocialLogin('google')}
-                >
-                  <FaGoogle className="size-4" />
-                  Login with Google
-                </Button>
-              )}
-            </div>
-            <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
-              <span className="relative z-10 bg-background px-2 text-muted-foreground">
-                Or continue with
-              </span>
-            </div>
+            <Social onClick={onSocialLogin} isLoading={isLoading} />
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)}>
                 <div className="grid gap-6">

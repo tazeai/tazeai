@@ -6,8 +6,8 @@
     ".": "./src/index.ts",
     "./envs": "./src/envs.ts",
     "./types": "./src/types/index.ts",
-    "./client": "./src/client.ts",
-    "./server": "./src/server.ts",
+    "./client": "./src/client/index.ts",
+    "./server": "./src/server/index.ts",
     "./middleware": "./src/middleware.ts",
     "./components/*": "./src/components/*.tsx"
   },
