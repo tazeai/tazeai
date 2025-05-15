@@ -1,9 +1,9 @@
-import type { Metadata } from 'next';
-import { Providers } from './providers';
-import { createI18nServerInstance } from '@/locales/i18n.server';
-import { getTheme } from '@/libs/theme';
 import { getFontsClassName } from '@/libs/fonts';
+import { getTheme } from '@/libs/theme';
+import { createI18nServerInstance } from '@/locales/i18n.server';
+import type { Metadata } from 'next';
 import '../styles/globals.css';
+import { Providers } from './providers';
 
 const appName = 'TazeAI';
 

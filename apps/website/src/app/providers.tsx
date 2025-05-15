@@ -1,11 +1,11 @@
 'use client';
 
-import { useMemo, type ReactNode } from 'react';
-import { I18nProvider } from '@tazeai/i18n/provider';
-import { getI18nSettings } from '@/locales/i18n.settings';
 import { i18nResolver } from '@/locales/i18n.resolver';
-import { ThemeProvider, type UIProviderProps } from '@tazeai/ui/providers';
+import { getI18nSettings } from '@/locales/i18n.settings';
+import { I18nProvider } from '@tazeai/i18n/provider';
 import { Toaster } from '@tazeai/ui/components/sonner';
+import { ThemeProvider, type UIProviderProps } from '@tazeai/ui/providers';
+import { useMemo, type ReactNode } from 'react';
 
 export interface ProvidersProps {
   children: ReactNode;
