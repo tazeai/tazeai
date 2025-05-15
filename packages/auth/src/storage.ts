@@ -1,6 +1,5 @@
 import { createRedis } from '@tazeai/cache';
 import type { SecondaryStorage } from 'better-auth';
-import { snakeCase } from 'lodash-es';
 
 type RedisStorageOptions = {
   url: string;
@@ -17,7 +16,7 @@ export const redisStorage = (
 ): SecondaryStorage => {
   const { prefix = 'auth', url } = options;
   const client = createRedis(url);
-  const getRedisKey = (key: string) => snakeCase(`${prefix}:${key}`);
+  const getRedisKey = (key: string) => `${prefix}:${key}`;
   const getRedis = async () => {
     if (!client.isOpen) {
       await client.connect();
