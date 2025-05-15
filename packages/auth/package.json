@@ -25,6 +25,7 @@
     "@tazeai/env": "workspace:*",
     "bcrypt-ts": "^7.0.0",
     "better-auth": "^1.2.7",
+    "lodash-es": "^4.17.21",
     "lucide-react": "catalog:",
     "nanoid": "^5.1.5",
     "react-hook-form": "^7.56.3",
@@ -36,6 +37,7 @@
   },
   "devDependencies": {
     "@tazeai/typescript-config": "workspace:*",
+    "@types/lodash-es": "^4.17.12",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",

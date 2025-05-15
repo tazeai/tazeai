@@ -2,11 +2,9 @@ import { createClient, type RedisClientType } from 'redis';
 import { Cache } from './cache';
 import { envs } from './envs';
 
-export const createRedis = (): RedisClientType => {
-  const env = envs();
-  const url = new URL(env.REDIS_URL);
+export const createRedis = (url: string): RedisClientType => {
   const redis = createClient({
-    url: url.toString(),
+    url,
   });
   return redis as RedisClientType;
 };

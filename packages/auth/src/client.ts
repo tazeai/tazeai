@@ -1,11 +1,11 @@
-import { createAuthClient } from 'better-auth/react';
 import {
+  adminClient,
+  apiKeyClient,
+  emailOTPClient,
   magicLinkClient,
   organizationClient,
-  apiKeyClient,
-  adminClient,
-  emailOTPClient,
 } from 'better-auth/client/plugins';
+import { createAuthClient } from 'better-auth/react';
 
 import { envs } from './envs';
 
@@ -28,5 +28,5 @@ export const client = createAuthClient({
 export const { signIn, signUp, useSession, signOut, admin, emailOtp } = client;
 
 // Export the types
-export * from './types';
 export * from 'better-auth/react';
+export * from './types';

@@ -1,40 +1,21 @@
-import { db, schemas, nanoid, uuidv7 } from '@tazeai/database';
+import { db, nanoid, schemas, uuidv7 } from '@tazeai/database';
+import { resend } from '@tazeai/email';
 import { betterAuth, type BetterAuthOptions } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
-import { admin, organization, apiKey, emailOTP } from 'better-auth/plugins';
+import { admin, apiKey, emailOTP, organization } from 'better-auth/plugins';
 import { envs } from './envs';
-import { createRedis } from '@tazeai/cache';
-import { resend } from '@tazeai/email';
+import { redisStorage } from './storage';
 
 const createConfig = (): BetterAuthOptions => {
   const env = envs();
-  const redis = createRedis();
   return {
     emailAndPassword: {
       enabled: true,
       autoSignIn: true,
     },
-    secondaryStorage: {
-      get: async (key) => {
-        if (!redis.isOpen) {
-          await redis.connect();
-        }
-        const value = (await redis.get(key)) ?? null;
-        return typeof value === 'string' ? value : null;
-      },
-      set: async (key, value, ttl) => {
-        if (!redis.isOpen) {
-          await redis.connect();
-        }
-        await redis.set(key, value, { EX: ttl ?? 60 * 60 });
-      },
-      delete: async (key) => {
-        if (!redis.isOpen) {
-          await redis.connect();
-        }
-        await redis.del(key);
-      },
-    },
+    secondaryStorage: redisStorage({
+      url: env.REDIS_URL,
+    }),
     baseURL: env.NEXT_PUBLIC_AUTH_URL,
     socialProviders: {
       github: {
