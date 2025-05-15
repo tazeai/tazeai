@@ -21,7 +21,7 @@ export default function HomePage() {
             <Button color="primary">{t('signIn', 'auth')}</Button>
           </Link>
         )}
-        <Link href="https://docs.tazeai.com">
+        <Link href="https://docs.tazeai.com" target="_blank">
           <Button color="primary">Docs</Button>
         </Link>
         <LanguageSwitcher />
