@@ -1,9 +1,7 @@
 'use client';
 
 import { useSession, signOut } from '@tazeai/auth/client';
-import {
-  LogOut,
-} from 'lucide-react';
+import { LogOut } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,

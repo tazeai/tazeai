@@ -3,119 +3,128 @@ import { betterAuth, type BetterAuthOptions } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 import { admin, organization, apiKey, emailOTP } from 'better-auth/plugins';
 import { envs } from './envs';
-import { createCache } from '@tazeai/cache';
+import { createRedis } from '@tazeai/cache';
 import { resend } from '@tazeai/email';
 
-const env = envs();
-
-const cache = createCache();
-
-const config: BetterAuthOptions = {
-  emailAndPassword: {
-    enabled: true,
-    autoSignIn: true,
-  },
-  secondaryStorage: {
-    get: async (key) => {
-      const value = (await cache.get<string>(key)) ?? null;
-      return typeof value === 'string' ? value : null;
-    },
-    set: async (key, value, ttl) => {
-      await cache.set(key, value, ttl ?? 60 * 60);
-    },
-    delete: async (key) => {
-      await cache.delete(key);
-    },
-  },
-  baseURL: env.NEXT_PUBLIC_AUTH_URL,
-  socialProviders: {
-    github: {
-      enabled: !!(
-        env.AUTH_GITHUB_ID &&
-        env.AUTH_GITHUB_SECRET &&
-        env.NEXT_PUBLIC_AUTH_GITHUB_ENABLED === 'true'
-      ),
-      clientId: env.AUTH_GITHUB_ID ?? '',
-      clientSecret: env.AUTH_GITHUB_SECRET ?? '',
-    },
-    google: {
-      enabled: !!(
-        env.AUTH_GOOGLE_ID &&
-        env.AUTH_GOOGLE_SECRET &&
-        env.NEXT_PUBLIC_AUTH_GOOGLE_ENABLED === 'true'
-      ),
-      clientId: env.AUTH_GOOGLE_ID ?? '',
-      clientSecret: env.AUTH_GOOGLE_SECRET ?? '',
-    },
-  },
-  trustedOrigins: (req) => [
-    req.headers.get('origin') ?? '',
-    req.headers.get('referer') ?? '',
-  ],
-  session: {
-    cookieCache: {
+const createConfig = (): BetterAuthOptions => {
+  const env = envs();
+  const redis = createRedis();
+  return {
+    emailAndPassword: {
       enabled: true,
-      maxAge: 5 * 60, // Cache duration in seconds
+      autoSignIn: true,
     },
-    expiresIn: 60 * 60 * 24 * 7, // 7 days
-    updateAge: 60 * 60 * 24, // 1 day
-  },
-  database: drizzleAdapter(db, {
-    provider: 'pg',
-    schema: schemas,
-  }),
-  rateLimit: {
-    enabled: false,
-  },
-  advanced: {
-    database: {
-      generateId: () => uuidv7(),
+    secondaryStorage: {
+      get: async (key) => {
+        if (!redis.isOpen) {
+          await redis.connect();
+        }
+        const value = (await redis.get(key)) ?? null;
+        return typeof value === 'string' ? value : null;
+      },
+      set: async (key, value, ttl) => {
+        if (!redis.isOpen) {
+          await redis.connect();
+        }
+        await redis.set(key, value, { EX: ttl ?? 60 * 60 });
+      },
+      delete: async (key) => {
+        if (!redis.isOpen) {
+          await redis.connect();
+        }
+        await redis.del(key);
+      },
     },
-    ipAddress: {
-      ipAddressHeaders: ['x-forwarded-for', 'x-real-ip'],
+    baseURL: env.NEXT_PUBLIC_AUTH_URL,
+    socialProviders: {
+      github: {
+        enabled: !!(
+          env.AUTH_GITHUB_ID &&
+          env.AUTH_GITHUB_SECRET &&
+          env.NEXT_PUBLIC_AUTH_GITHUB_ENABLED === 'true'
+        ),
+        clientId: env.AUTH_GITHUB_ID ?? '',
+        clientSecret: env.AUTH_GITHUB_SECRET ?? '',
+      },
+      google: {
+        enabled: !!(
+          env.AUTH_GOOGLE_ID &&
+          env.AUTH_GOOGLE_SECRET &&
+          env.NEXT_PUBLIC_AUTH_GOOGLE_ENABLED === 'true'
+        ),
+        clientId: env.AUTH_GOOGLE_ID ?? '',
+        clientSecret: env.AUTH_GOOGLE_SECRET ?? '',
+      },
     },
-    crossSubDomainCookies: {
-      enabled: !!env.AUTH_DOMAIN,
-      domain: env.AUTH_DOMAIN,
+    trustedOrigins: (req) => [
+      req.headers.get('origin') ?? '',
+      req.headers.get('referer') ?? '',
+    ],
+    session: {
+      cookieCache: {
+        enabled: true,
+        maxAge: 5 * 60, // Cache duration in seconds
+      },
+      expiresIn: 60 * 60 * 24 * 7, // 7 days
+      updateAge: 60 * 60 * 24, // 1 day
     },
-    cookiePrefix: 'auth',
-  },
-  databaseHooks: {
-    user: {
-      create: {
-        before: async (user) => {
-          const name = user.name.trim() || user.email.split('@')[0] || nanoid();
-          const image =
-            user.image || 'https://ui-avatars.com/api/?name=' + name;
-          return {
-            data: {
-              name,
-              image,
-            },
-          };
+    database: drizzleAdapter(db, {
+      provider: 'pg',
+      schema: schemas,
+    }),
+    rateLimit: {
+      enabled: false,
+    },
+    advanced: {
+      database: {
+        generateId: () => uuidv7(),
+      },
+      crossSubDomainCookies: {
+        enabled: !!env.AUTH_DOMAIN,
+        domain: env.AUTH_DOMAIN,
+      },
+      cookiePrefix: 'auth',
+    },
+    databaseHooks: {
+      user: {
+        create: {
+          before: async (user) => {
+            const name =
+              user.name.trim() || user.email.split('@')[0] || nanoid();
+            const image =
+              user.image || 'https://ui-avatars.com/api/?name=' + name;
+            return {
+              data: {
+                name,
+                image,
+              },
+            };
+          },
         },
       },
     },
-  },
-  plugins: [
-    organization(),
-    apiKey(),
-    admin(),
-    emailOTP({
-      sendVerificationOTP: async (data, request) => {
-        console.log('sendVerificationOTP', data, request);
-        const { email, otp } = data;
-        console.log('sendVerificationOTP', data, request);
-        const result = await resend.emails.send({
-          from: env.RESEND_FROM,
-          to: email,
-          subject: 'Verify your email',
-          html: `Verify your email with the code: ${otp}`,
-        });
-        console.log('sendVerificationOTP result', result.data);
-      },
-    }),
-  ],
+    plugins: [
+      organization(),
+      apiKey(),
+      admin(),
+      emailOTP({
+        sendVerificationOTP: async (data, request) => {
+          console.log('sendVerificationOTP', data, request);
+          const { email, otp } = data;
+          console.log('sendVerificationOTP', data, request);
+          const result = await resend.emails.send({
+            from: env.RESEND_FROM,
+            to: email,
+            subject: 'Verify your email',
+            html: `Verify your email with the code: ${otp}`,
+          });
+          console.log('sendVerificationOTP result', result.data);
+        },
+      }),
+    ],
+  };
 };
+
+const config: BetterAuthOptions = createConfig();
 
 export const auth = betterAuth(config);
