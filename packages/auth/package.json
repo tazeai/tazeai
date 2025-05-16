@@ -24,7 +24,7 @@
     "@tazeai/email": "workspace:*",
     "@tazeai/env": "workspace:*",
     "bcrypt-ts": "^7.0.0",
-    "better-auth": "^1.2.7",
+    "better-auth": "^1.2.8",
     "lodash-es": "^4.17.21",
     "lucide-react": "catalog:",
     "nanoid": "^5.1.5",

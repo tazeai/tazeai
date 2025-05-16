@@ -96,6 +96,14 @@ export class TazeAIServer extends Hono<Env> {
       return c.json({ message: 'OK', data });
     });
 
+    this.get('/db', async (c) => {
+      const now = Date.now();
+      const db = c.get('db');
+      const users = await db.query.user.findMany();
+      const time = Date.now() - now;
+      return c.json({ message: 'OK', users, time });
+    });
+
     this.get('/health', async (c) => {
       return c.json({ message: 'OK' });
     });
