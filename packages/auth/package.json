@@ -28,7 +28,7 @@
     "lodash-es": "^4.17.21",
     "lucide-react": "catalog:",
     "nanoid": "^5.1.5",
-    "react-hook-form": "^7.56.3",
+    "react-hook-form": "^7.56.4",
     "react-i18next": "^15.5.1",
     "server-only": "^0.0.1",
     "sonner": "^2.0.3",

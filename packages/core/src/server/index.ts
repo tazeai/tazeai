@@ -68,7 +68,6 @@ export class TazeAIServer extends Hono<Env> {
 
     this.use('*', async (c, next) => {
       const session = await auth.api.getSession({ headers: c.req.raw.headers });
-      console.log('session', session);
       c.set('session', session);
       return next();
     });
@@ -84,6 +83,7 @@ export class TazeAIServer extends Hono<Env> {
     this.route('/ai', ai);
     this.route('/langchain', langchain);
     this.get('/redis', async (c) => {
+      const now = Date.now();
       const cache = c.get('cache');
       const data = await cache.remember(
         'redis_status',
@@ -92,7 +92,8 @@ export class TazeAIServer extends Hono<Env> {
         },
         30,
       );
-      return c.json({ message: 'OK', data });
+      const time = Date.now() - now;
+      return c.json({ message: 'OK', data, time });
     });
 
     this.get('/db', async (c) => {
