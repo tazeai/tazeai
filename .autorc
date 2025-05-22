@@ -1,0 +1,11 @@
+{
+    "plugins": [
+        "npm",
+        "first-time-contributor",
+        "released"
+    ],
+    "owner": "tazeai",
+    "repo": "tazeai",
+    "name": "Taze AI",
+    "email": "hello@tazeai.com"
+}

@@ -1,0 +1,14 @@
+{
+  "name": "@tazeai/script",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "clean": "rimraf dist .turbo"
+  },
+  "devDependencies": {
+    "@tazeai/typescript-config": "workspace:*",
+    "@types/node": "catalog:",
+    "typescript": "catalog:"
+  }
+}

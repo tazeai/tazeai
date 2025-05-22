@@ -1,0 +1,29 @@
+{
+  "name": "@tazeai/core",
+  "version": "0.0.1",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./envs": "./src/envs.ts",
+    "./server": "./src/server/index.ts"
+  },
+  "scripts": {
+    "clean": "rimraf dist .turbo"
+  },
+  "dependencies": {
+    "@tazeai/ai": "workspace:*",
+    "@tazeai/auth": "workspace:*",
+    "@tazeai/cache": "workspace:*",
+    "@tazeai/database": "workspace:*",
+    "@tazeai/env": "workspace:*",
+    "dayjs": "^1.11.13",
+    "hono": "^4.7.10",
+    "pino": "^9.7.0",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@tazeai/typescript-config": "workspace:*",
+    "@types/node": "catalog:",
+    "typescript": "catalog:"
+  }
+}

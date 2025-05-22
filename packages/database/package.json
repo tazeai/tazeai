@@ -1,0 +1,40 @@
+{
+  "name": "@tazeai/database",
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./envs": "./src/envs.ts",
+    "./schemas": "./src/schemas.ts"
+  },
+  "scripts": {
+    "clean": "rimraf dist .turbo",
+    "generate": "pnpm with-env drizzle-kit generate",
+    "migrate": "pnpm with-env drizzle-kit migrate",
+    "push": "pnpm with-env drizzle-kit push",
+    "seed": "pnpm with-env tsx seed.ts",
+    "studio": "pnpm with-env drizzle-kit studio",
+    "with-env": "dotenv -e ../../.env --"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^1.0.0",
+    "@tazeai/env": "workspace:*",
+    "drizzle-dbml-generator": "^0.10.0",
+    "drizzle-orm": "^0.43.1",
+    "drizzle-seed": "^0.3.1",
+    "drizzle-zod": "^0.8.1",
+    "lodash-es": "^4.17.21",
+    "nanoid": "^5.1.5",
+    "postgres": "^3.4.6",
+    "uuid": "^11.1.0",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@tazeai/typescript-config": "workspace:*",
+    "@types/lodash-es": "^4.17.12",
+    "dotenv-cli": "^8.0.0",
+    "drizzle-kit": "^0.31.1",
+    "tsx": "^4.19.4",
+    "typescript": "catalog:"
+  }
+}

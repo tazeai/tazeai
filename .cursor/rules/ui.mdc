@@ -1,0 +1,107 @@
+---
+description: UI Components API reference and guidelines
+globs: **/*.tsx
+alwaysApply: false
+---
+# UI Components
+
+- Reusable UI components are defined in the "packages/ui" package named "@tazeai/ui".
+- By exporting the component from the "exports" field, we can import it using the "@tazeai/ui/components/{component-name}" format.
+
+## Styling
+- Styling is done using Tailwind CSS. We use the "cn" function from the "@tazeai/ui/lib/utils" package to generate class names.
+- Avoid fixes classes such as "bg-gray-500". Instead, use Shadcn classes such as "bg-background", "text-secondary-foreground", "text-muted-foreground", etc.
+
+TazeAI leverages two sets of UI components:
+1. **Shadcn UI Components**: Base components from the Shadcn UI library
+2. **TazeAI-specific Components**: Custom components built on top of Shadcn UI
+
+## Importing Components
+
+```tsx
+// Import Shadcn UI components
+import { Button } from '@tazeai/ui/components/button';
+import { Card } from '@tazeai/ui/components/card';
+import { toast } from '@tazeai/ui/components/sonner';
+
+// Import TazeAI-specific components
+import { If } from '@tazeai/ui/components/if';
+import { Trans } from '@tazeai/ui/components/trans';
+import { ProfileAvatar } from '@tazeai/ui/components/profile-avatar';
+```
+
+## Core Shadcn UI Components
+
+| Component | Description | Import Path |
+|-----------|-------------|-------------|
+| `Accordion` | Expandable/collapsible content sections | `@tazeai/ui/components/accordion` [accordion.tsx](mdc:packages/ui/src/shadcn/accordion.tsx) |
+| `AlertDialog` | Modal dialog for important actions | `@tazeai/ui/components/alert-dialog` [alert-dialog.tsx](mdc:packages/ui/src/shadcn/alert-dialog.tsx) |
+| `Alert` | Status/notification messages | `@tazeai/ui/components/alert` [alert.tsx](mdc:packages/ui/src/shadcn/alert.tsx) |
+| `Avatar` | User profile images with fallback | `@tazeai/ui/components/avatar` [avatar.tsx](mdc:packages/ui/src/shadcn/avatar.tsx) |
+| `Badge` | Small status indicators | `@tazeai/ui/components/badge` [badge.tsx](mdc:packages/ui/src/shadcn/badge.tsx) |
+| `Breadcrumb` | Navigation path indicators | `@tazeai/ui/components/breadcrumb` [breadcrumb.tsx](mdc:packages/ui/src/shadcn/breadcrumb.tsx) |
+| `Button` | Clickable action elements | `@tazeai/ui/components/button` [button.tsx](mdc:packages/ui/src/shadcn/button.tsx) |
+| `Calendar` | Date picker and date display | `@tazeai/ui/components/calendar` [calendar.tsx](mdc:packages/ui/src/shadcn/calendar.tsx) |
+| `Card` | Container for grouped content | `@tazeai/ui/components/card` [card.tsx](mdc:packages/ui/src/shadcn/card.tsx) |
+| `Checkbox` | Selection input | `@tazeai/ui/components/checkbox` [checkbox.tsx](mdc:packages/ui/src/shadcn/checkbox.tsx) |
+| `Command` | Command palette interface | `@tazeai/ui/components/command` [command.tsx](mdc:packages/ui/src/shadcn/command.tsx) |
+| `DataTable` | Table | `@tazeai/ui/components/data-table` [data-table.tsx](mdc:packages/ui/src/shadcn/data-table.tsx) |
+| `Dialog` | Modal window for focused interactions | `@tazeai/ui/components/dialog` [dialog.tsx](mdc:packages/ui/src/shadcn/dialog.tsx) |
+| `DropdownMenu` | Menu triggered by a button | `@tazeai/ui/components/dropdown-menu` [dropdown-menu.tsx](mdc:packages/ui/src/shadcn/dropdown-menu.tsx) |
+| `Form` | Form components with validation | `@tazeai/ui/components/form` [form.tsx](mdc:packages/ui/src/shadcn/form.tsx) |
+| `Input` | Text input field | `@tazeai/ui/components/input` [input.tsx](mdc:packages/ui/src/shadcn/input.tsx) |
+| `Input OTP` | OTP Text input field | `@tazeai/ui/components/input-otp` [input-otp.tsx](mdc:packages/ui/src/shadcn/input-otp.tsx) |
+| `Label` | Text label for form elements | `@tazeai/ui/components/label` [label.tsx](mdc:packages/ui/src/shadcn/label.tsx) |
+| `NavigationMenu` | Hierarchical navigation component | `@tazeai/ui/components/navigation-menu` [navigation-menu.tsx](mdc:packages/ui/src/shadcn/navigation-menu.tsx) |
+| `Popover` | Floating content triggered by interaction | `@tazeai/ui/components/popover` [popover.tsx](mdc:packages/ui/src/shadcn/popover.tsx) |
+| `RadioGroup` | Radio button selection group | `@tazeai/ui/components/radio-group` [radio-group.tsx](mdc:packages/ui/src/shadcn/radio-group.tsx) |
+| `ScrollArea` | Customizable scrollable area | `@tazeai/ui/components/scroll-area` [scroll-area.tsx](mdc:packages/ui/src/shadcn/scroll-area.tsx) |
+| `Select` | Dropdown selection menu | `@tazeai/ui/components/select` [select.tsx](mdc:packages/ui/src/shadcn/select.tsx) |
+| `Separator` | Visual divider between content | `@tazeai/ui/components/separator` [separator.tsx](mdc:packages/ui/src/shadcn/separator.tsx) |
+| `Sheet` | Sliding panel from screen edge | `@tazeai/ui/components/sheet` [sheet.tsx](mdc:packages/ui/src/shadcn/sheet.tsx) |
+| `Sidebar` | Advanced sidebar navigation | `@tazeai/ui/components/shadcn-sidebar` [sidebar.tsx](mdc:packages/ui/src/shadcn/sidebar.tsx) |
+| `Skeleton` | Loading placeholder | `@tazeai/ui/components/skeleton` [skeleton.tsx](mdc:packages/ui/src/shadcn/skeleton.tsx) |
+| `Switch` | Toggle control | `@tazeai/ui/components/switch` [switch.tsx](mdc:packages/ui/src/shadcn/switch.tsx) |
+| `Toast` | Toaster | `@tazeai/ui/components/sonner` [sonner.tsx](mdc:packages/ui/src/shadcn/sonner.tsx) |
+| `Tabs` | Tab-based navigation | `@tazeai/ui/components/tabs` [tabs.tsx](mdc:packages/ui/src/shadcn/tabs.tsx) |
+| `Textarea` | Multi-line text input | `@tazeai/ui/components/textarea` [textarea.tsx](mdc:packages/ui/src/shadcn/textarea.tsx) |
+| `Tooltip` | Contextual information on hover | `@tazeai/ui/components/tooltip` [tooltip.tsx](mdc:packages/ui/src/shadcn/tooltip.tsx) |
+
+## TazeAI-specific Components
+
+| Component | Description | Import Path |
+|-----------|-------------|-------------|
+| `If` | Conditional rendering component | `@tazeai/ui/components/if` [if.tsx](mdc:packages/ui/src/makerkit/if.tsx) |
+| `Trans` | Internationalization text component | `@tazeai/ui/components/trans` [trans.tsx](mdc:packages/ui/src/makerkit/trans.tsx) |
+| `Page` | Page layout with navigation | `@tazeai/ui/components/page` [page.tsx](mdc:packages/ui/src/makerkit/page.tsx) |
+| `GlobalLoader` | Full-page loading indicator | `@tazeai/ui/components/global-loader` [global-loader.tsx](mdc:packages/ui/src/makerkit/global-loader.tsx) |
+| `ImageUploader` | Image upload component | `@tazeai/ui/components/image-uploader` [image-uploader.tsx](mdc:packages/ui/src/makerkit/image-uploader.tsx) |
+| `ProfileAvatar` | User avatar with fallback | `@tazeai/ui/components/profile-avatar` [profile-avatar.tsx](mdc:packages/ui/src/makerkit/profile-avatar.tsx) |
+| `DataTable` (Enhanced) | Extended data table with pagination | `@tazeai/ui/components/enhanced-data-table` [data-table.tsx](mdc:packages/ui/src/makerkit/data-table.tsx) |
+| `Stepper` | Multi-step process indicator | `@tazeai/ui/components/stepper` [stepper.tsx](mdc:packages/ui/src/makerkit/stepper.tsx) |
+| `CookieBanner` | GDPR-compliant cookie notice | `@tazeai/ui/components/cookie-banner` [cookie-banner.tsx](mdc:packages/ui/src/makerkit/cookie-banner.tsx) |
+| `CardButton` | Card-styled button | `@tazeai/ui/components/card-button` [card-button.tsx](mdc:packages/ui/src/makerkit/card-button.tsx) |
+| `MultiStepForm` | Form with multiple steps | `@tazeai/ui/components/multi-step-form` [multi-step-form.tsx](mdc:packages/ui/src/makerkit/multi-step-form.tsx) |
+| `EmptyState` | Empty data placeholder | `@tazeai/ui/components/empty-state` [empty-state.tsx](mdc:packages/ui/src/makerkit/empty-state.tsx) |
+| `AppBreadcrumbs` | Application path breadcrumbs | `@tazeai/ui/components/app-breadcrumbs` [app-breadcrumbs.tsx](mdc:packages/ui/src/makerkit/app-breadcrumbs.tsx) |
+
+## Marketing Components
+
+Import all marketing components with:
+```tsx
+import {
+  Hero,
+  HeroTitle,
+  GradientText,
+  // etc.
+} from '@tazeai/ui/components/marketing';
+```
+
+Key marketing components:
+- `Hero` - Hero sections [hero.tsx](mdc:packages/ui/src/makerkit/marketing/hero.tsx)
+- `SecondaryHero` [secondary-hero.tsx](mdc:packages/ui/src/makerkit/marketing/secondary-hero.tsx)
+- `FeatureCard`, `FeatureGrid` - Feature showcases [feature-card.tsx](mdc:packages/ui/src/makerkit/marketing/feature-card.tsx)
+- `Footer` - Page Footer [footer.tsx](mdc:packages/ui/src/makerkit/marketing/footer.tsx)
+- `Header` - Page Header [header.tsx](mdc:packages/ui/src/makerkit/marketing/header.tsx)
+- `NewsletterSignup` - Email collection [newsletter-signup-container.tsx](mdc:packages/ui/src/makerkit/marketing/newsletter-signup-container.tsx)
+- `ComingSoon` - Coming soon page template [coming-soon.tsx](mdc:packages/ui/src/makerkit/marketing/coming-soon.tsx)

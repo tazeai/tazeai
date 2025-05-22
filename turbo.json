@@ -1,0 +1,30 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "ui": "stream",
+  "globalDependencies": ["**/.env.*local"],
+  "envMode": "loose",
+  "tasks": {
+    "build": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", ".output/**", ".vercel/*", ".next/*"]
+    },
+    "start": {
+      "dependsOn": ["^start"],
+      "cache": false
+    },
+    "dev": {
+      "cache": false,
+      "inputs": ["$TURBO_DEFAULT$", ".env"],
+      "persistent": true
+    },
+    "clean": {
+      "cache": false,
+      "outputLogs": "none"
+    },
+    "generate": {
+      "cache": false,
+      "outputLogs": "none"
+    }
+  }
+}

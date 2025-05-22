@@ -1,0 +1,21 @@
+{
+  "name": "@tazeai/{{ name }}",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "clean": "rimraf dist .turbo"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "@tazeai/typescript-config": "workspace:*",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "typescript": "catalog:"
+  }
+}

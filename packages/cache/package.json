@@ -1,0 +1,28 @@
+{
+  "name": "@tazeai/cache",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./envs": "./src/envs.ts"
+  },
+  "scripts": {
+    "clean": "rimraf dist .turbo"
+  },
+  "dependencies": {
+    "@tazeai/env": "workspace:*",
+    "lodash-es": "^4.17.21",
+    "redis": "^5.1.0",
+    "superjson": "^2.2.2",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@tazeai/typescript-config": "workspace:*",
+    "@types/lodash-es": "^4.17.12",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "typescript": "catalog:"
+  }
+}

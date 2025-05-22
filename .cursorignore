@@ -1,0 +1,12 @@
+database.types.ts
+playwright-report
+test-results
+pnpm-lock.yaml
+.env.local
+.env
+.env.production.local
+.idea
+.vscode
+.zed
+tsconfig.tsbuildinfo
+.windsurfrules

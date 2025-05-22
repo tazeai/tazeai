@@ -1,0 +1,28 @@
+{
+  "name": "@tazeai/email",
+  "version": "0.0.1",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./envs": "./src/envs.ts",
+    "./templates/*": "./src/templates/*.tsx"
+  },
+  "scripts": {
+    "clean": "rimraf dist .turbo"
+  },
+  "dependencies": {
+    "@react-email/components": "^0.0.41",
+    "@tazeai/env": "workspace:*",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "resend": "^4.5.1",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@tazeai/typescript-config": "workspace:*",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "typescript": "catalog:"
+  }
+}

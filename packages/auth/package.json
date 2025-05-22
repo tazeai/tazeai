@@ -1,0 +1,46 @@
+{
+  "name": "@tazeai/auth",
+  "version": "0.0.1",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./envs": "./src/envs.ts",
+    "./types": "./src/types/index.ts",
+    "./client": "./src/client/index.ts",
+    "./server": "./src/server/index.ts",
+    "./middleware": "./src/middleware.ts",
+    "./components/*": "./src/components/*.tsx"
+  },
+  "scripts": {
+    "clean": "rimraf dist .turbo",
+    "generate": "pnpm with-env pnpx @better-auth/cli generate --config=src/auth.ts",
+    "with-env": "dotenv -e ../../.env --"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^5.0.1",
+    "@iconify/react": "^6.0.0",
+    "@tazeai/cache": "workspace:*",
+    "@tazeai/database": "workspace:*",
+    "@tazeai/email": "workspace:*",
+    "@tazeai/env": "workspace:*",
+    "bcrypt-ts": "^7.0.0",
+    "better-auth": "^1.2.8",
+    "lodash-es": "^4.17.21",
+    "lucide-react": "catalog:",
+    "nanoid": "^5.1.5",
+    "react-hook-form": "^7.56.4",
+    "react-i18next": "^15.5.1",
+    "server-only": "^0.0.1",
+    "sonner": "^2.0.3",
+    "zod": "catalog:",
+    "zustand": "^5.0.5"
+  },
+  "devDependencies": {
+    "@tazeai/typescript-config": "workspace:*",
+    "@types/lodash-es": "^4.17.12",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "typescript": "catalog:"
+  }
+}
