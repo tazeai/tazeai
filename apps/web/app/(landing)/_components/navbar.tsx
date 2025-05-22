@@ -1,23 +1,31 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { Button } from '@tazeai/ui/components/button';
-import { ThemeSwitcher } from '@tazeai/ui/components/theme-switch';
-import { Sheet, SheetContent, SheetTrigger } from '@tazeai/ui/components/sheet';
-import { Menu, X } from 'lucide-react';
-import Link from 'next/link';
-import { cn } from '@tazeai/ui/lib/utils';
-import { authConfig } from 'config/auth';
+import OneTap from "@/app/(auth)/_components/one-tap";
+import { Logo } from "@/components/logo";
+import { UserButton } from "@/components/user-button";
+import { authConfig } from "@/config/auth";
+import { useSession } from "@tazeai/auth/client";
+import { Button } from "@tazeai/ui/components/button";
+import { Menu, X } from "@tazeai/ui/components/icons";
+import { Sheet, SheetContent, SheetTrigger } from "@tazeai/ui/components/sheet";
+import { ThemeSwitcher } from "@tazeai/ui/components/theme-switch";
+import { cn } from "@tazeai/ui/lib/utils";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
 const NavLink = ({
   href,
   children,
   target,
-}: { href: string; children: React.ReactNode; target?: string }) => (
+}: {
+  href: string;
+  children: React.ReactNode;
+  target?: string;
+}) => (
   <Link
+    className="font-medium text-sm transition-colors hover:text-primary"
     href={href}
     target={target}
-    className="text-sm font-medium transition-colors hover:text-primary"
   >
     {children}
   </Link>
@@ -25,35 +33,36 @@ const NavLink = ({
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
+  const session = useSession();
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <header
       className={cn(
-        'sticky top-0 z-40 w-full transition-all duration-200',
+        "sticky top-0 z-40 w-full transition-all duration-200",
         scrolled
-          ? 'bg-background/80 backdrop-blur-sm shadow-sm'
-          : 'bg-transparent',
+          ? "bg-background/80 shadow-sm backdrop-blur-sm"
+          : "bg-transparent",
       )}
     >
-      <div className="container mx-auto px-4 flex h-16 items-center justify-between py-4 max-w-7xl">
+      <div className="container mx-auto flex h-16 max-w-7xl items-center justify-between px-4 py-4">
         <div className="flex items-center gap-6 md:gap-10">
-          <a href="/" className="flex items-center space-x-2">
-            <div className="h-6 w-6 bg-primary rounded-full"></div>
-            <span className="font-bold text-xl hidden md:inline-block">
+          <a className="flex items-center space-x-2" href="/">
+            <Logo />
+            <span className="hidden font-bold text-xl md:inline-block">
               TazeAI
             </span>
           </a>
 
-          <nav className="hidden md:flex gap-6">
+          <nav className="hidden gap-6 md:flex">
             <NavLink href="#features">Features</NavLink>
             <NavLink href="#testimonials">Testimonials</NavLink>
             <NavLink href="https://docs.tazeai.com" target="_blank">
@@ -66,56 +75,63 @@ const Navbar = () => {
 
         <div className="flex items-center gap-4">
           <ThemeSwitcher />
-          <div className="hidden md:flex gap-3">
-            <Link href={authConfig.pages.signIn}>
-              <Button variant="ghost" size="sm">
-                Log in
-              </Button>
-            </Link>
-            <Link href={authConfig.pages.signUp}>
-              <Button size="sm">Sign up</Button>
-            </Link>
+          <div className="hidden gap-3 md:flex">
+            {session.data?.user ? (
+              <UserButton />
+            ) : session.isPending ? null : (
+              <>
+                <Link href={authConfig.pages.signIn}>
+                  <Button size="sm" variant="ghost">
+                    Log in
+                  </Button>
+                </Link>
+                <Link href={authConfig.pages.signUp}>
+                  <Button size="sm">Sign up</Button>
+                </Link>
+                <OneTap />
+              </>
+            )}
           </div>
 
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="md:hidden">
+              <Button className="md:hidden" size="icon" variant="ghost">
                 <Menu className="h-5 w-5" />
                 <span className="sr-only">Toggle menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="pr-0">
+            <SheetContent className="pr-0" side="right">
               <div className="flex flex-col gap-4 px-6">
-                <div className="flex items-center justify-between mb-8">
-                  <a href="/" className="flex items-center space-x-2">
-                    <div className="h-6 w-6 bg-primary rounded-full"></div>
+                <div className="mb-8 flex items-center justify-between">
+                  <a className="flex items-center space-x-2" href="/">
+                    <div className="h-6 w-6 rounded-full bg-primary"></div>
                     <span className="font-bold text-xl">TazeAI</span>
                   </a>
                   <SheetTrigger asChild>
-                    <Button variant="ghost" size="icon">
+                    <Button size="icon" variant="ghost">
                       <X className="h-5 w-5" />
                       <span className="sr-only">Close menu</span>
                     </Button>
                   </SheetTrigger>
                 </div>
 
-                <div className="flex flex-col gap-4 text-lg mb-8">
-                  <a href="#features" className="py-2">
+                <div className="mb-8 flex flex-col gap-4 text-lg">
+                  <a className="py-2" href="#features">
                     Features
                   </a>
-                  <a href="#testimonials" className="py-2">
+                  <a className="py-2" href="#testimonials">
                     Testimonials
                   </a>
-                  <a href="#pricing" className="py-2">
+                  <a className="py-2" href="#pricing">
                     Pricing
                   </a>
-                  <a href="#about" className="py-2">
+                  <a className="py-2" href="#about">
                     About
                   </a>
                 </div>
 
                 <div className="flex flex-col gap-3">
-                  <Button variant="outline" className="w-full">
+                  <Button className="w-full" variant="outline">
                     Log in
                   </Button>
                   <Button className="w-full">Sign up</Button>

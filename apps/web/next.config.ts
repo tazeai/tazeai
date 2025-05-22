@@ -1,21 +1,25 @@
-import type { NextConfig } from 'next';
+import withBundleAnalyzer from "@next/bundle-analyzer";
+import type { NextConfig } from "next";
 
-const isProduction = process.env.NODE_ENV === 'production';
-
-const nextConfig: NextConfig = {
-  /* config options here */
+let nextConfig: NextConfig = {
   transpilePackages: [
-    '@tazeai/auth',
-    '@tazeai/cache',
-    '@tazeai/core',
-    '@tazeai/database',
-    '@tazeai/shared',
-    '@tazeai/ui',
+    "@tazeai/analytics",
+    "@tazeai/auth",
+    "@tazeai/cache",
+    "@tazeai/core",
+    "@tazeai/db",
+    "@tazeai/shared",
+    "@tazeai/ui",
+    "@tazeai/env",
   ],
-  allowedDevOrigins: ['http://local.tazeai.com:3000'],
+  allowedDevOrigins: ["http://local.tazeai.com:3000"],
   eslint: {
     ignoreDuringBuilds: true,
   },
 };
+
+if (process.env.ANALYZE === "true") {
+  nextConfig = withBundleAnalyzer()(nextConfig);
+}
 
 export default nextConfig;

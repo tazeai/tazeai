@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import { Button } from '@tazeai/ui/components/button';
+import { Button } from "@tazeai/ui/components/button";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@tazeai/ui/components/dialog';
-import { Label } from '@tazeai/ui/components/label';
-import { RadioGroup, RadioGroupItem } from '@tazeai/ui/components/radio-group';
-import { Textarea } from '@tazeai/ui/components/textarea';
-import { useState } from 'react';
+} from "@tazeai/ui/components/dialog";
+import { Label } from "@tazeai/ui/components/label";
+import { RadioGroup, RadioGroupItem } from "@tazeai/ui/components/radio-group";
+import { Textarea } from "@tazeai/ui/components/textarea";
+import { useState } from "react";
 
 export type RatingProps = {
   title?: string;
@@ -19,9 +19,9 @@ export type RatingProps = {
 };
 
 export default function Rating(props: RatingProps) {
-  const { title = 'Rating', onSubmit: submit } = props;
+  const { title = "Rating", onSubmit: submit } = props;
   const [rating, setRating] = useState<number>(0);
-  const [feedback, setFeedback] = useState<string>('');
+  const [feedback, setFeedback] = useState<string>("");
 
   const onSubmit = () => {
     submit?.(rating, feedback);
@@ -43,30 +43,30 @@ export default function Rating(props: RatingProps) {
             <div className="space-y-4">
               <div>
                 <fieldset className="space-y-4">
-                  <legend className="text-foreground text-lg leading-none font-semibold">
+                  <legend className="font-semibold text-foreground text-lg leading-none">
                     How hard was it to set up your account?
                   </legend>
                   <RadioGroup
-                    value={rating.toString()}
+                    className="-space-x-px flex gap-0 rounded-md shadow-xs"
                     onValueChange={(value) => setRating(Number(value))}
-                    className="flex gap-0 -space-x-px rounded-md shadow-xs"
+                    value={rating.toString()}
                   >
                     {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((number) => (
                       <label
+                        className="relative flex size-9 flex-1 cursor-pointer flex-col items-center justify-center gap-3 border border-input text-center text-sm outline-none transition-[color,box-shadow] first:rounded-s-md last:rounded-e-md has-data-[state=checked]:z-10 has-data-disabled:cursor-not-allowed has-data-[state=checked]:border-primary/50 has-focus-visible:border-ring has-data-disabled:opacity-50 has-focus-visible:ring-[3px] has-focus-visible:ring-ring/50"
                         key={number}
-                        className="border-input has-data-[state=checked]:border-primary/50 has-focus-visible:border-ring has-focus-visible:ring-ring/50 relative flex size-9 flex-1 cursor-pointer flex-col items-center justify-center gap-3 border text-center text-sm transition-[color,box-shadow] outline-none first:rounded-s-md last:rounded-e-md has-focus-visible:ring-[3px] has-data-disabled:cursor-not-allowed has-data-disabled:opacity-50 has-data-[state=checked]:z-10"
                       >
                         <RadioGroupItem
+                          className="sr-only after:absolute after:inset-0"
                           id={`radio-17-r${number}`}
                           value={number.toString()}
-                          className="sr-only after:absolute after:inset-0"
                         />
                         {number}
                       </label>
                     ))}
                   </RadioGroup>
                 </fieldset>
-                <div className="text-muted-foreground mt-2 flex justify-between text-xs">
+                <div className="mt-2 flex justify-between text-muted-foreground text-xs">
                   <p>Very easy</p>
                   <p>Very dificult</p>
                 </div>
@@ -75,15 +75,15 @@ export default function Rating(props: RatingProps) {
               <div className="*:not-first:mt-2">
                 <Label>Why did you give this rating?</Label>
                 <Textarea
-                  id="feedback"
-                  placeholder="How can we improve Origin UI?"
                   aria-label="Send feedback"
-                  value={feedback}
+                  id="feedback"
                   onChange={(e) => setFeedback(e.target.value)}
+                  placeholder="How can we improve Origin UI?"
+                  value={feedback}
                 />
               </div>
             </div>
-            <Button type="button" className="w-full" onClick={onSubmit}>
+            <Button className="w-full" onClick={onSubmit} type="button">
               Send feedback
             </Button>
           </form>

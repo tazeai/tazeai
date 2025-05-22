@@ -1,0 +1,255 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# TypeScript
+
+## Core Principles
+
+- **Type Safety First**: Leverage TypeScript's type system to catch errors at compile time
+- **Explicit Over Implicit**: Be explicit about types when it improves code clarity
+- **Strict Configuration**: Use strict TypeScript settings for maximum safety
+- **Performance Awareness**: Consider the impact of complex types on compilation time
+- **Maintainability**: Write types that are easy to understand and maintain
+
+## Basic Guidelines
+
+- Write clean, clear, well-designed, explicit TypeScript
+- Make sure types are validated strictly
+- Use implicit type inference when the type is obvious
+- Be explicit when it improves code clarity or prevents errors
+- Consider using classes for server-side services, but export a function instead of the class
+
+```typescript
+// service.ts
+class UserService {
+  constructor(private db: Database) {}
+
+  getUser(id: string): Promise<User | null> {
+    return this.db.query.user.findFirst({
+      where: eq(user.id, id),
+    });
+  }
+}
+
+export function createUserService(db: Database) {
+  return new UserService(db);
+}
+```
+
+## Type Definitions
+
+### Basic Patterns
+
+- Prefer `interface` for object shapes that might be extended
+- Use `type` for unions, intersections, and computed types
+- Use discriminated unions for type-safe state management
+
+```typescript
+// Interface for extensible objects
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  createdAt: Date;
+}
+
+// Type for unions
+type UserRole = 'admin' | 'user' | 'moderator';
+
+// Discriminated union
+type LoadingState<T> = 
+  | { status: 'idle' }
+  | { status: 'loading' }
+  | { status: 'success'; data: T }
+  | { status: 'error'; error: string };
+```
+
+### Generic Types
+
+Create reusable generic types for common patterns:
+
+```typescript
+// API Response wrapper
+type ApiResponse<T> = {
+  data: T;
+  message: string;
+  success: boolean;
+};
+
+// Pagination wrapper
+type PaginatedResponse<T> = {
+  data: T[];
+  pagination: {
+    currentPage: number;
+    lastPage: number;
+    perPage: number;
+    total: number;
+  };
+};
+```
+
+### Utility Types
+
+Leverage TypeScript's built-in utility types:
+
+```typescript
+// Pick specific properties
+type UserSummary = Pick<User, 'id' | 'name' | 'email'>;
+
+// Omit properties
+type CreateUserData = Omit<User, 'id' | 'createdAt'>;
+
+// Make properties optional
+type PartialUser = Partial<User>;
+
+// Create record types
+type UserRolePermissions = Record<UserRole, Permission[]>;
+```
+
+## Error Handling
+
+### Custom Error Classes
+
+```typescript
+abstract class AppError extends Error {
+  abstract readonly statusCode: number;
+  abstract readonly isOperational: boolean;
+
+  constructor(message: string, public readonly context?: Record<string, any>) {
+    super(message);
+    this.name = this.constructor.name;
+  }
+}
+
+class ValidationError extends AppError {
+  readonly statusCode = 400;
+  readonly isOperational = true;
+}
+
+class NotFoundError extends AppError {
+  readonly statusCode = 404;
+  readonly isOperational = true;
+}
+```
+
+### Result Pattern
+
+```typescript
+type Result<T, E = Error> = 
+  | { success: true; data: T }
+  | { success: false; error: E };
+
+async function safeAsync<T>(fn: () => Promise<T>): Promise<Result<T>> {
+  try {
+    const data = await fn();
+    return { success: true, data };
+  } catch (error) {
+    return { 
+      success: false, 
+      error: error instanceof Error ? error : new Error('Unknown error')
+    };
+  }
+}
+```
+
+## React Component Types
+
+### Component Props
+
+```typescript
+interface BaseComponentProps {
+  className?: string;
+  children?: React.ReactNode;
+}
+
+interface ButtonProps extends BaseComponentProps {
+  variant: 'primary' | 'secondary' | 'ghost';
+  size?: 'sm' | 'md' | 'lg';
+  disabled?: boolean;
+  onClick?: () => void;
+}
+
+// Forward ref component
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ className, type = 'text', onChange, ...props }, ref) => {
+    return (
+      <input
+        ref={ref}
+        type={type}
+        className={cn('input-base', className)}
+        onChange={(e) => onChange?.(e.target.value)}
+        {...props}
+      />
+    );
+  }
+);
+```
+
+### Hook Types
+
+```typescript
+interface UseUserDataReturn {
+  user: User | null;
+  isLoading: boolean;
+  error: Error | null;
+  refetch: () => void;
+}
+
+function useUserData(userId: string): UseUserDataReturn {
+  // Implementation
+}
+```
+
+## Best Practices
+
+### Type Safety
+1. **Avoid `any`**: Use `unknown` instead and narrow the type
+2. **Use type guards**: Create functions to safely narrow types
+3. **Validate at boundaries**: Validate external data with libraries like Zod
+
+```typescript
+// Type guard
+function isUser(value: unknown): value is User {
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    'id' in value &&
+    'name' in value &&
+    'email' in value
+  );
+}
+
+// Zod validation
+import { z } from 'zod';
+
+const userSchema = z.object({
+  id: z.string(),
+  name: z.string().min(1),
+  email: z.string().email(),
+});
+
+type User = z.infer<typeof userSchema>;
+```
+
+### Code Organization
+- Follow the Single Responsibility Principle (SRP)
+- Favor composition over inheritance
+- Handle errors gracefully using try/catch and appropriate error types
+- Keep functions short and focused
+- Use descriptive names for variables, functions, and classes
+- Avoid unnecessary complexity
+- Be aware of performance implications of your code
+
+## Common Anti-Patterns to Avoid
+
+1. **Don't use `any` type** - Use `unknown` and type guards instead
+2. **Don't ignore TypeScript errors** - Fix them or use proper type assertions
+3. **Don't use `as any`** - Find the proper type or create a type guard
+4. **Don't create overly complex types** - Break them down into smaller, composable types
+5. **Don't use `Function` type** - Use proper function signatures
+6. **Don't use enums unnecessarily** - Consider union types of string literals as an alternative
+7. **Don't ignore strict null checks** - Handle null and undefined properly
+8. **Don't forget to export types** - Make types available for consumers
+

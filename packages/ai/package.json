@@ -11,21 +11,19 @@
     "clean": "rimraf dist .turbo"
   },
   "dependencies": {
-    "@langchain/community": "^0.3.43",
-    "@langchain/core": "^0.3.56",
-    "@langchain/deepseek": "^0.0.1",
-    "@langchain/openai": "^0.5.10",
+    "@langchain/community": "^0.3.46",
+    "@langchain/core": "^0.3.59",
+    "@langchain/deepseek": "^0.0.2",
+    "@langchain/openai": "^0.5.13",
     "@tazeai/cache": "workspace:*",
     "@tazeai/env": "workspace:*",
     "ai": "^4.3.16",
-    "langchain": "^0.3.26",
-    "langsmith": "^0.3.29",
-    "openai": "^4.100.0",
-    "zod": "catalog:"
+    "langchain": "^0.3.28",
+    "langsmith": "^0.3.33"
   },
   "devDependencies": {
-    "@tazeai/typescript-config": "workspace:*",
-    "@types/node": "catalog:",
-    "typescript": "catalog:"
+    "@tazeai/typescript": "workspace:*",
+    "@types/node": "^22.15.32",
+    "typescript": "^5.8.3"
   }
 }

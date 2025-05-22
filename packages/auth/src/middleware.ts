@@ -1,4 +1,4 @@
-import { getSessionCookie } from 'better-auth/cookies';
+import { getSessionCookie } from "better-auth/cookies";
 
 /**
  * Check if the session cookie is present in the request.

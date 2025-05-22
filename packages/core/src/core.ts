@@ -7,4 +7,8 @@ export class APIClient {
   constructor(options: APIClientOptions) {
     this.options = options;
   }
+
+  run() {
+    console.log("run", this.options);
+  }
 }

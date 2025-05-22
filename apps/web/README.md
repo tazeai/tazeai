@@ -1,1 +1,1 @@
-# Website
+# TazeAI Web Application

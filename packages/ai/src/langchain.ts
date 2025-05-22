@@ -1,10 +1,8 @@
-import { ChatPromptTemplate } from '@langchain/core/prompts';
-import { ChatOpenAI } from '@langchain/openai';
-import { ChatDeepSeek } from '@langchain/deepseek';
-// import { RedisCache } from '@langchain/community/caches/redis';
-// import { createRedis } from '@tazeai/cache';
-import { envs } from './envs';
-import { ProviderType } from './types';
+import { ChatPromptTemplate } from "@langchain/core/prompts";
+import { ChatDeepSeek } from "@langchain/deepseek";
+import { ChatOpenAI } from "@langchain/openai";
+import { envs } from "./envs";
+import { ProviderType } from "./types";
 
 const env = envs();
 
@@ -19,7 +17,7 @@ export class LangChain {
   getProvider(type: ProviderType, modelName: string) {
     if (type === ProviderType.OPENAI) {
       const apiKey = env.OPENAI_API_KEY;
-      console.log('apiKey', apiKey);
+      console.log("apiKey", apiKey);
       const llm = new ChatOpenAI({
         modelName,
         apiKey,
@@ -34,7 +32,7 @@ export class LangChain {
       return llm;
     } else if (type === ProviderType.DEEPSEEK) {
       const apiKey = env.DEEPSEEK_API_KEY;
-      console.log('apiKey', apiKey);
+      console.log("apiKey", apiKey);
       const llm = new ChatDeepSeek({
         modelName,
         apiKey,

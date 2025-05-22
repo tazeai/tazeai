@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   Select,
@@ -6,7 +6,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@tazeai/ui/components/select';
+} from "@tazeai/ui/components/select";
 
 interface UserFiltersProps {
   roleFilter: string;
@@ -23,7 +23,7 @@ export function UserFilters({
 }: UserFiltersProps) {
   return (
     <>
-      <Select value={roleFilter} onValueChange={onRoleFilterChange}>
+      <Select onValueChange={onRoleFilterChange} value={roleFilter}>
         <SelectTrigger className="w-[120px]">
           <SelectValue placeholder="角色" />
         </SelectTrigger>
@@ -35,7 +35,7 @@ export function UserFilters({
         </SelectContent>
       </Select>
 
-      <Select value={statusFilter} onValueChange={onStatusFilterChange}>
+      <Select onValueChange={onStatusFilterChange} value={statusFilter}>
         <SelectTrigger className="w-[120px]">
           <SelectValue placeholder="状态" />
         </SelectTrigger>

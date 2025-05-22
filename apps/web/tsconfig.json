@@ -1,7 +1,7 @@
 {
-  "extends": "@tazeai/typescript-config/nextjs.json",
   "compilerOptions": {
     "baseUrl": ".",
+    "lib": ["webworker", "DOM"],
     "paths": {
       "@/*": ["./*"]
     },
@@ -9,15 +9,15 @@
       {
         "name": "next"
       }
-    ],
-    "lib": ["webworker", "DOM"]
+    ]
   },
+  "exclude": ["node_modules"],
+  "extends": "@tazeai/typescript/nextjs.json",
   "include": [
     "next-env.d.ts",
     "next.config.ts",
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-  ],
-  "exclude": ["node_modules"]
+  ]
 }

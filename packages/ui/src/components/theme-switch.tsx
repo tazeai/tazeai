@@ -1,30 +1,30 @@
-'use client';
+"use client";
 
-import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
-import { Button } from '@tazeai/ui/components/button';
+import { Button } from "@tazeai/ui/components/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@tazeai/ui/components/dropdown-menu';
-import { LuSun, LuMoon, LuMonitor } from 'react-icons/lu';
+} from "@tazeai/ui/components/dropdown-menu";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
+import { LuMonitor, LuMoon, LuSun } from "react-icons/lu";
 
 const themes = [
   {
-    label: 'Light',
-    value: 'light',
+    label: "Light",
+    value: "light",
     icon: LuSun,
   },
   {
-    label: 'Dark',
-    value: 'dark',
+    label: "Dark",
+    value: "dark",
     icon: LuMoon,
   },
   {
-    label: 'System',
-    value: 'system',
+    label: "System",
+    value: "system",
     icon: LuMonitor,
   },
 ];
@@ -47,7 +47,7 @@ export function ThemeSwitcher() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon" aria-label="Select theme">
+        <Button aria-label="Select theme" size="icon" variant="outline">
           {currentTheme?.icon && (
             <currentTheme.icon className="h-[1.2rem] w-[1.2rem] transition-all" />
           )}
@@ -60,7 +60,7 @@ export function ThemeSwitcher() {
             key={theme.value}
             onClick={() => setTheme(theme.value)}
           >
-            <theme.icon size={16} className="opacity-60" aria-hidden="true" />
+            <theme.icon aria-hidden="true" className="opacity-60" size={16} />
             <span>{theme.label}</span>
           </DropdownMenuItem>
         ))}

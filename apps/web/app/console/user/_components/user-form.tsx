@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { Input } from '@tazeai/ui/components/input';
+import { Input } from "@tazeai/ui/components/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@tazeai/ui/components/select';
-import type { UserFormData } from './types';
+} from "@tazeai/ui/components/select";
+import type { UserFormData } from "./types";
 
 interface UserFormProps {
   data: UserFormData;
@@ -20,35 +20,50 @@ export function UserForm({ data, onChange, isEdit = false }: UserFormProps) {
   return (
     <div className="grid gap-4">
       <div className="grid grid-cols-4 items-center gap-4">
-        <label htmlFor="name" className="text-right">
+        <label className="text-right" htmlFor="name">
           姓名
         </label>
         <Input
-          id="name"
-          value={data.name}
-          onChange={(e) => onChange({ ...data, name: e.target.value })}
           className="col-span-3"
+          id="name"
+          onChange={(e) =>
+            onChange({
+              ...data,
+              name: e.target.value,
+            })
+          }
+          value={data.name}
         />
       </div>
       <div className="grid grid-cols-4 items-center gap-4">
-        <label htmlFor="email" className="text-right">
+        <label className="text-right" htmlFor="email">
           邮箱
         </label>
         <Input
+          className="col-span-3"
           id="email"
+          onChange={(e) =>
+            onChange({
+              ...data,
+              email: e.target.value,
+            })
+          }
           type="email"
           value={data.email}
-          onChange={(e) => onChange({ ...data, email: e.target.value })}
-          className="col-span-3"
         />
       </div>
       <div className="grid grid-cols-4 items-center gap-4">
-        <label htmlFor="role" className="text-right">
+        <label className="text-right" htmlFor="role">
           角色
         </label>
         <Select
+          onValueChange={(value) =>
+            onChange({
+              ...data,
+              role: value,
+            })
+          }
           value={data.role}
-          onValueChange={(value) => onChange({ ...data, role: value })}
         >
           <SelectTrigger className="col-span-3">
             <SelectValue placeholder="选择角色" />
@@ -61,12 +76,17 @@ export function UserForm({ data, onChange, isEdit = false }: UserFormProps) {
         </Select>
       </div>
       <div className="grid grid-cols-4 items-center gap-4">
-        <label htmlFor="status" className="text-right">
+        <label className="text-right" htmlFor="status">
           状态
         </label>
         <Select
+          onValueChange={(value) =>
+            onChange({
+              ...data,
+              status: value,
+            })
+          }
           value={data.status}
-          onValueChange={(value) => onChange({ ...data, status: value })}
         >
           <SelectTrigger className="col-span-3">
             <SelectValue placeholder="选择状态" />

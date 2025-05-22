@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { socialProviders } from '@tazeai/auth/client';
-import { FaGithub, FaGoogle } from 'react-icons/fa';
-import { Button } from '@tazeai/ui/components/button';
+import { socialProviders } from "@tazeai/auth/client";
+import { Button } from "@tazeai/ui/components/button";
+import { FaGithub, FaGoogle } from "react-icons/fa";
 
-type SocialProvider = 'github' | 'google';
+type SocialProvider = "github" | "google";
 
 type SocialProps = {
   isLoading: boolean;
@@ -14,11 +14,11 @@ type SocialProps = {
 export function Social({ isLoading, onClick }: SocialProps) {
   const SocialsConfig = {
     github: {
-      label: 'Sign up with Github',
+      label: "Sign up with Github",
       icon: <FaGithub className="size-4" />,
     },
     google: {
-      label: 'Sign up with Google',
+      label: "Sign up with Google",
       icon: <FaGoogle className="size-4" />,
     },
   };
@@ -38,18 +38,18 @@ export function Social({ isLoading, onClick }: SocialProps) {
       <div className="flex flex-col gap-4">
         {socials.map((social) => (
           <Button
-            key={social.provider}
-            variant="outline"
             className="w-full gap-2"
             disabled={isLoading}
+            key={social.provider}
             onClick={() => onClick(social.provider)}
+            variant="outline"
           >
             {social.icon}
             {social.label}
           </Button>
         ))}
       </div>
-      <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
+      <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-border after:border-t">
         <span className="relative z-10 bg-background px-2 text-muted-foreground">
           Or continue with
         </span>

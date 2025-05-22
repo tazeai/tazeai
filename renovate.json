@@ -1,5 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "baseBranches": ["main"],
+  "enabled": true,
   "extends": [
     "config:base",
     ":dependencyDashboard",
@@ -12,47 +14,45 @@
     "group:monorepos",
     "group:recommended"
   ],
-  "baseBranches": ["main"],
-  "vulnerabilityAlerts": {
-    "commitMessagePrefix": "chore(renovate): Security update"
-  },
-  "schedule": ["before 2am"],
-  "rangeStrategy": "bump",
+  "ignorePaths": ["**/node_modules/**", "**/test/**", "**/tests/**"],
   "packageRules": [
     {
+      "commitMessagePrefix": "chore(renovate):",
+      "groupName": "major",
       "matchPackagePatterns": ["*"],
       "matchUpdateTypes": ["major"],
-      "reviewersFromCodeOwners": true,
-      "commitMessagePrefix": "chore(renovate):",
-      "groupName": "major"
+      "reviewersFromCodeOwners": true
     },
     {
+      "commitMessagePrefix": "chore(renovate):",
+      "groupName": "minor",
       "matchPackagePatterns": ["*"],
-      "matchUpdateTypes": ["minor"],
-      "commitMessagePrefix": "chore(renovate):",
-      "groupName": "minor"
+      "matchUpdateTypes": ["minor"]
     },
     {
+      "commitMessagePrefix": "chore(renovate):",
+      "groupName": "patch",
       "matchPackagePatterns": ["*"],
-      "matchUpdateTypes": ["patch"],
-      "commitMessagePrefix": "chore(renovate):",
-      "groupName": "patch"
+      "matchUpdateTypes": ["patch"]
     },
     {
+      "commitMessagePrefix": "chore(renovate):",
+      "groupName": "pin",
       "matchPackagePatterns": ["*"],
-      "matchUpdateTypes": ["pin", "digest"],
-      "commitMessagePrefix": "chore(renovate):",
-      "groupName": "pin"
+      "matchUpdateTypes": ["pin", "digest"]
     },
     {
-      "matchDepTypes": ["engines"],
-      "enabled": false
+      "enabled": false,
+      "matchDepTypes": ["engines"]
     },
     {
-      "matchPackageNames": ["node", "pnpm", "bun"],
-      "enabled": false
+      "enabled": false,
+      "matchPackageNames": ["node", "pnpm", "bun"]
     }
   ],
-  "ignorePaths": ["**/node_modules/**", "**/test/**", "**/tests/**"],
-  "enabled": true
+  "rangeStrategy": "bump",
+  "schedule": ["before 2am"],
+  "vulnerabilityAlerts": {
+    "commitMessagePrefix": "chore(renovate): Security update"
+  }
 }

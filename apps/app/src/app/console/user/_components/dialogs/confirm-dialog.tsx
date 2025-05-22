@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { Button } from '@tazeai/ui/components/button';
+import { Button } from "@tazeai/ui/components/button";
 import {
   Dialog,
   DialogContent,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@tazeai/ui/components/dialog';
-import { Loader2 } from 'lucide-react';
+} from "@tazeai/ui/components/dialog";
+import { Loader2 } from "@tazeai/ui/components/icons";
 
 interface ConfirmDialogProps {
   open: boolean;
@@ -18,12 +18,12 @@ interface ConfirmDialogProps {
   confirmLabel?: string;
   cancelLabel?: string;
   confirmVariant?:
-    | 'default'
-    | 'destructive'
-    | 'outline'
-    | 'secondary'
-    | 'ghost'
-    | 'link';
+    | "default"
+    | "destructive"
+    | "outline"
+    | "secondary"
+    | "ghost"
+    | "link";
   isSubmitting?: boolean;
   onConfirm: () => void;
 }
@@ -33,14 +33,14 @@ export function ConfirmDialog({
   onOpenChange,
   title,
   description,
-  confirmLabel = '确认',
-  cancelLabel = '取消',
-  confirmVariant = 'default',
+  confirmLabel = "确认",
+  cancelLabel = "取消",
+  confirmVariant = "default",
   isSubmitting = false,
   onConfirm,
 }: ConfirmDialogProps) {
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog onOpenChange={onOpenChange} open={open}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
@@ -48,20 +48,20 @@ export function ConfirmDialog({
         <p>{description}</p>
         <DialogFooter>
           <Button
-            variant="outline"
-            onClick={() => onOpenChange(false)}
             disabled={isSubmitting}
+            onClick={() => onOpenChange(false)}
+            variant="outline"
           >
             {cancelLabel}
           </Button>
           <Button
-            variant={confirmVariant}
-            onClick={onConfirm}
             disabled={isSubmitting}
+            onClick={onConfirm}
+            variant={confirmVariant}
           >
             {isSubmitting ? (
               <>
-                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 处理中...
               </>
             ) : (

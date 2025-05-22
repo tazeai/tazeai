@@ -1,8 +1,6 @@
-'use client';
+"use client";
 
-import { useId, useState } from 'react';
-import { CircleAlertIcon } from 'lucide-react';
-import { Button } from '@tazeai/ui/components/button';
+import { Button } from "@tazeai/ui/components/button";
 import {
   Dialog,
   DialogClose,
@@ -12,10 +10,12 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@tazeai/ui/components/dialog';
-import { Input } from '@tazeai/ui/components/input';
-import { Label } from '@tazeai/ui/components/label';
-import { Loader2Icon } from 'lucide-react';
+} from "@tazeai/ui/components/dialog";
+import { Input } from "@tazeai/ui/components/input";
+import { Label } from "@tazeai/ui/components/label";
+import { CircleAlertIcon } from "lucide-react";
+import { Loader2Icon } from "lucide-react";
+import { useId, useState } from "react";
 
 export type DeleteConfirmProps = {
   name: string;
@@ -25,7 +25,7 @@ export type DeleteConfirmProps = {
 export default function DeleteConfirm(props: DeleteConfirmProps) {
   const id = useId();
   const [isLoading, setIsLoading] = useState(false);
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState("");
 
   const onSubmit = async () => {
     setIsLoading(true);
@@ -44,8 +44,8 @@ export default function DeleteConfirm(props: DeleteConfirmProps) {
       <DialogContent>
         <div className="flex flex-col items-center gap-2">
           <div
-            className="flex size-9 shrink-0 items-center justify-center rounded-full border"
             aria-hidden="true"
+            className="flex size-9 shrink-0 items-center justify-center rounded-full border"
           >
             <CircleAlertIcon className="opacity-80" size={16} />
           </div>
@@ -65,28 +65,28 @@ export default function DeleteConfirm(props: DeleteConfirmProps) {
             <Label htmlFor={id}>Project name</Label>
             <Input
               id={id}
-              type="text"
-              placeholder={`Type ${props.name} to confirm`}
-              value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
+              placeholder={`Type ${props.name} to confirm`}
+              type="text"
+              value={inputValue}
             />
           </div>
           <DialogFooter>
             <DialogClose asChild>
-              <Button type="button" variant="outline" className="flex-1">
+              <Button className="flex-1" type="button" variant="outline">
                 Cancel
               </Button>
             </DialogClose>
             <Button
-              type="button"
               className="flex-1"
               disabled={inputValue !== props.name}
               onClick={() => {
                 setIsLoading(true);
                 onSubmit?.().finally(() => setIsLoading(false));
               }}
+              type="button"
             >
-              {isLoading ? <Loader2Icon className="animate-spin" /> : 'Delete'}
+              {isLoading ? <Loader2Icon className="animate-spin" /> : "Delete"}
             </Button>
           </DialogFooter>
         </form>

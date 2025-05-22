@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import { Button } from '@tazeai/ui/components/button';
+import { Button } from "@tazeai/ui/components/button";
 import {
   Dialog,
   DialogContent,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@tazeai/ui/components/dialog';
-import type { ReactNode } from 'react';
-import { Loader2 } from 'lucide-react';
+} from "@tazeai/ui/components/dialog";
+import { Loader2 } from "@tazeai/ui/components/icons";
+import type { ReactNode } from "react";
 
 interface FormDialogProps {
   open: boolean;
@@ -28,19 +28,19 @@ export function FormDialog({
   onOpenChange,
   title,
   children,
-  submitLabel = '提交',
-  cancelLabel = '取消',
+  submitLabel = "提交",
+  cancelLabel = "取消",
   isSubmitting = false,
   isSubmitDisabled = false,
   onSubmit,
 }: FormDialogProps) {
   return (
     <Dialog
-      open={open}
       onOpenChange={(open) => {
         if (isSubmitting) return;
         onOpenChange(open);
       }}
+      open={open}
     >
       <DialogContent>
         <DialogHeader>
@@ -49,19 +49,19 @@ export function FormDialog({
         <div className="py-4">{children}</div>
         <DialogFooter>
           <Button
-            variant="outline"
-            onClick={() => onOpenChange(false)}
             disabled={isSubmitting}
+            onClick={() => onOpenChange(false)}
+            variant="outline"
           >
             {cancelLabel}
           </Button>
           <Button
-            onClick={onSubmit}
             disabled={isSubmitDisabled || isSubmitting}
+            onClick={onSubmit}
           >
             {isSubmitting ? (
               <>
-                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 处理中...
               </>
             ) : (

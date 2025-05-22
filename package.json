@@ -1,21 +1,29 @@
 {
-  "name": "tzai",
+  "name": "@tazeai/repo",
   "private": true,
+  "description": "TazeAI Monorepo",
   "homepage": "https://tazeai.com",
+  "bugs": {
+    "url": "https://github.com/tazeai/tazeai/issues"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/tazeai/tazeai"
   },
   "license": "Apache-2.0",
+  "author": {
+    "name": "Zack",
+    "email": "lorenx@163.com"
+  },
   "scripts": {
     "build": "turbo build --filter=\"./packages/**\"",
     "bump-ui": "pnpx shadcn@canary add --all --overwrite -c packages/ui && pnpm format",
     "clean": "turbo run clean --parallel",
     "coverage": "vitest --coverage",
     "dev": "NODE_ENV=development turbo dev --parallel",
-    "format": "biome format --write",
-    "generate": "turbo gen",
-    "lint": "biome check",
+    "format": "ultracite format",
+    "postinstall": "[ ! -f .env ] && cp .env.example .env || true",
+    "lint": "ultracite check",
     "prepare": "husky",
     "start": "turbo run start --filter=\"./apps/*\"",
     "test": "turbo test --cache-dir=.turbo",
@@ -28,27 +36,20 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@manypkg/cli": "^0.24.0",
-    "@turbo/gen": "^2.5.3",
-    "@types/node": "catalog:",
+    "@types/node": "^22.15.32",
     "dotenv-cli": "^8.0.0",
     "husky": "^9.1.7",
-    "lint-staged": "^16.0.0",
+    "lint-staged": "^16.1.2",
     "rimraf": "^6.0.1",
-    "turbo": "^2.5.3",
+    "turbo": "^2.5.4",
     "type-fest": "^4.41.0",
-    "typescript": "catalog:",
-    "vitest": "^3.1.4"
+    "typescript": "^5.8.3",
+    "ultracite": "^4.2.11",
+    "vitest": "^3.2.3"
   },
-  "packageManager": "pnpm@10.11.0",
+  "packageManager": "pnpm@10.12.1",
   "engines": {
     "node": "^20 || >=22",
     "pnpm": ">=9.10.0"
-  },
-  "pnpm": {
-    "overrides": {
-      "react-is": "19.0.0",
-      "require-in-the-middle": "7.5.2"
-    }
   }
 }

@@ -1,16 +1,19 @@
-'use client';
+"use client";
 
-import { i18nResolver } from 'locales/i18n.resolver';
-import { getI18nSettings } from 'locales/i18n.settings';
-import { I18nProvider } from '@tazeai/i18n/provider';
-import { Toaster } from '@tazeai/ui/components/sonner';
-import { ThemeProvider, type UIProviderProps } from '@tazeai/ui/providers';
-import { useMemo, type ReactNode } from 'react';
+import { i18nResolver } from "@/locales/i18n.resolver";
+import { getI18nSettings } from "@/locales/i18n.settings";
+import { AnalyticsProvider } from "@tazeai/analytics";
+import { I18nProvider } from "@tazeai/i18n/provider";
+import { Toaster } from "@tazeai/ui/components/sonner";
+import { ThemeProvider, type UIProviderProps } from "@tazeai/ui/providers";
+import { type ReactNode, useMemo } from "react";
 
 export interface ProvidersProps {
   children: ReactNode;
   themeProps?: UIProviderProps;
   lang: string;
+  userId?: string;
+  userEmail?: string;
 }
 
 export function Providers({ children, themeProps, lang }: ProvidersProps) {
@@ -20,9 +23,11 @@ export function Providers({ children, themeProps, lang }: ProvidersProps) {
 
   return (
     <ThemeProvider {...themeProps}>
-      <I18nProvider settings={i18nSettings} resolver={i18nResolver}>
-        <Toaster />
-        {children}
+      <I18nProvider resolver={i18nResolver} settings={i18nSettings}>
+        <AnalyticsProvider>
+          <Toaster />
+          {children}
+        </AnalyticsProvider>
       </I18nProvider>
     </ThemeProvider>
   );

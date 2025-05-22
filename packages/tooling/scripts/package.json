@@ -7,8 +7,8 @@
     "clean": "rimraf dist .turbo"
   },
   "devDependencies": {
-    "@tazeai/typescript-config": "workspace:*",
-    "@types/node": "catalog:",
-    "typescript": "catalog:"
+    "@tazeai/typescript": "workspace:*",
+    "@types/node": "^22.15.32",
+    "typescript": "^5.8.3"
   }
 }

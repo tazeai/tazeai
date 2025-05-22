@@ -1,42 +1,33 @@
-'use client';
+"use client";
 
-import { Facebook, Twitter, Instagram, Linkedin, Github } from 'lucide-react';
-import { Separator } from '@tazeai/ui/components/separator';
+import { Logo } from "@/components/logo";
+import { Github } from "@tazeai/ui/components/icons";
+import { Separator } from "@tazeai/ui/components/separator";
 
 const Footer = () => {
+  const startYear = 2024;
   const currentYear = new Date().getFullYear();
+  const copyright =
+    currentYear > startYear ? `${startYear}-${currentYear}` : `${currentYear}`;
 
   return (
     <footer className="bg-muted/30 py-12">
       <div className="container mx-auto max-w-7xl px-4 md:px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-8">
+        <div className="mb-8 grid grid-cols-2 gap-8 md:grid-cols-4 lg:grid-cols-5">
           <div className="col-span-2">
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="h-6 w-6 bg-primary rounded-full"></div>
+            <div className="mb-4 flex items-center space-x-2">
+              <Logo />
               <span className="font-bold text-xl">TazeAI</span>
             </div>
-            <p className="text-muted-foreground max-w-xs mb-4">
-              Transforming businesses with powerful workflow solutions since
-              2020.
+            <p className="mb-4 max-w-xs text-muted-foreground">
+              Transforming businesses with powerful workflow solutions since{" "}
+              {startYear}.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-muted-foreground hover:text-primary">
-                <Facebook className="h-5 w-5" />
-                <span className="sr-only">Facebook</span>
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-primary">
-                <Twitter className="h-5 w-5" />
-                <span className="sr-only">Twitter</span>
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-primary">
-                <Instagram className="h-5 w-5" />
-                <span className="sr-only">Instagram</span>
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-primary">
-                <Linkedin className="h-5 w-5" />
-                <span className="sr-only">LinkedIn</span>
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-primary">
+              <a
+                className="text-muted-foreground hover:text-primary"
+                href="https://github.com/tazeai/tazeai"
+              >
                 <Github className="h-5 w-5" />
                 <span className="sr-only">GitHub</span>
               </a>
@@ -44,36 +35,36 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="font-medium mb-4">Product</h3>
+            <h3 className="mb-4 font-medium">Product</h3>
             <ul className="space-y-3 text-sm">
               <li>
                 <a
-                  href="#"
                   className="text-muted-foreground hover:text-primary"
+                  href="#"
                 >
                   Features
                 </a>
               </li>
               <li>
                 <a
-                  href="#"
                   className="text-muted-foreground hover:text-primary"
+                  href="#"
                 >
                   Pricing
                 </a>
               </li>
               <li>
                 <a
-                  href="#"
                   className="text-muted-foreground hover:text-primary"
+                  href="#"
                 >
                   Integrations
                 </a>
               </li>
               <li>
                 <a
-                  href="#"
                   className="text-muted-foreground hover:text-primary"
+                  href="#"
                 >
                   FAQ
                 </a>
@@ -82,36 +73,36 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="font-medium mb-4">Company</h3>
+            <h3 className="mb-4 font-medium">Company</h3>
             <ul className="space-y-3 text-sm">
               <li>
                 <a
-                  href="#"
                   className="text-muted-foreground hover:text-primary"
+                  href="#"
                 >
                   About
                 </a>
               </li>
               <li>
                 <a
-                  href="#"
                   className="text-muted-foreground hover:text-primary"
+                  href="#"
                 >
                   Blog
                 </a>
               </li>
               <li>
                 <a
-                  href="#"
                   className="text-muted-foreground hover:text-primary"
+                  href="#"
                 >
                   Careers
                 </a>
               </li>
               <li>
                 <a
-                  href="#"
                   className="text-muted-foreground hover:text-primary"
+                  href="#"
                 >
                   Contact
                 </a>
@@ -120,36 +111,36 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="font-medium mb-4">Legal</h3>
+            <h3 className="mb-4 font-medium">Legal</h3>
             <ul className="space-y-3 text-sm">
               <li>
                 <a
-                  href="#"
                   className="text-muted-foreground hover:text-primary"
+                  href="#"
                 >
                   Terms
                 </a>
               </li>
               <li>
                 <a
-                  href="#"
                   className="text-muted-foreground hover:text-primary"
+                  href="#"
                 >
                   Privacy
                 </a>
               </li>
               <li>
                 <a
-                  href="#"
                   className="text-muted-foreground hover:text-primary"
+                  href="#"
                 >
                   Cookies
                 </a>
               </li>
               <li>
                 <a
-                  href="#"
                   className="text-muted-foreground hover:text-primary"
+                  href="#"
                 >
                   Licenses
                 </a>
@@ -160,26 +151,26 @@ const Footer = () => {
 
         <Separator className="my-8" />
 
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-muted-foreground">
-            &copy; {currentYear} TazeAI. All rights reserved.
+        <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+          <p className="text-muted-foreground text-sm">
+            &copy; {copyright} TazeAI. All rights reserved.
           </p>
           <div className="flex items-center space-x-4">
             <a
+              className="text-muted-foreground text-sm hover:text-primary"
               href="#"
-              className="text-sm text-muted-foreground hover:text-primary"
             >
               Terms of Service
             </a>
             <a
+              className="text-muted-foreground text-sm hover:text-primary"
               href="#"
-              className="text-sm text-muted-foreground hover:text-primary"
             >
               Privacy Policy
             </a>
             <a
+              className="text-muted-foreground text-sm hover:text-primary"
               href="#"
-              className="text-sm text-muted-foreground hover:text-primary"
             >
               Cookie Settings
             </a>

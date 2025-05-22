@@ -1,4 +1,4 @@
-import NotFoundError from '@/components/not-found-error';
+import NotFoundError from "@/components/not-found-error";
 
 function NotFoundPage() {
   return <NotFoundError />;

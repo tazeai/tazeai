@@ -2,14 +2,13 @@ import {
   Body,
   Container,
   Head,
-  Hr,
   Html,
+  Link,
   Preview,
   Section,
   Tailwind,
   Text,
-  Link,
-} from '@react-email/components';
+} from "@react-email/components";
 
 type SignInTemplateProps = {
   readonly url: string;

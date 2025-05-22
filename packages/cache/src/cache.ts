@@ -1,6 +1,6 @@
-import { isNil, transform } from 'lodash-es';
-import { createClient, type RedisClientType } from 'redis';
-import { MAX_COMMANDS_QUEUE_LENGTH } from './consts';
+import { isNil, transform } from "lodash-es";
+import { type RedisClientType, createClient } from "redis";
+import { MAX_COMMANDS_QUEUE_LENGTH } from "./consts";
 
 // TODO: Use superjson
 const json = {
@@ -13,7 +13,7 @@ const json = {
 };
 
 // Define the constant for successful Redis operation response
-export const REDIS_SUCCESS = 'OK';
+export const REDIS_SUCCESS = "OK";
 
 /**
  * Type representing a value that can be a promise or a value.
@@ -38,7 +38,7 @@ type CacheOptions = {
  * Class representing a cache store using Redis.
  */
 export class Cache {
-  #prefix = ''; // Prefix for cache keys
+  #prefix = ""; // Prefix for cache keys
   protected readonly redis: RedisClientType; // Redis client instance
 
   /**
@@ -52,7 +52,7 @@ export class Cache {
       url: connection,
       commandsQueueMaxLength: MAX_COMMANDS_QUEUE_LENGTH,
     });
-    this.#prefix = opts.prefix ?? '';
+    this.#prefix = opts.prefix ?? "";
   }
 
   /**
@@ -61,7 +61,7 @@ export class Cache {
    * @returns The current cache key prefix.
    */
   getPrefix = (): string => {
-    return this.#prefix || '';
+    return this.#prefix || "";
   };
 
   /**
@@ -114,7 +114,7 @@ export class Cache {
     const res = await (ttl
       ? this.redis.set(cacheKey, this.serialize(value), {
           expiration: {
-            type: 'EX',
+            type: "EX",
             value: ttl,
           },
         })
@@ -132,7 +132,10 @@ export class Cache {
   rememberForever = async <T>(
     key: string,
     fn: CacheClosure<T>,
-  ): Promise<{ value: T | null; cached: boolean }> => {
+  ): Promise<{
+    value: T | null;
+    cached: boolean;
+  }> => {
     return await this.remember<T>(this.getKey(key), fn);
   };
 
@@ -159,7 +162,10 @@ export class Cache {
     key: string,
     fn?: CacheClosure<T>,
     seconds?: number,
-  ): Promise<{ value: T | null; cached: boolean }> => {
+  ): Promise<{
+    value: T | null;
+    cached: boolean;
+  }> => {
     try {
       await this.connect();
       const start = Date.now();
@@ -167,17 +173,30 @@ export class Cache {
       console.log(`Cache[${key}] value: ${value}`);
       if (value) {
         console.log(`Cache[${key}] hit: ${Date.now() - start}ms`);
-        return { value, cached: true };
+        return {
+          value,
+          cached: true,
+        };
       }
-      if (!fn) return { value: null, cached: false };
+      if (!fn)
+        return {
+          value: null,
+          cached: false,
+        };
       const res = await fn();
       const end = Date.now();
       console.log(`Cache[${key}] miss: ${end - start}ms`);
       await this.set(key, res, seconds);
-      return { value: res, cached: false };
+      return {
+        value: res,
+        cached: false,
+      };
     } catch (error) {
       console.error(`Error in remember function: ${error}`);
-      return { value: null, cached: false };
+      return {
+        value: null,
+        cached: false,
+      };
     }
   };
 

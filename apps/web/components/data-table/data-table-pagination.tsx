@@ -1,23 +1,23 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { Button } from '@tazeai/ui/components/button';
-import { Input } from '@tazeai/ui/components/input';
+import { Button } from "@tazeai/ui/components/button";
+import {
+  ChevronLeft,
+  ChevronRight,
+  ChevronsLeft,
+  ChevronsRight,
+} from "@tazeai/ui/components/icons";
+import { Input } from "@tazeai/ui/components/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@tazeai/ui/components/select';
-import {
-  ChevronLeft,
-  ChevronRight,
-  ChevronsLeft,
-  ChevronsRight,
-} from 'lucide-react';
-import type { DataTablePaginationProps } from './types';
-import { cn } from '@tazeai/ui/lib/utils';
+} from "@tazeai/ui/components/select";
+import { cn } from "@tazeai/ui/lib/utils";
+import { useState } from "react";
+import type { DataTablePaginationProps } from "./types";
 
 export function DataTablePagination({
   currentPage,
@@ -25,21 +25,21 @@ export function DataTablePagination({
   totalItems,
   pageSize,
   onPageChange,
-  itemsLabel = '项',
+  itemsLabel = "项",
   pageSizeOptions = [10, 20, 30, 50, 100],
   onPageSizeChange,
 }: DataTablePaginationProps) {
   const startItem = totalItems === 0 ? 0 : (currentPage - 1) * pageSize + 1;
   const endItem = Math.min(currentPage * pageSize, totalItems);
 
-  const [jumpToPage, setJumpToPage] = useState('');
+  const [jumpToPage, setJumpToPage] = useState("");
 
   // 处理页码跳转
   const handleJumpToPage = () => {
     const pageNumber = Number.parseInt(jumpToPage, 10);
     if (!isNaN(pageNumber) && pageNumber >= 1 && pageNumber <= totalPages) {
       onPageChange(pageNumber);
-      setJumpToPage('');
+      setJumpToPage("");
     }
   };
 
@@ -51,12 +51,12 @@ export function DataTablePagination({
     // 始终显示第一页
     buttons.push(
       <Button
-        key="first"
-        variant={currentPage === 1 ? 'default' : 'outline'}
-        size="icon"
         className="h-8 w-8"
-        onClick={() => onPageChange(1)}
         disabled={currentPage === 1}
+        key="first"
+        onClick={() => onPageChange(1)}
+        size="icon"
+        variant={currentPage === 1 ? "default" : "outline"}
       >
         1
       </Button>,
@@ -74,8 +74,8 @@ export function DataTablePagination({
     if (startPage > 2) {
       buttons.push(
         <span
+          className="flex h-8 w-8 items-center justify-center text-muted-foreground"
           key="ellipsis-start"
-          className="flex items-center justify-center w-8 h-8 text-muted-foreground"
         >
           ···
         </span>,
@@ -86,11 +86,11 @@ export function DataTablePagination({
     for (let i = startPage; i <= endPage; i++) {
       buttons.push(
         <Button
-          key={i}
-          variant={currentPage === i ? 'default' : 'outline'}
-          size="icon"
           className="h-8 w-8"
+          key={i}
           onClick={() => onPageChange(i)}
+          size="icon"
+          variant={currentPage === i ? "default" : "outline"}
         >
           {i}
         </Button>,
@@ -101,8 +101,8 @@ export function DataTablePagination({
     if (endPage < totalPages - 1) {
       buttons.push(
         <span
+          className="flex h-8 w-8 items-center justify-center text-muted-foreground"
           key="ellipsis-end"
-          className="flex items-center justify-center w-8 h-8 text-muted-foreground"
         >
           ···
         </span>,
@@ -113,12 +113,12 @@ export function DataTablePagination({
     if (totalPages > 1) {
       buttons.push(
         <Button
-          key="last"
-          variant={currentPage === totalPages ? 'default' : 'outline'}
-          size="icon"
           className="h-8 w-8"
-          onClick={() => onPageChange(totalPages)}
           disabled={currentPage === totalPages}
+          key="last"
+          onClick={() => onPageChange(totalPages)}
+          size="icon"
+          variant={currentPage === totalPages ? "default" : "outline"}
         >
           {totalPages}
         </Button>,
@@ -130,18 +130,18 @@ export function DataTablePagination({
 
   return (
     <div className="mt-4 border-t pt-4">
-      <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
+      <div className="flex flex-col items-center justify-between gap-4 lg:flex-row">
         {/* 左侧：页面大小选择器和页面信息 */}
-        <div className="flex flex-col sm:flex-row items-center gap-6 w-full lg:w-auto order-2 lg:order-1">
+        <div className="order-2 flex w-full flex-col items-center gap-6 sm:flex-row lg:order-1 lg:w-auto">
           {/* 页面大小选择器 */}
           <div className="flex items-center gap-2">
-            <span className="text-sm text-muted-foreground whitespace-nowrap">
+            <span className="whitespace-nowrap text-muted-foreground text-sm">
               每页显示
             </span>
             {onPageSizeChange ? (
               <Select
-                value={pageSize.toString()}
                 onValueChange={(value) => onPageSizeChange(Number(value))}
+                value={pageSize.toString()}
               >
                 <SelectTrigger className="h-8 w-[70px]">
                   <SelectValue placeholder={pageSize.toString()} />
@@ -155,83 +155,83 @@ export function DataTablePagination({
                 </SelectContent>
               </Select>
             ) : (
-              <span className="text-sm font-medium">{pageSize}</span>
+              <span className="font-medium text-sm">{pageSize}</span>
             )}
-            <span className="text-sm text-muted-foreground">条</span>
+            <span className="text-muted-foreground text-sm">条</span>
           </div>
 
           {/* 页面信息 */}
-          <div className="text-sm text-muted-foreground whitespace-nowrap">
-            显示 <span className="font-medium">{startItem}</span> -{' '}
-            <span className="font-medium">{endItem}</span> 共{' '}
+          <div className="whitespace-nowrap text-muted-foreground text-sm">
+            显示 <span className="font-medium">{startItem}</span> -{" "}
+            <span className="font-medium">{endItem}</span> 共{" "}
             <span className="font-medium">{totalItems}</span> 个{itemsLabel}
           </div>
         </div>
 
         {/* 右侧：分页控件 */}
-        <div className="flex flex-col sm:flex-row items-center gap-4 w-full lg:w-auto order-1 lg:order-2">
+        <div className="order-1 flex w-full flex-col items-center gap-4 sm:flex-row lg:order-2 lg:w-auto">
           {/* 页码导航 */}
           <div className="flex items-center">
             <div className="flex items-center">
               <Button
-                variant="outline"
-                size="icon"
-                className={cn(
-                  'h-8 w-8 rounded-r-none border-r-0',
-                  currentPage === 1 && 'opacity-50',
-                )}
-                onClick={() => onPageChange(1)}
-                disabled={currentPage === 1}
                 aria-label="首页"
+                className={cn(
+                  "h-8 w-8 rounded-r-none border-r-0",
+                  currentPage === 1 && "opacity-50",
+                )}
+                disabled={currentPage === 1}
+                onClick={() => onPageChange(1)}
+                size="icon"
+                variant="outline"
               >
                 <ChevronsLeft className="h-4 w-4" />
               </Button>
               <Button
-                variant="outline"
-                size="icon"
-                className={cn(
-                  'h-8 w-8 rounded-l-none rounded-r-none',
-                  currentPage === 1 && 'opacity-50',
-                )}
-                onClick={() => onPageChange(Math.max(currentPage - 1, 1))}
-                disabled={currentPage === 1}
                 aria-label="上一页"
+                className={cn(
+                  "h-8 w-8 rounded-r-none rounded-l-none",
+                  currentPage === 1 && "opacity-50",
+                )}
+                disabled={currentPage === 1}
+                onClick={() => onPageChange(Math.max(currentPage - 1, 1))}
+                size="icon"
+                variant="outline"
               >
                 <ChevronLeft className="h-4 w-4" />
               </Button>
             </div>
 
             {/* 页码按钮 - 在中等及以上屏幕显示 */}
-            <div className="hidden md:flex items-center mx-1 space-x-1">
+            <div className="mx-1 hidden items-center space-x-1 md:flex">
               {totalPages > 0 && generatePaginationButtons()}
             </div>
 
             <div className="flex items-center">
               <Button
-                variant="outline"
-                size="icon"
+                aria-label="下一页"
                 className={cn(
-                  'h-8 w-8 rounded-l-none rounded-r-none',
-                  currentPage === totalPages && 'opacity-50',
+                  "h-8 w-8 rounded-r-none rounded-l-none",
+                  currentPage === totalPages && "opacity-50",
                 )}
+                disabled={currentPage === totalPages || totalPages === 0}
                 onClick={() =>
                   onPageChange(Math.min(currentPage + 1, totalPages))
                 }
-                disabled={currentPage === totalPages || totalPages === 0}
-                aria-label="下一页"
+                size="icon"
+                variant="outline"
               >
                 <ChevronRight className="h-4 w-4" />
               </Button>
               <Button
-                variant="outline"
-                size="icon"
-                className={cn(
-                  'h-8 w-8 rounded-l-none',
-                  currentPage === totalPages && 'opacity-50',
-                )}
-                onClick={() => onPageChange(totalPages)}
-                disabled={currentPage === totalPages || totalPages === 0}
                 aria-label="末页"
+                className={cn(
+                  "h-8 w-8 rounded-l-none",
+                  currentPage === totalPages && "opacity-50",
+                )}
+                disabled={currentPage === totalPages || totalPages === 0}
+                onClick={() => onPageChange(totalPages)}
+                size="icon"
+                variant="outline"
               >
                 <ChevronsRight className="h-4 w-4" />
               </Button>
@@ -240,27 +240,27 @@ export function DataTablePagination({
 
           {/* 页码跳转 - 在中等及以上屏幕显示 */}
           <div className="flex items-center space-x-2">
-            <span className="text-sm text-muted-foreground whitespace-nowrap">
+            <span className="whitespace-nowrap text-muted-foreground text-sm">
               跳转到
             </span>
             <div className="flex items-center">
               <Input
-                className="h-8 w-14 rounded-r-none text-center px-1"
-                value={jumpToPage}
+                aria-label="页码输入"
+                className="h-8 w-14 rounded-r-none px-1 text-center"
                 onChange={(e) => setJumpToPage(e.target.value)}
                 onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
+                  if (e.key === "Enter") {
                     handleJumpToPage();
                   }
                 }}
-                aria-label="页码输入"
+                value={jumpToPage}
               />
               <Button
-                variant="outline"
-                size="sm"
                 className="h-8 rounded-l-none border-l-0"
-                onClick={handleJumpToPage}
                 disabled={!jumpToPage || totalPages === 0}
+                onClick={handleJumpToPage}
+                size="sm"
+                variant="outline"
               >
                 跳转
               </Button>
@@ -270,9 +270,9 @@ export function DataTablePagination({
       </div>
 
       {/* 当前页码信息 - 在小屏幕上显示 */}
-      <div className="md:hidden flex justify-center mt-2">
-        <span className="text-sm text-muted-foreground">
-          第 <span className="font-medium">{currentPage}</span> 页，共{' '}
+      <div className="mt-2 flex justify-center md:hidden">
+        <span className="text-muted-foreground text-sm">
+          第 <span className="font-medium">{currentPage}</span> 页，共{" "}
           <span className="font-medium">{totalPages}</span> 页
         </span>
       </div>

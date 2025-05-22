@@ -3,10 +3,10 @@
   "extends": ["config:base"],
   "packageRules": [
     {
-      "matchPackagePatterns": ["^@tazeai/"],
-      "enabled": false
+      "enabled": false,
+      "matchPackagePatterns": ["^@tazeai/"]
     }
   ],
-  "updateInternalDeps": true,
-  "rangeStrategy": "bump"
+  "rangeStrategy": "bump",
+  "updateInternalDeps": true
 }

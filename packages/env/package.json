@@ -10,12 +10,12 @@
     "clean": "rimraf dist .turbo"
   },
   "dependencies": {
-    "@t3-oss/env-nextjs": "^0.13.4",
-    "zod": "catalog:"
+    "@t3-oss/env-core": "^0.13.8",
+    "zod": "^3.25.67"
   },
   "devDependencies": {
-    "@tazeai/typescript-config": "workspace:*",
-    "@types/node": "catalog:",
-    "typescript": "catalog:"
+    "@tazeai/typescript": "workspace:*",
+    "@types/node": "^22.15.32",
+    "typescript": "^5.8.3"
   }
 }

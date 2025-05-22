@@ -1,5 +1,5 @@
-import { isNumber, toNumber } from 'lodash-es';
-import superjson from 'superjson';
+import { isNumber, toNumber } from "lodash-es";
+import superjson from "superjson";
 
 /**
  * Unserialize the value.
@@ -13,7 +13,7 @@ import superjson from 'superjson';
 export function unserialize<T>(value: string): T | null {
   if (isNumber(value)) {
     return toNumber(value) as T;
-  } else if (typeof value === 'string') {
+  } else if (typeof value === "string") {
     return superjson.parse<T>(value);
   }
   return value as T;
@@ -28,12 +28,15 @@ export function unserialize<T>(value: string): T | null {
 export function serialize(value: unknown): string | number {
   if (isNumber(value)) {
     return toNumber(value);
-  } else if (typeof value === 'string') {
+  } else if (typeof value === "string") {
     return value;
   }
   return superjson.stringify(value);
 }
 
-export const json = { unserialize, serialize };
+export const json = {
+  unserialize,
+  serialize,
+};
 
 export default json;
