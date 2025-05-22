@@ -8,6 +8,9 @@ import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { cn } from '@tazeai/ui/lib/utils';
 import { authConfig } from 'config/auth';
+import OneTap from '../../(auth)/_components/one-tap';
+import { useSession } from '@tazeai/auth/client';
+import { UserButton } from '../../../components/user-button';
 
 const NavLink = ({
   href,
@@ -25,6 +28,7 @@ const NavLink = ({
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
+  const session = useSession();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -67,14 +71,21 @@ const Navbar = () => {
         <div className="flex items-center gap-4">
           <ThemeSwitcher />
           <div className="hidden md:flex gap-3">
-            <Link href={authConfig.pages.signIn}>
-              <Button variant="ghost" size="sm">
-                Log in
-              </Button>
-            </Link>
-            <Link href={authConfig.pages.signUp}>
-              <Button size="sm">Sign up</Button>
-            </Link>
+            {session.data?.user ? (
+              <UserButton />
+            ) : session.isPending ? null : (
+              <>
+                <Link href={authConfig.pages.signIn}>
+                  <Button variant="ghost" size="sm">
+                    Log in
+                  </Button>
+                </Link>
+                <Link href={authConfig.pages.signUp}>
+                  <Button size="sm">Sign up</Button>
+                </Link>
+                <OneTap />
+              </>
+            )}
           </div>
 
           <Sheet>

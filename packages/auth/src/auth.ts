@@ -2,7 +2,13 @@ import { db, nanoid, schemas, uuidv7 } from '@tazeai/database';
 import { resend } from '@tazeai/email';
 import { betterAuth, type BetterAuthOptions } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
-import { admin, apiKey, emailOTP, organization } from 'better-auth/plugins';
+import {
+  admin,
+  apiKey,
+  emailOTP,
+  organization,
+  oneTap,
+} from 'better-auth/plugins';
 import { envs } from './envs';
 import { redisStorage } from './storage';
 
@@ -88,6 +94,7 @@ const createConfig = (): BetterAuthOptions => {
       organization(),
       apiKey(),
       admin(),
+      oneTap(),
       emailOTP({
         sendVerificationOTP: async (data, request) => {
           console.log('sendVerificationOTP', data, request);

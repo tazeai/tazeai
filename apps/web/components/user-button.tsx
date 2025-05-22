@@ -34,7 +34,7 @@ export function UserButton() {
   // Get initials from name for avatar fallback
   const initials = data.user.name
     .split(' ')
-    .map((n) => n[0])
+    .map((n: string) => n[0])
     .join('')
     .toUpperCase();
 

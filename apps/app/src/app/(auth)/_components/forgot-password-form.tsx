@@ -18,7 +18,7 @@ import {
 } from '@tazeai/ui/components/form';
 import { Button } from '@tazeai/ui/components/button';
 import { useTranslation } from 'react-i18next';
-import { emailOtp } from '@tazeai/auth/client';
+import { client } from '@tazeai/auth/client';
 import { Loader2 } from 'lucide-react';
 import { useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -76,7 +76,7 @@ export function ForgotPasswordForm({
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       setIsLoading(true);
-      const res = await emailOtp.sendVerificationOtp({
+      const res = await client.emailOtp.sendVerificationOtp({
         email: values.email,
         type: 'forget-password',
       });
@@ -97,7 +97,7 @@ export function ForgotPasswordForm({
   const onOtpSubmit = async (values: z.infer<typeof otpFormSchema>) => {
     try {
       setIsLoading(true);
-      const res = await emailOtp.verifyEmail({
+      const res = await client.emailOtp.verifyEmail({
         email: values.email,
         otp: values.otp,
       });

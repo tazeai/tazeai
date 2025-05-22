@@ -5,6 +5,9 @@ import { createEnv, z } from '@tazeai/env';
 export const envs = () =>
   createEnv({
     extends: [cache(), email()],
+    client: {
+      NEXT_PUBLIC_AUTH_GOOGLE_ID: z.string().min(1).optional(),
+    },
     shared: {
       NEXT_PUBLIC_AUTH_URL: z.string().min(1).url(),
       NEXT_PUBLIC_AUTH_GITHUB_ENABLED: z.string().optional(),
@@ -32,5 +35,6 @@ export const envs = () =>
         process.env.NEXT_PUBLIC_AUTH_GITHUB_ENABLED,
       NEXT_PUBLIC_AUTH_GOOGLE_ENABLED:
         process.env.NEXT_PUBLIC_AUTH_GOOGLE_ENABLED,
+      NEXT_PUBLIC_AUTH_GOOGLE_ID: process.env.NEXT_PUBLIC_AUTH_GOOGLE_ID,
     },
   });
