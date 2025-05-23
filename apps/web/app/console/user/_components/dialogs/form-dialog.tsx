@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import { Button } from '@tazeai/ui/components/button';
+import { Button } from "@tazeai/ui/components/button";
 import {
   Dialog,
   DialogContent,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@tazeai/ui/components/dialog';
-import type { ReactNode } from 'react';
-import { Loader2 } from 'lucide-react';
+} from "@tazeai/ui/components/dialog";
+import type { ReactNode } from "react";
+import { Loader2 } from "lucide-react";
 
 interface FormDialogProps {
   open: boolean;
@@ -28,8 +28,8 @@ export function FormDialog({
   onOpenChange,
   title,
   children,
-  submitLabel = '提交',
-  cancelLabel = '取消',
+  submitLabel = "提交",
+  cancelLabel = "取消",
   isSubmitting = false,
   isSubmitDisabled = false,
   onSubmit,

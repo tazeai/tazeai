@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
 // import * as Sentry from "@sentry/nextjs";
 // import { useEffect } from "react";
-import NotFoundError from 'components/not-found-error';
+import NotFoundError from "components/not-found-error";
 // import { Button } from "@/components/button";
 // import { logOut } from "@/utils/user";
 

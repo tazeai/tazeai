@@ -1,1 +1,1 @@
-export { default } from '@tazeai/ui/postcss.config';
+export { default } from "@tazeai/ui/postcss.config";

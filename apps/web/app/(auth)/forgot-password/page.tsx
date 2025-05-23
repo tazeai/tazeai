@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import Image from 'next/image';
-import { ForgotPasswordForm } from '../_components/forgot-password-form';
+import Link from "next/link";
+import Image from "next/image";
+import { ForgotPasswordForm } from "../_components/forgot-password-form";
 
 export default function ForgotPasswordPage() {
   return (

@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { Button } from '@tazeai/ui/components/button';
+import { Button } from "@tazeai/ui/components/button";
 import {
   Dialog,
   DialogContent,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@tazeai/ui/components/dialog';
-import { Loader2 } from 'lucide-react';
+} from "@tazeai/ui/components/dialog";
+import { Loader2 } from "lucide-react";
 
 interface ConfirmDialogProps {
   open: boolean;
@@ -18,12 +18,12 @@ interface ConfirmDialogProps {
   confirmLabel?: string;
   cancelLabel?: string;
   confirmVariant?:
-    | 'default'
-    | 'destructive'
-    | 'outline'
-    | 'secondary'
-    | 'ghost'
-    | 'link';
+    | "default"
+    | "destructive"
+    | "outline"
+    | "secondary"
+    | "ghost"
+    | "link";
   isSubmitting?: boolean;
   onConfirm: () => void;
 }
@@ -33,9 +33,9 @@ export function ConfirmDialog({
   onOpenChange,
   title,
   description,
-  confirmLabel = '确认',
-  cancelLabel = '取消',
-  confirmVariant = 'default',
+  confirmLabel = "确认",
+  cancelLabel = "取消",
+  confirmVariant = "default",
   isSubmitting = false,
   onConfirm,
 }: ConfirmDialogProps) {

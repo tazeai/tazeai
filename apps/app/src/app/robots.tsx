@@ -1,13 +1,13 @@
-import type { MetadataRoute } from 'next';
+import type { MetadataRoute } from "next";
 
 const robots = (): MetadataRoute.Robots => {
   return {
-    host: 'https://tazeai.com',
+    host: "https://tazeai.com",
     rules: [
       {
-        allow: ['/'],
-        disallow: ['/api/*'],
-        userAgent: '*',
+        allow: ["/"],
+        disallow: ["/api/*"],
+        userAgent: "*",
       },
     ],
   };

@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { socialProviders } from '@tazeai/auth/client';
-import { FaGithub, FaGoogle } from 'react-icons/fa';
-import { Button } from '@tazeai/ui/components/button';
+import { socialProviders } from "@tazeai/auth/client";
+import { FaGithub, FaGoogle } from "react-icons/fa";
+import { Button } from "@tazeai/ui/components/button";
 
-type SocialProvider = 'github' | 'google';
+type SocialProvider = "github" | "google";
 
 type SocialProps = {
   isLoading: boolean;
@@ -14,11 +14,11 @@ type SocialProps = {
 export function Social({ isLoading, onClick }: SocialProps) {
   const SocialsConfig = {
     github: {
-      label: 'Sign up with Github',
+      label: "Sign up with Github",
       icon: <FaGithub className="size-4" />,
     },
     google: {
-      label: 'Sign up with Google',
+      label: "Sign up with Google",
       icon: <FaGoogle className="size-4" />,
     },
   };

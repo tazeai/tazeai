@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import * as React from 'react';
-import * as SliderPrimitive from '@radix-ui/react-slider';
+import * as SliderPrimitive from "@radix-ui/react-slider";
+import * as React from "react";
 
-import { cn } from '@tazeai/ui/lib/utils';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@tazeai/ui/components/tooltip';
+} from "@tazeai/ui/components/tooltip";
+import { cn } from "@tazeai/ui/lib/utils";
 
 function Slider({
   className,
@@ -59,9 +59,9 @@ function Slider({
 
   React.useEffect(() => {
     if (showTooltip) {
-      document.addEventListener('pointerup', handlePointerUp);
+      document.addEventListener("pointerup", handlePointerUp);
       return () => {
-        document.removeEventListener('pointerup', handlePointerUp);
+        document.removeEventListener("pointerup", handlePointerUp);
       };
     }
   }, [showTooltip, handlePointerUp]);
@@ -84,7 +84,7 @@ function Slider({
           <TooltipContent
             className="px-2 py-1 text-xs"
             sideOffset={8}
-            side={props.orientation === 'vertical' ? 'right' : 'top'}
+            side={props.orientation === "vertical" ? "right" : "top"}
           >
             <p>{tooltipContent ? tooltipContent(value) : value}</p>
           </TooltipContent>
@@ -101,7 +101,7 @@ function Slider({
       min={min}
       max={max}
       className={cn(
-        'relative flex w-full touch-none items-center select-none data-[disabled]:opacity-50 data-[orientation=vertical]:h-full data-[orientation=vertical]:min-h-44 data-[orientation=vertical]:w-auto data-[orientation=vertical]:flex-col',
+        "relative flex w-full touch-none items-center select-none data-[disabled]:opacity-50 data-[orientation=vertical]:h-full data-[orientation=vertical]:min-h-44 data-[orientation=vertical]:w-auto data-[orientation=vertical]:flex-col",
         className,
       )}
       onValueChange={handleValueChange}
@@ -110,13 +110,13 @@ function Slider({
       <SliderPrimitive.Track
         data-slot="slider-track"
         className={cn(
-          'bg-muted relative grow overflow-hidden rounded-full data-[orientation=horizontal]:h-1.5 data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-1.5',
+          "bg-muted relative grow overflow-hidden rounded-full data-[orientation=horizontal]:h-1.5 data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-1.5",
         )}
       >
         <SliderPrimitive.Range
           data-slot="slider-range"
           className={cn(
-            'bg-primary absolute data-[orientation=horizontal]:h-full data-[orientation=vertical]:w-full',
+            "bg-primary absolute data-[orientation=horizontal]:h-full data-[orientation=vertical]:w-full",
           )}
         />
       </SliderPrimitive.Track>

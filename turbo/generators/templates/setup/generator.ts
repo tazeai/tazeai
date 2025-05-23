@@ -1,26 +1,26 @@
-import type { PlopTypes } from '@turbo/gen';
-import { execSync } from 'node:child_process';
+import type { PlopTypes } from "@turbo/gen";
+import { execSync } from "node:child_process";
 
 export function createSetupGenerator(plop: PlopTypes.NodePlopAPI) {
-  plop.setGenerator('setup', {
-    description: 'Setup your TazeAI project',
+  plop.setGenerator("setup", {
+    description: "Setup your TazeAI project",
     prompts: [
       {
-        type: 'input',
-        name: 'projectName',
-        message: 'What is the name of the project?',
+        type: "input",
+        name: "projectName",
+        message: "What is the name of the project?",
       },
       {
-        type: 'confirm',
-        name: 'setupHealthCheck',
-        message: 'Do you want to setup a pre-commit hook for health checks?',
+        type: "confirm",
+        name: "setupHealthCheck",
+        message: "Do you want to setup a pre-commit hook for health checks?",
         default: false,
       },
     ],
     actions: [
       {
-        type: 'modify',
-        path: 'package.json',
+        type: "modify",
+        path: "package.json",
         async transform(content, answers) {
           const pkg = JSON.parse(content);
 
@@ -35,9 +35,9 @@ export function createSetupGenerator(plop: PlopTypes.NodePlopAPI) {
           setupRemote();
           setupPreCommit({ setupHealthCheck: answers.setupHealthCheck });
 
-          return 'Project setup complete';
+          return "Project setup complete";
         } catch (error) {
-          console.error('Project setup failed. Aborting package generation.');
+          console.error("Project setup failed. Aborting package generation.");
           process.exit(1);
         }
       },
@@ -49,7 +49,7 @@ function setupPreCommit(params: {
   setupHealthCheck: boolean;
 }) {
   try {
-    const filePath = '.git/hooks/pre-commit';
+    const filePath = ".git/hooks/pre-commit";
 
     const healthCheckCommands = params.setupHealthCheck
       ? `pnpm run lint:fix\npnpm run typecheck\n`.trim()
@@ -60,15 +60,15 @@ function setupPreCommit(params: {
 
     // write file
     execSync(`echo "${fileContent}" > ${filePath}`, {
-      stdio: 'inherit',
+      stdio: "inherit",
     });
 
     // make file executable
     execSync(`chmod +x ${filePath}`, {
-      stdio: 'inherit',
+      stdio: "inherit",
     });
   } catch (error) {
-    console.error('Pre-commit hook setup failed. Aborting package generation.');
+    console.error("Pre-commit hook setup failed. Aborting package generation.");
     process.exit(1);
   }
 }
@@ -76,33 +76,33 @@ function setupPreCommit(params: {
 function setupRemote() {
   try {
     // Setup remote upstream
-    const getRemoteUrl = execSync('git remote get-url origin', {
-      stdio: 'inherit',
+    const getRemoteUrl = execSync("git remote get-url origin", {
+      stdio: "inherit",
     });
 
     const currentRemote = getRemoteUrl.toString().trim();
 
     console.log(`Setting upstream remote to ${currentRemote} ...`);
 
-    if (currentRemote && currentRemote.includes('github.com')) {
+    if (currentRemote && currentRemote.includes("github.com")) {
       execSync(`git remote remove origin`, {
-        stdio: 'inherit',
+        stdio: "inherit",
       });
 
       execSync(`git remote set-url upstream ${currentRemote}`, {
-        stdio: 'inherit',
+        stdio: "inherit",
       });
     } else {
-      console.error('Your current remote is not GitHub');
+      console.error("Your current remote is not GitHub");
     }
   } catch (error) {
-    console.info('No current remote found. Skipping upstream remote setup.');
+    console.info("No current remote found. Skipping upstream remote setup.");
   }
 
   // Run license script
   try {
-    execSync('turbo run --filter license dev', {
-      stdio: 'inherit',
+    execSync("turbo run --filter license dev", {
+      stdio: "inherit",
     });
   } catch (error) {
     console.error(

@@ -1,29 +1,29 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import useSWR, { mutate } from 'swr';
-import { toast } from 'sonner';
-import { Button } from '@tazeai/ui/components/button';
+import { useState, useEffect } from "react";
+import useSWR, { mutate } from "swr";
+import { toast } from "sonner";
+import { Button } from "@tazeai/ui/components/button";
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from '@tazeai/ui/components/avatar';
-import { Badge } from '@tazeai/ui/components/badge';
-import { Checkbox } from '@tazeai/ui/components/checkbox';
-import { UserPlus, Trash, UserX, UserCheck } from 'lucide-react';
-import { fetcher } from './fetcher';
-import type { User, UserFormData } from './types';
-import { DataTable } from '@/components/data-table';
-import { DataTableToolbar } from '@/components/data-table/data-table-toolbar';
-import { DataTablePagination } from '@/components/data-table/data-table-pagination';
-import { UserFilters } from './user-filters';
-import { UserActions } from './user-actions';
-import { UserForm } from './user-form';
-import { FormDialog } from './dialogs/form-dialog';
-import { ConfirmDialog } from './dialogs/confirm-dialog';
-import type { Column } from '@/components/data-table/types';
-import { cn } from '@tazeai/ui/lib/utils';
+} from "@tazeai/ui/components/avatar";
+import { Badge } from "@tazeai/ui/components/badge";
+import { Checkbox } from "@tazeai/ui/components/checkbox";
+import { UserPlus, Trash, UserX, UserCheck } from "lucide-react";
+import { fetcher } from "./fetcher";
+import type { User, UserFormData } from "./types";
+import { DataTable } from "@/components/data-table";
+import { DataTableToolbar } from "@/components/data-table/data-table-toolbar";
+import { DataTablePagination } from "@/components/data-table/data-table-pagination";
+import { UserFilters } from "./user-filters";
+import { UserActions } from "./user-actions";
+import { UserForm } from "./user-form";
+import { FormDialog } from "./dialogs/form-dialog";
+import { ConfirmDialog } from "./dialogs/confirm-dialog";
+import type { Column } from "@/components/data-table/types";
+import { cn } from "@tazeai/ui/lib/utils";
 
 // 首先确保导入 DropdownMenu 相关组件
 import {
@@ -31,8 +31,8 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@tazeai/ui/components/dropdown-menu';
-import { ChevronDown } from 'lucide-react';
+} from "@tazeai/ui/components/dropdown-menu";
+import { ChevronDown } from "lucide-react";
 
 export default function UserManagementList() {
   // SWR hook for fetching users
@@ -40,14 +40,14 @@ export default function UserManagementList() {
     data: User[];
     total: number;
     page: number;
-  }>('/api/v1/users', fetcher);
+  }>("/api/v1/users", fetcher);
 
   const { data: users } = data || {};
 
   // State for search and filters
-  const [searchTerm, setSearchTerm] = useState('');
-  const [roleFilter, setRoleFilter] = useState('全部');
-  const [statusFilter, setStatusFilter] = useState('全部');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [roleFilter, setRoleFilter] = useState("全部");
+  const [statusFilter, setStatusFilter] = useState("全部");
 
   // State for pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -65,10 +65,10 @@ export default function UserManagementList() {
 
   // State for forms
   const [newUser, setNewUser] = useState<UserFormData>({
-    name: '',
-    email: '',
-    role: '用户',
-    status: '活跃',
+    name: "",
+    email: "",
+    role: "用户",
+    status: "活跃",
   });
   const [editingUser, setEditingUser] = useState<User | null>(null);
 
@@ -111,13 +111,13 @@ export default function UserManagementList() {
   };
 
   // 批量操作函数
-  const handleBulkAction = (action: 'delete' | 'disable' | 'enable') => {
+  const handleBulkAction = (action: "delete" | "disable" | "enable") => {
     if (selectedRowIds.length === 0) return;
 
     // 这里可以根据需要实现批量操作逻辑
     toast.info(
       `已选择 ${selectedRowIds.length} 个用户，准备${
-        action === 'delete' ? '删除' : action === 'disable' ? '禁用' : '启用'
+        action === "delete" ? "删除" : action === "disable" ? "禁用" : "启用"
       }`,
     );
 
@@ -132,9 +132,9 @@ export default function UserManagementList() {
           user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
           user.email.toLowerCase().includes(searchTerm.toLowerCase());
 
-        const matchesRole = roleFilter === '全部' || user.role === roleFilter;
+        const matchesRole = roleFilter === "全部" || user.role === roleFilter;
         const matchesStatus =
-          statusFilter === '全部' || user.status === statusFilter;
+          statusFilter === "全部" || user.status === statusFilter;
 
         return matchesSearch && matchesRole && matchesStatus;
       })
@@ -149,7 +149,7 @@ export default function UserManagementList() {
 
   // 选择列
   const selectColumn: Column<User> = {
-    id: 'select',
+    id: "select",
     header: (
       <Checkbox
         checked={
@@ -168,20 +168,20 @@ export default function UserManagementList() {
         aria-label={`选择 ${user.name}`}
       />
     ),
-    className: 'w-12',
+    className: "w-12",
   };
 
   // Define table columns
   const columns: Column<User>[] = [
     selectColumn, // 添加选择列
     {
-      id: 'name',
-      header: '用户',
+      id: "name",
+      header: "用户",
       cell: (user) => (
         <div className="flex items-center gap-2">
           <Avatar>
             <AvatarImage
-              src={user.avatar || '/placeholder.svg'}
+              src={user.avatar || "/placeholder.svg"}
               alt={user.name}
             />
             <AvatarFallback>{user.name.slice(0, 2)}</AvatarFallback>
@@ -191,19 +191,19 @@ export default function UserManagementList() {
       ),
     },
     {
-      id: 'email',
-      header: '邮箱',
+      id: "email",
+      header: "邮箱",
       cell: (user) => user.email,
-      className: 'hidden md:table-cell',
+      className: "hidden md:table-cell",
     },
     {
-      id: 'role',
-      header: '角色',
+      id: "role",
+      header: "角色",
       cell: (user) => user.role,
     },
     {
-      id: 'status',
-      header: '状态',
+      id: "status",
+      header: "状态",
       cell: (user) => (
         <Badge className={getStatusBadgeColor(user.status)}>
           {user.status}
@@ -211,14 +211,14 @@ export default function UserManagementList() {
       ),
     },
     {
-      id: 'lastLogin',
-      header: '最后登录',
+      id: "lastLogin",
+      header: "最后登录",
       cell: (user) => user.lastLogin,
-      className: 'hidden md:table-cell',
+      className: "hidden md:table-cell",
     },
     {
-      id: 'actions',
-      header: '',
+      id: "actions",
+      header: "",
       cell: (user) => (
         <div className="text-right">
           <UserActions
@@ -229,7 +229,7 @@ export default function UserManagementList() {
           />
         </div>
       ),
-      className: 'text-right',
+      className: "text-right",
     },
   ];
 
@@ -246,34 +246,34 @@ export default function UserManagementList() {
       try {
         // Optimistic UI update
         mutate(
-          '/api/users',
+          "/api/users",
           users?.filter((user) => user.id !== userToDelete),
           false,
         );
 
         // Send delete request to API
         await fetch(`/api/users/${userToDelete}`, {
-          method: 'DELETE',
+          method: "DELETE",
         });
 
         // Revalidate the cache
-        mutate('/api/users');
+        mutate("/api/users");
 
         // 如果删除的用户在选中列表中，从选中列表中移除
         if (selectedRowIds.includes(userToDelete)) {
           setSelectedRowIds((prev) => prev.filter((id) => id !== userToDelete));
         }
 
-        toast.success('用户已删除', {
-          description: '用户已成功删除。',
+        toast.success("用户已删除", {
+          description: "用户已成功删除。",
         });
       } catch (error) {
-        toast.error('删除失败', {
-          description: '删除用户时出错，请重试。',
+        toast.error("删除失败", {
+          description: "删除用户时出错，请重试。",
         });
 
         // Revalidate to get the correct data
-        mutate('/api/users');
+        mutate("/api/users");
       } finally {
         setIsDeleteDialogOpen(false);
         setUserToDelete(null);
@@ -288,10 +288,10 @@ export default function UserManagementList() {
 
     try {
       // Send POST request to API
-      const response = await fetch('/api/users', {
-        method: 'POST',
+      const response = await fetch("/api/users", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(newUser),
       });
@@ -299,22 +299,22 @@ export default function UserManagementList() {
       const addedUser = await response.json();
 
       // Update the cache with the new user
-      mutate('/api/users', [...(users || []), addedUser]);
+      mutate("/api/users", [...(users || []), addedUser]);
 
-      toast.success('用户已添加', {
-        description: '新用户已成功添加。',
+      toast.success("用户已添加", {
+        description: "新用户已成功添加。",
       });
 
       // Reset form
       setNewUser({
-        name: '',
-        email: '',
-        role: '用户',
-        status: '活跃',
+        name: "",
+        email: "",
+        role: "用户",
+        status: "活跃",
       });
     } catch (error) {
-      toast.error('添加失败', {
-        description: '添加用户时出错，请重试。',
+      toast.error("添加失败", {
+        description: "添加用户时出错，请重试。",
       });
     } finally {
       setIsAddUserDialogOpen(false);
@@ -340,13 +340,13 @@ export default function UserManagementList() {
         users?.map((user) =>
           user.id === editingUser.id ? editingUser : user,
         ) || [];
-      mutate('/api/users', updatedUsers, false);
+      mutate("/api/users", updatedUsers, false);
 
       // Send PUT request to API
       const response = await fetch(`/api/users/${editingUser.id}`, {
-        method: 'PUT',
+        method: "PUT",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           name: editingUser.name,
@@ -357,22 +357,22 @@ export default function UserManagementList() {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to update user');
+        throw new Error("Failed to update user");
       }
 
       // Revalidate the cache
-      mutate('/api/users');
+      mutate("/api/users");
 
-      toast.success('用户已更新', {
-        description: '用户信息已成功更新。',
+      toast.success("用户已更新", {
+        description: "用户信息已成功更新。",
       });
     } catch (error) {
-      toast.error('更新失败', {
-        description: '更新用户信息时出错，请重试。',
+      toast.error("更新失败", {
+        description: "更新用户信息时出错，请重试。",
       });
 
       // Revalidate to get the correct data
-      mutate('/api/users');
+      mutate("/api/users");
     } finally {
       setIsEditUserDialogOpen(false);
       setEditingUser(null);
@@ -383,11 +383,11 @@ export default function UserManagementList() {
   // Handle toggling user status (enable/disable)
   const handleToggleUserStatus = async (user: User) => {
     // Determine the new status
-    const newStatus = user.status === '已禁用' ? '活跃' : '已禁用';
+    const newStatus = user.status === "已禁用" ? "活跃" : "已禁用";
     const userName = user.name;
 
     // Show loading toast
-    toast.loading(`正在${newStatus === '已禁用' ? '禁用' : '启用'}用户...`);
+    toast.loading(`正在${newStatus === "已禁用" ? "禁用" : "启用"}用户...`);
 
     try {
       // Optimistic UI update
@@ -396,48 +396,48 @@ export default function UserManagementList() {
           u.id === user.id ? { ...u, status: newStatus } : u,
         ) || [];
 
-      mutate('/api/users', updatedUsers, false);
+      mutate("/api/users", updatedUsers, false);
 
       // Send PATCH request to API
       const response = await fetch(`/api/users/${user.id}`, {
-        method: 'PATCH',
+        method: "PATCH",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ status: newStatus }),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to update user status');
+        throw new Error("Failed to update user status");
       }
 
       // Revalidate the cache
-      mutate('/api/users');
+      mutate("/api/users");
 
-      toast.success('状态已更新', {
-        description: `用户 ${userName} 已${newStatus === '已禁用' ? '禁用' : '启用'}。`,
+      toast.success("状态已更新", {
+        description: `用户 ${userName} 已${newStatus === "已禁用" ? "禁用" : "启用"}。`,
       });
     } catch (error) {
-      toast.error('更新失败', {
-        description: '更新用户状态时出错，请重试。',
+      toast.error("更新失败", {
+        description: "更新用户状态时出错，请重试。",
       });
 
       // Revalidate to get the correct data
-      mutate('/api/users');
+      mutate("/api/users");
     }
   };
 
   // Status badge color mapping
   const getStatusBadgeColor = (status: string) => {
     switch (status) {
-      case '活跃':
-        return 'bg-green-500';
-      case '未激活':
-        return 'bg-yellow-500';
-      case '已禁用':
-        return 'bg-red-500';
+      case "活跃":
+        return "bg-green-500";
+      case "未激活":
+        return "bg-yellow-500";
+      case "已禁用":
+        return "bg-red-500";
       default:
-        return 'bg-gray-500';
+        return "bg-gray-500";
     }
   };
 
@@ -446,7 +446,7 @@ export default function UserManagementList() {
     return (
       <div className="flex flex-col items-center justify-center p-8 text-center">
         <p className="text-red-500 mb-4">加载用户数据时出错</p>
-        <Button onClick={() => mutate('/api/users')}>重试</Button>
+        <Button onClick={() => mutate("/api/users")}>重试</Button>
       </div>
     );
   }
@@ -455,10 +455,10 @@ export default function UserManagementList() {
   const bulkActions = (
     <div
       className={cn(
-        'flex items-center gap-3 transition-all duration-200',
+        "flex items-center gap-3 transition-all duration-200",
         selectedRowIds.length > 0
-          ? 'bg-muted/50 border rounded-lg p-2 shadow-sm'
-          : 'h-0 overflow-hidden p-0',
+          ? "bg-muted/50 border rounded-lg p-2 shadow-sm"
+          : "h-0 overflow-hidden p-0",
       )}
     >
       {selectedRowIds.length > 0 && (
@@ -489,21 +489,21 @@ export default function UserManagementList() {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-48">
               <DropdownMenuItem
-                onClick={() => handleBulkAction('delete')}
+                onClick={() => handleBulkAction("delete")}
                 className="text-red-500 focus:text-red-600 focus:bg-red-50"
               >
                 <Trash className="h-4 w-4 mr-2" />
                 批量删除
               </DropdownMenuItem>
               <DropdownMenuItem
-                onClick={() => handleBulkAction('disable')}
+                onClick={() => handleBulkAction("disable")}
                 className="text-amber-500 focus:text-amber-600 focus:bg-amber-50"
               >
                 <UserX className="h-4 w-4 mr-2" />
                 批量禁用
               </DropdownMenuItem>
               <DropdownMenuItem
-                onClick={() => handleBulkAction('enable')}
+                onClick={() => handleBulkAction("enable")}
                 className="text-green-500 focus:text-green-600 focus:bg-green-50"
               >
                 <UserCheck className="h-4 w-4 mr-2" />

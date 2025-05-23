@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { cn } from '@tazeai/ui/lib/utils';
-import { Button } from '@tazeai/ui/components/button';
+import { cn } from "@tazeai/ui/lib/utils";
+import { Button } from "@tazeai/ui/components/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@tazeai/ui/components/card';
+} from "@tazeai/ui/components/card";
 import {
   Form,
   FormControl,
@@ -16,45 +16,45 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@tazeai/ui/components/form';
-import Link from 'next/link';
-import { Input } from '@tazeai/ui/components/input';
-import { useTranslation } from 'react-i18next';
-import { useState } from 'react';
-import { signUp, signIn } from '@tazeai/auth/client';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { toast } from 'sonner';
-import { useSearchParams } from 'next/navigation';
-import { authConfig } from 'config/auth';
-import { Social } from './social';
+} from "@tazeai/ui/components/form";
+import Link from "next/link";
+import { Input } from "@tazeai/ui/components/input";
+import { useTranslation } from "react-i18next";
+import { useState } from "react";
+import { signUp, signIn } from "@tazeai/auth/client";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { toast } from "sonner";
+import { useSearchParams } from "next/navigation";
+import { authConfig } from "config/auth";
+import { Social } from "./social";
 
 const formSchema = z.object({
   email: z.string().email({
-    message: 'Invalid email address.',
+    message: "Invalid email address.",
   }),
   password: z.string().min(8, {
-    message: 'Password must be at least 8 characters.',
+    message: "Password must be at least 8 characters.",
   }),
 });
 
 export function SignUpForm({
   className,
   ...props
-}: React.ComponentPropsWithoutRef<'div'>) {
-  const { t } = useTranslation('auth');
+}: React.ComponentPropsWithoutRef<"div">) {
+  const { t } = useTranslation("auth");
   const params = useSearchParams();
   const [isLoading, setIsLoading] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
     },
   });
 
-  const onSocialLogin = async (provider: 'github' | 'google') => {
+  const onSocialLogin = async (provider: "github" | "google") => {
     try {
       setIsLoading(true);
       const res = await signIn.social({
@@ -67,12 +67,12 @@ export function SignUpForm({
         if (res.data.redirect && res.data.url) {
           window.location.href = res.data.url;
         } else {
-          toast.success('Sign up successful');
-          window.location.href = params.get('redirect') || '/';
+          toast.success("Sign up successful");
+          window.location.href = params.get("redirect") || "/";
         }
       }
     } catch (error) {
-      toast.error('Sign up failed');
+      toast.error("Sign up failed");
     } finally {
       setIsLoading(false);
     }
@@ -84,24 +84,24 @@ export function SignUpForm({
       const res = await signUp.email({
         email: values.email,
         password: values.password,
-        name: '',
-        image: '',
+        name: "",
+        image: "",
       });
       if (res.error) {
         toast.error(res.error.message);
       } else {
-        toast.success('Sign up successful');
-        window.location.href = params.get('redirect') || '/';
+        toast.success("Sign up successful");
+        window.location.href = params.get("redirect") || "/";
       }
     } catch (error) {
-      toast.error('Sign up failed');
+      toast.error("Sign up failed");
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className={cn('flex flex-col gap-6', className)} {...props}>
+    <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader className="text-center">
           <CardTitle className="text-xl">Get Started</CardTitle>
@@ -146,11 +146,11 @@ export function SignUpForm({
                     )}
                   />
                   <Button type="submit" className="w-full">
-                    {t('signUp')}
+                    {t("signUp")}
                   </Button>
                 </div>
                 <div className="text-center text-sm">
-                  Already have an account?{' '}
+                  Already have an account?{" "}
                   <Link
                     href={authConfig.pages.signIn}
                     className="underline underline-offset-4"
@@ -164,7 +164,7 @@ export function SignUpForm({
         </CardContent>
       </Card>
       <div className="text-balance text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 [&_a]:hover:text-primary  ">
-        By clicking continue, you agree to our <a href="#">Terms of Service</a>{' '}
+        By clicking continue, you agree to our <a href="#">Terms of Service</a>{" "}
         and <a href="#">Privacy Policy</a>.
       </div>
     </div>

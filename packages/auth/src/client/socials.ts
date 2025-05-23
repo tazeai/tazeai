@@ -1,22 +1,22 @@
-import { envs } from '../envs';
+import { envs } from "../envs";
 
 const env = envs();
 
 type SocialProvider = {
-  provider: 'github' | 'google';
+  provider: "github" | "google";
 };
 
 const socialProviders: SocialProvider[] = [];
 
 if (env.NEXT_PUBLIC_AUTH_GITHUB_ENABLED) {
   socialProviders.push({
-    provider: 'github',
+    provider: "github",
   });
 }
 
 if (env.NEXT_PUBLIC_AUTH_GOOGLE_ENABLED) {
   socialProviders.push({
-    provider: 'google',
+    provider: "google",
   });
 }
 

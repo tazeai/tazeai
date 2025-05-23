@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { Facebook, Twitter, Instagram, Linkedin, Github } from 'lucide-react';
-import { Separator } from '@tazeai/ui/components/separator';
+import { Facebook, Twitter, Instagram, Linkedin, Github } from "lucide-react";
+import { Separator } from "@tazeai/ui/components/separator";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();

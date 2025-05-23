@@ -1,6 +1,6 @@
-import { envs as cache } from '@tazeai/cache/envs';
-import { envs as email } from '@tazeai/email/envs';
-import { createEnv, z } from '@tazeai/env';
+import { envs as cache } from "@tazeai/cache/envs";
+import { envs as email } from "@tazeai/email/envs";
+import { createEnv, z } from "@tazeai/env";
 
 export const envs = () =>
   createEnv({
@@ -16,7 +16,7 @@ export const envs = () =>
     server: {
       AUTH_GITHUB_ID: z.string().min(1).optional(),
       AUTH_GITHUB_SECRET: z.string().min(1).optional(),
-      AUTH_RESEND_KEY: z.string().min(1).startsWith('re_').optional(),
+      AUTH_RESEND_KEY: z.string().min(1).startsWith("re_").optional(),
       AUTH_SECRET: z.string().min(1),
       AUTH_DOMAIN: z.string().min(1).optional(),
       AUTH_GOOGLE_ID: z.string().min(1).optional(),

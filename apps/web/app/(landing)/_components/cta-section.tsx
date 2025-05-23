@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { Button } from '@tazeai/ui/components/button';
-import { ArrowRight } from 'lucide-react';
-import { useInView } from '@tazeai/ui/hooks/use-in-view';
-import { cn } from '@tazeai/ui/lib/utils';
+import { useRef } from "react";
+import { Button } from "@tazeai/ui/components/button";
+import { ArrowRight } from "lucide-react";
+import { useInView } from "@tazeai/ui/hooks/use-in-view";
+import { cn } from "@tazeai/ui/lib/utils";
 
 const CTASection = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -15,8 +15,8 @@ const CTASection = () => {
       <div
         ref={ref}
         className={cn(
-          'container mx-auto max-w-5xl px-4 md:px-6 rounded-3xl bg-gradient-to-br from-primary to-primary/90 text-primary-foreground p-8 md:p-12 lg:p-16 relative overflow-hidden transition-all duration-1000',
-          isInView ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0',
+          "container mx-auto max-w-5xl px-4 md:px-6 rounded-3xl bg-gradient-to-br from-primary to-primary/90 text-primary-foreground p-8 md:p-12 lg:p-16 relative overflow-hidden transition-all duration-1000",
+          isInView ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0",
         )}
       >
         {/* Decorative elements */}

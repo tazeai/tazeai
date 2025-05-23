@@ -1,4 +1,4 @@
 export enum ProviderType {
-  OPENAI = 'openai',
-  DEEPSEEK = 'deepseek',
+  OPENAI = "openai",
+  DEEPSEEK = "deepseek",
 }

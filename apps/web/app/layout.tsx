@@ -1,15 +1,15 @@
-import { getFontsClassName } from 'libs/fonts';
-import { getTheme } from 'libs/theme';
-import { createI18nServerInstance } from 'locales/i18n.server';
-import type { Metadata } from 'next';
-import { Providers } from './providers';
+import { getFontsClassName } from "libs/fonts";
+import { getTheme } from "libs/theme";
+import { createI18nServerInstance } from "locales/i18n.server";
+import type { Metadata } from "next";
+import { Providers } from "./providers";
 
 // Styles
-import '../styles/globals.css';
+import "../styles/globals.css";
 
-const appName = 'TazeAI';
+const appName = "TazeAI";
 
-const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = process.env.NODE_ENV === "production";
 
 export const metadata: Metadata = {
   title: appName,
@@ -17,16 +17,16 @@ export const metadata: Metadata = {
   description: appName,
   appleWebApp: {
     capable: true,
-    statusBarStyle: 'default',
+    statusBarStyle: "default",
     title: appName,
   },
   icons: {
-    icon: '/images/logo.png',
+    icon: "/images/logo.png",
   },
-  manifest: isProduction ? '/manifest.json' : undefined,
+  manifest: isProduction ? "/manifest.json" : undefined,
 };
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 export default async function RootLayout({
   children,
@@ -41,7 +41,7 @@ export default async function RootLayout({
       <body>
         <Providers
           lang={language}
-          themeProps={{ attribute: 'class', defaultTheme: theme }}
+          themeProps={{ attribute: "class", defaultTheme: theme }}
         >
           {children}
         </Providers>

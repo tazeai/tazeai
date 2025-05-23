@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useRouter } from 'next/navigation';
-import { Button } from '@tazeai/ui/components/button';
+import { useRouter } from "next/navigation";
+import { Button } from "@tazeai/ui/components/button";
 
 export default function NotFoundError() {
   const router = useRouter();
@@ -18,7 +18,7 @@ export default function NotFoundError() {
           <Button variant="outline" onClick={() => router.back()}>
             Go Back
           </Button>
-          <Button onClick={() => router.push('/')}>Back to Home</Button>
+          <Button onClick={() => router.push("/")}>Back to Home</Button>
         </div>
       </div>
     </div>

@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { Button } from '@tazeai/ui/components/button';
-import { ThemeSwitcher } from '@tazeai/ui/components/theme-switch';
-import { Sheet, SheetContent, SheetTrigger } from '@tazeai/ui/components/sheet';
-import { Menu, X } from 'lucide-react';
-import Link from 'next/link';
-import { cn } from '@tazeai/ui/lib/utils';
-import { authConfig } from 'config/auth';
-import OneTap from '../../(auth)/_components/one-tap';
-import { useSession } from '@tazeai/auth/client';
-import { UserButton } from '../../../components/user-button';
+import { useState, useEffect } from "react";
+import { Button } from "@tazeai/ui/components/button";
+import { ThemeSwitcher } from "@tazeai/ui/components/theme-switch";
+import { Sheet, SheetContent, SheetTrigger } from "@tazeai/ui/components/sheet";
+import { Menu, X } from "lucide-react";
+import Link from "next/link";
+import { cn } from "@tazeai/ui/lib/utils";
+import { authConfig } from "config/auth";
+import OneTap from "../../(auth)/_components/one-tap";
+import { useSession } from "@tazeai/auth/client";
+import { UserButton } from "../../../components/user-button";
 
 const NavLink = ({
   href,
@@ -35,17 +35,17 @@ const Navbar = () => {
       setScrolled(window.scrollY > 10);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <header
       className={cn(
-        'sticky top-0 z-40 w-full transition-all duration-200',
+        "sticky top-0 z-40 w-full transition-all duration-200",
         scrolled
-          ? 'bg-background/80 backdrop-blur-sm shadow-sm'
-          : 'bg-transparent',
+          ? "bg-background/80 backdrop-blur-sm shadow-sm"
+          : "bg-transparent",
       )}
     >
       <div className="container mx-auto px-4 flex h-16 items-center justify-between py-4 max-w-7xl">

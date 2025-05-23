@@ -1,11 +1,11 @@
-import type { Metadata } from 'next';
-import { Providers } from './providers';
-import { createI18nServerInstance } from '@/locales/i18n.server';
-import { getTheme } from '@/libs/theme';
-import { getFontsClassName } from '@/libs/fonts';
-import '@/styles/globals.css';
+import type { Metadata } from "next";
+import { Providers } from "./providers";
+import { createI18nServerInstance } from "@/locales/i18n.server";
+import { getTheme } from "@/libs/theme";
+import { getFontsClassName } from "@/libs/fonts";
+import "@/styles/globals.css";
 
-const appName = 'TazeAI';
+const appName = "TazeAI";
 
 export const metadata: Metadata = {
   title: appName,
@@ -13,15 +13,15 @@ export const metadata: Metadata = {
   description: appName,
   appleWebApp: {
     capable: true,
-    statusBarStyle: 'default',
+    statusBarStyle: "default",
     title: appName,
   },
   icons: {
-    icon: '/images/logo.png',
+    icon: "/images/logo.png",
   },
 };
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 export default async function RootLayout({
   children,
@@ -36,7 +36,7 @@ export default async function RootLayout({
       <body>
         <Providers
           lang={language}
-          themeProps={{ attribute: 'class', defaultTheme: theme }}
+          themeProps={{ attribute: "class", defaultTheme: theme }}
         >
           {children}
         </Providers>

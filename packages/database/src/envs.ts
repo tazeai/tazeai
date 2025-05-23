@@ -1,4 +1,4 @@
-import { createEnv, z } from '@tazeai/env';
+import { createEnv, z } from "@tazeai/env";
 
 export const envs = () =>
   createEnv({

@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useId, useState } from 'react';
-import { CircleAlertIcon } from 'lucide-react';
-import { Button } from '@tazeai/ui/components/button';
+import { useId, useState } from "react";
+import { CircleAlertIcon } from "lucide-react";
+import { Button } from "@tazeai/ui/components/button";
 import {
   Dialog,
   DialogClose,
@@ -12,10 +12,10 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@tazeai/ui/components/dialog';
-import { Input } from '@tazeai/ui/components/input';
-import { Label } from '@tazeai/ui/components/label';
-import { Loader2Icon } from 'lucide-react';
+} from "@tazeai/ui/components/dialog";
+import { Input } from "@tazeai/ui/components/input";
+import { Label } from "@tazeai/ui/components/label";
+import { Loader2Icon } from "lucide-react";
 
 export type DeleteConfirmProps = {
   name: string;
@@ -25,7 +25,7 @@ export type DeleteConfirmProps = {
 export default function DeleteConfirm(props: DeleteConfirmProps) {
   const id = useId();
   const [isLoading, setIsLoading] = useState(false);
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState("");
 
   const onSubmit = async () => {
     setIsLoading(true);
@@ -86,7 +86,7 @@ export default function DeleteConfirm(props: DeleteConfirmProps) {
                 onSubmit?.().finally(() => setIsLoading(false));
               }}
             >
-              {isLoading ? <Loader2Icon className="animate-spin" /> : 'Delete'}
+              {isLoading ? <Loader2Icon className="animate-spin" /> : "Delete"}
             </Button>
           </DialogFooter>
         </form>
