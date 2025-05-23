@@ -9,7 +9,7 @@ import {
   Tailwind,
   Text,
   Link,
-} from '@react-email/components';
+} from "@react-email/components";
 
 type SignInTemplateProps = {
   readonly url: string;

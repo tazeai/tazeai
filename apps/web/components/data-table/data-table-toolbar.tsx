@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { Input } from '@tazeai/ui/components/input';
-import { Search } from 'lucide-react';
-import type { DataTableToolbarProps } from './types';
+import { Input } from "@tazeai/ui/components/input";
+import { Search } from "lucide-react";
+import type { DataTableToolbarProps } from "./types";
 
 export function DataTableToolbar<T>({
-  searchPlaceholder = '搜索...',
+  searchPlaceholder = "搜索...",
   onSearch,
-  searchValue = '',
+  searchValue = "",
   filters,
   actions,
 }: DataTableToolbarProps<T>) {

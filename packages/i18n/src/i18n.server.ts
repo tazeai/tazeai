@@ -1,6 +1,6 @@
-import { type InitOptions, createInstance, i18n as I18n } from 'i18next';
-import resourcesToBackend from 'i18next-resources-to-backend';
-import { initReactI18next } from 'react-i18next/initReactI18next';
+import { type InitOptions, createInstance, i18n as I18n } from "i18next";
+import resourcesToBackend from "i18next-resources-to-backend";
+import { initReactI18next } from "react-i18next/initReactI18next";
 
 export type I18nInstance = I18n;
 
@@ -37,7 +37,7 @@ export async function initializeServerI18n(
         }),
       )
       .use({
-        type: '3rdParty',
+        type: "3rdParty",
         init: async (i18next: typeof i18nInstance) => {
           let iterations = 0;
           const maxIterations = 100;
@@ -121,23 +121,23 @@ export function parseAcceptLanguageHeader(
 
   // Split the header value by comma and map each language to its quality value
   return languageHeaderValue
-    .split(',')
+    .split(",")
     .map((lang): [number, string] => {
-      const [locale, q = 'q=1'] = lang.split(';');
+      const [locale, q = "q=1"] = lang.split(";");
 
-      if (!locale) return [0, ''];
+      if (!locale) return [0, ""];
 
       const trimmedLocale = locale.trim();
-      const numQ = Number(q.replace(/q ?=/, ''));
+      const numQ = Number(q.replace(/q ?=/, ""));
 
       return [isNaN(numQ) ? 0 : numQ, trimmedLocale];
     })
     .sort(([q1], [q2]) => q2 - q1) // Sort by quality value in descending order
     .flatMap(([_, locale]) => {
       // Ignore wildcard '*' if 'ignoreWildcard' is true
-      if (locale === '*' && ignoreWildcard) return [];
+      if (locale === "*" && ignoreWildcard) return [];
 
-      const languageSegment = locale.split('-')[0];
+      const languageSegment = locale.split("-")[0];
 
       if (!languageSegment) return [];
 

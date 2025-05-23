@@ -1,6 +1,6 @@
-import { createClient, type RedisClientType } from 'redis';
-import { Cache } from './cache';
-import { envs } from './envs';
+import { createClient, type RedisClientType } from "redis";
+import { Cache } from "./cache";
+import { envs } from "./envs";
 
 export const createRedis = (url: string): RedisClientType => {
   const redis = createClient({
@@ -12,8 +12,8 @@ export const createRedis = (url: string): RedisClientType => {
 export const createCache = () => {
   const env = envs();
   return new Cache(env.REDIS_URL, {
-    prefix: 'auth_session_',
+    prefix: "auth_session_",
   });
 };
 
-export * from './cache';
+export * from "./cache";

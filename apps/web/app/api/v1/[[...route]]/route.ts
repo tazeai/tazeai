@@ -1,7 +1,7 @@
-import { TazeAIServer, vercel } from '@tazeai/core/server';
+import { TazeAIServer, vercel } from "@tazeai/core/server";
 
 const server = new TazeAIServer({
-  prefix: '/api/v1',
+  prefix: "/api/v1",
 });
 
 const handler = vercel(server);

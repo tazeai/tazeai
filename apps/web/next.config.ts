@@ -1,18 +1,18 @@
-import type { NextConfig } from 'next';
+import type { NextConfig } from "next";
 
-const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = process.env.NODE_ENV === "production";
 
 const nextConfig: NextConfig = {
   /* config options here */
   transpilePackages: [
-    '@tazeai/auth',
-    '@tazeai/cache',
-    '@tazeai/core',
-    '@tazeai/database',
-    '@tazeai/shared',
-    '@tazeai/ui',
+    "@tazeai/auth",
+    "@tazeai/cache",
+    "@tazeai/core",
+    "@tazeai/database",
+    "@tazeai/shared",
+    "@tazeai/ui",
   ],
-  allowedDevOrigins: ['http://local.tazeai.com:3000'],
+  allowedDevOrigins: ["http://local.tazeai.com:3000"],
   eslint: {
     ignoreDuringBuilds: true,
   },

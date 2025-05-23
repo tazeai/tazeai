@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useSearchParams, useRouter } from 'next/navigation';
-import { useEffect } from 'react';
-import { useSession } from '@tazeai/auth/client';
+import { useSearchParams, useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { useSession } from "@tazeai/auth/client";
 
 export function GuestGuard() {
   const searchParams = useSearchParams();
@@ -11,7 +11,7 @@ export function GuestGuard() {
 
   useEffect(() => {
     if (session.data?.user && !session.isPending) {
-      router.push((searchParams.get('redirect') as string) || '/');
+      router.push((searchParams.get("redirect") as string) || "/");
     }
   }, [searchParams, router, session]);
 

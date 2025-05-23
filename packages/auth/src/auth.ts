@@ -1,16 +1,16 @@
-import { db, nanoid, schemas, uuidv7 } from '@tazeai/database';
-import { resend } from '@tazeai/email';
-import { betterAuth, type BetterAuthOptions } from 'better-auth';
-import { drizzleAdapter } from 'better-auth/adapters/drizzle';
+import { db, nanoid, schemas, uuidv7 } from "@tazeai/database";
+import { resend } from "@tazeai/email";
+import { betterAuth, type BetterAuthOptions } from "better-auth";
+import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import {
   admin,
   apiKey,
   emailOTP,
   organization,
   oneTap,
-} from 'better-auth/plugins';
-import { envs } from './envs';
-import { redisStorage } from './storage';
+} from "better-auth/plugins";
+import { envs } from "./envs";
+import { redisStorage } from "./storage";
 
 const createConfig = (): BetterAuthOptions => {
   const env = envs();
@@ -28,24 +28,24 @@ const createConfig = (): BetterAuthOptions => {
         enabled: !!(
           env.AUTH_GITHUB_ID &&
           env.AUTH_GITHUB_SECRET &&
-          env.NEXT_PUBLIC_AUTH_GITHUB_ENABLED === 'true'
+          env.NEXT_PUBLIC_AUTH_GITHUB_ENABLED === "true"
         ),
-        clientId: env.AUTH_GITHUB_ID ?? '',
-        clientSecret: env.AUTH_GITHUB_SECRET ?? '',
+        clientId: env.AUTH_GITHUB_ID ?? "",
+        clientSecret: env.AUTH_GITHUB_SECRET ?? "",
       },
       google: {
         enabled: !!(
           env.AUTH_GOOGLE_ID &&
           env.AUTH_GOOGLE_SECRET &&
-          env.NEXT_PUBLIC_AUTH_GOOGLE_ENABLED === 'true'
+          env.NEXT_PUBLIC_AUTH_GOOGLE_ENABLED === "true"
         ),
-        clientId: env.AUTH_GOOGLE_ID ?? '',
-        clientSecret: env.AUTH_GOOGLE_SECRET ?? '',
+        clientId: env.AUTH_GOOGLE_ID ?? "",
+        clientSecret: env.AUTH_GOOGLE_SECRET ?? "",
       },
     },
     trustedOrigins: (req) => [
-      req.headers.get('origin') ?? '',
-      req.headers.get('referer') ?? '',
+      req.headers.get("origin") ?? "",
+      req.headers.get("referer") ?? "",
     ],
     session: {
       cookieCache: {
@@ -56,7 +56,7 @@ const createConfig = (): BetterAuthOptions => {
       updateAge: 60 * 60 * 24, // 1 day
     },
     database: drizzleAdapter(db, {
-      provider: 'pg',
+      provider: "pg",
       schema: schemas,
     }),
     rateLimit: {
@@ -70,16 +70,16 @@ const createConfig = (): BetterAuthOptions => {
         enabled: !!env.AUTH_DOMAIN,
         domain: env.AUTH_DOMAIN,
       },
-      cookiePrefix: 'auth',
+      cookiePrefix: "auth",
     },
     databaseHooks: {
       user: {
         create: {
           before: async (user) => {
             const name =
-              user.name.trim() || user.email.split('@')[0] || nanoid();
+              user.name.trim() || user.email.split("@")[0] || nanoid();
             const image =
-              user.image || 'https://ui-avatars.com/api/?name=' + name;
+              user.image || "https://ui-avatars.com/api/?name=" + name;
             return {
               data: {
                 name,
@@ -97,16 +97,16 @@ const createConfig = (): BetterAuthOptions => {
       oneTap(),
       emailOTP({
         sendVerificationOTP: async (data, request) => {
-          console.log('sendVerificationOTP', data, request);
+          console.log("sendVerificationOTP", data, request);
           const { email, otp } = data;
-          console.log('sendVerificationOTP', data, request);
+          console.log("sendVerificationOTP", data, request);
           const result = await resend.emails.send({
             from: env.RESEND_FROM,
             to: email,
-            subject: 'Verify your email',
+            subject: "Verify your email",
             html: `Verify your email with the code: ${otp}`,
           });
-          console.log('sendVerificationOTP result', result.data);
+          console.log("sendVerificationOTP result", result.data);
         },
       }),
     ],

@@ -1,14 +1,14 @@
-import { auth } from '@tazeai/auth';
-import { Hono } from 'hono';
-import { logger } from 'hono/logger';
-import { cors } from 'hono/cors';
-import { handle } from 'hono/vercel';
+import { auth } from "@tazeai/auth";
+import { Hono } from "hono";
+import { logger } from "hono/logger";
+import { cors } from "hono/cors";
+import { handle } from "hono/vercel";
 
-const app = new Hono().basePath('/api/auth');
+const app = new Hono().basePath("/api/auth");
 
 app.use(logger());
 app.use(
-  '*',
+  "*",
   cors({
     origin: (origin) => {
       console.log(origin);
@@ -18,7 +18,7 @@ app.use(
   }),
 );
 
-app.on(['POST', 'GET'], '*', (c) => {
+app.on(["POST", "GET"], "*", (c) => {
   return auth.handler(c.req.raw);
 });
 

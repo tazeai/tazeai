@@ -1,6 +1,6 @@
-import { db } from './src';
-import { seed, reset } from 'drizzle-seed';
-import * as schemas from './src/schemas';
+import { db } from "./src";
+import { seed, reset } from "drizzle-seed";
+import * as schemas from "./src/schemas";
 
 async function main() {
   await reset(db, schemas);

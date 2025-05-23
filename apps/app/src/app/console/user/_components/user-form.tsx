@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { Input } from '@tazeai/ui/components/input';
+import { Input } from "@tazeai/ui/components/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@tazeai/ui/components/select';
-import type { UserFormData } from './types';
+} from "@tazeai/ui/components/select";
+import type { UserFormData } from "./types";
 
 interface UserFormProps {
   data: UserFormData;

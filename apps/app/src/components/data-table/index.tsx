@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   Table,
@@ -7,18 +7,18 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@tazeai/ui/components/table';
-import { Loader2 } from 'lucide-react';
-import type { DataTableProps } from './types';
-import { cn } from '@tazeai/ui/lib/utils';
+} from "@tazeai/ui/components/table";
+import { Loader2 } from "lucide-react";
+import type { DataTableProps } from "./types";
+import { cn } from "@tazeai/ui/lib/utils";
 
 export function DataTable<T extends Record<string, any>>({
   data,
   columns,
   isLoading = false,
-  emptyMessage = '没有数据',
-  loadingMessage = '加载中...',
-  rowKeyField = 'id' as keyof T,
+  emptyMessage = "没有数据",
+  loadingMessage = "加载中...",
+  rowKeyField = "id" as keyof T,
   onRowClick,
   selectedRowIds = [],
   onRowSelect,
@@ -60,13 +60,13 @@ export function DataTable<T extends Record<string, any>>({
                     key={rowId}
                     className={cn(
                       // 基础样式
-                      'transition-colors duration-200',
+                      "transition-colors duration-200",
                       // 悬停高亮效果
-                      highlightOnHover && 'hover:bg-muted/50',
+                      highlightOnHover && "hover:bg-muted/50",
                       // 选中高亮效果
-                      isSelected && 'bg-primary/10 hover:bg-primary/20',
+                      isSelected && "bg-primary/10 hover:bg-primary/20",
                       // 可点击样式
-                      (onRowClick || onRowSelect) && 'cursor-pointer',
+                      (onRowClick || onRowSelect) && "cursor-pointer",
                     )}
                     onClick={(e) => {
                       // 如果有行选择回调，则触发
@@ -78,8 +78,8 @@ export function DataTable<T extends Record<string, any>>({
                         onRowClick(item);
                       }
                     }}
-                    data-selected={isSelected ? 'true' : undefined}
-                    data-state={isSelected ? 'selected' : undefined}
+                    data-selected={isSelected ? "true" : undefined}
+                    data-state={isSelected ? "selected" : undefined}
                   >
                     {columns.map((column) => (
                       <TableCell

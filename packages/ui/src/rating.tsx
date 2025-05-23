@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import { Button } from '@tazeai/ui/components/button';
+import { Button } from "@tazeai/ui/components/button";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@tazeai/ui/components/dialog';
-import { Label } from '@tazeai/ui/components/label';
-import { RadioGroup, RadioGroupItem } from '@tazeai/ui/components/radio-group';
-import { Textarea } from '@tazeai/ui/components/textarea';
-import { useState } from 'react';
+} from "@tazeai/ui/components/dialog";
+import { Label } from "@tazeai/ui/components/label";
+import { RadioGroup, RadioGroupItem } from "@tazeai/ui/components/radio-group";
+import { Textarea } from "@tazeai/ui/components/textarea";
+import { useState } from "react";
 
 export type RatingProps = {
   title?: string;
@@ -19,9 +19,9 @@ export type RatingProps = {
 };
 
 export default function Rating(props: RatingProps) {
-  const { title = 'Rating', onSubmit: submit } = props;
+  const { title = "Rating", onSubmit: submit } = props;
   const [rating, setRating] = useState<number>(0);
-  const [feedback, setFeedback] = useState<string>('');
+  const [feedback, setFeedback] = useState<string>("");
 
   const onSubmit = () => {
     submit?.(rating, feedback);

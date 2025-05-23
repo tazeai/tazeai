@@ -1,6 +1,6 @@
-import { cookies } from 'next/headers';
+import { cookies } from "next/headers";
 
-type Theme = 'light' | 'dark' | 'system';
+type Theme = "light" | "dark" | "system";
 
 /**
  * @name getTheme
@@ -10,7 +10,7 @@ type Theme = 'light' | 'dark' | 'system';
 export async function getTheme() {
   const cookiesStore = await cookies();
 
-  const themeCookie = cookiesStore.get('theme')?.value as Theme;
+  const themeCookie = cookiesStore.get("theme")?.value as Theme;
 
-  return themeCookie ?? process.env.NEXT_PUBLIC_DEFAULT_THEME_MODE ?? 'light';
+  return themeCookie ?? process.env.NEXT_PUBLIC_DEFAULT_THEME_MODE ?? "light";
 }

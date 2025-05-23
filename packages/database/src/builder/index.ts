@@ -1,12 +1,12 @@
-import { count } from 'drizzle-orm/sql';
+import { count } from "drizzle-orm/sql";
 import type {
   PgColumn,
   PgTable,
   SelectedFields,
   TableConfig,
-} from 'drizzle-orm/pg-core';
-import type { SQL } from 'drizzle-orm';
-import type { Database } from '../index';
+} from "drizzle-orm/pg-core";
+import type { SQL } from "drizzle-orm";
+import type { Database } from "../index";
 
 type PaginateOptions = {
   where?: SQL;
@@ -16,7 +16,7 @@ type PaginateOptions = {
 
 const coverInt = (value: number | string | undefined, defaultValue = 1) => {
   if (value === undefined) return defaultValue;
-  if (typeof value === 'string') {
+  if (typeof value === "string") {
     const parsed = Number.parseInt(value, 10);
     return isNaN(parsed) ? defaultValue : parsed;
   }

@@ -14,7 +14,6 @@
     "coverage": "vitest --coverage",
     "dev": "NODE_ENV=development turbo dev --parallel",
     "format": "biome format --write",
-    "generate": "turbo gen",
     "lint": "biome check",
     "prepare": "husky",
     "start": "turbo run start --filter=\"./apps/*\"",
@@ -28,8 +27,6 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@manypkg/cli": "^0.24.0",
-    "@turbo/gen": "^2.5.3",
     "@types/node": "catalog:",
     "dotenv-cli": "^8.0.0",
     "husky": "^9.1.7",

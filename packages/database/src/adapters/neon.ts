@@ -1,5 +1,5 @@
-import { drizzle } from 'drizzle-orm/neon-http';
-import { neon } from '@neondatabase/serverless';
+import { drizzle } from "drizzle-orm/neon-http";
+import { neon } from "@neondatabase/serverless";
 
 export const createClient = <TSchema extends Record<string, unknown>>({
   databaseUrl,
@@ -9,5 +9,5 @@ export const createClient = <TSchema extends Record<string, unknown>>({
   schema: TSchema;
 }) => {
   const sql = neon(databaseUrl);
-  return drizzle({ client: sql, schema, casing: 'snake_case', logger: true });
+  return drizzle({ client: sql, schema, casing: "snake_case", logger: true });
 };

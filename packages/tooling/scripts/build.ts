@@ -1,5 +1,5 @@
 const build = async () => {
-  console.log('Building...');
+  console.log("Building...");
 };
 
 build();

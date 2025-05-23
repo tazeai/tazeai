@@ -1,5 +1,5 @@
-import { createRedis } from '@tazeai/cache';
-import type { SecondaryStorage } from 'better-auth';
+import { createRedis } from "@tazeai/cache";
+import type { SecondaryStorage } from "better-auth";
 
 type RedisStorageOptions = {
   url: string;
@@ -14,7 +14,7 @@ type RedisStorageOptions = {
 export const redisStorage = (
   options: RedisStorageOptions,
 ): SecondaryStorage => {
-  const { prefix = 'auth', url } = options;
+  const { prefix = "auth", url } = options;
   const client = createRedis(url);
   const getRedisKey = (key: string) => `${prefix}:${key}`;
   const getRedis = async () => {
@@ -28,7 +28,7 @@ export const redisStorage = (
     get: async (key) => {
       const redis = await getRedis();
       const value = (await redis.get(getRedisKey(key))) ?? null;
-      return typeof value === 'string' ? value : null;
+      return typeof value === "string" ? value : null;
     },
     set: async (key, value, ttl) => {
       const redis = await getRedis();

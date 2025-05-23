@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useSession, signOut } from '@tazeai/auth/client';
-import { LogOut } from 'lucide-react';
+import { useSession, signOut } from "@tazeai/auth/client";
+import { LogOut } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,13 +9,13 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@tazeai/ui/components/dropdown-menu';
+} from "@tazeai/ui/components/dropdown-menu";
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from '@tazeai/ui/components/avatar';
-import { Button } from '@tazeai/ui/components/button';
+} from "@tazeai/ui/components/avatar";
+import { Button } from "@tazeai/ui/components/button";
 
 export function UserButton() {
   const { data } = useSession();
@@ -25,9 +25,9 @@ export function UserButton() {
 
   // Get initials from name for avatar fallback
   const initials = data.user.name
-    .split(' ')
+    .split(" ")
     .map((n) => n[0])
-    .join('')
+    .join("")
     .toUpperCase();
 
   return (
@@ -39,7 +39,7 @@ export function UserButton() {
         >
           <Avatar className="h-8 w-8">
             <AvatarImage
-              src={data.user.image || '/images/logo.png'}
+              src={data.user.image || "/images/logo.png"}
               alt={data.user.name}
             />
             <AvatarFallback>{initials}</AvatarFallback>

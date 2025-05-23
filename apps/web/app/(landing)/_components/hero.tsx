@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { Button } from '@tazeai/ui/components/button';
-import { ChevronRight, ArrowRight, Sparkles } from 'lucide-react';
-import { cn } from '@tazeai/ui/lib/utils';
+import { useEffect, useState } from "react";
+import { Button } from "@tazeai/ui/components/button";
+import { ChevronRight, ArrowRight, Sparkles } from "lucide-react";
+import { cn } from "@tazeai/ui/lib/utils";
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [text, setText] = useState('');
-  const fullText = '创意无限，智能对话';
+  const [text, setText] = useState("");
+  const fullText = "创意无限，智能对话";
 
   useEffect(() => {
     setIsVisible(true);
@@ -35,10 +35,10 @@ const Hero = () => {
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
           <div
             className={cn(
-              'space-y-6 transition-all duration-700 delay-300',
+              "space-y-6 transition-all duration-700 delay-300",
               isVisible
-                ? 'translate-y-0 opacity-100'
-                : 'translate-y-12 opacity-0',
+                ? "translate-y-0 opacity-100"
+                : "translate-y-12 opacity-0",
             )}
           >
             <div className="inline-flex items-center rounded-full border px-3 py-1 text-sm font-medium bg-primary/5 border-primary/10">
@@ -78,8 +78,8 @@ const Hero = () => {
                 ))}
               </div>
               <p className="ml-4 text-sm text-muted-foreground">
-                加入{' '}
-                <span className="font-medium text-foreground">10,000+</span>{' '}
+                加入{" "}
+                <span className="font-medium text-foreground">10,000+</span>{" "}
                 位创作者的智能创作之旅
               </p>
             </div>
@@ -87,10 +87,10 @@ const Hero = () => {
 
           <div
             className={cn(
-              'relative rounded-lg border backdrop-blur-sm bg-background/30 shadow-lg overflow-hidden transition-all duration-700 delay-500',
+              "relative rounded-lg border backdrop-blur-sm bg-background/30 shadow-lg overflow-hidden transition-all duration-700 delay-500",
               isVisible
-                ? 'translate-y-0 opacity-100'
-                : 'translate-y-12 opacity-0',
+                ? "translate-y-0 opacity-100"
+                : "translate-y-12 opacity-0",
             )}
           >
             <div className="aspect-video bg-gradient-to-br from-primary/10 via-purple-500/10 to-background rounded-lg p-2">

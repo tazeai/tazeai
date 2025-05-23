@@ -1,23 +1,23 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { Button } from '@tazeai/ui/components/button';
-import { Input } from '@tazeai/ui/components/input';
+import { useState } from "react";
+import { Button } from "@tazeai/ui/components/button";
+import { Input } from "@tazeai/ui/components/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@tazeai/ui/components/select';
+} from "@tazeai/ui/components/select";
 import {
   ChevronLeft,
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
-} from 'lucide-react';
-import type { DataTablePaginationProps } from './types';
-import { cn } from '@tazeai/ui/lib/utils';
+} from "lucide-react";
+import type { DataTablePaginationProps } from "./types";
+import { cn } from "@tazeai/ui/lib/utils";
 
 export function DataTablePagination({
   currentPage,
@@ -25,21 +25,21 @@ export function DataTablePagination({
   totalItems,
   pageSize,
   onPageChange,
-  itemsLabel = '项',
+  itemsLabel = "项",
   pageSizeOptions = [10, 20, 30, 50, 100],
   onPageSizeChange,
 }: DataTablePaginationProps) {
   const startItem = totalItems === 0 ? 0 : (currentPage - 1) * pageSize + 1;
   const endItem = Math.min(currentPage * pageSize, totalItems);
 
-  const [jumpToPage, setJumpToPage] = useState('');
+  const [jumpToPage, setJumpToPage] = useState("");
 
   // 处理页码跳转
   const handleJumpToPage = () => {
     const pageNumber = Number.parseInt(jumpToPage, 10);
     if (!isNaN(pageNumber) && pageNumber >= 1 && pageNumber <= totalPages) {
       onPageChange(pageNumber);
-      setJumpToPage('');
+      setJumpToPage("");
     }
   };
 
@@ -52,7 +52,7 @@ export function DataTablePagination({
     buttons.push(
       <Button
         key="first"
-        variant={currentPage === 1 ? 'default' : 'outline'}
+        variant={currentPage === 1 ? "default" : "outline"}
         size="icon"
         className="h-8 w-8"
         onClick={() => onPageChange(1)}
@@ -87,7 +87,7 @@ export function DataTablePagination({
       buttons.push(
         <Button
           key={i}
-          variant={currentPage === i ? 'default' : 'outline'}
+          variant={currentPage === i ? "default" : "outline"}
           size="icon"
           className="h-8 w-8"
           onClick={() => onPageChange(i)}
@@ -114,7 +114,7 @@ export function DataTablePagination({
       buttons.push(
         <Button
           key="last"
-          variant={currentPage === totalPages ? 'default' : 'outline'}
+          variant={currentPage === totalPages ? "default" : "outline"}
           size="icon"
           className="h-8 w-8"
           onClick={() => onPageChange(totalPages)}
@@ -162,8 +162,8 @@ export function DataTablePagination({
 
           {/* 页面信息 */}
           <div className="text-sm text-muted-foreground whitespace-nowrap">
-            显示 <span className="font-medium">{startItem}</span> -{' '}
-            <span className="font-medium">{endItem}</span> 共{' '}
+            显示 <span className="font-medium">{startItem}</span> -{" "}
+            <span className="font-medium">{endItem}</span> 共{" "}
             <span className="font-medium">{totalItems}</span> 个{itemsLabel}
           </div>
         </div>
@@ -177,8 +177,8 @@ export function DataTablePagination({
                 variant="outline"
                 size="icon"
                 className={cn(
-                  'h-8 w-8 rounded-r-none border-r-0',
-                  currentPage === 1 && 'opacity-50',
+                  "h-8 w-8 rounded-r-none border-r-0",
+                  currentPage === 1 && "opacity-50",
                 )}
                 onClick={() => onPageChange(1)}
                 disabled={currentPage === 1}
@@ -190,8 +190,8 @@ export function DataTablePagination({
                 variant="outline"
                 size="icon"
                 className={cn(
-                  'h-8 w-8 rounded-l-none rounded-r-none',
-                  currentPage === 1 && 'opacity-50',
+                  "h-8 w-8 rounded-l-none rounded-r-none",
+                  currentPage === 1 && "opacity-50",
                 )}
                 onClick={() => onPageChange(Math.max(currentPage - 1, 1))}
                 disabled={currentPage === 1}
@@ -211,8 +211,8 @@ export function DataTablePagination({
                 variant="outline"
                 size="icon"
                 className={cn(
-                  'h-8 w-8 rounded-l-none rounded-r-none',
-                  currentPage === totalPages && 'opacity-50',
+                  "h-8 w-8 rounded-l-none rounded-r-none",
+                  currentPage === totalPages && "opacity-50",
                 )}
                 onClick={() =>
                   onPageChange(Math.min(currentPage + 1, totalPages))
@@ -226,8 +226,8 @@ export function DataTablePagination({
                 variant="outline"
                 size="icon"
                 className={cn(
-                  'h-8 w-8 rounded-l-none',
-                  currentPage === totalPages && 'opacity-50',
+                  "h-8 w-8 rounded-l-none",
+                  currentPage === totalPages && "opacity-50",
                 )}
                 onClick={() => onPageChange(totalPages)}
                 disabled={currentPage === totalPages || totalPages === 0}
@@ -249,7 +249,7 @@ export function DataTablePagination({
                 value={jumpToPage}
                 onChange={(e) => setJumpToPage(e.target.value)}
                 onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
+                  if (e.key === "Enter") {
                     handleJumpToPage();
                   }
                 }}
@@ -272,7 +272,7 @@ export function DataTablePagination({
       {/* 当前页码信息 - 在小屏幕上显示 */}
       <div className="md:hidden flex justify-center mt-2">
         <span className="text-sm text-muted-foreground">
-          第 <span className="font-medium">{currentPage}</span> 页，共{' '}
+          第 <span className="font-medium">{currentPage}</span> 页，共{" "}
           <span className="font-medium">{totalPages}</span> 页
         </span>
       </div>

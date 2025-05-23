@@ -1,16 +1,16 @@
-import { cache } from 'react';
+import { cache } from "react";
 
-import { cookies, headers } from 'next/headers';
+import { cookies, headers } from "next/headers";
 
 import {
   initializeServerI18n,
   parseAcceptLanguageHeader,
-} from '@tazeai/i18n/server';
+} from "@tazeai/i18n/server";
 
-import featuresFlagConfig from '@/config/feature-flags.config';
-import { I18N_COOKIE_NAME, getI18nSettings, languages } from './i18n.settings';
+import featuresFlagConfig from "@/config/feature-flags.config";
+import { I18N_COOKIE_NAME, getI18nSettings, languages } from "./i18n.settings";
 
-import { i18nResolver } from './i18n.resolver';
+import { i18nResolver } from "./i18n.resolver";
 
 /**
  * @name priority
@@ -39,7 +39,7 @@ async function createInstance() {
 
   // if not, check if the language priority is set to user and
   // use the user's preferred language
-  if (!selectedLanguage && priority === 'user') {
+  if (!selectedLanguage && priority === "user") {
     const userPreferredLanguage = await getPreferredLanguageFromBrowser();
 
     selectedLanguage = getLanguageOrFallback(userPreferredLanguage);
@@ -54,7 +54,7 @@ export const createI18nServerInstance = cache(createInstance);
 
 async function getPreferredLanguageFromBrowser() {
   const headersStore = await headers();
-  const acceptLanguage = headersStore.get('accept-language');
+  const acceptLanguage = headersStore.get("accept-language");
 
   if (!acceptLanguage) {
     return;
@@ -66,7 +66,7 @@ async function getPreferredLanguageFromBrowser() {
 function getLanguageOrFallback(language: string | undefined) {
   let selectedLanguage = language;
 
-  if (!languages.includes(language ?? '')) {
+  if (!languages.includes(language ?? "")) {
     console.warn(
       `Language "${language}" is not supported. Falling back to "${languages[0]}"`,
     );

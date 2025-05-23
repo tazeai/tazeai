@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useVisitorData } from '@fingerprintjs/fingerprintjs-pro-react';
-import { useEffect } from 'react';
+import { useVisitorData } from "@fingerprintjs/fingerprintjs-pro-react";
+import { useEffect } from "react";
 
 function Fingerprintjs() {
   const { data } = useVisitorData(

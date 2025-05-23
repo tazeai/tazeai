@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
-import { useIsomorphicEffect } from './useIsomorphicEffect';
+import { useIsomorphicEffect } from "./useIsomorphicEffect";
 
 function useEventListener(
   eventName: string,

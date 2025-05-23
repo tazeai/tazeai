@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { Check } from 'lucide-react';
-import { Button } from '@tazeai/ui/components/button';
-import { cn } from '@tazeai/ui/lib/utils';
-import { useRef } from 'react';
-import { useInView } from '@tazeai/ui/hooks/use-in-view';
+import { Check } from "lucide-react";
+import { Button } from "@tazeai/ui/components/button";
+import { cn } from "@tazeai/ui/lib/utils";
+import { useRef } from "react";
+import { useInView } from "@tazeai/ui/hooks/use-in-view";
 
 const PricingSection = () => {
   const ref = useRef<HTMLElement>(null);
@@ -12,42 +12,42 @@ const PricingSection = () => {
 
   const plans = [
     {
-      name: '个人版',
-      price: '99',
-      description: '适合个人创作者和自由职业者',
+      name: "个人版",
+      price: "99",
+      description: "适合个人创作者和自由职业者",
       features: [
-        '每日100次AI对话',
-        '基础文本生成',
-        '3个AI角色选择',
-        '标准客户支持',
+        "每日100次AI对话",
+        "基础文本生成",
+        "3个AI角色选择",
+        "标准客户支持",
       ],
     },
     {
-      name: '专业版',
-      price: '199',
-      description: '适合专业团队和小型企业',
+      name: "专业版",
+      price: "199",
+      description: "适合专业团队和小型企业",
       features: [
-        '无限AI对话',
-        '高级文本生成',
-        '10个AI角色选择',
-        '优先客户支持',
-        '自定义AI提示词',
-        '团队协作功能',
+        "无限AI对话",
+        "高级文本生成",
+        "10个AI角色选择",
+        "优先客户支持",
+        "自定义AI提示词",
+        "团队协作功能",
       ],
       popular: true,
     },
     {
-      name: '企业版',
-      price: '联系我们',
-      description: '适合大型企业和机构',
+      name: "企业版",
+      price: "联系我们",
+      description: "适合大型企业和机构",
       features: [
-        '完全无限制使用',
-        '专属AI模型定制',
-        '无限AI角色创建',
-        '24/7专属支持',
-        'API集成支持',
-        '企业级数据安全',
-        '专属客户经理',
+        "完全无限制使用",
+        "专属AI模型定制",
+        "无限AI角色创建",
+        "24/7专属支持",
+        "API集成支持",
+        "企业级数据安全",
+        "专属客户经理",
       ],
     },
   ];
@@ -60,20 +60,20 @@ const PricingSection = () => {
         <div className="text-center space-y-4 mb-12">
           <h2
             className={cn(
-              'text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl transition-all duration-700',
+              "text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl transition-all duration-700",
               isInView
-                ? 'translate-y-0 opacity-100'
-                : 'translate-y-12 opacity-0',
+                ? "translate-y-0 opacity-100"
+                : "translate-y-12 opacity-0",
             )}
           >
             选择适合您的方案
           </h2>
           <p
             className={cn(
-              'mx-auto max-w-[700px] text-lg text-muted-foreground transition-all duration-700 delay-100',
+              "mx-auto max-w-[700px] text-lg text-muted-foreground transition-all duration-700 delay-100",
               isInView
-                ? 'translate-y-0 opacity-100'
-                : 'translate-y-12 opacity-0',
+                ? "translate-y-0 opacity-100"
+                : "translate-y-12 opacity-0",
             )}
           >
             灵活的价格方案，满足不同规模团队的需求
@@ -85,11 +85,11 @@ const PricingSection = () => {
             <div
               key={plan.name}
               className={cn(
-                'relative rounded-2xl border bg-background p-8 shadow-lg transition-all duration-700',
-                plan.popular && 'border-primary/50 shadow-primary/10',
+                "relative rounded-2xl border bg-background p-8 shadow-lg transition-all duration-700",
+                plan.popular && "border-primary/50 shadow-primary/10",
                 isInView
-                  ? 'translate-y-0 opacity-100'
-                  : 'translate-y-12 opacity-0',
+                  ? "translate-y-0 opacity-100"
+                  : "translate-y-12 opacity-0",
               )}
               style={{ transitionDelay: `${i * 100 + 200}ms` }}
             >
@@ -103,7 +103,7 @@ const PricingSection = () => {
                 <h3 className="text-2xl font-bold">{plan.name}</h3>
                 <div className="text-primary">
                   <span className="text-4xl font-bold">¥{plan.price}</span>
-                  {plan.price !== '联系我们' && (
+                  {plan.price !== "联系我们" && (
                     <span className="text-muted-foreground">/月</span>
                   )}
                 </div>
@@ -121,7 +121,7 @@ const PricingSection = () => {
                 </ul>
                 <Button
                   className="w-full"
-                  variant={plan.popular ? 'default' : 'outline'}
+                  variant={plan.popular ? "default" : "outline"}
                 >
                   开始使用
                 </Button>

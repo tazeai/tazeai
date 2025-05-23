@@ -24,7 +24,7 @@
     "@tazeai/shared": "workspace:*",
     "@tazeai/ui": "workspace:*",
     "hono": "^4.7.10",
-    "i18next": "^25.2.0",
+    "i18next": "^25.2.1",
     "lucide-react": "catalog:",
     "next": "^15.3.2",
     "react": "catalog:",
@@ -37,7 +37,7 @@
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@next/bundle-analyzer": "^15.3.2",
+    "@next/bundle-analyzer": "^15.4.0-canary.51",
     "@tailwindcss/postcss": "^4.1.7",
     "@tazeai/typescript-config": "workspace:*",
     "@types/node": "catalog:",

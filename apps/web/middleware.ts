@@ -1,9 +1,9 @@
-import { authConfig } from 'config/auth';
-import type { NextRequest } from 'next/server';
+import { authConfig } from "config/auth";
+import type { NextRequest } from "next/server";
 
 export const config = {
   matcher: [
-    '/((?!_next/static|_next/image|images|locales|assets|favicon.ico|api/*).*)',
+    "/((?!_next/static|_next/image|images|locales|assets|favicon.ico|api/*).*)",
   ],
 };
 
@@ -12,11 +12,11 @@ const publicRoutes = [
   authConfig.pages.signUp,
   authConfig.pages.forgotPassword,
   authConfig.pages.resetPassword,
-  '/',
+  "/",
 ];
 
 function setRequestId(request: Request) {
-  request.headers.set('x-correlation-id', crypto.randomUUID());
+  request.headers.set("x-correlation-id", crypto.randomUUID());
 }
 
 export default async function middleware(request: NextRequest) {

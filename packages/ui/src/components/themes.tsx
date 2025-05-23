@@ -1,1 +1,1 @@
-export * from 'next-themes';
+export * from "next-themes";

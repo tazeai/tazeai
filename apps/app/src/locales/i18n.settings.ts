@@ -1,23 +1,23 @@
-import { createI18nSettings } from '@tazeai/i18n';
+import { createI18nSettings } from "@tazeai/i18n";
 
 /**
  * The default language of the application.
  * This is used as a fallback language when the selected language is not supported.
  *
  */
-const defaultLanguage = process.env.NEXT_PUBLIC_DEFAULT_LOCALE ?? 'en';
+const defaultLanguage = process.env.NEXT_PUBLIC_DEFAULT_LOCALE ?? "en";
 
 /**
  * The list of supported languages.
  * By default, only the default language is supported.
  * Add more languages here if needed.
  */
-export const languages: string[] = ['en', 'zh'];
+export const languages: string[] = ["en", "zh"];
 
 /**
  * The name of the cookie that stores the selected language.
  */
-export const I18N_COOKIE_NAME = 'lang';
+export const I18N_COOKIE_NAME = "lang";
 
 /**
  * The default array of Internationalization (i18n) namespaces.
@@ -25,7 +25,7 @@ export const I18N_COOKIE_NAME = 'lang';
  *
  * Add your own namespaces here
  **/
-export const defaultI18nNamespaces = ['common', 'auth'];
+export const defaultI18nNamespaces = ["common", "auth"];
 
 /**
  * Get the i18n settings for the given language and namespaces.

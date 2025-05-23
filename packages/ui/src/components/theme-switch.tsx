@@ -1,30 +1,30 @@
-'use client';
+"use client";
 
-import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
-import { Button } from '@tazeai/ui/components/button';
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
+import { Button } from "@tazeai/ui/components/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@tazeai/ui/components/dropdown-menu';
-import { LuSun, LuMoon, LuMonitor } from 'react-icons/lu';
+} from "@tazeai/ui/components/dropdown-menu";
+import { LuSun, LuMoon, LuMonitor } from "react-icons/lu";
 
 const themes = [
   {
-    label: 'Light',
-    value: 'light',
+    label: "Light",
+    value: "light",
     icon: LuSun,
   },
   {
-    label: 'Dark',
-    value: 'dark',
+    label: "Dark",
+    value: "dark",
     icon: LuMoon,
   },
   {
-    label: 'System',
-    value: 'system',
+    label: "System",
+    value: "system",
     icon: LuMonitor,
   },
 ];
