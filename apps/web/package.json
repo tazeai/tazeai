@@ -12,7 +12,7 @@
     "with-env": "dotenv -e ../../.env --"
   },
   "dependencies": {
-    "@fingerprintjs/fingerprintjs-pro": "^3.11.9",
+    "@fingerprintjs/fingerprintjs-pro": "^3.11.10",
     "@fingerprintjs/fingerprintjs-pro-react": "^2.6.3",
     "@hookform/resolvers": "^5.0.1",
     "@iconify/react": "^6.0.0",
@@ -33,7 +33,7 @@
     "react": "catalog:",
     "react-dom": "catalog:",
     "react-hook-form": "^7.56.4",
-    "react-i18next": "^15.5.1",
+    "react-i18next": "^15.5.2",
     "react-icons": "^5.5.0",
     "sonner": "^2.0.3",
     "swr": "^2.3.3",

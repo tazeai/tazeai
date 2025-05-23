@@ -14,7 +14,8 @@
   "scripts": {
     "clean": "rimraf dist .turbo",
     "generate": "pnpm with-env pnpx @better-auth/cli generate --config=src/auth.ts",
-    "with-env": "dotenv -e ../../.env --"
+    "with-env": "dotenv -e ../../.env --",
+    "test": "vitest"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
@@ -29,7 +30,7 @@
     "lucide-react": "catalog:",
     "nanoid": "^5.1.5",
     "react-hook-form": "^7.56.4",
-    "react-i18next": "^15.5.1",
+    "react-i18next": "^15.5.2",
     "server-only": "^0.0.1",
     "sonner": "^2.0.3",
     "zod": "catalog:",
@@ -41,6 +42,7 @@
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "vitest": "^3.1.4"
   }
 }
