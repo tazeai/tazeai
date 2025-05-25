@@ -12,7 +12,7 @@ const Footer = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-8">
           <div className="col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-              <div className="h-6 w-6 bg-primary rounded-full"></div>
+              <img src="/images/logo.png" alt="TazeAI" className="h-6 w-6 bg-primary rounded-full" />
               <span className="font-bold text-xl">TazeAI</span>
             </div>
             <p className="text-muted-foreground max-w-xs mb-4">

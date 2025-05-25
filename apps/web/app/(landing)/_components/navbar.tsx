@@ -51,7 +51,7 @@ const Navbar = () => {
       <div className="container mx-auto px-4 flex h-16 items-center justify-between py-4 max-w-7xl">
         <div className="flex items-center gap-6 md:gap-10">
           <a href="/" className="flex items-center space-x-2">
-            <div className="h-6 w-6 bg-primary rounded-full"></div>
+            <img src="/images/logo.png" alt="TazeAI" className="h-6 w-6 bg-primary rounded-full" />
             <span className="font-bold text-xl hidden md:inline-block">
               TazeAI
             </span>
