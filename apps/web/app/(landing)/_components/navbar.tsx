@@ -11,6 +11,7 @@ import { authConfig } from "config/auth";
 import OneTap from "../../(auth)/_components/one-tap";
 import { useSession } from "@tazeai/auth/client";
 import { UserButton } from "../../../components/user-button";
+import { Logo } from "../../../components/logo";
 
 const NavLink = ({
   href,
@@ -51,7 +52,7 @@ const Navbar = () => {
       <div className="container mx-auto px-4 flex h-16 items-center justify-between py-4 max-w-7xl">
         <div className="flex items-center gap-6 md:gap-10">
           <a href="/" className="flex items-center space-x-2">
-            <img src="/images/logo.png" alt="TazeAI" className="h-6 w-6 bg-primary rounded-full" />
+            <Logo />
             <span className="font-bold text-xl hidden md:inline-block">
               TazeAI
             </span>
