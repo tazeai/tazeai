@@ -6,7 +6,7 @@ import { I18nProvider } from "@tazeai/i18n/provider";
 import { Toaster } from "@tazeai/ui/components/sonner";
 import { ThemeProvider, type UIProviderProps } from "@tazeai/ui/providers";
 import { useMemo, type ReactNode } from "react";
-import { FpjsProvider } from "@fingerprintjs/fingerprintjs-pro-react";
+import { FpjsProvider as FingerprintjsProvider } from "@fingerprintjs/fingerprintjs-pro-react";
 import { Analytics } from "@vercel/analytics/next";
 import Fingerprintjs from "@/components/fingerprintjs";
 
@@ -24,12 +24,15 @@ export function Providers({ children, themeProps, lang }: ProvidersProps) {
     return getI18nSettings(lang);
   }, [lang]);
 
+  const FpjsProvider = ({ children }: { children: ReactNode }) => {
+    if (!fpjsPublicApiKey) {
+      return children;
+    }
+    return <FingerprintjsProvider loadOptions={{ apiKey: fpjsPublicApiKey }}>{children}</FingerprintjsProvider>;
+  };
+
   return (
-    <FpjsProvider
-      loadOptions={{
-        apiKey: fpjsPublicApiKey,
-      }}
-    >
+    <FpjsProvider>
       <ThemeProvider {...themeProps}>
         <I18nProvider settings={i18nSettings} resolver={i18nResolver}>
           <Toaster />

@@ -1,9 +1,7 @@
 import {
-  pgTable,
   uuid,
   text,
   vector,
-  uniqueIndex,
   timestamp,
   integer,
   varchar,
@@ -11,6 +9,7 @@ import {
   unique,
 } from "drizzle-orm/pg-core";
 import { user } from "./auth";
+import { pgTable } from "./_table";
 
 export const timestamptz = (name: string) =>
   timestamp(name, { withTimezone: true });

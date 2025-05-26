@@ -1,8 +1,8 @@
 "use client";
 
-import { Facebook, Twitter, Instagram, Linkedin, Github } from "lucide-react";
+import { Github } from "lucide-react";
 import { Separator } from "@tazeai/ui/components/separator";
-import { Logo } from "../../../components/logo";
+import { Logo } from "@/components/logo";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -21,23 +21,10 @@ const Footer = () => {
               2020.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-muted-foreground hover:text-primary">
-                <Facebook className="h-5 w-5" />
-                <span className="sr-only">Facebook</span>
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-primary">
-                <Twitter className="h-5 w-5" />
-                <span className="sr-only">Twitter</span>
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-primary">
-                <Instagram className="h-5 w-5" />
-                <span className="sr-only">Instagram</span>
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-primary">
-                <Linkedin className="h-5 w-5" />
-                <span className="sr-only">LinkedIn</span>
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-primary">
+              <a
+                href="https://github.com/tazeai/tazeai"
+                className="text-muted-foreground hover:text-primary"
+              >
                 <Github className="h-5 w-5" />
                 <span className="sr-only">GitHub</span>
               </a>

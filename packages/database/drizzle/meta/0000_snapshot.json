@@ -1,11 +1,11 @@
 {
-  "id": "801f912f-e3e0-4e8e-8142-e5e6ac52cced",
+  "id": "19435226-433a-466b-99a6-1428f9d5a4c1",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
-    "public.account": {
-      "name": "account",
+    "public.accounts": {
+      "name": "accounts",
       "schema": "",
       "columns": {
         "id": {
@@ -90,10 +90,10 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "account_user_id_user_id_fk": {
-          "name": "account_user_id_user_id_fk",
-          "tableFrom": "account",
-          "tableTo": "user",
+        "accounts_user_id_users_id_fk": {
+          "name": "accounts_user_id_users_id_fk",
+          "tableFrom": "accounts",
+          "tableTo": "users",
           "columnsFrom": ["user_id"],
           "columnsTo": ["id"],
           "onDelete": "cascade",
@@ -106,8 +106,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.apikey": {
-      "name": "apikey",
+    "public.api_keys": {
+      "name": "api_keys",
       "schema": "",
       "columns": {
         "id": {
@@ -240,10 +240,10 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "apikey_user_id_user_id_fk": {
-          "name": "apikey_user_id_user_id_fk",
-          "tableFrom": "apikey",
-          "tableTo": "user",
+        "api_keys_user_id_users_id_fk": {
+          "name": "api_keys_user_id_users_id_fk",
+          "tableFrom": "api_keys",
+          "tableTo": "users",
           "columnsFrom": ["user_id"],
           "columnsTo": ["id"],
           "onDelete": "cascade",
@@ -256,8 +256,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.invitation": {
-      "name": "invitation",
+    "public.invitations": {
+      "name": "invitations",
       "schema": "",
       "columns": {
         "id": {
@@ -319,19 +319,19 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "invitation_organization_id_organization_id_fk": {
-          "name": "invitation_organization_id_organization_id_fk",
-          "tableFrom": "invitation",
-          "tableTo": "organization",
+        "invitations_organization_id_organizations_id_fk": {
+          "name": "invitations_organization_id_organizations_id_fk",
+          "tableFrom": "invitations",
+          "tableTo": "organizations",
           "columnsFrom": ["organization_id"],
           "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
-        "invitation_inviter_id_user_id_fk": {
-          "name": "invitation_inviter_id_user_id_fk",
-          "tableFrom": "invitation",
-          "tableTo": "user",
+        "invitations_inviter_id_users_id_fk": {
+          "name": "invitations_inviter_id_users_id_fk",
+          "tableFrom": "invitations",
+          "tableTo": "users",
           "columnsFrom": ["inviter_id"],
           "columnsTo": ["id"],
           "onDelete": "cascade",
@@ -344,8 +344,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.jwks": {
-      "name": "jwks",
+    "public.jwk_keys": {
+      "name": "jwk_keys",
       "schema": "",
       "columns": {
         "id": {
@@ -382,8 +382,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.member": {
-      "name": "member",
+    "public.members": {
+      "name": "members",
       "schema": "",
       "columns": {
         "id": {
@@ -427,19 +427,19 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "member_organization_id_organization_id_fk": {
-          "name": "member_organization_id_organization_id_fk",
-          "tableFrom": "member",
-          "tableTo": "organization",
+        "members_organization_id_organizations_id_fk": {
+          "name": "members_organization_id_organizations_id_fk",
+          "tableFrom": "members",
+          "tableTo": "organizations",
           "columnsFrom": ["organization_id"],
           "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
-        "member_user_id_user_id_fk": {
-          "name": "member_user_id_user_id_fk",
-          "tableFrom": "member",
-          "tableTo": "user",
+        "members_user_id_users_id_fk": {
+          "name": "members_user_id_users_id_fk",
+          "tableFrom": "members",
+          "tableTo": "users",
           "columnsFrom": ["user_id"],
           "columnsTo": ["id"],
           "onDelete": "cascade",
@@ -452,8 +452,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.organization": {
-      "name": "organization",
+    "public.organizations": {
+      "name": "organizations",
       "schema": "",
       "columns": {
         "id": {
@@ -504,8 +504,8 @@
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
-        "organization_slug_unique": {
-          "name": "organization_slug_unique",
+        "organizations_slug_unique": {
+          "name": "organizations_slug_unique",
           "nullsNotDistinct": false,
           "columns": ["slug"]
         }
@@ -514,8 +514,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.session": {
-      "name": "session",
+    "public.sessions": {
+      "name": "sessions",
       "schema": "",
       "columns": {
         "id": {
@@ -582,10 +582,10 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "session_user_id_user_id_fk": {
-          "name": "session_user_id_user_id_fk",
-          "tableFrom": "session",
-          "tableTo": "user",
+        "sessions_user_id_users_id_fk": {
+          "name": "sessions_user_id_users_id_fk",
+          "tableFrom": "sessions",
+          "tableTo": "users",
           "columnsFrom": ["user_id"],
           "columnsTo": ["id"],
           "onDelete": "cascade",
@@ -594,8 +594,8 @@
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
-        "session_token_unique": {
-          "name": "session_token_unique",
+        "sessions_token_unique": {
+          "name": "sessions_token_unique",
           "nullsNotDistinct": false,
           "columns": ["token"]
         }
@@ -604,8 +604,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.user": {
-      "name": "user",
+    "public.users": {
+      "name": "users",
       "schema": "",
       "columns": {
         "id": {
@@ -681,8 +681,8 @@
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
-        "user_email_unique": {
-          "name": "user_email_unique",
+        "users_email_unique": {
+          "name": "users_email_unique",
           "nullsNotDistinct": false,
           "columns": ["email"]
         }
@@ -691,8 +691,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.verification": {
-      "name": "verification",
+    "public.verifications": {
+      "name": "verifications",
       "schema": "",
       "columns": {
         "id": {
@@ -818,10 +818,10 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "chunks_user_id_user_id_fk": {
-          "name": "chunks_user_id_user_id_fk",
+        "chunks_user_id_users_id_fk": {
+          "name": "chunks_user_id_users_id_fk",
           "tableFrom": "chunks",
-          "tableTo": "user",
+          "tableTo": "users",
           "columnsFrom": ["user_id"],
           "columnsTo": ["id"],
           "onDelete": "cascade",
@@ -893,10 +893,10 @@
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
-        "embeddings_user_id_user_id_fk": {
-          "name": "embeddings_user_id_user_id_fk",
+        "embeddings_user_id_users_id_fk": {
+          "name": "embeddings_user_id_users_id_fk",
           "tableFrom": "embeddings",
-          "tableTo": "user",
+          "tableTo": "users",
           "columnsFrom": ["user_id"],
           "columnsTo": ["id"],
           "onDelete": "cascade",

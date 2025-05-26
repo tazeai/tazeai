@@ -1,12 +1,6 @@
-import {
-  pgTable,
-  uuid,
-  text,
-  integer,
-  boolean,
-  timestamp,
-} from "drizzle-orm/pg-core";
+import { uuid, text, integer, boolean, timestamp } from "drizzle-orm/pg-core";
 import { uuidv7 } from "../utils";
+import { pgTable } from "./_table";
 
 export type { PgColumn, PgTableWithColumns } from "drizzle-orm/pg-core";
 
@@ -15,7 +9,7 @@ export enum SystemRole {
   USER = "user",
 }
 
-export const user = pgTable("user", {
+export const user = pgTable("users", {
   id: uuid("id")
     .primaryKey()
     .$defaultFn(() => uuidv7()),
@@ -35,7 +29,7 @@ export const user = pgTable("user", {
 
 export type UserType = typeof user.$inferSelect;
 
-export const session = pgTable("session", {
+export const session = pgTable("sessions", {
   id: uuid("id")
     .primaryKey()
     .$defaultFn(() => uuidv7()),
@@ -54,7 +48,7 @@ export const session = pgTable("session", {
     .$onUpdateFn(() => new Date()),
 });
 
-export const account = pgTable("account", {
+export const account = pgTable("accounts", {
   id: uuid("id")
     .primaryKey()
     .$defaultFn(() => uuidv7()),
@@ -76,7 +70,7 @@ export const account = pgTable("account", {
     .$onUpdateFn(() => new Date()),
 });
 
-export const verification = pgTable("verification", (t) => ({
+export const verification = pgTable("verifications", (t) => ({
   id: uuid("id")
     .primaryKey()
     .$defaultFn(() => uuidv7()),
@@ -90,7 +84,7 @@ export const verification = pgTable("verification", (t) => ({
     .$onUpdateFn(() => new Date()),
 }));
 
-export const organization = pgTable("organization", {
+export const organization = pgTable("organizations", {
   id: uuid("id")
     .primaryKey()
     .$defaultFn(() => uuidv7()),
@@ -104,7 +98,7 @@ export const organization = pgTable("organization", {
     .$onUpdateFn(() => new Date()),
 });
 
-export const member = pgTable("member", {
+export const member = pgTable("members", {
   id: uuid("id")
     .primaryKey()
     .$defaultFn(() => uuidv7()),
@@ -121,7 +115,7 @@ export const member = pgTable("member", {
     .$onUpdateFn(() => new Date()),
 });
 
-export const invitation = pgTable("invitation", {
+export const invitation = pgTable("invitations", {
   id: uuid("id")
     .primaryKey()
     .$defaultFn(() => uuidv7()),
@@ -141,7 +135,7 @@ export const invitation = pgTable("invitation", {
     .$onUpdateFn(() => new Date()),
 });
 
-export const apikey = pgTable("apikey", {
+export const apikey = pgTable("api_keys", {
   id: text("id").primaryKey(),
   name: text("name"),
   start: text("start"),
@@ -169,7 +163,7 @@ export const apikey = pgTable("apikey", {
     .$onUpdateFn(() => new Date()),
 });
 
-export const jwks = pgTable("jwks", {
+export const jwks = pgTable("jwk_keys", {
   id: uuid("id")
     .primaryKey()
     .$defaultFn(() => uuidv7()),
