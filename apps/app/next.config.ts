@@ -1,9 +1,7 @@
 import type { NextConfig } from "next";
+import withBundleAnalyzer from "@next/bundle-analyzer";
 
-const isProduction = process.env.NODE_ENV === "production";
-
-const nextConfig: NextConfig = {
-  /* config options here */
+let nextConfig: NextConfig = {
   transpilePackages: [
     "@tazeai/auth",
     "@tazeai/cache",
@@ -16,5 +14,9 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
 };
+
+if (process.env.ANALYZE === 'true') {
+  nextConfig = withBundleAnalyzer()(nextConfig);
+}
 
 export default nextConfig;

@@ -4,12 +4,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "pnpm with-env next build",
+    "build": "next build",
     "clean": "rimraf dist .turbo .next",
-    "dev": "pnpm with-env next dev --turbopack --hostname 0.0.0.0 --port 3001",
-    "lint": "pnpm with-env next lint",
-    "start": "pnpm with-env next start",
-    "with-env": "dotenv -e ../../.env --"
+    "dev": "next dev --turbopack --hostname 0.0.0.0 --port 3001",
+    "lint": "next lint",
+    "start": "next start",
+    "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
@@ -37,7 +37,7 @@
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@next/bundle-analyzer": "^15.4.0-canary.51",
+    "@next/bundle-analyzer": "^15.3.2",
     "@tailwindcss/postcss": "^4.1.7",
     "@tazeai/typescript-config": "workspace:*",
     "@types/node": "catalog:",

@@ -10,7 +10,7 @@
     "clean": "rimraf dist .turbo"
   },
   "dependencies": {
-    "@t3-oss/env-nextjs": "^0.13.4",
+    "@t3-oss/env-nextjs": "^0.13.6",
     "zod": "catalog:"
   },
   "devDependencies": {

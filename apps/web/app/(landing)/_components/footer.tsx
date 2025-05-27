@@ -5,7 +5,12 @@ import { Separator } from "@tazeai/ui/components/separator";
 import { Logo } from "@/components/logo";
 
 const Footer = () => {
+  const startYear = 2024;
   const currentYear = new Date().getFullYear();
+  const copyright =
+    currentYear > startYear
+      ? `${startYear}-${currentYear}`
+      : `${currentYear}`;
 
   return (
     <footer className="bg-muted/30 py-12">
@@ -17,8 +22,7 @@ const Footer = () => {
               <span className="font-bold text-xl">TazeAI</span>
             </div>
             <p className="text-muted-foreground max-w-xs mb-4">
-              Transforming businesses with powerful workflow solutions since
-              2020.
+              Transforming businesses with powerful workflow solutions since {startYear}.
             </p>
             <div className="flex space-x-4">
               <a
@@ -150,7 +154,7 @@ const Footer = () => {
 
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-muted-foreground">
-            &copy; {currentYear} TazeAI. All rights reserved.
+            &copy; {copyright} TazeAI. All rights reserved.
           </p>
           <div className="flex items-center space-x-4">
             <a
