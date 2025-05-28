@@ -1,6 +1,6 @@
 ---
-description:
-globs:
+description: 
+globs: 
 alwaysApply: false
 ---
 # Database
@@ -14,14 +14,15 @@ The database layer is implemented using Drizzle ORM with PostgreSQL and is organ
 - **Schema Organization**: Modular schema files in `packages/database/src/schemas/`
 - **Migration**: Drizzle Kit for schema generation and migrations
 - **Type Safety**: Full TypeScript support with Drizzle's type inference
+- **Performance**: Built-in connection pooling and query optimization
 
 ## Database Configuration
 
 ### Environment Setup
 ```typescript
-// Database URL is required
-DATABASE_URL=postgresql://...
-DATABASE_PREFIX=optional_prefix_ // Optional table prefix
+// Required environment variables
+DATABASE_URL=postgresql://username:password@host:port/database
+DATABASE_PREFIX=optional_prefix_ // Optional table prefix for multi-tenancy
 ```
 
 ### Drizzle Configuration
@@ -33,9 +34,14 @@ import { envs } from "./src/envs";
 const config: Config = {
   schema: "./src/schemas/**/*.ts",
   dialect: "postgresql", 
-  dbCredentials: { url: env.DATABASE_URL },
+  dbCredentials: { url: envs.DATABASE_URL },
   casing: "snake_case", // Always use snake_case for database columns
+  migrations: {
+    prefix: "supabase", // Use appropriate prefix
+  },
 };
+
+export default config;
 ```
 
 ## Schema Patterns
@@ -46,13 +52,21 @@ Always use the custom `pgTable` creator for consistent table prefixing:
 ```typescript
 import { pgTable } from "./_table";
 
-export const tableName = pgTable("table_name", {
-  // column definitions
+export const users = pgTable("users", {
+  id: uuid("id")
+    .primaryKey()
+    .$defaultFn(() => uuidv7()),
+  name: text("name").notNull(),
+  email: text("email").notNull().unique(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at")
+    .notNull()
+    .$onUpdateFn(() => new Date()),
 });
 ```
 
 ### Primary Keys
-Use UUIDv7 for all primary keys:
+Use UUIDv7 for all primary keys for better performance and sortability:
 
 ```typescript
 import { uuid } from "drizzle-orm/pg-core";
@@ -67,7 +81,7 @@ export const table = pgTable("table_name", {
 ```
 
 ### Timestamps
-Always include `createdAt` and `updatedAt` timestamps:
+Always include `createdAt` and `updatedAt` timestamps for audit trails:
 
 ```typescript
 import { timestamp } from "drizzle-orm/pg-core";
@@ -82,48 +96,102 @@ export const table = pgTable("table_name", {
 ```
 
 ### Foreign Keys
-Use proper foreign key constraints with cascade delete where appropriate:
+Use proper foreign key constraints with appropriate cascade behavior:
 
 ```typescript
+// One-to-many relationship
 userId: uuid("user_id")
   .notNull()
-  .references(() => user.id, { onDelete: "cascade" }),
+  .references(() => users.id, { onDelete: "cascade" }),
+
+// Optional relationship
+organizationId: uuid("organization_id")
+  .references(() => organizations.id, { onDelete: "set null" }),
+
+// Restrict deletion if referenced
+categoryId: uuid("category_id")
+  .notNull()
+  .references(() => categories.id, { onDelete: "restrict" }),
 ```
 
 ### Text Fields
-Use appropriate text field types:
+Use appropriate text field types based on content:
 
 ```typescript
-// Short text fields
+// Short text fields (names, titles)
 name: text("name").notNull(),
+title: text("title").notNull(),
+
+// Email with validation
 email: text("email").notNull().unique(),
 
 // Optional text fields
 description: text("description"),
+bio: text("bio"),
 
-// JSON/metadata fields
+// Long text content
+content: text("content"), // For articles, posts, etc.
+
+// JSON/metadata fields (store as text)
 metadata: text("metadata"), // Store JSON as text
+settings: text("settings"), // User preferences, etc.
 ```
 
 ### Boolean Fields
 Use boolean fields with appropriate defaults:
 
 ```typescript
+// Feature flags
 enabled: boolean("enabled").default(true),
-emailVerified: boolean("email_verified").notNull(),
+isPublic: boolean("is_public").default(false),
+
+// Status fields
+emailVerified: boolean("email_verified").notNull().default(false),
 banned: boolean("banned").default(false),
+deleted: boolean("deleted").default(false),
 ```
 
 ### Enums
 Define enums as TypeScript enums and use them in schema:
 
 ```typescript
-export enum SystemRole {
+export enum UserRole {
   ADMIN = "admin",
   USER = "user",
+  MODERATOR = "moderator",
 }
 
-role: text("role").$type<SystemRole>().default(SystemRole.USER).notNull(),
+export enum PostStatus {
+  DRAFT = "draft",
+  PUBLISHED = "published",
+  ARCHIVED = "archived",
+}
+
+// Use in schema
+role: text("role").$type<UserRole>().default(UserRole.USER).notNull(),
+status: text("status").$type<PostStatus>().default(PostStatus.DRAFT).notNull(),
+```
+
+### Indexes
+Add indexes for frequently queried columns:
+
+```typescript
+import { index, uniqueIndex } from "drizzle-orm/pg-core";
+
+export const users = pgTable("users", {
+  // columns...
+}, (table) => ({
+  // Unique index for email
+  emailIdx: uniqueIndex("users_email_idx").on(table.email),
+  
+  // Composite index for queries
+  userRoleIdx: index("users_role_created_idx").on(table.role, table.createdAt),
+  
+  // Partial index for active users
+  activeUsersIdx: index("active_users_idx")
+    .on(table.id)
+    .where(eq(table.banned, false)),
+}));
 ```
 
 ## Schema Organization
@@ -132,33 +200,58 @@ role: text("role").$type<SystemRole>().default(SystemRole.USER).notNull(),
 ```
 packages/database/src/schemas/
 ├── _table.ts          # Table creator with prefix
-├── index.ts           # Export all schemas
+├── index.ts           # Export all schemas and types
 ├── auth.ts            # Authentication-related tables
+├── users.ts           # User management tables
+├── content.ts         # Content management tables
 ├── rag.ts             # RAG/AI-related tables
 └── [feature].ts       # Feature-specific schemas
 ```
 
 ### Schema Exports
-Each schema file should export:
+Each schema file should export tables, types, and relations:
 
 ```typescript
-// Export table definitions
-export const tableName = pgTable("table_name", { ... });
+// users.ts
+export const users = pgTable("users", { ... });
+export const profiles = pgTable("profiles", { ... });
 
 // Export inferred types
-export type TableNameType = typeof tableName.$inferSelect;
-export type InsertTableNameType = typeof tableName.$inferInsert;
+export type User = typeof users.$inferSelect;
+export type InsertUser = typeof users.$inferInsert;
+export type Profile = typeof profiles.$inferSelect;
+export type InsertProfile = typeof profiles.$inferInsert;
+
+// Export relations
+export const usersRelations = relations(users, ({ one, many }) => ({
+  profile: one(profiles, {
+    fields: [users.id],
+    references: [profiles.userId],
+  }),
+  posts: many(posts),
+}));
 
 // Export any enums used
-export enum RelatedEnum { ... }
+export { UserRole, UserStatus };
 ```
 
 ### Index File Pattern
 ```typescript
 // schemas/index.ts
 export * from "./auth";
+export * from "./users";
+export * from "./content";
 export * from "./rag";
-// Export other schema files
+
+// Re-export common types
+export type {
+  Database,
+  AnyColumn,
+  SQL,
+  PgColumn,
+  PgTableWithColumns,
+  PgTable,
+} from "drizzle-orm/pg-core";
 ```
 
 ## Database Client
@@ -169,7 +262,7 @@ import { createClient } from "./adapters/postgres";
 import * as schemas from "./schemas";
 
 export const db = createClient<typeof schemas>({
-  databaseUrl: env.DATABASE_URL,
+  databaseUrl: envs.DATABASE_URL,
   schema: schemas,
 });
 
@@ -178,65 +271,166 @@ export type Database = typeof db;
 
 ### Query Patterns
 
-#### Basic Queries
+#### Basic CRUD Operations
 ```typescript
-// Select all
-const users = await db.select().from(schemas.user);
+// Select all with pagination
+const users = await db
+  .select()
+  .from(schemas.users)
+  .limit(20)
+  .offset(page * 20);
 
 // Select with conditions
 const user = await db
   .select()
-  .from(schemas.user)
-  .where(eq(schemas.user.email, email))
+  .from(schemas.users)
+  .where(eq(schemas.users.email, email))
   .limit(1);
 
-// Insert
-const newUser = await db
-  .insert(schemas.user)
+// Insert single record
+const [newUser] = await db
+  .insert(schemas.users)
   .values({
     name: "John Doe",
     email: "john@example.com",
-    emailVerified: false,
+    role: UserRole.USER,
   })
   .returning();
+
+// Insert multiple records
+const newUsers = await db
+  .insert(schemas.users)
+  .values([
+    { name: "User 1", email: "user1@example.com" },
+    { name: "User 2", email: "user2@example.com" },
+  ])
+  .returning();
+
+// Update with conditions
+const [updatedUser] = await db
+  .update(schemas.users)
+  .set({ 
+    name: "Jane Doe",
+    updatedAt: new Date(),
+  })
+  .where(eq(schemas.users.id, userId))
+  .returning();
+
+// Delete with conditions
+await db
+  .delete(schemas.users)
+  .where(eq(schemas.users.id, userId));
 ```
 
-#### Joins
+#### Advanced Queries
 ```typescript
-const userWithSessions = await db
+// Joins with relations
+const usersWithProfiles = await db
+  .select({
+    user: schemas.users,
+    profile: schemas.profiles,
+  })
+  .from(schemas.users)
+  .leftJoin(schemas.profiles, eq(schemas.users.id, schemas.profiles.userId))
+  .where(eq(schemas.users.banned, false));
+
+// Subqueries
+const usersWithPostCount = await db
+  .select({
+    user: schemas.users,
+    postCount: sql<number>`count(${schemas.posts.id})`.as('post_count'),
+  })
+  .from(schemas.users)
+  .leftJoin(schemas.posts, eq(schemas.users.id, schemas.posts.userId))
+  .groupBy(schemas.users.id);
+
+// Complex filtering
+const activeUsers = await db
   .select()
-  .from(schemas.user)
-  .leftJoin(schemas.session, eq(schemas.user.id, schemas.session.userId))
-  .where(eq(schemas.user.id, userId));
+  .from(schemas.users)
+  .where(
+    and(
+      eq(schemas.users.banned, false),
+      eq(schemas.users.emailVerified, true),
+      gte(schemas.users.createdAt, new Date(Date.now() - 30 * 24 * 60 * 60 * 1000))
+    )
+  );
+
+// Ordering and pagination
+const recentUsers = await db
+  .select()
+  .from(schemas.users)
+  .orderBy(desc(schemas.users.createdAt), asc(schemas.users.name))
+  .limit(50);
 ```
 
 #### Transactions
 ```typescript
+// Simple transaction
 await db.transaction(async (tx) => {
-  const user = await tx.insert(schemas.user).values(userData).returning();
-  await tx.insert(schemas.session).values({
-    userId: user[0].id,
-    // other session data
-  });
+  const [user] = await tx
+    .insert(schemas.users)
+    .values(userData)
+    .returning();
+    
+  await tx
+    .insert(schemas.profiles)
+    .values({
+      userId: user.id,
+      ...profileData,
+    });
 });
+
+// Transaction with error handling
+try {
+  await db.transaction(async (tx) => {
+    // Multiple operations
+    const [user] = await tx.insert(schemas.users).values(userData).returning();
+    const [profile] = await tx.insert(schemas.profiles).values({ userId: user.id }).returning();
+    
+    // Conditional logic
+    if (user.role === UserRole.ADMIN) {
+      await tx.insert(schemas.adminPermissions).values({ userId: user.id });
+    }
+    
+    return { user, profile };
+  });
+} catch (error) {
+  console.error('Transaction failed:', error);
+  throw new DatabaseError('Failed to create user', error);
+}
 ```
 
 ## Query Builder
 
-Use the custom `Builder` class for pagination:
+Use the custom `Builder` class for advanced pagination and filtering:
 
 ```typescript
 import { Builder } from "@tazeai/database/builder";
 
-const builder = new Builder(db, schemas.user);
+const builder = new Builder(db, schemas.users);
 
+// Basic pagination
 const result = await builder.paginate(page, {
-  where: eq(schemas.user.banned, false),
+  where: eq(schemas.users.banned, false),
   perPage: 20,
-  orderBy: [desc(schemas.user.createdAt)],
+  orderBy: [desc(schemas.users.createdAt)],
 });
 
-// Returns: { data, pagination: { currentPage, lastPage, perPage }, total, duration }
+// Advanced filtering with search
+const searchResult = await builder.paginate(page, {
+  where: and(
+    eq(schemas.users.banned, false),
+    or(
+      ilike(schemas.users.name, `%${searchTerm}%`),
+      ilike(schemas.users.email, `%${searchTerm}%`)
+    )
+  ),
+  perPage: 20,
+  orderBy: [desc(schemas.users.createdAt)],
+});
+
+// Result structure: { data, pagination: { currentPage, lastPage, perPage }, total, duration }
 ```
 
 ## Utilities
@@ -245,14 +439,15 @@ const result = await builder.paginate(page, {
 ```typescript
 import { nanoid, uuidv7 } from "@tazeai/database/utils";
 
-// Use uuidv7 for primary keys
+// Use uuidv7 for primary keys (time-ordered, better for indexes)
 const id = uuidv7();
 
-// Use nanoid for shorter, URL-safe IDs
+// Use nanoid for shorter, URL-safe IDs (invites, tokens, etc.)
 const shortId = nanoid(); // 16 characters, URL-safe
+const customId = nanoid(10); // Custom length
 ```
 
-### Type Exports
+### Type Utilities
 ```typescript
 // Import common types
 import type {
@@ -263,35 +458,76 @@ import type {
   PgTableWithColumns,
   PgTable,
 } from "@tazeai/database";
+
+// Helper types for queries
+type SelectUser = typeof schemas.users.$inferSelect;
+type InsertUser = typeof schemas.users.$inferInsert;
+type UpdateUser = Partial<InsertUser>;
+
+// Relation types
+type UserWithProfile = SelectUser & {
+  profile: SelectProfile | null;
+};
 ```
 
 ## Migration Workflow
 
 ### Development Commands
 ```bash
-# Generate migration files
+# Generate migration files from schema changes
 pnpm db:generate
 
-# Apply migrations
+# Apply pending migrations
 pnpm db:migrate
 
-# Push schema changes (development only)
+# Push schema changes directly (development only)
 pnpm db:push
 
-# Open Drizzle Studio
+# Open Drizzle Studio for database inspection
 pnpm db:studio
 
-# Seed database
+# Seed database with initial data
 pnpm db:seed
+
+# Reset database (drop all tables and re-migrate)
+pnpm db:reset
 ```
 
 ### Migration Best Practices
 
-1. **Always generate migrations** for schema changes
-2. **Review generated SQL** before applying
-3. **Test migrations** on staging before production
-4. **Use transactions** for complex migrations
-5. **Backup database** before major migrations
+1. **Always generate migrations** for schema changes in production
+2. **Review generated SQL** before applying to ensure correctness
+3. **Test migrations** on staging environment before production
+4. **Use transactions** for complex migrations that involve multiple steps
+5. **Backup database** before applying major migrations
+6. **Version control** all migration files
+7. **Document breaking changes** in migration comments
+
+```typescript
+// Example migration with transaction
+import { sql } from "drizzle-orm";
+
+export async function up(db: Database) {
+  await db.transaction(async (tx) => {
+    // Add new column
+    await tx.execute(sql`ALTER TABLE users ADD COLUMN middle_name TEXT`);
+    
+    // Migrate existing data
+    await tx.execute(sql`
+      UPDATE users 
+      SET middle_name = SPLIT_PART(name, ' ', 2) 
+      WHERE name LIKE '% % %'
+    `);
+    
+    // Add constraints
+    await tx.execute(sql`
+      ALTER TABLE users 
+      ADD CONSTRAINT users_middle_name_length 
+      CHECK (LENGTH(middle_name) <= 50)
+    `);
+  });
+}
+```
 
 ## Security Patterns
 
@@ -300,17 +536,38 @@ Implement application-level security in queries:
 
 ```typescript
 // Filter by user ownership
-const userPosts = await db
-  .select()
-  .from(schemas.post)
-  .where(eq(schemas.post.userId, currentUserId));
+async function getUserPosts(userId: string, currentUserId: string) {
+  return await db
+    .select()
+    .from(schemas.posts)
+    .where(
+      and(
+        eq(schemas.posts.userId, userId),
+        // Only show public posts or user's own posts
+        or(
+          eq(schemas.posts.isPublic, true),
+          eq(schemas.posts.userId, currentUserId)
+        )
+      )
+    );
+}
 
 // Filter by organization membership
-const orgData = await db
-  .select()
-  .from(schemas.data)
-  .innerJoin(schemas.member, eq(schemas.data.organizationId, schemas.member.organizationId))
-  .where(eq(schemas.member.userId, currentUserId));
+async function getOrganizationData(orgId: string, userId: string) {
+  return await db
+    .select()
+    .from(schemas.organizationData)
+    .innerJoin(
+      schemas.organizationMembers, 
+      eq(schemas.organizationData.organizationId, schemas.organizationMembers.organizationId)
+    )
+    .where(
+      and(
+        eq(schemas.organizationData.organizationId, orgId),
+        eq(schemas.organizationMembers.userId, userId)
+      )
+    );
+}
 ```
 
 ### Input Validation
@@ -322,107 +579,295 @@ import { z } from "zod";
 const createUserSchema = z.object({
   name: z.string().min(1).max(255),
   email: z.string().email(),
+  role: z.nativeEnum(UserRole).default(UserRole.USER),
 });
 
-const userData = createUserSchema.parse(input);
+async function createUser(input: unknown) {
+  // Validate input
+  const userData = createUserSchema.parse(input);
+  
+  // Check for existing user
+  const existingUser = await db
+    .select()
+    .from(schemas.users)
+    .where(eq(schemas.users.email, userData.email))
+    .limit(1);
+    
+  if (existingUser.length > 0) {
+    throw new ValidationError('Email already exists', 'email');
+  }
+  
+  // Create user
+  const [user] = await db
+    .insert(schemas.users)
+    .values(userData)
+    .returning();
+    
+  return user;
+}
 ```
 
 ## Performance Optimization
 
 ### Indexing Strategy
-- **Primary keys**: Automatically indexed
-- **Foreign keys**: Consider indexing frequently joined columns
+- **Primary keys**: Automatically indexed (UUIDv7 for better performance)
+- **Foreign keys**: Index frequently joined columns
 - **Search fields**: Index columns used in WHERE clauses
 - **Unique constraints**: Automatically create unique indexes
+- **Composite indexes**: For multi-column queries
+
+```typescript
+// Example of strategic indexing
+export const posts = pgTable("posts", {
+  id: uuid("id").primaryKey().$defaultFn(() => uuidv7()),
+  userId: uuid("user_id").notNull().references(() => users.id),
+  title: text("title").notNull(),
+  content: text("content"),
+  status: text("status").$type<PostStatus>().default(PostStatus.DRAFT),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+}, (table) => ({
+  // Index for user's posts
+  userPostsIdx: index("posts_user_id_idx").on(table.userId),
+  
+  // Composite index for status and date queries
+  statusDateIdx: index("posts_status_created_idx").on(table.status, table.createdAt),
+  
+  // Full-text search index (if using PostgreSQL)
+  titleSearchIdx: index("posts_title_search_idx").using('gin', sql`to_tsvector('english', ${table.title})`),
+}));
+```
 
 ### Query Optimization
 ```typescript
 // Use select() to limit returned columns
-const users = await db
+const userSummaries = await db
   .select({
-    id: schemas.user.id,
-    name: schemas.user.name,
-    email: schemas.user.email,
+    id: schemas.users.id,
+    name: schemas.users.name,
+    email: schemas.users.email,
   })
-  .from(schemas.user);
+  .from(schemas.users);
 
 // Use limit() for large datasets
 const recentUsers = await db
   .select()
-  .from(schemas.user)
-  .orderBy(desc(schemas.user.createdAt))
+  .from(schemas.users)
+  .orderBy(desc(schemas.users.createdAt))
   .limit(100);
+
+// Use exists() for existence checks instead of count()
+const hasActiveUsers = await db
+  .select({ exists: sql`1` })
+  .from(schemas.users)
+  .where(eq(schemas.users.banned, false))
+  .limit(1);
+
+// Use batch operations for multiple inserts
+const batchSize = 1000;
+for (let i = 0; i < userData.length; i += batchSize) {
+  const batch = userData.slice(i, i + batchSize);
+  await db.insert(schemas.users).values(batch);
+}
 ```
 
 ### Connection Pooling
-The Neon serverless driver handles connection pooling automatically.
+The Neon serverless driver handles connection pooling automatically, but consider:
 
-## Testing
+```typescript
+// Configure connection limits if needed
+const db = createClient({
+  databaseUrl: envs.DATABASE_URL,
+  schema: schemas,
+  // Connection pool configuration (if using node-postgres)
+  max: 20, // Maximum number of connections
+  idleTimeoutMillis: 30000, // Close idle connections after 30s
+  connectionTimeoutMillis: 2000, // Timeout for new connections
+});
+```
+
+## Testing Patterns
 
 ### Test Database Setup
 ```typescript
 // Use separate test database
 const testDb = createClient({
-  databaseUrl: process.env.TEST_DATABASE_URL,
+  databaseUrl: process.env.TEST_DATABASE_URL!,
   schema: schemas,
 });
+
+// Test utilities
+export async function cleanupDatabase() {
+  // Clean up in reverse dependency order
+  await testDb.delete(schemas.posts);
+  await testDb.delete(schemas.profiles);
+  await testDb.delete(schemas.users);
+}
+
+export async function createTestUser(overrides: Partial<InsertUser> = {}) {
+  const [user] = await testDb
+    .insert(schemas.users)
+    .values({
+      name: 'Test User',
+      email: `test-${Date.now()}@example.com`,
+      ...overrides,
+    })
+    .returning();
+  return user;
+}
 ```
 
 ### Test Patterns
 ```typescript
-// Clean up after tests
-afterEach(async () => {
-  await testDb.delete(schemas.user);
+describe('User Service', () => {
+  beforeEach(async () => {
+    await cleanupDatabase();
+  });
+
+  it('should create a user', async () => {
+    const userData = {
+      name: 'John Doe',
+      email: 'john@example.com',
+    };
+
+    const user = await createUser(userData);
+
+    expect(user.name).toBe(userData.name);
+    expect(user.email).toBe(userData.email);
+    expect(user.id).toBeDefined();
+  });
+
+  it('should handle duplicate email error', async () => {
+    const userData = {
+      name: 'John Doe',
+      email: 'john@example.com',
+    };
+
+    await createUser(userData);
+
+    await expect(createUser(userData)).rejects.toThrow('Email already exists');
+  });
 });
 
 // Use transactions for test isolation
-await testDb.transaction(async (tx) => {
-  // Test operations within transaction
-  // Automatically rolled back
+describe('Transaction Tests', () => {
+  it('should rollback on error', async () => {
+    await expect(
+      testDb.transaction(async (tx) => {
+        await tx.insert(schemas.users).values({ name: 'Test', email: 'test@example.com' });
+        throw new Error('Rollback test');
+      })
+    ).rejects.toThrow('Rollback test');
+
+    // Verify rollback
+    const users = await testDb.select().from(schemas.users);
+    expect(users).toHaveLength(0);
+  });
 });
 ```
 
-## Common Anti-Patterns to Avoid
-
-1. **Don't use raw SQL** unless absolutely necessary
-2. **Don't forget foreign key constraints** for referential integrity
-3. **Don't skip input validation** before database operations
-4. **Don't use SELECT \*** in production code
-5. **Don't forget to handle database errors** properly
-6. **Don't use synchronous operations** - always use async/await
-7. **Don't hardcode table names** - use schema references
-
 ## Error Handling
 
+### Database Error Types
 ```typescript
 import { DatabaseError } from "pg";
 
-try {
-  await db.insert(schemas.user).values(userData);
-} catch (error) {
-  if (error instanceof DatabaseError) {
-    // Handle specific database errors
-    if (error.code === "23505") {
-      throw new Error("Email already exists");
-    }
+// Custom error classes
+export class DatabaseOperationError extends Error {
+  constructor(
+    message: string,
+    public readonly operation: string,
+    public readonly originalError?: Error
+  ) {
+    super(message);
+    this.name = 'DatabaseOperationError';
   }
-  throw error;
+}
+
+export class UniqueConstraintError extends DatabaseOperationError {
+  constructor(field: string, value: string) {
+    super(`${field} '${value}' already exists`, 'insert');
+    this.name = 'UniqueConstraintError';
+  }
+}
+
+export class ForeignKeyConstraintError extends DatabaseOperationError {
+  constructor(field: string, value: string) {
+    super(`Referenced ${field} '${value}' does not exist`, 'insert');
+    this.name = 'ForeignKeyConstraintError';
+  }
+}
+```
+
+### Error Handling Patterns
+```typescript
+async function safeCreateUser(userData: InsertUser): Promise<Result<User>> {
+  try {
+    const [user] = await db
+      .insert(schemas.users)
+      .values(userData)
+      .returning();
+    
+    return { success: true, data: user };
+  } catch (error) {
+    if (error instanceof DatabaseError) {
+      // Handle specific database errors
+      switch (error.code) {
+        case '23505': // Unique violation
+          return {
+            success: false,
+            error: new UniqueConstraintError('email', userData.email),
+          };
+        case '23503': // Foreign key violation
+          return {
+            success: false,
+            error: new ForeignKeyConstraintError('organization', userData.organizationId || ''),
+          };
+        default:
+          return {
+            success: false,
+            error: new DatabaseOperationError('Failed to create user', 'insert', error),
+          };
+      }
+    }
+    
+    return {
+      success: false,
+      error: error instanceof Error ? error : new Error('Unknown error'),
+    };
+  }
 }
 ```
 
 ## Environment Configuration
 
+### Environment Variables
 ```typescript
-// envs.ts pattern
+// envs.ts pattern using T3 Env
 import { createEnv } from "@t3-oss/env-core";
 import { z } from "zod";
 
-export const envs = () =>
-  createEnv({
-    server: {
-      DATABASE_URL: z.string().url(),
-      DATABASE_PREFIX: z.string().optional(),
-    },
-    runtimeEnv: process.env,
-  });
+export const envs = createEnv({
+  server: {
+    DATABASE_URL: z.string().url(),
+    DATABASE_PREFIX: z.string().optional(),
+    DATABASE_POOL_MAX: z.coerce.number().default(20),
+    DATABASE_POOL_MIN: z.coerce.number().default(2),
+  },
+  runtimeEnv: process.env,
+});
 ```
+
+## Common Anti-Patterns to Avoid
+
+1. **Don't use raw SQL** unless absolutely necessary - use Drizzle's query builder
+2. **Don't forget foreign key constraints** - maintain referential integrity
+3. **Don't skip input validation** - validate all external data before database operations
+4. **Don't use SELECT \*** in production - specify required columns
+5. **Don't forget to handle database errors** - implement proper error handling
+6. **Don't use synchronous operations** - always use async/await
+7. **Don't hardcode table names** - use schema references
+8. **Don't ignore migrations** - always generate and apply migrations for schema changes
+9. **Don't skip indexes** - add indexes for frequently queried columns
+10. **Don't forget transactions** - use transactions for multi-step operations
+11. **Don't expose sensitive data** - filter sensitive fields in API responses
+12. **Don't ignore connection limits** - monitor and configure connection pooling appropriately

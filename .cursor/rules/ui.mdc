@@ -1,107 +1,643 @@
 ---
-description: UI Components API reference and guidelines
-globs: **/*.tsx
+description: 
+globs: 
 alwaysApply: false
 ---
 # UI Components
 
-- Reusable UI components are defined in the "packages/ui" package named "@tazeai/ui".
-- By exporting the component from the "exports" field, we can import it using the "@tazeai/ui/components/{component-name}" format.
+TazeAI leverages a comprehensive design system built on top of Shadcn UI components, providing both base components and custom TazeAI-specific components for building consistent, accessible, and beautiful user interfaces.
 
-## Styling
-- Styling is done using Tailwind CSS. We use the "cn" function from the "@tazeai/ui/lib/utils" package to generate class names.
-- Avoid fixes classes such as "bg-gray-500". Instead, use Shadcn classes such as "bg-background", "text-secondary-foreground", "text-muted-foreground", etc.
+## Architecture Overview
 
-TazeAI leverages two sets of UI components:
-1. **Shadcn UI Components**: Base components from the Shadcn UI library
-2. **TazeAI-specific Components**: Custom components built on top of Shadcn UI
+- **Base Components**: Shadcn UI components for foundational UI elements
+- **Custom Components**: TazeAI-specific components built on top of Shadcn UI
+- **Styling**: Tailwind CSS with design tokens and semantic color system
+- **Accessibility**: WCAG 2.1 AA compliant components
+- **Theming**: Light/dark mode support with CSS custom properties
 
-## Importing Components
+## Package Structure
 
-```tsx
-// Import Shadcn UI components
+Reusable UI components are defined in the "packages/ui" package named "@tazeai/ui". Components are exported using the "exports" field pattern, allowing imports using the "@tazeai/ui/components/{component-name}" format.
+
+```
+packages/ui/src/
+├── shadcn/           # Base Shadcn UI components
+├── makerkit/         # TazeAI-specific components
+│   ├── marketing/    # Marketing-specific components
+│   └── ...           # Other custom components
+├── lib/              # Utilities (cn function, etc.)
+└── styles/           # Global styles and Tailwind config
+```
+
+## Styling Guidelines
+
+### Tailwind CSS Usage
+- Use Tailwind CSS for all styling needs
+- Leverage the "cn" function from "@tazeai/ui/lib/utils" to generate class names
+- Avoid fixed classes like "bg-gray-500" - use semantic classes instead
+- Use design tokens for consistent spacing, colors, and typography
+
+```typescript
+import { cn } from '@tazeai/ui/lib/utils';
+
+// Good: Using semantic classes and cn function
+<div className={cn(
+  "bg-background text-foreground",
+  "border border-border rounded-lg",
+  "p-4 space-y-2",
+  variant === 'destructive' && "bg-destructive text-destructive-foreground",
+  className
+)} />
+
+// Avoid: Fixed color classes
+<div className="bg-gray-100 text-gray-900 border-gray-200" />
+```
+
+### Semantic Color System
+Use semantic color classes that adapt to light/dark themes:
+
+```typescript
+// Background colors
+"bg-background"           // Main background
+"bg-card"                 // Card backgrounds
+"bg-popover"              // Popover backgrounds
+"bg-muted"                // Muted backgrounds
+
+// Text colors
+"text-foreground"         // Primary text
+"text-muted-foreground"   // Secondary text
+"text-card-foreground"    // Text on cards
+"text-destructive"        // Error text
+"text-primary"            // Primary brand text
+
+// Border colors
+"border-border"           // Default borders
+"border-input"            // Input borders
+"border-destructive"      // Error borders
+
+// Interactive states
+"hover:bg-accent"         // Hover backgrounds
+"focus:ring-ring"         // Focus rings
+"disabled:opacity-50"     // Disabled states
+```
+
+## Component Import Patterns
+
+### Shadcn UI Components
+```typescript
+// Import base Shadcn UI components
 import { Button } from '@tazeai/ui/components/button';
-import { Card } from '@tazeai/ui/components/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@tazeai/ui/components/card';
+import { Input } from '@tazeai/ui/components/input';
 import { toast } from '@tazeai/ui/components/sonner';
+```
 
-// Import TazeAI-specific components
+### TazeAI-specific Components
+```typescript
+// Import custom TazeAI components
 import { If } from '@tazeai/ui/components/if';
 import { Trans } from '@tazeai/ui/components/trans';
 import { ProfileAvatar } from '@tazeai/ui/components/profile-avatar';
+import { Page } from '@tazeai/ui/components/page';
 ```
 
-## Core Shadcn UI Components
-
-| Component | Description | Import Path |
-|-----------|-------------|-------------|
-| `Accordion` | Expandable/collapsible content sections | `@tazeai/ui/components/accordion` [accordion.tsx](mdc:packages/ui/src/shadcn/accordion.tsx) |
-| `AlertDialog` | Modal dialog for important actions | `@tazeai/ui/components/alert-dialog` [alert-dialog.tsx](mdc:packages/ui/src/shadcn/alert-dialog.tsx) |
-| `Alert` | Status/notification messages | `@tazeai/ui/components/alert` [alert.tsx](mdc:packages/ui/src/shadcn/alert.tsx) |
-| `Avatar` | User profile images with fallback | `@tazeai/ui/components/avatar` [avatar.tsx](mdc:packages/ui/src/shadcn/avatar.tsx) |
-| `Badge` | Small status indicators | `@tazeai/ui/components/badge` [badge.tsx](mdc:packages/ui/src/shadcn/badge.tsx) |
-| `Breadcrumb` | Navigation path indicators | `@tazeai/ui/components/breadcrumb` [breadcrumb.tsx](mdc:packages/ui/src/shadcn/breadcrumb.tsx) |
-| `Button` | Clickable action elements | `@tazeai/ui/components/button` [button.tsx](mdc:packages/ui/src/shadcn/button.tsx) |
-| `Calendar` | Date picker and date display | `@tazeai/ui/components/calendar` [calendar.tsx](mdc:packages/ui/src/shadcn/calendar.tsx) |
-| `Card` | Container for grouped content | `@tazeai/ui/components/card` [card.tsx](mdc:packages/ui/src/shadcn/card.tsx) |
-| `Checkbox` | Selection input | `@tazeai/ui/components/checkbox` [checkbox.tsx](mdc:packages/ui/src/shadcn/checkbox.tsx) |
-| `Command` | Command palette interface | `@tazeai/ui/components/command` [command.tsx](mdc:packages/ui/src/shadcn/command.tsx) |
-| `DataTable` | Table | `@tazeai/ui/components/data-table` [data-table.tsx](mdc:packages/ui/src/shadcn/data-table.tsx) |
-| `Dialog` | Modal window for focused interactions | `@tazeai/ui/components/dialog` [dialog.tsx](mdc:packages/ui/src/shadcn/dialog.tsx) |
-| `DropdownMenu` | Menu triggered by a button | `@tazeai/ui/components/dropdown-menu` [dropdown-menu.tsx](mdc:packages/ui/src/shadcn/dropdown-menu.tsx) |
-| `Form` | Form components with validation | `@tazeai/ui/components/form` [form.tsx](mdc:packages/ui/src/shadcn/form.tsx) |
-| `Input` | Text input field | `@tazeai/ui/components/input` [input.tsx](mdc:packages/ui/src/shadcn/input.tsx) |
-| `Input OTP` | OTP Text input field | `@tazeai/ui/components/input-otp` [input-otp.tsx](mdc:packages/ui/src/shadcn/input-otp.tsx) |
-| `Label` | Text label for form elements | `@tazeai/ui/components/label` [label.tsx](mdc:packages/ui/src/shadcn/label.tsx) |
-| `NavigationMenu` | Hierarchical navigation component | `@tazeai/ui/components/navigation-menu` [navigation-menu.tsx](mdc:packages/ui/src/shadcn/navigation-menu.tsx) |
-| `Popover` | Floating content triggered by interaction | `@tazeai/ui/components/popover` [popover.tsx](mdc:packages/ui/src/shadcn/popover.tsx) |
-| `RadioGroup` | Radio button selection group | `@tazeai/ui/components/radio-group` [radio-group.tsx](mdc:packages/ui/src/shadcn/radio-group.tsx) |
-| `ScrollArea` | Customizable scrollable area | `@tazeai/ui/components/scroll-area` [scroll-area.tsx](mdc:packages/ui/src/shadcn/scroll-area.tsx) |
-| `Select` | Dropdown selection menu | `@tazeai/ui/components/select` [select.tsx](mdc:packages/ui/src/shadcn/select.tsx) |
-| `Separator` | Visual divider between content | `@tazeai/ui/components/separator` [separator.tsx](mdc:packages/ui/src/shadcn/separator.tsx) |
-| `Sheet` | Sliding panel from screen edge | `@tazeai/ui/components/sheet` [sheet.tsx](mdc:packages/ui/src/shadcn/sheet.tsx) |
-| `Sidebar` | Advanced sidebar navigation | `@tazeai/ui/components/shadcn-sidebar` [sidebar.tsx](mdc:packages/ui/src/shadcn/sidebar.tsx) |
-| `Skeleton` | Loading placeholder | `@tazeai/ui/components/skeleton` [skeleton.tsx](mdc:packages/ui/src/shadcn/skeleton.tsx) |
-| `Switch` | Toggle control | `@tazeai/ui/components/switch` [switch.tsx](mdc:packages/ui/src/shadcn/switch.tsx) |
-| `Toast` | Toaster | `@tazeai/ui/components/sonner` [sonner.tsx](mdc:packages/ui/src/shadcn/sonner.tsx) |
-| `Tabs` | Tab-based navigation | `@tazeai/ui/components/tabs` [tabs.tsx](mdc:packages/ui/src/shadcn/tabs.tsx) |
-| `Textarea` | Multi-line text input | `@tazeai/ui/components/textarea` [textarea.tsx](mdc:packages/ui/src/shadcn/textarea.tsx) |
-| `Tooltip` | Contextual information on hover | `@tazeai/ui/components/tooltip` [tooltip.tsx](mdc:packages/ui/src/shadcn/tooltip.tsx) |
-
-## TazeAI-specific Components
-
-| Component | Description | Import Path |
-|-----------|-------------|-------------|
-| `If` | Conditional rendering component | `@tazeai/ui/components/if` [if.tsx](mdc:packages/ui/src/makerkit/if.tsx) |
-| `Trans` | Internationalization text component | `@tazeai/ui/components/trans` [trans.tsx](mdc:packages/ui/src/makerkit/trans.tsx) |
-| `Page` | Page layout with navigation | `@tazeai/ui/components/page` [page.tsx](mdc:packages/ui/src/makerkit/page.tsx) |
-| `GlobalLoader` | Full-page loading indicator | `@tazeai/ui/components/global-loader` [global-loader.tsx](mdc:packages/ui/src/makerkit/global-loader.tsx) |
-| `ImageUploader` | Image upload component | `@tazeai/ui/components/image-uploader` [image-uploader.tsx](mdc:packages/ui/src/makerkit/image-uploader.tsx) |
-| `ProfileAvatar` | User avatar with fallback | `@tazeai/ui/components/profile-avatar` [profile-avatar.tsx](mdc:packages/ui/src/makerkit/profile-avatar.tsx) |
-| `DataTable` (Enhanced) | Extended data table with pagination | `@tazeai/ui/components/enhanced-data-table` [data-table.tsx](mdc:packages/ui/src/makerkit/data-table.tsx) |
-| `Stepper` | Multi-step process indicator | `@tazeai/ui/components/stepper` [stepper.tsx](mdc:packages/ui/src/makerkit/stepper.tsx) |
-| `CookieBanner` | GDPR-compliant cookie notice | `@tazeai/ui/components/cookie-banner` [cookie-banner.tsx](mdc:packages/ui/src/makerkit/cookie-banner.tsx) |
-| `CardButton` | Card-styled button | `@tazeai/ui/components/card-button` [card-button.tsx](mdc:packages/ui/src/makerkit/card-button.tsx) |
-| `MultiStepForm` | Form with multiple steps | `@tazeai/ui/components/multi-step-form` [multi-step-form.tsx](mdc:packages/ui/src/makerkit/multi-step-form.tsx) |
-| `EmptyState` | Empty data placeholder | `@tazeai/ui/components/empty-state` [empty-state.tsx](mdc:packages/ui/src/makerkit/empty-state.tsx) |
-| `AppBreadcrumbs` | Application path breadcrumbs | `@tazeai/ui/components/app-breadcrumbs` [app-breadcrumbs.tsx](mdc:packages/ui/src/makerkit/app-breadcrumbs.tsx) |
-
-## Marketing Components
-
-Import all marketing components with:
-```tsx
+### Marketing Components
+```typescript
+// Import marketing components
 import {
   Hero,
   HeroTitle,
   GradientText,
-  // etc.
+  FeatureCard,
+  FeatureGrid,
+  Footer,
+  Header,
 } from '@tazeai/ui/components/marketing';
 ```
 
-Key marketing components:
-- `Hero` - Hero sections [hero.tsx](mdc:packages/ui/src/makerkit/marketing/hero.tsx)
-- `SecondaryHero` [secondary-hero.tsx](mdc:packages/ui/src/makerkit/marketing/secondary-hero.tsx)
-- `FeatureCard`, `FeatureGrid` - Feature showcases [feature-card.tsx](mdc:packages/ui/src/makerkit/marketing/feature-card.tsx)
-- `Footer` - Page Footer [footer.tsx](mdc:packages/ui/src/makerkit/marketing/footer.tsx)
-- `Header` - Page Header [header.tsx](mdc:packages/ui/src/makerkit/marketing/header.tsx)
-- `NewsletterSignup` - Email collection [newsletter-signup-container.tsx](mdc:packages/ui/src/makerkit/marketing/newsletter-signup-container.tsx)
-- `ComingSoon` - Coming soon page template [coming-soon.tsx](mdc:packages/ui/src/makerkit/marketing/coming-soon.tsx)
+## Core Shadcn UI Components
+
+### Form Components
+
+| Component | Description | Import Path | Usage |
+|-----------|-------------|-------------|-------|
+| `Button` | Clickable action elements with variants | `@tazeai/ui/components/button` | Primary actions, secondary actions, links |
+| `Input` | Text input field with validation | `@tazeai/ui/components/input` | Form fields, search boxes |
+| `Textarea` | Multi-line text input | `@tazeai/ui/components/textarea` | Long text content, descriptions |
+| `Select` | Dropdown selection menu | `@tazeai/ui/components/select` | Option selection, filters |
+| `Checkbox` | Selection input for multiple choices | `@tazeai/ui/components/checkbox` | Multi-select, toggles |
+| `RadioGroup` | Radio button selection group | `@tazeai/ui/components/radio-group` | Single selection from options |
+| `Switch` | Toggle control | `@tazeai/ui/components/switch` | Settings, feature toggles |
+| `Label` | Text label for form elements | `@tazeai/ui/components/label` | Form field labels |
+| `Form` | Form components with validation | `@tazeai/ui/components/form` | Complete form handling |
+
+```typescript
+// Example form usage
+import { Button } from '@tazeai/ui/components/button';
+import { Input } from '@tazeai/ui/components/input';
+import { Label } from '@tazeai/ui/components/label';
+import { Form, FormControl, FormField, FormItem, FormMessage } from '@tazeai/ui/components/form';
+
+function UserForm() {
+  return (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <Label htmlFor="name">
+                <Trans i18nKey="user:form.name" />
+              </Label>
+              <FormControl>
+                <Input id="name" placeholder="Enter your name" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button type="submit">
+          <Trans i18nKey="common:save" />
+        </Button>
+      </form>
+    </Form>
+  );
+}
+```
+
+### Layout Components
+
+| Component | Description | Import Path | Usage |
+|-----------|-------------|-------------|-------|
+| `Card` | Container for grouped content | `@tazeai/ui/components/card` | Content sections, data display |
+| `Separator` | Visual divider between content | `@tazeai/ui/components/separator` | Section dividers |
+| `ScrollArea` | Customizable scrollable area | `@tazeai/ui/components/scroll-area` | Long content lists |
+| `Tabs` | Tab-based navigation | `@tazeai/ui/components/tabs` | Content organization |
+| `Accordion` | Expandable/collapsible content sections | `@tazeai/ui/components/accordion` | FAQ, settings panels |
+
+```typescript
+// Example layout usage
+import { Card, CardContent, CardHeader, CardTitle } from '@tazeai/ui/components/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@tazeai/ui/components/tabs';
+
+function UserProfile() {
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>
+          <Trans i18nKey="user:profile.title" />
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <Tabs defaultValue="general">
+          <TabsList>
+            <TabsTrigger value="general">
+              <Trans i18nKey="user:profile.tabs.general" />
+            </TabsTrigger>
+            <TabsTrigger value="security">
+              <Trans i18nKey="user:profile.tabs.security" />
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent value="general">
+            {/* General settings */}
+          </TabsContent>
+          <TabsContent value="security">
+            {/* Security settings */}
+          </TabsContent>
+        </Tabs>
+      </CardContent>
+    </Card>
+  );
+}
+```
+
+### Navigation Components
+
+| Component | Description | Import Path | Usage |
+|-----------|-------------|-------------|-------|
+| `NavigationMenu` | Hierarchical navigation component | `@tazeai/ui/components/navigation-menu` | Main navigation |
+| `Breadcrumb` | Navigation path indicators | `@tazeai/ui/components/breadcrumb` | Page hierarchy |
+| `Sidebar` | Advanced sidebar navigation | `@tazeai/ui/components/shadcn-sidebar` | App navigation |
+| `Sheet` | Sliding panel from screen edge | `@tazeai/ui/components/sheet` | Mobile menus, side panels |
+
+### Feedback Components
+
+| Component | Description | Import Path | Usage |
+|-----------|-------------|-------------|-------|
+| `Alert` | Status/notification messages | `@tazeai/ui/components/alert` | Inline notifications |
+| `AlertDialog` | Modal dialog for important actions | `@tazeai/ui/components/alert-dialog` | Confirmations, warnings |
+| `Dialog` | Modal window for focused interactions | `@tazeai/ui/components/dialog` | Forms, detailed views |
+| `Popover` | Floating content triggered by interaction | `@tazeai/ui/components/popover` | Tooltips, menus |
+| `Toast` | Temporary notification messages | `@tazeai/ui/components/sonner` | Success, error messages |
+| `Tooltip` | Contextual information on hover | `@tazeai/ui/components/tooltip` | Help text, descriptions |
+
+```typescript
+// Example feedback usage
+import { Alert, AlertDescription, AlertTitle } from '@tazeai/ui/components/alert';
+import { toast } from '@tazeai/ui/components/sonner';
+import { AlertTriangle } from 'lucide-react';
+
+function ErrorAlert({ error }: { error: string }) {
+  return (
+    <Alert variant="destructive">
+      <AlertTriangle className="h-4 w-4" />
+      <AlertTitle>
+        <Trans i18nKey="error:title" />
+      </AlertTitle>
+      <AlertDescription>{error}</AlertDescription>
+    </Alert>
+  );
+}
+
+// Toast usage
+function handleSave() {
+  try {
+    // Save logic
+    toast.success('Settings saved successfully');
+  } catch (error) {
+    toast.error('Failed to save settings');
+  }
+}
+```
+
+### Data Display Components
+
+| Component | Description | Import Path | Usage |
+|-----------|-------------|-------------|-------|
+| `Avatar` | User profile images with fallback | `@tazeai/ui/components/avatar` | User representation |
+| `Badge` | Small status indicators | `@tazeai/ui/components/badge` | Status, categories |
+| `DataTable` | Table with sorting and pagination | `@tazeai/ui/components/data-table` | Data lists |
+| `Skeleton` | Loading placeholder | `@tazeai/ui/components/skeleton` | Loading states |
+
+## TazeAI-specific Components
+
+### Core Components
+
+| Component | Description | Import Path | Usage |
+|-----------|-------------|-------------|-------|
+| `If` | Conditional rendering component | `@tazeai/ui/components/if` | Conditional UI |
+| `Trans` | Internationalization text component | `@tazeai/ui/components/trans` | All user-facing text |
+| `Page` | Page layout with navigation | `@tazeai/ui/components/page` | Page structure |
+| `ProfileAvatar` | Enhanced user avatar | `@tazeai/ui/components/profile-avatar` | User profiles |
+
+```typescript
+// Example TazeAI component usage
+import { If } from '@tazeai/ui/components/if';
+import { Trans } from '@tazeai/ui/components/trans';
+import { ProfileAvatar } from '@tazeai/ui/components/profile-avatar';
+
+function UserCard({ user, isOwner }: { user: User; isOwner: boolean }) {
+  return (
+    <Card>
+      <CardContent className="flex items-center space-x-4 p-4">
+        <ProfileAvatar user={user} size="lg" />
+        <div className="flex-1">
+          <h3 className="font-semibold">{user.name}</h3>
+          <p className="text-muted-foreground">{user.email}</p>
+        </div>
+        <If condition={isOwner}>
+          <Button variant="outline" size="sm">
+            <Trans i18nKey="user:edit" />
+          </Button>
+        </If>
+      </CardContent>
+    </Card>
+  );
+}
+```
+
+### Enhanced Components
+
+| Component | Description | Import Path | Usage |
+|-----------|-------------|-------------|-------|
+| `DataTable` (Enhanced) | Extended data table with advanced features | `@tazeai/ui/components/enhanced-data-table` | Complex data display |
+| `MultiStepForm` | Form with multiple steps | `@tazeai/ui/components/multi-step-form` | Complex workflows |
+| `Stepper` | Multi-step process indicator | `@tazeai/ui/components/stepper` | Progress indication |
+| `EmptyState` | Empty data placeholder | `@tazeai/ui/components/empty-state` | No data states |
+
+### Utility Components
+
+| Component | Description | Import Path | Usage |
+|-----------|-------------|-------------|-------|
+| `GlobalLoader` | Full-page loading indicator | `@tazeai/ui/components/global-loader` | App-wide loading |
+| `ImageUploader` | Image upload component | `@tazeai/ui/components/image-uploader` | File uploads |
+| `CookieBanner` | GDPR-compliant cookie notice | `@tazeai/ui/components/cookie-banner` | Legal compliance |
+| `CardButton` | Card-styled button | `@tazeai/ui/components/card-button` | Action cards |
+
+## Marketing Components
+
+Marketing components are designed for landing pages, promotional content, and public-facing pages.
+
+### Hero Components
+```typescript
+import {
+  Hero,
+  HeroTitle,
+  HeroSubtitle,
+  SecondaryHero,
+  GradientText,
+} from '@tazeai/ui/components/marketing';
+
+function LandingPage() {
+  return (
+    <Hero>
+      <HeroTitle>
+        Build Amazing Apps with{' '}
+        <GradientText>TazeAI</GradientText>
+      </HeroTitle>
+      <HeroSubtitle>
+        The complete platform for building AI-powered applications
+      </HeroSubtitle>
+    </Hero>
+  );
+}
+```
+
+### Feature Components
+```typescript
+import {
+  FeatureCard,
+  FeatureGrid,
+} from '@tazeai/ui/components/marketing';
+
+function FeaturesSection() {
+  return (
+    <FeatureGrid>
+      <FeatureCard
+        icon={<Zap className="h-6 w-6" />}
+        title="Lightning Fast"
+        description="Built for performance with modern technologies"
+      />
+      <FeatureCard
+        icon={<Shield className="h-6 w-6" />}
+        title="Secure by Default"
+        description="Enterprise-grade security built in"
+      />
+    </FeatureGrid>
+  );
+}
+```
+
+### Layout Components
+```typescript
+import {
+  Header,
+  Footer,
+  NewsletterSignup,
+} from '@tazeai/ui/components/marketing';
+
+function MarketingLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <>
+      <Header />
+      <main>{children}</main>
+      <NewsletterSignup />
+      <Footer />
+    </>
+  );
+}
+```
+
+## Component Development Guidelines
+
+### Component Structure
+```typescript
+// component-name.tsx
+import { cn } from '@tazeai/ui/lib/utils';
+import { forwardRef } from 'react';
+
+interface ComponentProps {
+  variant?: 'default' | 'destructive';
+  size?: 'sm' | 'md' | 'lg';
+  className?: string;
+  children?: React.ReactNode;
+}
+
+const Component = forwardRef<HTMLDivElement, ComponentProps>(
+  ({ variant = 'default', size = 'md', className, children, ...props }, ref) => {
+    return (
+      <div
+        ref={ref}
+        className={cn(
+          // Base styles
+          'inline-flex items-center justify-center rounded-md font-medium',
+          // Variant styles
+          variant === 'default' && 'bg-primary text-primary-foreground',
+          variant === 'destructive' && 'bg-destructive text-destructive-foreground',
+          // Size styles
+          size === 'sm' && 'h-8 px-3 text-sm',
+          size === 'md' && 'h-10 px-4',
+          size === 'lg' && 'h-12 px-6 text-lg',
+          className
+        )}
+        {...props}
+      >
+        {children}
+      </div>
+    );
+  }
+);
+
+Component.displayName = 'Component';
+
+export { Component };
+export type { ComponentProps };
+```
+
+### Accessibility Guidelines
+1. **Semantic HTML**: Use appropriate HTML elements
+2. **ARIA Labels**: Provide descriptive labels for screen readers
+3. **Keyboard Navigation**: Ensure all interactive elements are keyboard accessible
+4. **Focus Management**: Implement proper focus handling
+5. **Color Contrast**: Ensure sufficient color contrast ratios
+
+```typescript
+// Accessible component example
+function AccessibleButton({ children, ...props }: ButtonProps) {
+  return (
+    <Button
+      {...props}
+      aria-label={props['aria-label'] || children?.toString()}
+      className={cn(
+        'focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',
+        props.className
+      )}
+    >
+      {children}
+    </Button>
+  );
+}
+```
+
+### Responsive Design
+```typescript
+// Responsive component example
+function ResponsiveCard({ children }: { children: React.ReactNode }) {
+  return (
+    <Card className={cn(
+      'w-full',
+      'sm:max-w-sm',
+      'md:max-w-md',
+      'lg:max-w-lg',
+      'xl:max-w-xl'
+    )}>
+      {children}
+    </Card>
+  );
+}
+```
+
+## Best Practices
+
+### Component Composition
+1. **Single Responsibility**: Each component should have one clear purpose
+2. **Composition over Configuration**: Prefer composable components over complex props
+3. **Consistent API**: Use consistent prop naming and patterns
+4. **Extensibility**: Allow customization through className and style props
+
+```typescript
+// Good: Composable components
+<Card>
+  <CardHeader>
+    <CardTitle>User Profile</CardTitle>
+    <CardDescription>Manage your account settings</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <UserForm />
+  </CardContent>
+  <CardFooter>
+    <Button>Save Changes</Button>
+  </CardFooter>
+</Card>
+
+// Avoid: Monolithic component with many props
+<UserProfileCard
+  title="User Profile"
+  description="Manage your account settings"
+  showForm={true}
+  showSaveButton={true}
+  formData={data}
+/>
+```
+
+### Performance Optimization
+1. **Lazy Loading**: Use dynamic imports for large components
+2. **Memoization**: Use React.memo for expensive components
+3. **Bundle Splitting**: Split components into separate chunks
+4. **Tree Shaking**: Ensure components are tree-shakeable
+
+```typescript
+// Lazy loading example
+const HeavyComponent = lazy(() => import('./heavy-component'));
+
+function App() {
+  return (
+    <Suspense fallback={<Skeleton className="h-32 w-full" />}>
+      <HeavyComponent />
+    </Suspense>
+  );
+}
+```
+
+### Internationalization
+Always use the `Trans` component for user-facing text:
+
+```typescript
+// Good: Using Trans component
+<Button>
+  <Trans i18nKey="common:save" />
+</Button>
+
+<Alert>
+  <AlertTitle>
+    <Trans i18nKey="error:validation.title" />
+  </AlertTitle>
+  <AlertDescription>
+    <Trans 
+      i18nKey="error:validation.description" 
+      values={{ field: 'email' }} 
+    />
+  </AlertDescription>
+</Alert>
+
+// Avoid: Hardcoded strings
+<Button>Save</Button>
+<Alert>
+  <AlertTitle>Validation Error</AlertTitle>
+  <AlertDescription>The email field is required</AlertDescription>
+</Alert>
+```
+
+## Testing Components
+
+### Component Testing
+```typescript
+import { render, screen, fireEvent } from '@testing-library/react';
+import { Button } from './button';
+
+describe('Button', () => {
+  it('renders correctly', () => {
+    render(<Button>Click me</Button>);
+    expect(screen.getByRole('button', { name: 'Click me' })).toBeInTheDocument();
+  });
+
+  it('handles click events', () => {
+    const handleClick = jest.fn();
+    render(<Button onClick={handleClick}>Click me</Button>);
+    
+    fireEvent.click(screen.getByRole('button'));
+    expect(handleClick).toHaveBeenCalledTimes(1);
+  });
+
+  it('applies custom className', () => {
+    render(<Button className="custom-class">Click me</Button>);
+    expect(screen.getByRole('button')).toHaveClass('custom-class');
+  });
+});
+```
+
+### Visual Testing
+```typescript
+// Storybook story example
+import type { Meta, StoryObj } from '@storybook/react';
+import { Button } from './button';
+
+const meta: Meta<typeof Button> = {
+  title: 'Components/Button',
+  component: Button,
+  parameters: {
+    layout: 'centered',
+  },
+  tags: ['autodocs'],
+};
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {
+    children: 'Button',
+  },
+};
+
+export const Destructive: Story = {
+  args: {
+    variant: 'destructive',
+    children: 'Delete',
+  },
+};
+```
+
+## Common Anti-Patterns to Avoid
+
+1. **Don't use fixed color classes** - Use semantic color tokens
+2. **Don't hardcode strings** - Always use the `Trans` component
+3. **Don't ignore accessibility** - Implement proper ARIA attributes
+4. **Don't create monolithic components** - Prefer composition
+5. **Don't skip responsive design** - Consider all screen sizes
+6. **Don't forget loading states** - Provide feedback during async operations
+7. **Don't ignore error states** - Handle and display errors appropriately
+8. **Don't use inline styles** - Use Tailwind classes or CSS modules
+9. **Don't forget keyboard navigation** - Ensure keyboard accessibility
+10. **Don't skip component testing** - Test component behavior and accessibility

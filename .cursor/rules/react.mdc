@@ -1,0 +1,658 @@
+---
+description: 
+globs: *.tsx
+alwaysApply: false
+---
+# React
+
+## Core Principles
+
+- **Component-Driven Development**: Build applications as a composition of isolated, reusable components
+- **One-Way Data Flow**: Follow React's unidirectional data flow pattern
+- **Single Responsibility**: Each component should have a clear, singular purpose
+- **TypeScript First**: Use TypeScript for type safety and better developer experience
+- **Internationalization (i18n) By Default**: All user-facing text should be translatable using `Trans` component
+- **Performance by Design**: Consider performance implications from the start
+
+## Component Architecture
+
+### Component Structure & Naming
+
+- Always use functional components with TypeScript
+- Name components using PascalCase (e.g., `UserProfile`)
+- Use named exports for components, not default exports
+- Split components by responsibility and avoid "god components"
+- Name files to match their component name using kebab-case (e.g., `user-profile.tsx`)
+- Co-locate related files (tests, stories, styles) with components
+
+```typescript
+// user-profile.tsx
+export type UserProfileProps = {
+  userId: string;
+  variant?: 'compact' | 'detailed';
+  onEdit?: () => void;
+};
+
+export function UserProfile({ 
+  userId, 
+  variant = 'detailed', 
+  onEdit 
+}: UserProfileProps) {
+  // Component implementation
+}
+```
+
+### Props Design
+
+- Always type props using TypeScript interfaces or type aliases
+- Use discriminated unions for complex prop types with conditional rendering
+- Destructure props at the start of component functions
+- Use prop spreading cautiously and only when appropriate
+- Provide default props for optional parameters when it makes sense
+- Prefer composition over configuration for complex components
+
+```typescript
+// Good: Discriminated union for conditional props
+type ButtonProps = 
+  | {
+      variant: 'primary' | 'secondary';
+      size?: 'sm' | 'md' | 'lg';
+      children: React.ReactNode;
+      disabled?: boolean;
+      onClick?: () => void;
+    }
+  | {
+      variant: 'link';
+      href: string;
+      children: React.ReactNode;
+      external?: boolean;
+    };
+
+export function Button(props: ButtonProps) {
+  if (props.variant === 'link') {
+    return (
+      <a 
+        href={props.href} 
+        target={props.external ? '_blank' : undefined}
+        rel={props.external ? 'noopener noreferrer' : undefined}
+      >
+        {props.children}
+      </a>
+    );
+  }
+
+  const { variant, size = 'md', children, disabled = false, onClick } = props;
+  // Button implementation
+}
+```
+
+### State Management Patterns
+
+- Keep state as local as possible
+- Lift state up when multiple components need access
+- Use Context sparingly and only for truly global state
+- Prefer the "Container/Presenter" pattern when separating data and UI
+- Use custom hooks for complex state logic
+- Consider state machines for complex state transitions
+
+```typescript
+// Container component (manages data and state)
+function UserProfileContainer({ userId }: { userId: string }) {
+  const { data: userData, isLoading, error } = useUserData(userId);
+  const [isEditing, setIsEditing] = useState(false);
+  
+  const handleEdit = useCallback(() => {
+    setIsEditing(true);
+  }, []);
+
+  const handleSave = useCallback(async (updates: UserUpdate) => {
+    await updateUser(userId, updates);
+    setIsEditing(false);
+  }, [userId]);
+  
+  if (isLoading) {
+    return <UserProfileSkeleton />;
+  }
+
+  if (error) {
+    return <ErrorMessage error={error} />;
+  }
+  
+  return (
+    <UserProfilePresenter 
+      data={userData} 
+      isEditing={isEditing}
+      onEdit={handleEdit}
+      onSave={handleSave}
+      onCancel={() => setIsEditing(false)}
+    />
+  );
+}
+
+// Presenter component (renders UI)
+type UserProfilePresenterProps = {
+  data: UserData;
+  isEditing: boolean;
+  onEdit: () => void;
+  onSave: (updates: UserUpdate) => void;
+  onCancel: () => void;
+};
+
+function UserProfilePresenter({ 
+  data, 
+  isEditing, 
+  onEdit, 
+  onSave, 
+  onCancel 
+}: UserProfilePresenterProps) {
+  if (isEditing) {
+    return <UserProfileEditForm data={data} onSave={onSave} onCancel={onCancel} />;
+  }
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>{data.name}</CardTitle>
+        <Button variant="ghost" size="sm" onClick={onEdit}>
+          <Trans i18nKey="common:edit" />
+        </Button>
+      </CardHeader>
+      <CardContent>
+        {/* Profile content */}
+      </CardContent>
+    </Card>
+  );
+}
+```
+
+### Custom Hooks
+
+- Follow the Rules of Hooks (only call hooks at the top level, only call them from React functions)
+- Create custom hooks for reusable logic
+- Keep custom hooks focused on a single concern
+- Name custom hooks with a 'use' prefix (e.g., `useUserProfile`)
+- Extract complex effect logic into separate functions
+- Always provide a complete dependencies array to `useEffect`
+- Return objects for multiple values, not arrays
+
+```typescript
+// Good: Focused custom hook
+function useUserData(userId: string) {
+  const [data, setData] = useState<UserData | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function fetchUser() {
+      try {
+        setIsLoading(true);
+        setError(null);
+        const userData = await getUserById(userId);
+        
+        if (!cancelled) {
+          setData(userData);
+        }
+      } catch (err) {
+        if (!cancelled) {
+          setError(err instanceof Error ? err : new Error('Unknown error'));
+        }
+      } finally {
+        if (!cancelled) {
+          setIsLoading(false);
+        }
+      }
+    }
+
+    fetchUser();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [userId]);
+
+  const refetch = useCallback(() => {
+    // Trigger refetch logic
+  }, [userId]);
+
+  return { data, isLoading, error, refetch };
+}
+```
+
+### Performance Optimization
+
+- Apply `useMemo` for expensive calculations
+- Use `useCallback` for functions passed as props to child components
+- Split code using dynamic imports and `React.lazy()`
+- Use `React.memo` for components that render frequently with same props
+- Optimize re-renders by minimizing prop changes
+- Use proper key props for list items
+
+```typescript
+// Memoized component
+const UserCard = React.memo(function UserCard({ 
+  user, 
+  onSelect 
+}: { 
+  user: User; 
+  onSelect: (userId: string) => void; 
+}) {
+  const handleClick = useCallback(() => {
+    onSelect(user.id);
+  }, [user.id, onSelect]);
+
+  return (
+    <Card onClick={handleClick}>
+      <CardContent>
+        <ProfileAvatar user={user} />
+        <h3>{user.name}</h3>
+      </CardContent>
+    </Card>
+  );
+});
+
+// Parent component with optimized callbacks
+function UserList({ users }: { users: User[] }) {
+  const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
+
+  // Memoized callback to prevent unnecessary re-renders
+  const handleUserSelect = useCallback((userId: string) => {
+    setSelectedUserId(userId);
+  }, []);
+
+  // Memoized expensive calculation
+  const sortedUsers = useMemo(() => {
+    return users.sort((a, b) => a.name.localeCompare(b.name));
+  }, [users]);
+
+  return (
+    <div>
+      {sortedUsers.map(user => (
+        <UserCard 
+          key={user.id} 
+          user={user} 
+          onSelect={handleUserSelect} 
+        />
+      ))}
+    </div>
+  );
+}
+```
+
+### Internationalization (i18n)
+
+- Always use the `Trans` component for text rendering (no hardcoded strings)
+- Ensure all i18n keys are available in locale files
+- Use namespaces to organize translations logically
+- Include interpolation variables in translation keys
+- Test UI with different languages, especially those with longer text
+- Use semantic keys rather than literal text
+
+```typescript
+// Correct: Using Trans component with semantic keys
+function WelcomeMessage({ user }: { user: User }) {
+  return (
+    <div>
+      <Trans 
+        i18nKey="user:welcome.greeting" 
+        values={{ name: user.name }} 
+      />
+      <Trans 
+        i18nKey="user:welcome.lastLogin" 
+        values={{ date: formatDate(user.lastLoginAt) }} 
+      />
+    </div>
+  );
+}
+
+// Incorrect: Hardcoded strings
+function WelcomeMessage({ user }: { user: User }) {
+  return (
+    <div>
+      <p>Welcome, {user.name}!</p>
+      <p>Last login: {formatDate(user.lastLoginAt)}</p>
+    </div>
+  );
+}
+```
+
+## Server Components
+
+### Fundamentals
+
+- Server Components render React server-side and never run on the client
+- Use Server Components as the default choice, especially for data fetching
+- No use of hooks, browser APIs, or event handlers in Server Components
+- No use of `useState`, `useEffect`, or any other React hooks
+- Server Components can render Client Components but not vice versa
+- Keep Server Components pure and predictable
+
+### Data Fetching Patterns
+
+- Fetch data directly using async/await in Server Components
+- Use Suspense boundaries around data-fetching components
+- Apply security checks before fetching sensitive data
+- Never pass sensitive data (API keys, tokens) to Client Components
+- Use React's `cache()` function for caching data requests
+- Implement proper error boundaries for data fetching failures
+
+```typescript
+import { cache } from 'react';
+import { db } from '@tazeai/database';
+import { auth } from '@tazeai/auth';
+
+// Cached data fetching function
+const getUserProfile = cache(async (userId: string) => {
+  const user = await db.query.user.findFirst({
+    where: eq(user.id, userId),
+    with: {
+      profile: true,
+      sessions: true,
+    },
+  });
+  
+  if (!user) {
+    throw new Error('User not found');
+  }
+  
+  return user;
+});
+
+// Server Component
+async function UserProfilePage({ params }: { params: { userId: string } }) {
+  const session = await auth();
+  
+  // Security check
+  if (!session || (session.user.id !== params.userId && !session.user.isAdmin)) {
+    throw new Error('Unauthorized');
+  }
+  
+  const user = await getUserProfile(params.userId);
+  
+  return (
+    <div>
+      <UserProfileHeader user={user} />
+      <Suspense fallback={<UserProfileSkeleton />}>
+        <UserProfileContent userId={user.id} />
+      </Suspense>
+    </div>
+  );
+}
+```
+
+### Error Handling
+
+- Implement error boundaries at appropriate levels
+- Use the Next.js `error.tsx` file for route-level error handling
+- Create fallback UI for when data fetching fails
+- Log server errors appropriately without exposing details to clients
+- Provide meaningful error messages to users
+
+### Streaming and Suspense
+
+- Use React Suspense for progressive loading experiences
+- Implement streaming rendering for large or complex pages
+- Structure components to enable meaningful loading states
+- Prioritize above-the-fold content when using streaming
+
+## Client Components
+
+### Fundamentals
+
+- Add the `'use client'` directive at the top of files for Client Components
+- Keep Client Components focused on interactivity and browser APIs
+- Use hooks appropriately following the Rules of Hooks
+- Implement controlled components for form elements
+- Handle all browser events in Client Components
+- Minimize the client-side JavaScript bundle
+
+### Data Fetching in Client Components
+
+- Use React Query (TanStack Query) for data fetching in Client Components
+- Create custom hooks for data fetching logic (e.g., `useUserData`)
+- Always handle loading, success, and error states
+- Implement proper caching and invalidation strategies
+
+```typescript
+'use client';
+
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+
+function useUserProfile(userId: string) {
+  return useQuery({
+    queryKey: ['user', userId],
+    queryFn: () => fetchUserProfile(userId),
+    staleTime: 5 * 60 * 1000, // 5 minutes
+  });
+}
+
+function useUpdateUserProfile() {
+  const queryClient = useQueryClient();
+  
+  return useMutation({
+    mutationFn: updateUserProfile,
+    onSuccess: (data) => {
+      queryClient.setQueryData(['user', data.id], data);
+      queryClient.invalidateQueries({ queryKey: ['users'] });
+    },
+  });
+}
+```
+
+### Form Handling
+
+- Use libraries like React Hook Form for complex forms
+- Implement proper validation with libraries like Zod
+- Create reusable form components
+- Handle form submissions with loading and error states
+- Use controlled components for form inputs
+- Implement optimistic updates where appropriate
+
+```typescript
+'use client';
+
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+
+const userProfileSchema = z.object({
+  name: z.string().min(1, 'Name is required'),
+  email: z.string().email('Invalid email'),
+  bio: z.string().max(500, 'Bio must be less than 500 characters'),
+});
+
+type UserProfileForm = z.infer<typeof userProfileSchema>;
+
+function UserProfileEditForm({ 
+  user, 
+  onSave, 
+  onCancel 
+}: {
+  user: User;
+  onSave: (data: UserProfileForm) => Promise<void>;
+  onCancel: () => void;
+}) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<UserProfileForm>({
+    resolver: zodResolver(userProfileSchema),
+    defaultValues: {
+      name: user.name,
+      email: user.email,
+      bio: user.bio || '',
+    },
+  });
+
+  const onSubmit = async (data: UserProfileForm) => {
+    try {
+      await onSave(data);
+    } catch (error) {
+      // Handle error
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div>
+        <Label htmlFor="name">
+          <Trans i18nKey="user:form.name" />
+        </Label>
+        <Input
+          id="name"
+          {...register('name')}
+          error={errors.name?.message}
+        />
+      </div>
+      
+      <div>
+        <Label htmlFor="email">
+          <Trans i18nKey="user:form.email" />
+        </Label>
+        <Input
+          id="email"
+          type="email"
+          {...register('email')}
+          error={errors.email?.message}
+        />
+      </div>
+      
+      <div>
+        <Label htmlFor="bio">
+          <Trans i18nKey="user:form.bio" />
+        </Label>
+        <Textarea
+          id="bio"
+          {...register('bio')}
+          error={errors.bio?.message}
+        />
+      </div>
+      
+      <div className="flex gap-2">
+        <Button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? (
+            <Trans i18nKey="common:saving" />
+          ) : (
+            <Trans i18nKey="common:save" />
+          )}
+        </Button>
+        <Button type="button" variant="ghost" onClick={onCancel}>
+          <Trans i18nKey="common:cancel" />
+        </Button>
+      </div>
+    </form>
+  );
+}
+```
+
+### Error Handling
+
+- Implement error boundaries to catch and handle component errors
+- Always handle network request errors
+- Provide user-friendly error messages
+- Log errors appropriately
+- Implement retry mechanisms where applicable
+
+```typescript
+'use client';
+
+import { ErrorBoundary } from 'react-error-boundary';
+
+function ErrorFallback({ 
+  error, 
+  resetErrorBoundary 
+}: { 
+  error: Error; 
+  resetErrorBoundary: () => void; 
+}) {
+  return (
+    <Card className="border-destructive">
+      <CardHeader>
+        <CardTitle className="text-destructive">
+          <Trans i18nKey="error:boundary.title" />
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <p className="text-muted-foreground mb-4">
+          <Trans i18nKey="error:boundary.description" />
+        </p>
+        <Button onClick={resetErrorBoundary}>
+          <Trans i18nKey="error:boundary.retry" />
+        </Button>
+      </CardContent>
+    </Card>
+  );
+}
+
+export function UserProfileWithErrorHandling({ userId }: { userId: string }) {
+  return (
+    <ErrorBoundary
+      FallbackComponent={ErrorFallback}
+      onReset={() => {
+        // Reset application state here if needed
+        window.location.reload();
+      }}
+    >
+      <UserProfile userId={userId} />
+    </ErrorBoundary>
+  );
+}
+```
+
+## Testing Patterns
+
+### Component Testing
+
+- Test component behavior, not implementation details
+- Use React Testing Library for component tests
+- Test user interactions and accessibility
+- Mock external dependencies appropriately
+
+```typescript
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { UserProfile } from './user-profile';
+
+describe('UserProfile', () => {
+  it('displays user information correctly', () => {
+    const user = { id: '1', name: 'John Doe', email: 'john@example.com' };
+    
+    render(<UserProfile user={user} />);
+    
+    expect(screen.getByText('John Doe')).toBeInTheDocument();
+    expect(screen.getByText('john@example.com')).toBeInTheDocument();
+  });
+
+  it('handles edit mode correctly', async () => {
+    const user = { id: '1', name: 'John Doe', email: 'john@example.com' };
+    const onSave = jest.fn();
+    
+    render(<UserProfile user={user} onSave={onSave} />);
+    
+    fireEvent.click(screen.getByRole('button', { name: /edit/i }));
+    
+    const nameInput = screen.getByLabelText(/name/i);
+    fireEvent.change(nameInput, { target: { value: 'Jane Doe' } });
+    
+    fireEvent.click(screen.getByRole('button', { name: /save/i }));
+    
+    await waitFor(() => {
+      expect(onSave).toHaveBeenCalledWith({ name: 'Jane Doe', email: 'john@example.com' });
+    });
+  });
+});
+```
+
+## Common Anti-Patterns to Avoid
+
+1. **Don't use default exports** for components - use named exports for better refactoring
+2. **Don't mutate props** - props should be treated as immutable
+3. **Don't use array indices as keys** - use stable, unique identifiers
+4. **Don't forget to handle loading and error states** - always provide feedback to users
+5. **Don't use `useEffect` for data fetching in Client Components** - use React Query instead
+6. **Don't hardcode strings** - always use the `Trans` component for user-facing text
+7. **Don't create components inside render functions** - define components outside or use `useMemo`
+8. **Don't use `any` type** - prefer proper TypeScript types
+9. **Don't forget accessibility** - use semantic HTML and ARIA attributes
+10. **Don't skip error boundaries** - implement proper error handling at component boundaries

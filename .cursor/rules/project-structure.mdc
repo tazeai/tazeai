@@ -1,0 +1,273 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Project Structure
+
+TazeAI is a modern monorepo built with TypeScript, Next.js, and a comprehensive package architecture designed for scalability and maintainability.
+
+## Monorepo Architecture
+
+### Workspace Organization
+```
+tazeai/
+├── apps/                    # Applications
+│   ├── web/                # Marketing website (Next.js)
+│   └── app/                # Main application (Next.js)
+├── packages/               # Shared packages
+│   ├── ui/                 # UI components (@tazeai/ui)
+│   ├── database/           # Database layer (@tazeai/database)
+│   ├── auth/               # Authentication (@tazeai/auth)
+│   ├── ai/                 # AI/ML functionality (@tazeai/ai)
+│   ├── email/              # Email templates (@tazeai/email)
+│   ├── i18n/               # Internationalization (@tazeai/i18n)
+│   ├── analytics/          # Analytics (@tazeai/analytics)
+│   ├── cache/              # Caching layer (@tazeai/cache)
+│   ├── core/               # Core utilities (@tazeai/core)
+│   ├── shared/             # Shared utilities (@tazeai/shared)
+│   ├── types/              # Shared types (@tazeai/types)
+│   ├── env/                # Environment validation (@tazeai/env)
+│   └── tooling/            # Development tools (@tazeai/tooling)
+└── docker/                 # Docker configurations
+```
+
+### Package Manager & Tools
+- **Package Manager**: pnpm with workspaces
+- **Build System**: Turbo for monorepo orchestration
+- **Linting**: Biome for formatting and linting
+- **Type Checking**: TypeScript with strict configuration
+- **Version Control**: Git with Husky hooks
+
+## Application Structure
+
+### Apps Directory (`apps/`)
+
+#### Web App (`apps/web/`)
+- **Purpose**: Marketing website and landing pages
+- **Framework**: Next.js with App Router
+- **Features**: Static generation, SEO optimization, marketing components
+
+#### Main App (`apps/app/`)
+- **Purpose**: Core application functionality
+- **Framework**: Next.js with App Router
+- **Features**: Authentication, dashboard, user management, AI features
+
+### Package Architecture
+
+#### Core Packages
+
+##### UI Package (`packages/ui/`)
+- **Purpose**: Reusable UI components and design system
+- **Structure**:
+  ```
+  packages/ui/src/
+  ├── shadcn/           # Shadcn UI base components
+  ├── makerkit/         # TazeAI-specific components
+  │   ├── marketing/    # Marketing components
+  │   └── ...           # Other custom components
+  ├── lib/              # Utilities (cn function, etc.)
+  └── styles/           # Global styles and Tailwind config
+  ```
+- **Export Pattern**: `@tazeai/ui/components/{component-name}`
+
+##### Database Package (`packages/database/`)
+- **Purpose**: Database layer with Drizzle ORM
+- **Structure**:
+  ```
+  packages/database/src/
+  ├── schemas/          # Database schemas
+  ├── adapters/         # Database adapters
+  ├── utils/            # Database utilities
+  └── builder/          # Query builder
+  ```
+- **Features**: PostgreSQL, migrations, type-safe queries
+
+##### Authentication Package (`packages/auth/`)
+- **Purpose**: Authentication and authorization
+- **Features**: Session management, user roles, security
+
+##### AI Package (`packages/ai/`)
+- **Purpose**: AI/ML functionality and integrations
+- **Features**: LLM integrations, RAG, AI workflows
+
+#### Supporting Packages
+
+##### Environment Package (`packages/env/`)
+- **Purpose**: Environment variable validation
+- **Pattern**: T3 Env for type-safe environment variables
+
+##### Internationalization Package (`packages/i18n/`)
+- **Purpose**: Multi-language support
+- **Features**: Translation management, locale handling
+
+##### Email Package (`packages/email/`)
+- **Purpose**: Email templates and sending
+- **Features**: React Email templates, transactional emails
+
+##### Analytics Package (`packages/analytics/`)
+- **Purpose**: Analytics and tracking
+- **Features**: Event tracking, user analytics
+
+##### Cache Package (`packages/cache/`)
+- **Purpose**: Caching layer
+- **Features**: Redis integration, cache strategies
+
+## Development Patterns
+
+### File Naming Conventions
+- **Components**: `kebab-case.tsx` (e.g., `user-profile.tsx`)
+- **Utilities**: `kebab-case.ts` (e.g., `format-date.ts`)
+- **Types**: `kebab-case.ts` or `types.ts`
+- **Constants**: `UPPER_SNAKE_CASE` or `kebab-case.ts`
+
+### Import/Export Patterns
+
+#### Package Exports
+```typescript
+// packages/ui/package.json exports field pattern
+{
+  "exports": {
+    "./components/*": "./src/*/index.ts",
+    "./lib/*": "./src/lib/*.ts"
+  }
+}
+```
+
+#### Import Patterns
+```typescript
+// UI Components
+import { Button } from '@tazeai/ui/components/button';
+import { Card } from '@tazeai/ui/components/card';
+
+// Database
+import { db } from '@tazeai/database';
+import type { User } from '@tazeai/database/schemas';
+
+// Utilities
+import { cn } from '@tazeai/ui/lib/utils';
+import { formatDate } from '@tazeai/shared/utils';
+```
+
+### Code Organization
+
+#### Feature-Based Structure
+Organize code by features rather than technical layers:
+```
+src/
+├── features/
+│   ├── auth/
+│   │   ├── components/
+│   │   ├── hooks/
+│   │   ├── services/
+│   │   └── types.ts
+│   ├── dashboard/
+│   └── profile/
+├── shared/
+│   ├── components/
+│   ├── hooks/
+│   └── utils/
+└── app/                # Next.js app directory
+```
+
+#### Component Co-location
+Keep related files close together:
+```
+components/
+├── user-profile/
+│   ├── user-profile.tsx
+│   ├── user-profile.test.tsx
+│   ├── user-profile.stories.tsx
+│   └── index.ts
+```
+
+### Configuration Files
+
+#### TypeScript Configuration
+- **Root**: `tsconfig.json` with path mapping
+- **Packages**: Extend from root configuration
+- **Apps**: Extend from root with app-specific settings
+
+#### Build Configuration
+- **Turbo**: `turbo.json` for build orchestration
+- **Next.js**: `next.config.js` for app configuration
+- **Biome**: `biome.jsonc` for linting and formatting
+
+## Development Workflow
+
+### Package Scripts
+```bash
+# Development
+pnpm dev                    # Start all apps in development
+pnpm dev --filter=web       # Start specific app
+
+# Building
+pnpm build                  # Build all packages
+pnpm build --filter=@tazeai/ui  # Build specific package
+
+# Testing
+pnpm test                   # Run all tests
+pnpm test --filter=app      # Test specific app
+
+# Linting & Formatting
+pnpm lint                   # Check all files
+pnpm format                 # Format all files
+```
+
+### Dependency Management
+- **Internal Dependencies**: Use workspace protocol (`workspace:*`)
+- **External Dependencies**: Use catalog for version consistency
+- **Dev Dependencies**: Hoist to root when possible
+
+### Environment Management
+- **Local**: `.env.local` files in app directories
+- **Shared**: Environment validation in `@tazeai/env`
+- **Production**: Platform-specific environment variables
+
+## Best Practices
+
+### Package Design
+1. **Single Responsibility**: Each package should have a clear, focused purpose
+2. **Minimal API Surface**: Export only what's necessary
+3. **Type Safety**: Full TypeScript coverage with strict settings
+4. **Documentation**: Clear README and API documentation
+
+### Dependency Management
+1. **Minimize Dependencies**: Only add dependencies when necessary
+2. **Version Consistency**: Use catalog for shared dependencies
+3. **Peer Dependencies**: Use for packages that should be provided by consumers
+4. **Internal First**: Prefer internal packages over external ones
+
+### Performance Considerations
+1. **Tree Shaking**: Design packages for optimal tree shaking
+2. **Code Splitting**: Use dynamic imports for large features
+3. **Bundle Analysis**: Regular bundle size monitoring
+4. **Caching**: Leverage Turbo's caching for builds and tests
+
+### Security Practices
+1. **Environment Variables**: Never commit secrets
+2. **Package Auditing**: Regular security audits
+3. **Access Control**: Proper package access controls
+4. **Input Validation**: Validate all external inputs
+
+## Migration Guidelines
+
+### Adding New Packages
+1. Create package directory in `packages/`
+2. Add `package.json` with proper exports
+3. Update workspace configuration
+4. Add to Turbo pipeline if needed
+5. Document in this structure guide
+
+### Refactoring Existing Code
+1. Identify shared functionality
+2. Create appropriate package
+3. Move code with proper imports/exports
+4. Update consuming packages
+5. Test thoroughly
+
+### Deprecating Packages
+1. Mark as deprecated in `package.json`
+2. Add deprecation notices
+3. Provide migration path
+4. Remove after transition period
