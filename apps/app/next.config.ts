@@ -15,7 +15,7 @@ let nextConfig: NextConfig = {
   },
 };
 
-if (process.env.ANALYZE === 'true') {
+if (process.env.ANALYZE === "true") {
   nextConfig = withBundleAnalyzer()(nextConfig);
 }
 

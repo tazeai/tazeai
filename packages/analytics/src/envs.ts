@@ -2,10 +2,14 @@ import { createEnv, z } from "@tazeai/env";
 
 export const envs = () =>
   createEnv({
-    server: {
-      REDIS_URL: z.string().min(1).url(),
+    client: {
+      NEXT_PUBLIC_POSTHOG_KEY: z.string().startsWith("phc_"),
+      NEXT_PUBLIC_POSTHOG_HOST: z.string().url(),
+      NEXT_PUBLIC_GA_MEASUREMENT_ID: z.string().startsWith("G-").optional(),
     },
     runtimeEnv: {
-      REDIS_URL: process.env.REDIS_URL,
+      NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
+      NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+      NEXT_PUBLIC_GA_MEASUREMENT_ID: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID,
     },
   });

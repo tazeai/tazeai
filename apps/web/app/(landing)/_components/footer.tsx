@@ -8,9 +8,7 @@ const Footer = () => {
   const startYear = 2024;
   const currentYear = new Date().getFullYear();
   const copyright =
-    currentYear > startYear
-      ? `${startYear}-${currentYear}`
-      : `${currentYear}`;
+    currentYear > startYear ? `${startYear}-${currentYear}` : `${currentYear}`;
 
   return (
     <footer className="bg-muted/30 py-12">
@@ -22,7 +20,8 @@ const Footer = () => {
               <span className="font-bold text-xl">TazeAI</span>
             </div>
             <p className="text-muted-foreground max-w-xs mb-4">
-              Transforming businesses with powerful workflow solutions since {startYear}.
+              Transforming businesses with powerful workflow solutions since{" "}
+              {startYear}.
             </p>
             <div className="flex space-x-4">
               <a

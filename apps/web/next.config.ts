@@ -3,6 +3,7 @@ import withBundleAnalyzer from "@next/bundle-analyzer";
 
 let nextConfig: NextConfig = {
   transpilePackages: [
+    "@tazeai/analytics",
     "@tazeai/auth",
     "@tazeai/cache",
     "@tazeai/core",
@@ -16,7 +17,7 @@ let nextConfig: NextConfig = {
   },
 };
 
-if (process.env.ANALYZE === 'true') {
+if (process.env.ANALYZE === "true") {
   nextConfig = withBundleAnalyzer()(nextConfig);
 }
 

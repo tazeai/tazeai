@@ -38,21 +38,21 @@ const Hero = () => {
       <div className="absolute inset-0 -z-10 overflow-hidden">
         {/* 渐变背景 */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-purple-500/5 to-pink-500/5" />
-        
+
         {/* 动态光球 */}
         <div className="absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-primary/10 to-purple-500/10 blur-[120px] animate-pulse" />
         <div className="absolute bottom-0 left-0 translate-y-1/4 -translate-x-1/4 w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-purple-500/10 to-pink-500/10 blur-[100px] animate-pulse delay-700" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-gradient-to-r from-blue-500/5 to-cyan-500/5 blur-[80px] animate-pulse delay-1000" />
-        
+
         {/* 鼠标跟随光效 */}
-        <div 
+        <div
           className="absolute w-[300px] h-[300px] rounded-full bg-gradient-to-r from-primary/20 to-transparent blur-[60px] pointer-events-none transition-all duration-300 ease-out"
           style={{
             left: mousePosition.x - 150,
             top: mousePosition.y - 150,
           }}
         />
-        
+
         {/* 浮动粒子 */}
         {[...Array(20)].map((_, i) => (
           <div
@@ -117,9 +117,9 @@ const Hero = () => {
                 立即体验
                 <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
+              <Button
+                size="lg"
+                variant="outline"
                 className="group border-2 hover:bg-primary/5 hover:border-primary/50 transition-all duration-300 transform hover:scale-105"
               >
                 查看演示
@@ -142,12 +142,19 @@ const Hero = () => {
               </div>
               <div className="ml-6 space-y-1">
                 <p className="text-sm font-medium text-foreground">
-                  加入 <span className="text-2xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">10,000+</span> 位创作者
+                  加入{" "}
+                  <span className="text-2xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
+                    10,000+
+                  </span>{" "}
+                  位创作者
                 </p>
                 <div className="flex items-center text-sm text-muted-foreground">
                   <div className="flex mr-2">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-3 h-3 fill-yellow-400 text-yellow-400" />
+                      <Star
+                        key={i}
+                        className="w-3 h-3 fill-yellow-400 text-yellow-400"
+                      />
                     ))}
                   </div>
                   <span>4.9/5 用户评分</span>
@@ -176,9 +183,11 @@ const Hero = () => {
                       <div className="h-3 w-3 rounded-full bg-yellow-500 animate-pulse delay-100"></div>
                       <div className="h-3 w-3 rounded-full bg-green-500 animate-pulse delay-200"></div>
                     </div>
-                    <div className="text-xs text-muted-foreground font-mono">TazeAI v2.0</div>
+                    <div className="text-xs text-muted-foreground font-mono">
+                      TazeAI v2.0
+                    </div>
                   </div>
-                  
+
                   {/* AI思考动画 */}
                   <div className="flex-1 flex items-center justify-center">
                     <div className="space-y-6 text-center">

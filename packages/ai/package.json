@@ -11,7 +11,7 @@
     "clean": "rimraf dist .turbo"
   },
   "dependencies": {
-    "@langchain/community": "^0.3.44",
+    "@langchain/community": "^0.3.45",
     "@langchain/core": "^0.3.57",
     "@langchain/deepseek": "^0.0.1",
     "@langchain/openai": "^0.5.11",
