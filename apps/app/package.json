@@ -39,13 +39,13 @@
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^15.3.2",
-    "@tailwindcss/postcss": "^4.1.7",
+    "@tailwindcss/postcss": "^4.1.8",
     "@tazeai/typescript-config": "workspace:*",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "dotenv-cli": "^8.0.0",
-    "tailwindcss": "^4.1.7",
+    "tailwindcss": "^4.1.8",
     "typescript": "catalog:"
   }
 }

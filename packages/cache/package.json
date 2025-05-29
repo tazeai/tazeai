@@ -13,7 +13,7 @@
   "dependencies": {
     "@tazeai/env": "workspace:*",
     "lodash-es": "^4.17.21",
-    "redis": "^5.1.0",
+    "redis": "^5.1.1",
     "superjson": "^2.2.2",
     "zod": "catalog:"
   },

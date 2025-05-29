@@ -18,7 +18,7 @@ export const PostHogProvider = (
   useEffect(() => {
     console.log("env", env);
     posthog.init(env.NEXT_PUBLIC_POSTHOG_KEY, {
-      api_host: env.NEXT_PUBLIC_POSTHOG_HOST,
+      api_host: "/ingest",
       ui_host: env.NEXT_PUBLIC_POSTHOG_HOST,
       person_profiles: "identified_only",
       capture_pageview: false, // Disable automatic pageview capture, as we capture manually
