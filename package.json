@@ -32,20 +32,14 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.1.0",
     "rimraf": "^6.0.1",
-    "turbo": "^2.5.3",
+    "turbo": "^2.5.4",
     "type-fest": "^4.41.0",
     "typescript": "catalog:",
-    "vitest": "^3.1.4"
+    "vitest": "^3.2.0"
   },
-  "packageManager": "pnpm@10.11.0",
+  "packageManager": "pnpm@10.11.1",
   "engines": {
     "node": "^20 || >=22",
     "pnpm": ">=9.10.0"
-  },
-  "pnpm": {
-    "overrides": {
-      "react-is": "19.0.0",
-      "require-in-the-middle": "7.5.2"
-    }
   }
 }

@@ -5,7 +5,7 @@ packages:
   - "!**/__tests__/*"
 
 catalog:
-  "@types/node": ^22.15.24
+  "@types/node": ^22.15.29
   "@types/react-dom": ^19.1.5
   "@types/react": ^19.1.6
   lucide-react: ^0.511.0
@@ -13,4 +13,4 @@ catalog:
   react-dom: ^19.1.0
   react: ^19.1.0
   typescript: ^5.8.3
-  zod: ^3.25.34
+  zod: ^3.25.48
