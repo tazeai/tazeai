@@ -29,7 +29,7 @@ import { toast } from "sonner";
 import { useSearchParams } from "next/navigation";
 import { Label } from "@tazeai/ui/components/label";
 import Link from "next/link";
-import { authConfig } from "config/auth";
+import { authConfig } from "@/config/auth";
 import { Social } from "./social";
 
 const formSchema = z.object({

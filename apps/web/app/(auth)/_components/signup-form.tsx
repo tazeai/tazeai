@@ -27,7 +27,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { toast } from "sonner";
 import { useSearchParams } from "next/navigation";
-import { authConfig } from "config/auth";
+import { authConfig } from "@/config/auth";
 import { Social } from "./social";
 
 const formSchema = z.object({

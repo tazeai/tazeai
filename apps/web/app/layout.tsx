@@ -1,6 +1,6 @@
-import { getFontsClassName } from "libs/fonts";
-import { getTheme } from "libs/theme";
-import { createI18nServerInstance } from "locales/i18n.server";
+import { getFontsClassName } from "@/libs/fonts";
+import { getTheme } from "@/libs/theme";
+import { createI18nServerInstance } from "@/locales/i18n.server";
 import type { Metadata } from "next";
 import { Providers } from "./providers";
 

@@ -19,13 +19,12 @@
     "@tazeai/env": "workspace:*",
     "ai": "^4.3.16",
     "langchain": "^0.3.27",
-    "langsmith": "^0.3.29",
-    "openai": "^5.0.1",
+    "langsmith": "^0.3.30",
     "zod": "catalog:"
   },
   "devDependencies": {
     "@tazeai/typescript-config": "workspace:*",
-    "@types/node": "catalog:",
+    "@types/node": "^22.15.29",
     "typescript": "catalog:"
   }
 }

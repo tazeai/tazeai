@@ -7,11 +7,11 @@ import { Sheet, SheetContent, SheetTrigger } from "@tazeai/ui/components/sheet";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@tazeai/ui/lib/utils";
-import { authConfig } from "config/auth";
-import OneTap from "../../(auth)/_components/one-tap";
+import { authConfig } from "@/config/auth";
+import OneTap from "@/app/(auth)/_components/one-tap";
 import { useSession } from "@tazeai/auth/client";
-import { UserButton } from "../../../components/user-button";
-import { Logo } from "../../../components/logo";
+import { UserButton } from "@/components/user-button";
+import { Logo } from "@/components/logo";
 
 const NavLink = ({
   href,

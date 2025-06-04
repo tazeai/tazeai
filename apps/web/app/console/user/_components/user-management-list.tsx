@@ -14,15 +14,15 @@ import { Checkbox } from "@tazeai/ui/components/checkbox";
 import { UserPlus, Trash, UserX, UserCheck } from "lucide-react";
 import { fetcher } from "./fetcher";
 import type { User, UserFormData } from "./types";
-import { DataTable } from "components/data-table";
-import { DataTableToolbar } from "components/data-table/data-table-toolbar";
-import { DataTablePagination } from "components/data-table/data-table-pagination";
+import { DataTable } from "@/components/data-table";
+import { DataTableToolbar } from "@/components/data-table/data-table-toolbar";
+import { DataTablePagination } from "@/components/data-table/data-table-pagination";
 import { UserFilters } from "./user-filters";
 import { UserActions } from "./user-actions";
 import { UserForm } from "./user-form";
 import { FormDialog } from "./dialogs/form-dialog";
 import { ConfirmDialog } from "./dialogs/confirm-dialog";
-import type { Column } from "components/data-table/types";
+import type { Column } from "@/components/data-table/types";
 import { cn } from "@tazeai/ui/lib/utils";
 
 // 首先确保导入 DropdownMenu 相关组件

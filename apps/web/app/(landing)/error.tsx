@@ -1,6 +1,6 @@
 "use client";
 
-import NotFoundError from "components/not-found-error";
+import NotFoundError from "@/components/not-found-error";
 
 export default function ErrorBoundary({ error }: any) {
   return (
