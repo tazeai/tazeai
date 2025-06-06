@@ -1,4 +1,4 @@
-import type { Database } from "@tazeai/database";
+import type { Database } from "@tazeai/db";
 import type { auth } from "@tazeai/auth";
 import type { Context } from "hono";
 import type { Cache } from "@tazeai/cache";

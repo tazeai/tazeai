@@ -1,5 +1,5 @@
 {
-  "name": "@tazeai/database",
+  "name": "@tazeai/db",
   "version": "0.1.0",
   "type": "module",
   "exports": {
@@ -26,14 +26,14 @@
     "nanoid": "^5.1.5",
     "postgres": "^3.4.7",
     "uuid": "^11.1.0",
-    "zod": "catalog:"
+    "zod": "^3.25.55"
   },
   "devDependencies": {
-    "@tazeai/typescript-config": "workspace:*",
+    "@tazeai/typescript": "workspace:*",
     "@types/lodash-es": "^4.17.12",
     "dotenv-cli": "^8.0.0",
     "drizzle-kit": "^0.31.1",
     "tsx": "^4.19.4",
-    "typescript": "catalog:"
+    "typescript": "^5.8.3"
   }
 }

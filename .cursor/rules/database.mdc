@@ -5,7 +5,7 @@ alwaysApply: false
 ---
 # Database
 
-The database layer is implemented using Drizzle ORM with PostgreSQL and is organized in the "@tazeai/database" package.
+The database layer is implemented using Drizzle ORM with PostgreSQL and is organized in the "@tazeai/db" package.
 
 ## Architecture Overview
 
@@ -406,7 +406,7 @@ try {
 Use the custom `Builder` class for advanced pagination and filtering:
 
 ```typescript
-import { Builder } from "@tazeai/database/builder";
+import { Builder } from "@tazeai/db/builder";
 
 const builder = new Builder(db, schemas.users);
 
@@ -437,7 +437,7 @@ const searchResult = await builder.paginate(page, {
 
 ### ID Generation
 ```typescript
-import { nanoid, uuidv7 } from "@tazeai/database/utils";
+import { nanoid, uuidv7 } from "@tazeai/db/utils";
 
 // Use uuidv7 for primary keys (time-ordered, better for indexes)
 const id = uuidv7();
@@ -457,7 +457,7 @@ import type {
   PgColumn,
   PgTableWithColumns,
   PgTable,
-} from "@tazeai/database";
+} from "@tazeai/db";
 
 // Helper types for queries
 type SelectUser = typeof schemas.users.$inferSelect;

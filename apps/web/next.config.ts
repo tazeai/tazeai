@@ -7,7 +7,7 @@ let nextConfig: NextConfig = {
     "@tazeai/auth",
     "@tazeai/cache",
     "@tazeai/core",
-    "@tazeai/database",
+    "@tazeai/db",
     "@tazeai/shared",
     "@tazeai/ui",
   ],

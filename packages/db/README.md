@@ -1,4 +1,4 @@
-# @tazeai/database
+# @tazeai/db
 
 Database package for TazeAI. This package provides database connectivity, models, and query builders for the TazeAI platform.
 
@@ -14,13 +14,13 @@ Database package for TazeAI. This package provides database connectivity, models
 ## Installation
 
 ```bash
-npm install @tazeai/database
+npm install @tazeai/db
 ```
 
 ## Usage
 
 ```typescript
-import { Database } from '@tazeai/database';
+import { Database } from '@tazeai/db';
 
 // Initialize database connection
 const db = new Database({

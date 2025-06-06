@@ -14,16 +14,16 @@
     "@tazeai/ai": "workspace:*",
     "@tazeai/auth": "workspace:*",
     "@tazeai/cache": "workspace:*",
-    "@tazeai/database": "workspace:*",
+    "@tazeai/db": "workspace:*",
     "@tazeai/env": "workspace:*",
     "dayjs": "^1.11.13",
     "hono": "^4.7.11",
     "pino": "^9.7.0",
-    "zod": "catalog:"
+    "zod": "^3.25.55"
   },
   "devDependencies": {
-    "@tazeai/typescript-config": "workspace:*",
-    "@types/node": "^22.15.29",
-    "typescript": "catalog:"
+    "@tazeai/typescript": "workspace:*",
+    "@types/node": "^22.15.30",
+    "typescript": "^5.8.3"
   }
 }

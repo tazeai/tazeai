@@ -1,4 +1,4 @@
-import { db, nanoid, schemas, uuidv7 } from "@tazeai/database";
+import { db, nanoid, schemas, uuidv7 } from "@tazeai/db";
 import { resend } from "@tazeai/email";
 import { betterAuth, type BetterAuthOptions } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";

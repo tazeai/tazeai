@@ -339,7 +339,7 @@ function WelcomeMessage({ user }: { user: User }) {
 
 ```typescript
 import { cache } from 'react';
-import { db } from '@tazeai/database';
+import { db } from '@tazeai/db';
 import { auth } from '@tazeai/auth';
 
 // Cached data fetching function

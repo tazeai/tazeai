@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import type { Env } from "../types";
-import { schemas, ilike, desc, Builder } from "@tazeai/database";
+import { schemas, ilike, desc, Builder } from "@tazeai/db";
 import dayjs from "dayjs";
 
 const app = new Hono<Env>();

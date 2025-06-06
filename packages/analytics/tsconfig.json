@@ -1,5 +1,5 @@
 {
-  "extends": "@tazeai/typescript-config/nextjs.json",
+  "extends": "@tazeai/typescript/nextjs.json",
   "compilerOptions": {
     "baseUrl": "."
   },

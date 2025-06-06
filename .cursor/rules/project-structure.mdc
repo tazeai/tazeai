@@ -17,7 +17,7 @@ tazeai/
 │   └── app/                # Main application (Next.js)
 ├── packages/               # Shared packages
 │   ├── ui/                 # UI components (@tazeai/ui)
-│   ├── database/           # Database layer (@tazeai/database)
+│   ├── database/           # Database layer (@tazeai/db)
 │   ├── auth/               # Authentication (@tazeai/auth)
 │   ├── ai/                 # AI/ML functionality (@tazeai/ai)
 │   ├── email/              # Email templates (@tazeai/email)
@@ -141,8 +141,8 @@ import { Button } from '@tazeai/ui/components/button';
 import { Card } from '@tazeai/ui/components/card';
 
 // Database
-import { db } from '@tazeai/database';
-import type { User } from '@tazeai/database/schemas';
+import { db } from '@tazeai/db';
+import type { User } from '@tazeai/db/schemas';
 
 // Utilities
 import { cn } from '@tazeai/ui/lib/utils';

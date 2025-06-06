@@ -4,7 +4,7 @@ import { prettyJSON } from "hono/pretty-json";
 import { requestId } from "hono/request-id";
 import { logger } from "hono/logger";
 import { cors } from "hono/cors";
-import { db, type Database } from "@tazeai/database";
+import { db, type Database } from "@tazeai/db";
 import { compress } from "hono/compress";
 import { languageDetector } from "hono/language";
 import type { HonoOptions } from "hono/hono-base";

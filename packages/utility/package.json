@@ -1,0 +1,21 @@
+{
+  "name": "@tazeai/utility",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "clean": "rimraf dist .turbo"
+  },
+  "dependencies": {
+    "@t3-oss/env-nextjs": "^0.13.6",
+    "zod": "^3.25.55"
+  },
+  "devDependencies": {
+    "@tazeai/typescript": "workspace:*",
+    "@types/node": "^22.15.30",
+    "typescript": "^5.8.3"
+  }
+}

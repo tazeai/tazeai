@@ -1,0 +1,24 @@
+{
+  "name": "@tazeai/cli",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./envs": "./src/envs.ts"
+  },
+  "scripts": {
+    "clean": "rimraf dist .turbo",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@tazeai/env": "workspace:*",
+    "zod": "^3.25.55"
+  },
+  "devDependencies": {
+    "@tazeai/typescript": "workspace:*",
+    "@types/node": "^22.15.30",
+    "typescript": "^5.8.3"
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "extends": "@tazeai/typescript-config/react-library.json",
+  "extends": "@tazeai/typescript/react-library.json",
   "compilerOptions": {
     "baseUrl": "."
   },
