@@ -17,7 +17,7 @@
     "with-env": "dotenv -e ../../.env --"
   },
   "dependencies": {
-    "@neondatabase/serverless": "^1.0.0",
+    "@neondatabase/serverless": "^1.0.1",
     "@tazeai/env": "workspace:*",
     "drizzle-orm": "^0.44.2",
     "drizzle-seed": "^0.3.1",
@@ -26,7 +26,7 @@
     "nanoid": "^5.1.5",
     "postgres": "^3.4.7",
     "uuid": "^11.1.0",
-    "zod": "^3.25.55"
+    "zod": "^3.25.56"
   },
   "devDependencies": {
     "@tazeai/typescript": "workspace:*",

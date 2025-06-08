@@ -18,13 +18,13 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@hookform/resolvers": "^5.0.1",
+    "@hookform/resolvers": "^5.1.0",
     "@iconify/react": "^6.0.0",
     "@tazeai/cache": "workspace:*",
     "@tazeai/db": "workspace:*",
     "@tazeai/email": "workspace:*",
     "@tazeai/env": "workspace:*",
-    "bcrypt-ts": "^7.0.0",
+    "bcrypt-ts": "^7.1.0",
     "better-auth": "^1.2.8",
     "lodash-es": "^4.17.21",
     "lucide-react": "^0.513.0",
@@ -33,7 +33,7 @@
     "react-i18next": "^15.5.2",
     "server-only": "^0.0.1",
     "sonner": "^2.0.5",
-    "zod": "^3.25.55",
+    "zod": "^3.25.56",
     "zustand": "^5.0.5"
   },
   "devDependencies": {
