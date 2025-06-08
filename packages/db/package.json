@@ -5,7 +5,8 @@
   "exports": {
     ".": "./src/index.ts",
     "./envs": "./src/envs.ts",
-    "./schemas": "./src/schemas.ts"
+    "./schemas": "./src/schemas.ts",
+    "./query": "./src/query/index.ts"
   },
   "scripts": {
     "clean": "rimraf dist .turbo",
