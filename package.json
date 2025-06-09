@@ -24,6 +24,7 @@
     "format": "biome format --write",
     "lint": "biome check",
     "prepare": "husky",
+    "postinstall": "[ ! -f .env ] && cp .env.example .env || true",
     "start": "turbo run start --filter=\"./apps/*\"",
     "test": "turbo test --cache-dir=.turbo",
     "update:deps": "pnpm update -r -i -L"
