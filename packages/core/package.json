@@ -19,11 +19,11 @@
     "dayjs": "^1.11.13",
     "hono": "^4.7.11",
     "pino": "^9.7.0",
-    "zod": "^3.25.56"
+    "zod": "^3.25.61"
   },
   "devDependencies": {
     "@tazeai/typescript": "workspace:*",
-    "@types/node": "^22.15.30",
+    "@types/node": "^22.15.31",
     "typescript": "^5.8.3"
   }
 }
