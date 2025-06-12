@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { XIcon } from "lucide-react";
-import { Sheet as SheetPrimitive } from "radix-ui";
+import { Dialog as SheetPrimitive } from "radix-ui";
 
 import { cn } from "@tazeai/ui/lib/utils";
 

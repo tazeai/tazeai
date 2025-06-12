@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Label as LabelPrimitive, Slot } from "radix-ui";
+import { Label as LabelPrimitive, Slot as SlotPrimitive } from "radix-ui";
 import {
   Controller,
   FormProvider,
@@ -103,12 +103,14 @@ function FormLabel({
   );
 }
 
-function FormControl({ ...props }: React.ComponentProps<typeof Slot>) {
+function FormControl({
+  ...props
+}: React.ComponentProps<typeof SlotPrimitive.Root>) {
   const { error, formItemId, formDescriptionId, formMessageId } =
     useFormField();
 
   return (
-    <Slot
+    <SlotPrimitive.Root
       data-slot="form-control"
       id={formItemId}
       aria-describedby={

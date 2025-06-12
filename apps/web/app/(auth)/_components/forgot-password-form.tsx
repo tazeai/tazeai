@@ -30,7 +30,6 @@ import { useSearchParams } from "next/navigation";
 import {
   InputOTP,
   InputOTPGroup,
-  InputOTPSeparator,
   InputOTPSlot,
 } from "@tazeai/ui/components/input-otp";
 
