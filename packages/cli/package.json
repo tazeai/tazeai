@@ -13,8 +13,7 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "@tazeai/env": "workspace:*",
-    "zod": "^3.25.61"
+    "@tazeai/env": "workspace:*"
   },
   "devDependencies": {
     "@tazeai/typescript": "workspace:*",

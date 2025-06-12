@@ -11,7 +11,7 @@ import {
   CommandGroup,
   CommandItem,
   CommandList,
-} from "@tazeai/ui/components/command";
+} from "@tazeai/ui/ui/command";
 
 export interface Option {
   value: string;

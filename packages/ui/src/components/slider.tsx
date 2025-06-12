@@ -1,15 +1,15 @@
 "use client";
 
-import * as SliderPrimitive from "@radix-ui/react-slider";
 import * as React from "react";
+import { Slider as SliderPrimitive } from "radix-ui";
 
+import { cn } from "@tazeai/ui/lib/utils";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@tazeai/ui/components/tooltip";
-import { cn } from "@tazeai/ui/lib/utils";
 
 function Slider({
   className,

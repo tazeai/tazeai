@@ -18,8 +18,7 @@
     "@tazeai/env": "workspace:*",
     "dayjs": "^1.11.13",
     "hono": "^4.7.11",
-    "pino": "^9.7.0",
-    "zod": "^3.25.61"
+    "pino": "^9.7.0"
   },
   "devDependencies": {
     "@tazeai/typescript": "workspace:*",

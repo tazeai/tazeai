@@ -1,8 +1,8 @@
 "use client";
 
-import * as SheetPrimitive from "@radix-ui/react-dialog";
-import { XIcon } from "lucide-react";
 import * as React from "react";
+import { XIcon } from "lucide-react";
+import { Sheet as SheetPrimitive } from "radix-ui";
 
 import { cn } from "@tazeai/ui/lib/utils";
 
@@ -129,11 +129,11 @@ function SheetDescription({
 
 export {
   Sheet,
+  SheetTrigger,
   SheetClose,
   SheetContent,
-  SheetDescription,
-  SheetFooter,
   SheetHeader,
+  SheetFooter,
   SheetTitle,
-  SheetTrigger,
+  SheetDescription,
 };

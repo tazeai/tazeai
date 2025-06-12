@@ -1,7 +1,7 @@
 "use client";
 
-import * as ProgressPrimitive from "@radix-ui/react-progress";
 import * as React from "react";
+import { Progress as ProgressPrimitive } from "radix-ui";
 
 import { cn } from "@tazeai/ui/lib/utils";
 

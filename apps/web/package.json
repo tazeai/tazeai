@@ -35,17 +35,17 @@
     "react-icons": "^5.5.0",
     "sonner": "^2.0.5",
     "swr": "^2.3.3",
-    "zod": "^3.25.61"
+    "zod": "^3.25.63"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^15.3.3",
-    "@tailwindcss/postcss": "^4.1.8",
+    "@tailwindcss/postcss": "^4.1.10",
     "@tazeai/typescript": "workspace:*",
     "@types/node": "^22.15.31",
-    "@types/react": "^19.1.7",
+    "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "dotenv-cli": "^8.0.0",
-    "tailwindcss": "^4.1.8",
+    "tailwindcss": "^4.1.10",
     "typescript": "^5.8.3"
   }
 }

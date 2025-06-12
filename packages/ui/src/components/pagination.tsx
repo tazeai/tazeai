@@ -1,12 +1,12 @@
+import * as React from "react";
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
   MoreHorizontalIcon,
 } from "lucide-react";
-import * as React from "react";
 
-import { Button, buttonVariants } from "@tazeai/ui/components/button";
 import { cn } from "@tazeai/ui/lib/utils";
+import { Button, buttonVariants } from "@tazeai/ui/ui/button";
 
 function Pagination({ className, ...props }: React.ComponentProps<"nav">) {
   return (
