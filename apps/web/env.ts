@@ -5,7 +5,7 @@ import { envs as analytics } from "@tazeai/analytics/envs";
 
 export const env = createEnv({
   extends: [auth(), database(), analytics()],
+  runtimeEnv: {},
   server: {},
   client: {},
-  runtimeEnv: {},
 });

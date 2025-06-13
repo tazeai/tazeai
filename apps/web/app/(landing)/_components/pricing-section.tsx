@@ -1,6 +1,6 @@
 "use client";
 
-import { Check } from "lucide-react";
+import { Check } from "@tazeai/ui/components/icons";
 import { Button } from "@tazeai/ui/components/button";
 import { cn } from "@tazeai/ui/lib/utils";
 import { useRef } from "react";

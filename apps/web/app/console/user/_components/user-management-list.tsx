@@ -11,7 +11,7 @@ import {
 } from "@tazeai/ui/components/avatar";
 import { Badge } from "@tazeai/ui/components/badge";
 import { Checkbox } from "@tazeai/ui/components/checkbox";
-import { UserPlus, Trash, UserX, UserCheck } from "lucide-react";
+import { UserPlus, Trash, UserX, UserCheck } from "@tazeai/ui/components/icons";
 import { fetcher } from "./fetcher";
 import type { User, UserFormData } from "./types";
 import { DataTable } from "@/components/data-table";
@@ -32,7 +32,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@tazeai/ui/components/dropdown-menu";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown } from "@tazeai/ui/components/icons";
 
 export default function UserManagementList() {
   // SWR hook for fetching users

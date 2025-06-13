@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@tazeai/ui/components/button";
 import { ThemeSwitcher } from "@tazeai/ui/components/theme-switch";
 import { Sheet, SheetContent, SheetTrigger } from "@tazeai/ui/components/sheet";
-import { Menu, X } from "lucide-react";
+import { Menu, X } from "@tazeai/ui/components/icons";
 import Link from "next/link";
 import { cn } from "@tazeai/ui/lib/utils";
 import { authConfig } from "@/config/auth";

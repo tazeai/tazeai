@@ -10,6 +10,7 @@ let nextConfig: NextConfig = {
     "@tazeai/db",
     "@tazeai/shared",
     "@tazeai/ui",
+    "@tazeai/env",
   ],
   allowedDevOrigins: ["http://local.tazeai.com:3000"],
   eslint: {

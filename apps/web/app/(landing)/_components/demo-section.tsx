@@ -3,7 +3,7 @@
 import { useState, useRef } from "react";
 import { Button } from "@tazeai/ui/components/button";
 import { Input } from "@tazeai/ui/components/input";
-import { Sparkles, Send } from "lucide-react";
+import { Sparkles, Send } from "@tazeai/ui/components/icons";
 import { cn } from "@tazeai/ui/lib/utils";
 import { useInView } from "@tazeai/ui/hooks/use-in-view";
 

@@ -9,6 +9,7 @@
     "dev": "next dev --turbopack --hostname 0.0.0.0 --port 3001",
     "lint": "next lint",
     "start": "next start",
+    "tauri": "tauri",
     "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
@@ -26,12 +27,11 @@
     "@tazeai/ui": "workspace:*",
     "hono": "^4.7.11",
     "i18next": "^25.2.1",
-    "lucide-react": "^0.514.0",
     "next": "^15.3.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-hook-form": "^7.57.0",
-    "react-i18next": "^15.5.2",
+    "react-i18next": "^15.5.3",
     "react-icons": "^5.5.0",
     "sonner": "^2.0.5",
     "swr": "^2.3.3",
@@ -40,6 +40,7 @@
   "devDependencies": {
     "@next/bundle-analyzer": "^15.3.3",
     "@tailwindcss/postcss": "^4.1.10",
+    "@tauri-apps/cli": "^2.5.0",
     "@tazeai/typescript": "workspace:*",
     "@types/node": "^22.15.31",
     "@types/react": "^19.1.8",

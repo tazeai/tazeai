@@ -1,6 +1,6 @@
 "use client";
 
-import { Github } from "lucide-react";
+import { Github } from "@tazeai/ui/components/icons";
 import { Separator } from "@tazeai/ui/components/separator";
 import { Logo } from "@/components/logo";
 

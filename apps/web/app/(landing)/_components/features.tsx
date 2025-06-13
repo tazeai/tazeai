@@ -1,7 +1,12 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { Sparkles, Brain, Lightbulb, MessageSquareMore } from "lucide-react";
+import {
+  Sparkles,
+  Brain,
+  Lightbulb,
+  MessageSquareMore,
+} from "@tazeai/ui/components/icons";
 import { cn } from "@tazeai/ui/lib/utils";
 import { useInView } from "@tazeai/ui/hooks/use-in-view";
 

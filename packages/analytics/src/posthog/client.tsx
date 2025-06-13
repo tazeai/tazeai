@@ -1,6 +1,6 @@
 "use client";
 
-import posthog, { type PostHogConfig, type PostHog } from "posthog-js";
+import posthog from "posthog-js";
 import { PostHogProvider as PostHogProviderRaw } from "posthog-js/react";
 import type { ReactNode } from "react";
 import { useEffect } from "react";
@@ -11,8 +11,14 @@ type PostHogProviderProps = {
 };
 
 const initPostHog = () => {
-  if (typeof window === "undefined") return;
   const env = envs();
+  if (
+    typeof window === "undefined" ||
+    !env.NEXT_PUBLIC_POSTHOG_KEY ||
+    process.env.NODE_ENV !== "production"
+  )
+    return;
+
   posthog.init(env.NEXT_PUBLIC_POSTHOG_KEY, {
     api_host: "/ingest",
     ui_host: env.NEXT_PUBLIC_POSTHOG_HOST,
@@ -27,9 +33,7 @@ const initPostHog = () => {
 
 export const PostHogProvider = (props: PostHogProviderProps) => {
   useEffect(() => {
-    if (process.env.NODE_ENV === "production") {
-      initPostHog();
-    }
+    initPostHog();
   }, []);
 
   return <PostHogProviderRaw client={posthog} {...props} />;

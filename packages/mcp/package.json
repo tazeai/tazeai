@@ -1,0 +1,24 @@
+{
+  "name": "@tazeai/mcp",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./envs": "./src/envs.ts"
+  },
+  "scripts": {
+    "clean": "rimraf dist .turbo",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1",
+    "@tazeai/env": "workspace:*"
+  },
+  "devDependencies": {
+    "@tazeai/typescript": "workspace:*",
+    "@types/node": "^22.15.31",
+    "typescript": "^5.8.3"
+  }
+}

@@ -2,7 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { Button } from "@tazeai/ui/components/button";
-import { ChevronRight, ArrowRight, Sparkles, Star, Zap } from "lucide-react";
+import {
+  ChevronRight,
+  ArrowRight,
+  Sparkles,
+  Star,
+  Zap,
+} from "@tazeai/ui/components/icons";
 import { cn } from "@tazeai/ui/lib/utils";
 
 const Hero = () => {

@@ -8,7 +8,7 @@ import {
   Settings,
   HelpCircle,
   LogOut,
-} from "lucide-react";
+} from "@tazeai/ui/components/icons";
 import {
   DropdownMenu,
   DropdownMenuContent,

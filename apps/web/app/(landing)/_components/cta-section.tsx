@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { Button } from "@tazeai/ui/components/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight } from "@tazeai/ui/components/icons";
 import { useInView } from "@tazeai/ui/hooks/use-in-view";
 import { cn } from "@tazeai/ui/lib/utils";
 
