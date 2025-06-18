@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import { authConfig } from "@/config/auth";
-import { env } from "@/env";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { signIn, signUp } from "@tazeai/auth/client";
-import { Button } from "@tazeai/ui/components/button";
+import { authConfig } from '@/config/auth';
+import { env } from '@/env';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { signIn, signUp } from '@tazeai/auth/client';
+import { Button } from '@tazeai/ui/components/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@tazeai/ui/components/card";
+} from '@tazeai/ui/components/card';
 import {
   Form,
   FormControl,
@@ -19,43 +19,43 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@tazeai/ui/components/form";
-import { Input } from "@tazeai/ui/components/input";
-import { cn } from "@tazeai/ui/lib/utils";
-import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
-import { FaGithub, FaGoogle } from "react-icons/fa";
-import { toast } from "sonner";
-import { z } from "zod";
+} from '@tazeai/ui/components/form';
+import { Input } from '@tazeai/ui/components/input';
+import { cn } from '@tazeai/ui/lib/utils';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { FaGithub, FaGoogle } from 'react-icons/fa';
+import { toast } from 'sonner';
+import { z } from 'zod';
 
 const formSchema = z.object({
   email: z.string().email({
-    message: "Invalid email address.",
+    message: 'Invalid email address.',
   }),
   password: z.string().min(8, {
-    message: "Password must be at least 8 characters.",
+    message: 'Password must be at least 8 characters.',
   }),
 });
 
 export function SignUpForm({
   className,
   ...props
-}: React.ComponentPropsWithoutRef<"div">) {
-  const { t } = useTranslation("auth");
+}: React.ComponentPropsWithoutRef<'div'>) {
+  const { t } = useTranslation('auth');
   const params = useSearchParams();
   const [isLoading, setIsLoading] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
   });
 
-  const onSocialLogin = async (provider: "github" | "google") => {
+  const onSocialLogin = async (provider: 'github' | 'google') => {
     try {
       setIsLoading(true);
       const res = await signIn.social({
@@ -67,11 +67,11 @@ export function SignUpForm({
       } else if (res.data.redirect && res.data.url) {
         window.location.href = res.data.url;
       } else {
-        toast.success("Sign up successful");
-        window.location.href = params.get("redirect") || "/";
+        toast.success('Sign up successful');
+        window.location.href = params.get('redirect') || '/';
       }
     } catch (error) {
-      toast.error("Sign up failed");
+      toast.error('Sign up failed');
     } finally {
       setIsLoading(false);
     }
@@ -83,24 +83,24 @@ export function SignUpForm({
       const res = await signUp.email({
         email: values.email,
         password: values.password,
-        name: "",
-        image: "",
+        name: '',
+        image: '',
       });
       if (res.error) {
         toast.error(res.error.message);
       } else {
-        toast.success("Sign up successful");
-        window.location.href = params.get("redirect") || "/";
+        toast.success('Sign up successful');
+        window.location.href = params.get('redirect') || '/';
       }
     } catch (error) {
-      toast.error("Sign up failed");
+      toast.error('Sign up failed');
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className={cn("flex flex-col gap-6", className)} {...props}>
+    <div className={cn('flex flex-col gap-6', className)} {...props}>
       <Card>
         <CardHeader className="text-center">
           <CardTitle className="text-xl">Get Started</CardTitle>
@@ -117,7 +117,7 @@ export function SignUpForm({
                     <Button
                       className="w-full gap-2"
                       disabled={isLoading}
-                      onClick={() => onSocialLogin("github")}
+                      onClick={() => onSocialLogin('github')}
                       variant="outline"
                     >
                       <FaGithub className="size-4" />
@@ -128,7 +128,7 @@ export function SignUpForm({
                     <Button
                       className="w-full gap-2"
                       disabled={isLoading}
-                      onClick={() => onSocialLogin("google")}
+                      onClick={() => onSocialLogin('google')}
                       variant="outline"
                     >
                       <FaGoogle className="size-4" />
@@ -173,11 +173,11 @@ export function SignUpForm({
                     )}
                   />
                   <Button className="w-full" type="submit">
-                    {t("signUp")}
+                    {t('signUp')}
                   </Button>
                 </div>
                 <div className="text-center text-sm">
-                  Already have an account?{" "}
+                  Already have an account?{' '}
                   <Link
                     className="underline underline-offset-4"
                     href={authConfig.pages.signIn}
@@ -191,7 +191,7 @@ export function SignUpForm({
         </CardContent>
       </Card>
       <div className="text-balance text-center text-muted-foreground text-xs [&_a]:underline [&_a]:underline-offset-4 [&_a]:hover:text-primary ">
-        By clicking continue, you agree to our <a href="#">Terms of Service</a>{" "}
+        By clicking continue, you agree to our <a href="#">Terms of Service</a>{' '}
         and <a href="#">Privacy Policy</a>.
       </div>
     </div>

@@ -6,11 +6,11 @@ import type {
   StandardSchemaDictionary,
   StandardSchemaV1,
   StrictOptions,
-} from "@t3-oss/env-core";
-import { createEnv as createEnvCore } from "@t3-oss/env-core";
-import { z } from "zod";
+} from '@t3-oss/env-core';
+import { createEnv as createEnvCore } from '@t3-oss/env-core';
+import { z } from 'zod';
 
-const CLIENT_PREFIX = "NEXT_PUBLIC_" as const;
+const CLIENT_PREFIX = 'NEXT_PUBLIC_' as const;
 type ClientPrefix = typeof CLIENT_PREFIX;
 
 type Options<
@@ -23,7 +23,7 @@ type Options<
   StrictOptions<ClientPrefix, TServer, TClient, TShared, TExtends> &
     ServerClientOptions<ClientPrefix, TServer, TClient> &
     CreateSchemaOptions<TServer, TClient, TShared, TFinalSchema>,
-  "runtimeEnvStrict" | "runtimeEnv" | "clientPrefix"
+  'runtimeEnvStrict' | 'runtimeEnv' | 'clientPrefix'
 > &
   (
     | {
@@ -33,7 +33,7 @@ type Options<
           TClient,
           TShared,
           TExtends
-        >["runtimeEnvStrict"];
+        >['runtimeEnvStrict'];
         experimental__runtimeEnv?: never;
       }
     | {
@@ -70,16 +70,16 @@ export function createEnv<
     | Options<TServer, TClient, TShared, TExtends, TFinalSchema>
     | ((p: {
         z: typeof z;
-      }) => Options<TServer, TClient, TShared, TExtends, TFinalSchema>),
+      }) => Options<TServer, TClient, TShared, TExtends, TFinalSchema>)
 ): CreateEnv<TFinalSchema, TExtends> {
   const opts =
-    typeof options === "function"
+    typeof options === 'function'
       ? options({
           z,
         })
       : options;
-  const client = typeof opts.client === "object" ? opts.client : {};
-  const server = typeof opts.server === "object" ? opts.server : {};
+  const client = typeof opts.client === 'object' ? opts.client : {};
+  const server = typeof opts.server === 'object' ? opts.server : {};
   const shared = opts.shared;
 
   const runtimeEnv = opts.runtimeEnv
@@ -124,7 +124,7 @@ export function definedEnvs<
     | Options<TServer, TClient, TShared, TExtends, TFinalSchema>
     | ((p: {
         z: typeof z;
-      }) => Options<TServer, TClient, TShared, TExtends, TFinalSchema>),
+      }) => Options<TServer, TClient, TShared, TExtends, TFinalSchema>)
 ): () => CreateEnv<TFinalSchema, TExtends> {
   return () => createEnv(options);
 }

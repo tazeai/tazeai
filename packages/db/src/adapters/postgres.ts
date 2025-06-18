@@ -1,5 +1,5 @@
-import { drizzle } from "drizzle-orm/postgres-js";
-import postgres from "postgres";
+import { drizzle } from 'drizzle-orm/postgres-js';
+import postgres from 'postgres';
 
 export const createClient = <TSchema extends Record<string, unknown>>({
   databaseUrl,
@@ -14,7 +14,7 @@ export const createClient = <TSchema extends Record<string, unknown>>({
   });
   return drizzle(client, {
     schema,
-    casing: "snake_case",
+    casing: 'snake_case',
     logger: true,
   });
 };

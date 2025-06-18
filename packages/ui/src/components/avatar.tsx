@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { Avatar as AvatarPrimitive } from "radix-ui";
-import type * as React from "react";
+import { Avatar as AvatarPrimitive } from 'radix-ui';
+import type * as React from 'react';
 
-import { cn } from "@tazeai/ui/lib/utils";
+import { cn } from '@tazeai/ui/lib/utils';
 
 function Avatar({
   className,
@@ -12,8 +12,8 @@ function Avatar({
   return (
     <AvatarPrimitive.Root
       className={cn(
-        "relative flex size-8 shrink-0 overflow-hidden rounded-full",
-        className,
+        'relative flex size-8 shrink-0 overflow-hidden rounded-full',
+        className
       )}
       data-slot="avatar"
       {...props}
@@ -27,7 +27,7 @@ function AvatarImage({
 }: React.ComponentProps<typeof AvatarPrimitive.Image>) {
   return (
     <AvatarPrimitive.Image
-      className={cn("aspect-square size-full", className)}
+      className={cn('aspect-square size-full', className)}
       data-slot="avatar-image"
       {...props}
     />
@@ -41,8 +41,8 @@ function AvatarFallback({
   return (
     <AvatarPrimitive.Fallback
       className={cn(
-        "flex size-full items-center justify-center rounded-[inherit] bg-secondary text-xs",
-        className,
+        'flex size-full items-center justify-center rounded-[inherit] bg-secondary text-xs',
+        className
       )}
       data-slot="avatar-fallback"
       {...props}

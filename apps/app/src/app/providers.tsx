@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { Toaster } from "@tazeai/ui/components/sonner";
-import { ThemeProvider, type UIProviderProps } from "@tazeai/ui/providers";
-import type { ReactNode } from "react";
+import { Toaster } from '@tazeai/ui/components/sonner';
+import { ThemeProvider, type UIProviderProps } from '@tazeai/ui/providers';
+import type { ReactNode } from 'react';
 
 export interface ProvidersProps {
   children: ReactNode;

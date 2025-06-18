@@ -1,12 +1,12 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
 
-import { useIsomorphicEffect } from "./use-isomorphic-effect";
+import { useIsomorphicEffect } from './use-isomorphic-effect';
 
 function useEventListener(
   eventName: string,
   handler: (event: Event) => void,
   element: React.RefObject<HTMLElement | null>,
-  options?: AddEventListenerOptions,
+  options?: AddEventListenerOptions
 ) {
   // Create a ref that stores handler
   const savedHandler = useRef(handler);

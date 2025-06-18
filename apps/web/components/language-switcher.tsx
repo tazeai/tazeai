@@ -1,23 +1,23 @@
-"use client";
+'use client';
 
-import { Button } from "@tazeai/ui/components/button";
+import { Button } from '@tazeai/ui/components/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@tazeai/ui/components/dropdown-menu";
-import { useTranslation } from "react-i18next";
-import { LuGlobe } from "react-icons/lu";
+} from '@tazeai/ui/components/dropdown-menu';
+import { useTranslation } from 'react-i18next';
+import { LuGlobe } from 'react-icons/lu';
 
 const languages = [
   {
-    code: "en",
-    label: "English",
+    code: 'en',
+    label: 'English',
   },
   {
-    code: "zh",
-    label: "中文",
+    code: 'zh',
+    label: '中文',
   },
 ];
 
@@ -41,7 +41,7 @@ export default function LanguageSwitcher() {
       <DropdownMenuContent align="end">
         {languages.map((lang) => (
           <DropdownMenuItem
-            className={i18n.language === lang.code ? "bg-accent" : ""}
+            className={i18n.language === lang.code ? 'bg-accent' : ''}
             key={lang.code}
             onClick={() => changeLanguage(lang.code)}
           >

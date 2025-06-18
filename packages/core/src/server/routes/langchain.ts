@@ -1,11 +1,11 @@
-import { LangChain, type ProviderType } from "@tazeai/ai";
-import { Hono } from "hono";
-import { streamSSE } from "hono/streaming";
-import type { Env } from "../types";
+import { LangChain, type ProviderType } from '@tazeai/ai';
+import { Hono } from 'hono';
+import { streamSSE } from 'hono/streaming';
+import type { Env } from '../types';
 
 const app = new Hono<Env>();
 
-app.post("/completions", async (c) => {
+app.post('/completions', async (c) => {
   const data: {
     model: string;
     prompt: string;
@@ -17,7 +17,7 @@ app.post("/completions", async (c) => {
       content: string;
     }[];
   } = await c.req.json();
-  const type = c.req.query("type");
+  const type = c.req.query('type');
   return streamSSE(
     c,
     async (stream) => {
@@ -25,7 +25,7 @@ app.post("/completions", async (c) => {
         const manager = new LangChain();
         const llm = manager.getProvider(type as ProviderType, data.model);
         if (!llm) {
-          throw new Error("Model not found");
+          throw new Error('Model not found');
         }
         const result = await llm.stream(data.messages);
         for await (const chunk of result) {
@@ -37,7 +37,7 @@ app.post("/completions", async (c) => {
         await stream.writeSSE({
           data: JSON.stringify({
             error:
-              "An error occurred while processing your request:" +
+              'An error occurred while processing your request:' +
               (error as Error).message,
           }),
         });
@@ -46,9 +46,9 @@ app.post("/completions", async (c) => {
       }
     },
     (error: Error) => {
-      console.error("error", error);
+      console.error('error', error);
       return Promise.resolve();
-    },
+    }
   );
 });
 

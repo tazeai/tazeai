@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { Logo } from "@/components/logo";
-import { Github } from "@tazeai/ui/components/icons";
-import { Separator } from "@tazeai/ui/components/separator";
+import { Logo } from '@/components/logo';
+import { Github } from '@tazeai/ui/components/icons';
+import { Separator } from '@tazeai/ui/components/separator';
 
 const Footer = () => {
   const startYear = 2024;
@@ -20,7 +20,7 @@ const Footer = () => {
               <span className="font-bold text-xl">TazeAI</span>
             </div>
             <p className="mb-4 max-w-xs text-muted-foreground">
-              Transforming businesses with powerful workflow solutions since{" "}
+              Transforming businesses with powerful workflow solutions since{' '}
               {startYear}.
             </p>
             <div className="flex space-x-4">

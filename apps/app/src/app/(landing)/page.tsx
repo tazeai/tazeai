@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { UserButton } from "@/components/user-button";
-import { authConfig } from "@/config/auth";
-import { useSession } from "@tazeai/auth/client";
-import { Button } from "@tazeai/ui/components/button";
-import { ThemeSwitcher } from "@tazeai/ui/components/theme-switch";
-import Link from "next/link";
+import { UserButton } from '@/components/user-button';
+import { authConfig } from '@/config/auth';
+import { useSession } from '@tazeai/auth/client';
+import { Button } from '@tazeai/ui/components/button';
+import { ThemeSwitcher } from '@tazeai/ui/components/theme-switch';
+import Link from 'next/link';
 
 export default function HomePage() {
   const { data: session } = useSession();

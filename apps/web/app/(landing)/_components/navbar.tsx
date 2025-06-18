@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import OneTap from "@/app/(auth)/_components/one-tap";
-import { Logo } from "@/components/logo";
-import { UserButton } from "@/components/user-button";
-import { authConfig } from "@/config/auth";
-import { useSession } from "@tazeai/auth/client";
-import { Button } from "@tazeai/ui/components/button";
-import { Menu, X } from "@tazeai/ui/components/icons";
-import { Sheet, SheetContent, SheetTrigger } from "@tazeai/ui/components/sheet";
-import { ThemeSwitcher } from "@tazeai/ui/components/theme-switch";
-import { cn } from "@tazeai/ui/lib/utils";
-import Link from "next/link";
-import { useEffect, useState } from "react";
+import OneTap from '@/app/(auth)/_components/one-tap';
+import { Logo } from '@/components/logo';
+import { UserButton } from '@/components/user-button';
+import { authConfig } from '@/config/auth';
+import { useSession } from '@tazeai/auth/client';
+import { Button } from '@tazeai/ui/components/button';
+import { Menu, X } from '@tazeai/ui/components/icons';
+import { Sheet, SheetContent, SheetTrigger } from '@tazeai/ui/components/sheet';
+import { ThemeSwitcher } from '@tazeai/ui/components/theme-switch';
+import { cn } from '@tazeai/ui/lib/utils';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 const NavLink = ({
   href,
@@ -40,17 +40,17 @@ const Navbar = () => {
       setScrolled(window.scrollY > 10);
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
     <header
       className={cn(
-        "sticky top-0 z-40 w-full transition-all duration-200",
+        'sticky top-0 z-40 w-full transition-all duration-200',
         scrolled
-          ? "bg-background/80 shadow-sm backdrop-blur-sm"
-          : "bg-transparent",
+          ? 'bg-background/80 shadow-sm backdrop-blur-sm'
+          : 'bg-transparent'
       )}
     >
       <div className="container mx-auto flex h-16 max-w-7xl items-center justify-between px-4 py-4">

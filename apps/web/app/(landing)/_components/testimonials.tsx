@@ -1,21 +1,21 @@
-"use client";
+'use client';
 
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from "@tazeai/ui/components/avatar";
-import { Card, CardContent } from "@tazeai/ui/components/card";
+} from '@tazeai/ui/components/avatar';
+import { Card, CardContent } from '@tazeai/ui/components/card';
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@tazeai/ui/components/carousel";
-import { useInView } from "@tazeai/ui/hooks/use-in-view";
-import { cn } from "@tazeai/ui/lib/utils";
-import { useRef } from "react";
+} from '@tazeai/ui/components/carousel';
+import { useInView } from '@tazeai/ui/hooks/use-in-view';
+import { cn } from '@tazeai/ui/lib/utils';
+import { useRef } from 'react';
 
 type TestimonialProps = {
   content: string;
@@ -29,35 +29,35 @@ type TestimonialProps = {
 const testimonials: TestimonialProps[] = [
   {
     content:
-      "Taze AI has transformed the way our team works. The platform is intuitive and has all the features we need to streamline our workflow.",
-    author: "Sarah Johnson",
-    role: "Marketing Director",
-    company: "TechGrowth",
-    initials: "SJ",
+      'Taze AI has transformed the way our team works. The platform is intuitive and has all the features we need to streamline our workflow.',
+    author: 'Sarah Johnson',
+    role: 'Marketing Director',
+    company: 'TechGrowth',
+    initials: 'SJ',
   },
   {
     content:
       "We've tried numerous solutions, but none have matched the efficiency and ease of use that Acme provides. It's truly a game-changer.",
-    author: "Michael Chen",
-    role: "Operations Manager",
-    company: "InnovateNow",
-    initials: "MC",
+    author: 'Michael Chen',
+    role: 'Operations Manager',
+    company: 'InnovateNow',
+    initials: 'MC',
   },
   {
     content:
       "The analytics dashboard alone has saved us countless hours of manual reporting. I can't imagine running our business without Acme now.",
-    author: "Jessica Reynolds",
-    role: "CEO",
-    company: "Brighter Solutions",
-    initials: "JR",
+    author: 'Jessica Reynolds',
+    role: 'CEO',
+    company: 'Brighter Solutions',
+    initials: 'JR',
   },
   {
     content:
       "Customer support is exceptional - they're responsive, knowledgeable, and genuinely care about helping you succeed.",
-    author: "Robert Williams",
-    role: "IT Director",
-    company: "Global Services",
-    initials: "RW",
+    author: 'Robert Williams',
+    role: 'IT Director',
+    company: 'Global Services',
+    initials: 'RW',
   },
 ];
 
@@ -74,20 +74,20 @@ const Testimonials = () => {
         <div className="mb-12 space-y-4 text-center">
           <h2
             className={cn(
-              "font-bold text-3xl tracking-tight transition-all duration-700 sm:text-4xl md:text-5xl",
+              'font-bold text-3xl tracking-tight transition-all duration-700 sm:text-4xl md:text-5xl',
               isInView
-                ? "translate-y-0 opacity-100"
-                : "translate-y-12 opacity-0",
+                ? 'translate-y-0 opacity-100'
+                : 'translate-y-12 opacity-0'
             )}
           >
             Trusted by Businesses Everywhere
           </h2>
           <p
             className={cn(
-              "mx-auto max-w-[700px] text-lg text-muted-foreground transition-all duration-700",
+              'mx-auto max-w-[700px] text-lg text-muted-foreground transition-all duration-700',
               isInView
-                ? "translate-y-0 opacity-100 delay-100"
-                : "translate-y-12 opacity-0",
+                ? 'translate-y-0 opacity-100 delay-100'
+                : 'translate-y-12 opacity-0'
             )}
           >
             Hear what our customers have to say about their experience with our
@@ -97,15 +97,15 @@ const Testimonials = () => {
 
         <div
           className={cn(
-            "transition-all duration-700",
+            'transition-all duration-700',
             isInView
-              ? "translate-y-0 opacity-100 delay-200"
-              : "translate-y-12 opacity-0",
+              ? 'translate-y-0 opacity-100 delay-200'
+              : 'translate-y-12 opacity-0'
           )}
         >
           <Carousel
             opts={{
-              align: "start",
+              align: 'start',
               loop: true,
             }}
           >

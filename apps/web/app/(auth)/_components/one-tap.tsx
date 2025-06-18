@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { env } from "@/env";
-import { client, useSession } from "@tazeai/auth/client";
-import { useEffect, useState } from "react";
+import { env } from '@/env';
+import { client, useSession } from '@tazeai/auth/client';
+import { useEffect, useState } from 'react';
 
 function OneTap() {
   const session = useSession();

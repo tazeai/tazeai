@@ -1,5 +1,5 @@
-import { GitHubLogoIcon } from "@radix-ui/react-icons";
-import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
+import { GitHubLogoIcon } from '@radix-ui/react-icons';
+import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
 
 /**
  * Shared layout configurations
@@ -19,9 +19,9 @@ export const baseOptions: BaseLayoutProps = {
   },
   links: [
     {
-      type: "main",
-      text: "GitHub",
-      url: "https://github.com/tazeai/tazeai",
+      type: 'main',
+      text: 'GitHub',
+      url: 'https://github.com/tazeai/tazeai',
       external: true,
       icon: <GitHubLogoIcon className="h-4 w-4" />,
     },

@@ -1,11 +1,11 @@
 export const languages = [
   {
-    code: "en",
-    label: "English",
+    code: 'en',
+    label: 'English',
   },
   {
-    code: "zh",
-    label: "中文",
+    code: 'zh',
+    label: '中文',
   },
 ];
 

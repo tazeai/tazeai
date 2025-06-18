@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { Progress as ProgressPrimitive } from "radix-ui";
-import type * as React from "react";
+import { Progress as ProgressPrimitive } from 'radix-ui';
+import type * as React from 'react';
 
-import { cn } from "@tazeai/ui/lib/utils";
+import { cn } from '@tazeai/ui/lib/utils';
 
 function Progress({
   className,
@@ -13,8 +13,8 @@ function Progress({
   return (
     <ProgressPrimitive.Root
       className={cn(
-        "relative h-2 w-full overflow-hidden rounded-full bg-primary/20",
-        className,
+        'relative h-2 w-full overflow-hidden rounded-full bg-primary/20',
+        className
       )}
       data-slot="progress"
       {...props}

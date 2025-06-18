@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { Button } from "@tazeai/ui/components/button";
-import { Send, Sparkles } from "@tazeai/ui/components/icons";
-import { Input } from "@tazeai/ui/components/input";
-import { useInView } from "@tazeai/ui/hooks/use-in-view";
-import { cn } from "@tazeai/ui/lib/utils";
-import { useRef, useState } from "react";
+import { Button } from '@tazeai/ui/components/button';
+import { Send, Sparkles } from '@tazeai/ui/components/icons';
+import { Input } from '@tazeai/ui/components/input';
+import { useInView } from '@tazeai/ui/hooks/use-in-view';
+import { cn } from '@tazeai/ui/lib/utils';
+import { useRef, useState } from 'react';
 
 const DemoSection = () => {
-  const [prompt, setPrompt] = useState("");
+  const [prompt, setPrompt] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, {
@@ -23,7 +23,7 @@ const DemoSection = () => {
     // 模拟AI响应延迟
     setTimeout(() => {
       setIsGenerating(false);
-      setPrompt("");
+      setPrompt('');
     }, 2000);
   };
 
@@ -38,20 +38,20 @@ const DemoSection = () => {
         <div className="mb-12 space-y-4 text-center">
           <h2
             className={cn(
-              "font-bold text-3xl tracking-tight transition-all duration-700 sm:text-4xl md:text-5xl",
+              'font-bold text-3xl tracking-tight transition-all duration-700 sm:text-4xl md:text-5xl',
               isInView
-                ? "translate-y-0 opacity-100"
-                : "translate-y-12 opacity-0",
+                ? 'translate-y-0 opacity-100'
+                : 'translate-y-12 opacity-0'
             )}
           >
             体验AI的魔力
           </h2>
           <p
             className={cn(
-              "mx-auto max-w-[700px] text-lg text-muted-foreground transition-all delay-100 duration-700",
+              'mx-auto max-w-[700px] text-lg text-muted-foreground transition-all delay-100 duration-700',
               isInView
-                ? "translate-y-0 opacity-100"
-                : "translate-y-12 opacity-0",
+                ? 'translate-y-0 opacity-100'
+                : 'translate-y-12 opacity-0'
             )}
           >
             输入任何提示，让AI展示创作的无限可能
@@ -60,8 +60,8 @@ const DemoSection = () => {
 
         <div
           className={cn(
-            "mx-auto max-w-3xl rounded-2xl border bg-background/80 p-8 shadow-lg backdrop-blur-sm transition-all delay-200 duration-700",
-            isInView ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0",
+            'mx-auto max-w-3xl rounded-2xl border bg-background/80 p-8 shadow-lg backdrop-blur-sm transition-all delay-200 duration-700',
+            isInView ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
           )}
         >
           <form className="space-y-8" onSubmit={handleSubmit}>
@@ -109,7 +109,7 @@ const DemoSection = () => {
                         </span>
                       </div>
                     ) : (
-                      "我可以帮您创作任何内容，从文案到故事，从诗歌到代码。"
+                      '我可以帮您创作任何内容，从文案到故事，从诗歌到代码。'
                     )}
                   </div>
                 </div>

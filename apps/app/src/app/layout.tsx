@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
-import { Providers } from "./providers";
-import "@/styles/globals.css";
+import type { Metadata } from 'next';
+import { Providers } from './providers';
+import '@/styles/globals.css';
 
-const appName = "TazeAI";
+const appName = 'TazeAI';
 
 export const metadata: Metadata = {
   title: appName,
@@ -10,11 +10,11 @@ export const metadata: Metadata = {
   description: appName,
   appleWebApp: {
     capable: true,
-    statusBarStyle: "default",
+    statusBarStyle: 'default',
     title: appName,
   },
   icons: {
-    icon: "/images/logo.png",
+    icon: '/images/logo.png',
   },
 };
 
@@ -28,8 +28,8 @@ export default async function RootLayout({
       <body>
         <Providers
           themeProps={{
-            attribute: "class",
-            defaultTheme: "light",
+            attribute: 'class',
+            defaultTheme: 'light',
           }}
         >
           {children}

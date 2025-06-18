@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { Search } from "@tazeai/ui/components/icons";
-import { Input } from "@tazeai/ui/components/input";
-import type { DataTableToolbarProps } from "./types";
+import { Search } from '@tazeai/ui/components/icons';
+import { Input } from '@tazeai/ui/components/input';
+import type { DataTableToolbarProps } from './types';
 
 export function DataTableToolbar<T>({
-  searchPlaceholder = "搜索...",
+  searchPlaceholder = '搜索...',
   onSearch,
-  searchValue = "",
+  searchValue = '',
   filters,
   actions,
 }: DataTableToolbarProps<T>) {

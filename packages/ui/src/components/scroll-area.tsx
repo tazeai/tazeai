@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { ScrollArea as ScrollAreaPrimitive } from "radix-ui";
-import type * as React from "react";
+import { ScrollArea as ScrollAreaPrimitive } from 'radix-ui';
+import type * as React from 'react';
 
-import { cn } from "@tazeai/ui/lib/utils";
+import { cn } from '@tazeai/ui/lib/utils';
 
 function ScrollArea({
   className,
@@ -12,7 +12,7 @@ function ScrollArea({
 }: React.ComponentProps<typeof ScrollAreaPrimitive.Root>) {
   return (
     <ScrollAreaPrimitive.Root
-      className={cn("relative", className)}
+      className={cn('relative', className)}
       data-slot="scroll-area"
       {...props}
     >
@@ -30,18 +30,18 @@ function ScrollArea({
 
 function ScrollBar({
   className,
-  orientation = "vertical",
+  orientation = 'vertical',
   ...props
 }: React.ComponentProps<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>) {
   return (
     <ScrollAreaPrimitive.ScrollAreaScrollbar
       className={cn(
-        "flex touch-none select-none",
-        orientation === "vertical" &&
-          "h-full w-2.5 border-l border-l-transparent p-px",
-        orientation === "horizontal" &&
-          "h-2.5 flex-col border-t border-t-transparent p-px",
-        className,
+        'flex touch-none select-none',
+        orientation === 'vertical' &&
+          'h-full w-2.5 border-l border-l-transparent p-px',
+        orientation === 'horizontal' &&
+          'h-2.5 flex-col border-t border-t-transparent p-px',
+        className
       )}
       data-slot="scroll-area-scrollbar"
       orientation={orientation}

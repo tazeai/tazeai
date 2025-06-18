@@ -1,24 +1,24 @@
-"use client";
+'use client';
 
-import { Button } from "@tazeai/ui/components/button";
+import { Button } from '@tazeai/ui/components/button';
 import {
   ArrowRight,
   ChevronRight,
   Sparkles,
   Star,
   Zap,
-} from "@tazeai/ui/components/icons";
-import { cn } from "@tazeai/ui/lib/utils";
-import { useEffect, useState } from "react";
+} from '@tazeai/ui/components/icons';
+import { cn } from '@tazeai/ui/lib/utils';
+import { useEffect, useState } from 'react';
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [text, setText] = useState("");
+  const [text, setText] = useState('');
   const [mousePosition, setMousePosition] = useState({
     x: 0,
     y: 0,
   });
-  const fullText = "创意无限，智能对话";
+  const fullText = '创意无限，智能对话';
 
   useEffect(() => {
     setIsVisible(true);
@@ -40,8 +40,8 @@ const Hero = () => {
         y: e.clientY,
       });
     };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
   return (
@@ -84,10 +84,10 @@ const Hero = () => {
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div
             className={cn(
-              "space-y-8 transition-all delay-300 duration-1000",
+              'space-y-8 transition-all delay-300 duration-1000',
               isVisible
-                ? "translate-y-0 opacity-100"
-                : "translate-y-12 opacity-0",
+                ? 'translate-y-0 opacity-100'
+                : 'translate-y-12 opacity-0'
             )}
           >
             {/* 增强的标签 */}
@@ -154,10 +154,10 @@ const Hero = () => {
               </div>
               <div className="ml-6 space-y-1">
                 <p className="font-medium text-foreground text-sm">
-                  加入{" "}
+                  加入{' '}
                   <span className="bg-gradient-to-r from-primary to-purple-600 bg-clip-text font-bold text-2xl text-transparent">
                     10,000+
-                  </span>{" "}
+                  </span>{' '}
                   位创作者
                 </p>
                 <div className="flex items-center text-muted-foreground text-sm">
@@ -178,10 +178,10 @@ const Hero = () => {
           {/* 增强的演示区域 */}
           <div
             className={cn(
-              "relative transform overflow-hidden rounded-2xl border bg-gradient-to-br from-background/50 to-background/30 shadow-2xl backdrop-blur-sm transition-all delay-500 duration-1000 hover:scale-105",
+              'relative transform overflow-hidden rounded-2xl border bg-gradient-to-br from-background/50 to-background/30 shadow-2xl backdrop-blur-sm transition-all delay-500 duration-1000 hover:scale-105',
               isVisible
-                ? "translate-y-0 opacity-100"
-                : "translate-y-12 opacity-0",
+                ? 'translate-y-0 opacity-100'
+                : 'translate-y-12 opacity-0'
             )}
           >
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-purple-500/5 to-pink-500/5" />

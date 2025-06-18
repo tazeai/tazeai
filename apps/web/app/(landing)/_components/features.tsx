@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
 import {
   Brain,
   Lightbulb,
   MessageSquareMore,
   Sparkles,
-} from "@tazeai/ui/components/icons";
-import { useInView } from "@tazeai/ui/hooks/use-in-view";
-import { cn } from "@tazeai/ui/lib/utils";
-import { useRef } from "react";
+} from '@tazeai/ui/components/icons';
+import { useInView } from '@tazeai/ui/hooks/use-in-view';
+import { cn } from '@tazeai/ui/lib/utils';
+import { useRef } from 'react';
 
 type FeatureProps = {
   icon: React.ReactNode;
@@ -26,9 +26,9 @@ const Feature = ({ icon, title, description, delay }: FeatureProps) => {
   return (
     <div
       className={cn(
-        "rounded-xl border bg-card p-6 shadow-sm transition-all duration-700",
-        "hover:-translate-y-1 transform hover:bg-primary/5 hover:shadow-lg",
-        isInView ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0",
+        'rounded-xl border bg-card p-6 shadow-sm transition-all duration-700',
+        'hover:-translate-y-1 transform hover:bg-primary/5 hover:shadow-lg',
+        isInView ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
       )}
       ref={ref}
       style={{

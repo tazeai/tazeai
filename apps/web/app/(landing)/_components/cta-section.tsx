@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { Button } from "@tazeai/ui/components/button";
-import { ArrowRight } from "@tazeai/ui/components/icons";
-import { useInView } from "@tazeai/ui/hooks/use-in-view";
-import { cn } from "@tazeai/ui/lib/utils";
-import { useRef } from "react";
+import { Button } from '@tazeai/ui/components/button';
+import { ArrowRight } from '@tazeai/ui/components/icons';
+import { useInView } from '@tazeai/ui/hooks/use-in-view';
+import { cn } from '@tazeai/ui/lib/utils';
+import { useRef } from 'react';
 
 const CTASection = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -17,8 +17,8 @@ const CTASection = () => {
     <section className="py-20">
       <div
         className={cn(
-          "container relative mx-auto max-w-5xl overflow-hidden rounded-3xl bg-gradient-to-br from-primary to-primary/90 p-8 px-4 text-primary-foreground transition-all duration-1000 md:p-12 md:px-6 lg:p-16",
-          isInView ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0",
+          'container relative mx-auto max-w-5xl overflow-hidden rounded-3xl bg-gradient-to-br from-primary to-primary/90 p-8 px-4 text-primary-foreground transition-all duration-1000 md:p-12 md:px-6 lg:p-16',
+          isInView ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
         )}
         ref={ref}
       >

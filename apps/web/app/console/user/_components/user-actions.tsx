@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import { Button } from "@tazeai/ui/components/button";
+import { Button } from '@tazeai/ui/components/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@tazeai/ui/components/dropdown-menu";
+} from '@tazeai/ui/components/dropdown-menu';
 import {
   MoreHorizontal,
   ShieldAlert,
   ShieldCheck,
   Trash,
   UserCog,
-} from "@tazeai/ui/components/icons";
-import type { User } from "./types";
+} from '@tazeai/ui/components/icons';
+import type { User } from './types';
 
 interface UserActionsProps {
   user: User;
@@ -43,7 +43,7 @@ export function UserActions({
           编辑
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => onToggleStatus(user)}>
-          {user.status === "已禁用" ? (
+          {user.status === '已禁用' ? (
             <>
               <ShieldCheck className="mr-2 h-4 w-4 text-green-500" />
               <span className="text-green-500">启用用户</span>

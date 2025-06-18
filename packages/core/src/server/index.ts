@@ -1,19 +1,19 @@
-import { auth } from "@tazeai/auth";
-import { type Cache, createCache } from "@tazeai/cache";
-import { type Database, db } from "@tazeai/db";
-import { Hono } from "hono";
-import { compress } from "hono/compress";
-import { contextStorage } from "hono/context-storage";
-import { cors } from "hono/cors";
-import type { HonoOptions } from "hono/hono-base";
-import { languageDetector } from "hono/language";
-import { logger } from "hono/logger";
-import { prettyJSON } from "hono/pretty-json";
-import { requestId } from "hono/request-id";
-import { envs } from "../envs";
-import ai from "./routes/ai";
-import langchain from "./routes/langchain";
-import user from "./routes/user";
+import { auth } from '@tazeai/auth';
+import { type Cache, createCache } from '@tazeai/cache';
+import { type Database, db } from '@tazeai/db';
+import { Hono } from 'hono';
+import { compress } from 'hono/compress';
+import { contextStorage } from 'hono/context-storage';
+import { cors } from 'hono/cors';
+import type { HonoOptions } from 'hono/hono-base';
+import { languageDetector } from 'hono/language';
+import { logger } from 'hono/logger';
+import { prettyJSON } from 'hono/pretty-json';
+import { requestId } from 'hono/request-id';
+import { envs } from '../envs';
+import ai from './routes/ai';
+import langchain from './routes/langchain';
+import user from './routes/user';
 
 const env = envs();
 
@@ -39,7 +39,7 @@ export class TazeAIServer extends Hono<Env> {
   constructor(options: ServerOptions) {
     const { prefix, ...rest } = options;
     super(rest);
-    this._basePath = prefix ?? "/";
+    this._basePath = prefix ?? '/';
     this.db = db;
     const cache = createCache();
 
@@ -52,81 +52,81 @@ export class TazeAIServer extends Hono<Env> {
     this.use(logger());
     this.use(
       languageDetector({
-        supportedLanguages: ["en", "zh"], // Must include fallback
-        fallbackLanguage: "en", // Required
-        lookupCookie: "lang",
+        supportedLanguages: ['en', 'zh'], // Must include fallback
+        fallbackLanguage: 'en', // Required
+        lookupCookie: 'lang',
         cookieOptions: {
-          path: "/",
+          path: '/',
           httpOnly: true,
-          secure: process.env.NODE_ENV === "production",
-          sameSite: "Lax",
+          secure: process.env.NODE_ENV === 'production',
+          sameSite: 'Lax',
           domain:
-            process.env.NODE_ENV === "production" ? ".tazeai.com" : undefined,
+            process.env.NODE_ENV === 'production' ? '.tazeai.com' : undefined,
         },
-      }),
+      })
     );
 
-    this.use("*", async (c, next) => {
+    this.use('*', async (c, next) => {
       const session = await auth.api.getSession({
         headers: c.req.raw.headers,
       });
-      c.set("session", session);
+      c.set('session', session);
       return next();
     });
     // Database
-    this.use("*", async (c, next) => {
-      c.set("db", this.db);
-      c.set("cache", cache);
+    this.use('*', async (c, next) => {
+      c.set('db', this.db);
+      c.set('cache', cache);
       await next();
     });
 
     // Routes
-    this.route("/users", user);
-    this.route("/ai", ai);
-    this.route("/langchain", langchain);
-    this.get("/redis", async (c) => {
+    this.route('/users', user);
+    this.route('/ai', ai);
+    this.route('/langchain', langchain);
+    this.get('/redis', async (c) => {
       const now = Date.now();
-      const cache = c.get("cache");
+      const cache = c.get('cache');
       const data = await cache.remember(
-        "redis_status",
+        'redis_status',
         () => {
           return Date.now();
         },
-        30,
+        30
       );
       const time = Date.now() - now;
       return c.json({
-        message: "OK",
+        message: 'OK',
         data,
         time,
       });
     });
 
-    this.get("/db", async (c) => {
+    this.get('/db', async (c) => {
       const now = Date.now();
-      const db = c.get("db");
+      const db = c.get('db');
       const users = await db.query.user.findMany();
       const time = Date.now() - now;
       return c.json({
-        message: "OK",
+        message: 'OK',
         users,
         time,
       });
     });
 
-    this.get("/health", async (c) => {
+    this.get('/health', async (c) => {
       return c.json({
-        message: "OK",
+        message: 'OK',
       });
     });
 
     this.notFound((c) => {
-      console.log("Not Found", c.req.path);
+      console.log('Not Found', c.req.path);
       return c.json(
         {
-          message: "Not Found",
+          message: 'Not Found',
         },
-        404,
+        404
       );
     });
 
@@ -134,12 +134,12 @@ export class TazeAIServer extends Hono<Env> {
       console.error(err);
       return c.json(
         {
-          message: "Internal Server Error",
+          message: 'Internal Server Error',
         },
-        500,
+        500
       );
     });
   }
 }
 
-export { handle as vercel } from "hono/vercel";
+export { handle as vercel } from 'hono/vercel';

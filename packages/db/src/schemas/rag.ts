@@ -7,9 +7,9 @@ import {
   uuid,
   varchar,
   vector,
-} from "drizzle-orm/pg-core";
-import { pgTable } from "./_table";
-import { user } from "./auth";
+} from 'drizzle-orm/pg-core';
+import { pgTable } from './_table';
+import { user } from './auth';
 
 export const timestamptz = (name: string) =>
   timestamp(name, {
@@ -17,44 +17,44 @@ export const timestamptz = (name: string) =>
   });
 
 export const chunks = pgTable(
-  "chunks",
+  'chunks',
   {
-    id: uuid("id").defaultRandom().primaryKey(),
-    text: text("text"),
-    abstract: text("abstract"),
-    metadata: jsonb("metadata"),
-    index: integer("index"),
-    type: varchar("type"),
-    clientId: text("client_id"),
-    userId: uuid("user_id").references(() => user.id, {
-      onDelete: "cascade",
+    id: uuid('id').defaultRandom().primaryKey(),
+    text: text('text'),
+    abstract: text('abstract'),
+    metadata: jsonb('metadata'),
+    index: integer('index'),
+    type: varchar('type'),
+    clientId: text('client_id'),
+    userId: uuid('user_id').references(() => user.id, {
+      onDelete: 'cascade',
     }),
-    createdAt: timestamptz("created_at").notNull().defaultNow(),
-    updatedAt: timestamptz("updated_at").notNull().defaultNow(),
-    accessedAt: timestamptz("accessed_at").notNull().defaultNow(),
+    createdAt: timestamptz('created_at').notNull().defaultNow(),
+    updatedAt: timestamptz('updated_at').notNull().defaultNow(),
+    accessedAt: timestamptz('accessed_at').notNull().defaultNow(),
   },
-  (t) => [unique("chunks_client_id_user_id_unique").on(t.clientId, t.userId)],
+  (t) => [unique('chunks_client_id_user_id_unique').on(t.clientId, t.userId)]
 );
 
 export const embeddings = pgTable(
-  "embeddings",
+  'embeddings',
   {
-    id: uuid("id").defaultRandom().primaryKey(),
-    chunkId: uuid("chunk_id")
+    id: uuid('id').defaultRandom().primaryKey(),
+    chunkId: uuid('chunk_id')
       .references(() => chunks.id, {
-        onDelete: "cascade",
+        onDelete: 'cascade',
       })
       .unique(),
-    embeddings: vector("embeddings", {
+    embeddings: vector('embeddings', {
       dimensions: 1024,
     }),
-    model: text("model"),
-    clientId: text("client_id"),
-    userId: uuid("user_id").references(() => user.id, {
-      onDelete: "cascade",
+    model: text('model'),
+    clientId: text('client_id'),
+    userId: uuid('user_id').references(() => user.id, {
+      onDelete: 'cascade',
     }),
   },
   (t) => [
-    unique("embeddings_client_id_user_id_unique").on(t.clientId, t.userId),
-  ],
+    unique('embeddings_client_id_user_id_unique').on(t.clientId, t.userId),
+  ]
 );

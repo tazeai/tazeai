@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { Loader2 } from "@tazeai/ui/components/icons";
+import { Loader2 } from '@tazeai/ui/components/icons';
 import {
   Table,
   TableBody,
@@ -8,17 +8,17 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@tazeai/ui/components/table";
-import { cn } from "@tazeai/ui/lib/utils";
-import type { DataTableProps } from "./types";
+} from '@tazeai/ui/components/table';
+import { cn } from '@tazeai/ui/lib/utils';
+import type { DataTableProps } from './types';
 
 export function DataTable<T extends Record<string, any>>({
   data,
   columns,
   isLoading = false,
-  emptyMessage = "没有数据",
-  loadingMessage = "加载中...",
-  rowKeyField = "id" as keyof T,
+  emptyMessage = '没有数据',
+  loadingMessage = '加载中...',
+  rowKeyField = 'id' as keyof T,
   onRowClick,
   selectedRowIds = [],
   onRowSelect,
@@ -59,16 +59,16 @@ export function DataTable<T extends Record<string, any>>({
                   <TableRow
                     className={cn(
                       // 基础样式
-                      "transition-colors duration-200",
+                      'transition-colors duration-200',
                       // 悬停高亮效果
-                      highlightOnHover && "hover:bg-muted/50",
+                      highlightOnHover && 'hover:bg-muted/50',
                       // 选中高亮效果
-                      isSelected && "bg-primary/10 hover:bg-primary/20",
+                      isSelected && 'bg-primary/10 hover:bg-primary/20',
                       // 可点击样式
-                      (onRowClick || onRowSelect) && "cursor-pointer",
+                      (onRowClick || onRowSelect) && 'cursor-pointer'
                     )}
-                    data-selected={isSelected ? "true" : undefined}
-                    data-state={isSelected ? "selected" : undefined}
+                    data-selected={isSelected ? 'true' : undefined}
+                    data-state={isSelected ? 'selected' : undefined}
                     key={rowId}
                     onClick={(e) => {
                       // 如果有行选择回调，则触发

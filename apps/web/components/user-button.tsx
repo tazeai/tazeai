@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { signOut, useSession } from "@tazeai/auth/client";
+import { signOut, useSession } from '@tazeai/auth/client';
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from "@tazeai/ui/components/avatar";
-import { Button } from "@tazeai/ui/components/button";
+} from '@tazeai/ui/components/avatar';
+import { Button } from '@tazeai/ui/components/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,15 +15,15 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@tazeai/ui/components/dropdown-menu";
+} from '@tazeai/ui/components/dropdown-menu';
 import {
   HelpCircle,
   LayoutDashboard,
   LogOut,
   Settings,
   User,
-} from "@tazeai/ui/components/icons";
-import Link from "next/link";
+} from '@tazeai/ui/components/icons';
+import Link from 'next/link';
 
 export function UserButton() {
   const { data } = useSession();
@@ -33,9 +33,9 @@ export function UserButton() {
 
   // Get initials from name for avatar fallback
   const initials = data.user.name
-    .split(" ")
+    .split(' ')
     .map((n: string) => n[0])
-    .join("")
+    .join('')
     .toUpperCase();
 
   return (
@@ -48,7 +48,7 @@ export function UserButton() {
           <Avatar className="h-8 w-8">
             <AvatarImage
               alt={data.user.name}
-              src={data.user.image || "/images/logo.png"}
+              src={data.user.image || '/images/logo.png'}
             />
             <AvatarFallback>{initials}</AvatarFallback>
           </Avatar>

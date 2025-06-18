@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import Link from "next/link";
-import { GuestGuard } from "../_components/guest-guard";
-import { SignUpForm } from "../_components/signup-form";
+import Image from 'next/image';
+import Link from 'next/link';
+import { GuestGuard } from '../_components/guest-guard';
+import { SignUpForm } from '../_components/signup-form';
 
 export default function SignUpPage() {
   return (

@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { type RefObject, useEffect, useState } from "react";
+import { type RefObject, useEffect, useState } from 'react';
 
 interface UseInViewOptions {
   threshold?: number;
@@ -10,9 +10,9 @@ interface UseInViewOptions {
 
 export function useInView(
   ref: RefObject<HTMLElement | Element | null>,
-  options: UseInViewOptions = {},
+  options: UseInViewOptions = {}
 ): boolean {
-  const { threshold = 0, once = false, rootMargin = "0px" } = options;
+  const { threshold = 0, once = false, rootMargin = '0px' } = options;
   const [inView, setInView] = useState(false);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export function useInView(
           setInView(false);
         }
       },
-      { threshold, rootMargin },
+      { threshold, rootMargin }
     );
 
     observer.observe(ref.current);

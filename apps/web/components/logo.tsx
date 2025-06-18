@@ -1,6 +1,6 @@
-import Image, { type ImageProps } from "next/image";
+import Image, { type ImageProps } from 'next/image';
 
-export const Logo = (props: Omit<ImageProps, "src" | "alt">) => {
+export const Logo = (props: Omit<ImageProps, 'src' | 'alt'>) => {
   return (
     <Image
       alt="TazeAI"

@@ -1,82 +1,131 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
-  "assists": {
-    "actions": {
-      "source": {
-        "sortJsxProps": "on",
-        "useSortedKeys": "on"
-      }
-    },
-    "enabled": true
-  },
-  "extends": ["ultracite"],
-  "files": {
-    "ignore": [
-      "**/.turbo",
-      "**/coverage",
-      "**/dist",
-      "**/pnpm-lock.yaml",
-      "**/CHANGELOG.md",
-      "**/package.json"
-    ]
-  },
+  "$schema": "https://biomejs.dev/schemas/2.0.0/schema.json",
   "formatter": {
-    "attributePosition": "auto",
     "enabled": true,
-    "formatWithErrors": false,
+    "formatWithErrors": true,
     "indentStyle": "space",
     "indentWidth": 2,
     "lineEnding": "lf",
-    "lineWidth": 100
+    "lineWidth": 100,
+    "attributePosition": "auto"
   },
-  "javascript": {
-    "formatter": {
-      "bracketSameLine": false,
-      "bracketSpacing": true,
-      "jsxQuoteStyle": "double",
-      "quoteProperties": "asNeeded",
-      "quoteStyle": "double",
-      "semicolons": "always",
-      "trailingCommas": "all"
-    },
-    "parser": {
-      "unsafeParameterDecoratorsEnabled": true
-    }
-  },
+  "assist": { "actions": { "source": { "organizeImports": "on" } } },
   "linter": {
+    "enabled": true,
     "rules": {
       "a11y": {
-        "all": false
+        "noAutofocus": "off"
       },
       "complexity": {
-        "all": false
+        "useSimplifiedLogicExpression": "off"
       },
       "correctness": {
-        "noUndeclaredVariables": "off",
-        "noUnusedFunctionParameters": "off",
-        "noUnusedVariables": "off",
-        "useExhaustiveDependencies": "off"
+        "noUndeclaredDependencies": "off",
+        "useImportExtensions": "off",
+        "noNodejsModules": "off"
       },
       "nursery": {
-        "all": false
+        "noSecrets": "off",
+        "useExplicitType": "off",
+        "useSortedClasses": {
+          "fix": "safe",
+          "level": "error",
+          "options": {
+            "attributes": ["className"],
+            "functions": ["clsx", "cva", "tw", "twMerge", "cn", "twJoin"]
+          }
+        }
       },
       "performance": {
-        "all": false
-      },
-      "security": {
-        "all": false
+        "noBarrelFile": "off",
+        "noReExportAll": "off",
+        "noNamespaceImport": "off"
       },
       "style": {
-        "all": false
+        "noDefaultExport": "off",
+        "noImplicitBoolean": "off",
+        "useExplicitLengthCheck": "off",
+        "useFilenamingConvention": {
+          "level": "error",
+          "options": {
+            "requireAscii": true,
+            "filenameCases": ["kebab-case"]
+          }
+        },
+        "useSingleVarDeclarator": "off",
+        "useNamingConvention": "off",
+        "noParameterAssign": "error",
+        "useAsConstAssertion": "error",
+        "useDefaultParameterLast": "error",
+        "useEnumInitializers": "error",
+        "useSelfClosingElements": "error",
+        "noUnusedTemplateLiteral": "error",
+        "useNumberNamespace": "error",
+        "noInferrableTypes": "error",
+        "noUselessElse": "error",
+        "noCommonJs": "off",
+        "noProcessEnv": "off",
+        "useComponentExportOnlyModules": "off",
+        "useConsistentCurlyBraces": "off"
       },
       "suspicious": {
-        "all": false
+        "noReactSpecificProps": "off",
+        "noArrayIndexKey": "off"
       }
     }
   },
+  "javascript": {
+    "formatter": {
+      "arrowParentheses": "always",
+      "attributePosition": "auto",
+      "bracketSameLine": false,
+      "bracketSpacing": true,
+      "enabled": true,
+      "indentStyle": "space",
+      "indentWidth": 2,
+      "jsxQuoteStyle": "double",
+      "lineEnding": "lf",
+      "lineWidth": 80,
+      "quoteProperties": "asNeeded",
+      "quoteStyle": "single",
+      "semicolons": "always",
+      "trailingCommas": "es5"
+    }
+  },
+  "css": {
+    "formatter": {
+      "indentStyle": "space",
+      "indentWidth": 2,
+      "lineEnding": "lf",
+      "lineWidth": 80,
+      "quoteStyle": "double"
+    },
+    "parser": {
+      "allowWrongLineComments": false,
+      "cssModules": false
+    }
+  },
+  "json": {
+    "formatter": {
+      "enabled": true,
+      "indentStyle": "space",
+      "indentWidth": 2,
+      "lineEnding": "lf",
+      "lineWidth": 80,
+      "trailingCommas": "none"
+    },
+    "linter": {
+      "enabled": true
+    },
+    "parser": {
+      "allowComments": false,
+      "allowTrailingCommas": false
+    }
+  },
   "vcs": {
-    "clientKind": "git",
     "enabled": true,
-    "useIgnoreFile": true
+    "clientKind": "git",
+    "useIgnoreFile": true,
+    "defaultBranch": "main"
   }
 }

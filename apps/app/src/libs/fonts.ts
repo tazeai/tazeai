@@ -1,6 +1,6 @@
-import { Inter as SansFont } from "next/font/google";
+import { Inter as SansFont } from 'next/font/google';
 
-import { cn } from "@tazeai/ui/lib/utils";
+import { cn } from '@tazeai/ui/lib/utils';
 
 /**
  * @sans
@@ -8,11 +8,11 @@ import { cn } from "@tazeai/ui/lib/utils";
  * By default, it uses the Inter font from Google Fonts.
  */
 const sans = SansFont({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  fallback: ["system-ui", "Helvetica Neue", "Helvetica", "Arial"],
+  subsets: ['latin'],
+  variable: '--font-sans',
+  fallback: ['system-ui', 'Helvetica Neue', 'Helvetica', 'Arial'],
   preload: true,
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ['300', '400', '500', '600', '700'],
 });
 
 /**
@@ -30,7 +30,7 @@ export { sans, heading };
  * @param theme
  */
 export function getFontsClassName(theme?: string) {
-  const dark = theme === "dark";
+  const dark = theme === 'dark';
   const light = !dark;
 
   const font = [sans.variable, heading.variable].reduce<string[]>(
@@ -39,10 +39,10 @@ export function getFontsClassName(theme?: string) {
 
       return [...acc, curr];
     },
-    [],
+    []
   );
 
-  return cn("min-h-screen bg-background antialiased", ...font, {
+  return cn('min-h-screen bg-background antialiased', ...font, {
     dark,
     light,
   });

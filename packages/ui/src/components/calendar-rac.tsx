@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { getLocalTimeZone, today } from "@internationalized/date";
-import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
-import type { ComponentProps } from "react";
+import { getLocalTimeZone, today } from '@internationalized/date';
+import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
+import type { ComponentProps } from 'react';
 import {
   Button,
   CalendarCell as CalendarCellRac,
@@ -14,9 +14,9 @@ import {
   Heading as HeadingRac,
   RangeCalendar as RangeCalendarRac,
   composeRenderProps,
-} from "react-aria-components";
+} from 'react-aria-components';
 
-import { cn } from "@tazeai/ui/lib/utils";
+import { cn } from '@tazeai/ui/lib/utils';
 
 interface BaseCalendarProps {
   className?: string;
@@ -62,18 +62,18 @@ function CalendarGridComponent({ isRange = false }: { isRange?: boolean }) {
         {(date) => (
           <CalendarCellRac
             className={cn(
-              "relative flex size-9 items-center justify-center whitespace-nowrap rounded-md p-0 font-normal text-foreground text-sm outline-none duration-150 [transition-property:color,background-color,border-radius,box-shadow] data-disabled:pointer-events-none data-unavailable:pointer-events-none data-focus-visible:z-10 data-hovered:bg-accent data-selected:bg-primary data-hovered:text-foreground data-selected:text-primary-foreground data-unavailable:line-through data-disabled:opacity-30 data-unavailable:opacity-30 data-focus-visible:ring-[3px] data-focus-visible:ring-ring/50",
+              'relative flex size-9 items-center justify-center whitespace-nowrap rounded-md p-0 font-normal text-foreground text-sm outline-none duration-150 [transition-property:color,background-color,border-radius,box-shadow] data-disabled:pointer-events-none data-unavailable:pointer-events-none data-focus-visible:z-10 data-hovered:bg-accent data-selected:bg-primary data-hovered:text-foreground data-selected:text-primary-foreground data-unavailable:line-through data-disabled:opacity-30 data-unavailable:opacity-30 data-focus-visible:ring-[3px] data-focus-visible:ring-ring/50',
               // Range-specific styles
               isRange &&
-                "data-invalid:data-selection-end:bg-destructive data-invalid:data-selection-start:bg-destructive data-invalid:data-selection-end:text-white data-invalid:data-selection-start:text-white data-selected:rounded-none data-selection-start:rounded-s-md data-selection-end:rounded-e-md data-invalid:bg-red-100 data-selected:bg-accent data-selection-end:bg-primary data-selection-start:bg-primary data-selected:text-foreground data-selection-end:text-primary-foreground data-selection-start:text-primary-foreground",
+                'data-invalid:data-selection-end:bg-destructive data-invalid:data-selection-start:bg-destructive data-invalid:data-selection-end:text-white data-invalid:data-selection-start:text-white data-selected:rounded-none data-selection-start:rounded-s-md data-selection-end:rounded-e-md data-invalid:bg-red-100 data-selected:bg-accent data-selection-end:bg-primary data-selection-start:bg-primary data-selected:text-foreground data-selection-end:text-primary-foreground data-selection-start:text-primary-foreground',
               // Today indicator styles
               date.compare(now) === 0 &&
                 cn(
-                  "after:-translate-x-1/2 after:pointer-events-none after:absolute after:start-1/2 after:bottom-1 after:z-10 after:size-[3px] after:rounded-full after:bg-primary",
+                  'after:-translate-x-1/2 after:pointer-events-none after:absolute after:start-1/2 after:bottom-1 after:z-10 after:size-[3px] after:rounded-full after:bg-primary',
                   isRange
-                    ? "data-selection-end:after:bg-background data-selection-start:after:bg-background"
-                    : "data-selected:after:bg-background",
-                ),
+                    ? 'data-selection-end:after:bg-background data-selection-start:after:bg-background'
+                    : 'data-selected:after:bg-background'
+                )
             )}
             date={date}
           />
@@ -88,7 +88,7 @@ function Calendar({ className, ...props }: CalendarProps) {
     <CalendarRac
       {...props}
       className={composeRenderProps(className, (className) =>
-        cn("w-fit", className),
+        cn('w-fit', className)
       )}
     >
       <CalendarHeader />
@@ -102,7 +102,7 @@ function RangeCalendar({ className, ...props }: RangeCalendarProps) {
     <RangeCalendarRac
       {...props}
       className={composeRenderProps(className, (className) =>
-        cn("w-fit", className),
+        cn('w-fit', className)
       )}
     >
       <CalendarHeader />

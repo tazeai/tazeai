@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import type { VariantProps } from "class-variance-authority";
-import { ToggleGroup as ToggleGroupPrimitive } from "radix-ui";
-import * as React from "react";
+import type { VariantProps } from 'class-variance-authority';
+import { ToggleGroup as ToggleGroupPrimitive } from 'radix-ui';
+import * as React from 'react';
 
-import { toggleVariants } from "@tazeai/ui/components/toggle";
-import { cn } from "@tazeai/ui/lib/utils";
+import { toggleVariants } from '@tazeai/ui/components/toggle';
+import { cn } from '@tazeai/ui/lib/utils';
 
 const ToggleGroupContext = React.createContext<
   VariantProps<typeof toggleVariants>
 >({
-  size: "default",
-  variant: "default",
+  size: 'default',
+  variant: 'default',
 });
 
 function ToggleGroup({
@@ -25,8 +25,8 @@ function ToggleGroup({
   return (
     <ToggleGroupPrimitive.Root
       className={cn(
-        "group/toggle-group flex items-center rounded-md data-[variant=outline]:shadow-xs",
-        className,
+        'group/toggle-group flex items-center rounded-md data-[variant=outline]:shadow-xs',
+        className
       )}
       data-size={size}
       data-slot="toggle-group"
@@ -57,8 +57,8 @@ function ToggleGroupItem({
           variant: context.variant || variant,
           size: context.size || size,
         }),
-        "min-w-0 shrink-0 rounded-none shadow-none first:rounded-l-md last:rounded-r-md focus:z-10 focus-visible:z-10 data-[variant=outline]:border-l-0 data-[variant=outline]:first:border-l",
-        className,
+        'min-w-0 shrink-0 rounded-none shadow-none first:rounded-l-md last:rounded-r-md focus:z-10 focus-visible:z-10 data-[variant=outline]:border-l-0 data-[variant=outline]:first:border-l',
+        className
       )}
       data-size={context.size || size}
       data-slot="toggle-group-item"

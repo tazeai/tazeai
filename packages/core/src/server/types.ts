@@ -1,7 +1,7 @@
-import type { auth } from "@tazeai/auth";
-import type { Cache } from "@tazeai/cache";
-import type { Database } from "@tazeai/db";
-import type { Context } from "hono";
+import type { auth } from '@tazeai/auth';
+import type { Cache } from '@tazeai/cache';
+import type { Database } from '@tazeai/db';
+import type { Context } from 'hono';
 
 export type Variables = {
   db: Database;

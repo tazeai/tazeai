@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { client } from "@tazeai/auth/client";
-import { Button } from "@tazeai/ui/components/button";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { client } from '@tazeai/auth/client';
+import { Button } from '@tazeai/ui/components/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@tazeai/ui/components/card";
+} from '@tazeai/ui/components/card';
 import {
   Form,
   FormControl,
@@ -17,34 +17,34 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@tazeai/ui/components/form";
-import { Loader2 } from "@tazeai/ui/components/icons";
-import { Input } from "@tazeai/ui/components/input";
+} from '@tazeai/ui/components/form';
+import { Loader2 } from '@tazeai/ui/components/icons';
+import { Input } from '@tazeai/ui/components/input';
 import {
   InputOTP,
   InputOTPGroup,
   InputOTPSlot,
-} from "@tazeai/ui/components/input-otp";
-import { cn } from "@tazeai/ui/lib/utils";
-import { useSearchParams } from "next/navigation";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
-import { toast } from "sonner";
-import { z } from "zod";
+} from '@tazeai/ui/components/input-otp';
+import { cn } from '@tazeai/ui/lib/utils';
+import { useSearchParams } from 'next/navigation';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { toast } from 'sonner';
+import { z } from 'zod';
 
 const formSchema = z.object({
   email: z.string().email({
-    message: "Invalid email address.",
+    message: 'Invalid email address.',
   }),
 });
 
 const otpFormSchema = z.object({
   otp: z.string().length(6, {
-    message: "Invalid OTP.",
+    message: 'Invalid OTP.',
   }),
   email: z.string().email({
-    message: "Invalid email address.",
+    message: 'Invalid email address.',
   }),
 });
 
@@ -53,22 +53,22 @@ const otpLength = 6;
 export function ForgotPasswordForm({
   className,
   ...props
-}: React.ComponentPropsWithoutRef<"div">) {
-  const { t } = useTranslation("auth");
+}: React.ComponentPropsWithoutRef<'div'>) {
+  const { t } = useTranslation('auth');
   const params = useSearchParams();
   const [showOtpForm, setShowOtpForm] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: "",
+      email: '',
     },
   });
 
   const otpForm = useForm<z.infer<typeof otpFormSchema>>({
     resolver: zodResolver(otpFormSchema),
     defaultValues: {
-      otp: "",
+      otp: '',
     },
   });
 
@@ -77,17 +77,17 @@ export function ForgotPasswordForm({
       setIsLoading(true);
       const res = await client.emailOtp.sendVerificationOtp({
         email: values.email,
-        type: "forget-password",
+        type: 'forget-password',
       });
       if (res.error) {
         toast.error(res.error.message);
       } else {
-        toast.success("Send email link successful");
+        toast.success('Send email link successful');
         setShowOtpForm(true);
-        otpForm.setValue("email", values.email);
+        otpForm.setValue('email', values.email);
       }
     } catch (error) {
-      toast.error("Send email link failed");
+      toast.error('Send email link failed');
     } finally {
       setIsLoading(false);
     }
@@ -103,18 +103,18 @@ export function ForgotPasswordForm({
       if (res.error) {
         toast.error(res.error.message);
       } else {
-        toast.success("Verify email successful");
+        toast.success('Verify email successful');
         setShowOtpForm(false);
       }
     } catch (error) {
-      toast.error("Verify email failed");
+      toast.error('Verify email failed');
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className={cn("flex flex-col gap-6", className)} {...props}>
+    <div className={cn('flex flex-col gap-6', className)} {...props}>
       <Card>
         {showOtpForm ? (
           <CardHeader className="text-center">
@@ -129,8 +129,8 @@ export function ForgotPasswordForm({
               Verification
             </CardTitle>
             <CardDescription>
-              If you have an account, we have sent a code to{" "}
-              <span className="font-bold">{otpForm.getValues("email")}</span>.
+              If you have an account, we have sent a code to{' '}
+              <span className="font-bold">{otpForm.getValues('email')}</span>.
               Enter it below.
             </CardDescription>
           </CardHeader>
@@ -180,7 +180,7 @@ export function ForgotPasswordForm({
                       {isLoading && (
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                       )}
-                      {t("forgotPasswordVerify")}
+                      {t('forgotPasswordVerify')}
                     </Button>
                   </div>
                 </form>
@@ -210,7 +210,7 @@ export function ForgotPasswordForm({
                       {isLoading && (
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                       )}
-                      {t("sendEmailLink")}
+                      {t('sendEmailLink')}
                     </Button>
                   </div>
                 </form>

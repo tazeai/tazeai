@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { Cropper as CropperPrimitive } from "@origin-space/image-cropper";
+import { Cropper as CropperPrimitive } from '@origin-space/image-cropper';
 
-import { cn } from "@tazeai/ui/lib/utils";
+import { cn } from '@tazeai/ui/lib/utils';
 
 function Cropper({
   className,
@@ -11,8 +11,8 @@ function Cropper({
   return (
     <CropperPrimitive.Root
       className={cn(
-        "relative flex w-full cursor-move touch-none items-center justify-center overflow-hidden focus:outline-none",
-        className,
+        'relative flex w-full cursor-move touch-none items-center justify-center overflow-hidden focus:outline-none',
+        className
       )}
       data-slot="cropper"
       {...props}
@@ -26,7 +26,7 @@ function CropperDescription({
 }: React.ComponentProps<typeof CropperPrimitive.Description>) {
   return (
     <CropperPrimitive.Description
-      className={cn("sr-only", className)}
+      className={cn('sr-only', className)}
       data-slot="cropper-description"
       {...props}
     />
@@ -40,8 +40,8 @@ function CropperImage({
   return (
     <CropperPrimitive.Image
       className={cn(
-        "pointer-events-none h-full w-full object-cover",
-        className,
+        'pointer-events-none h-full w-full object-cover',
+        className
       )}
       data-slot="cropper-image"
       {...props}
@@ -56,8 +56,8 @@ function CropperCropArea({
   return (
     <CropperPrimitive.CropArea
       className={cn(
-        "pointer-events-none absolute border-3 border-white shadow-[0_0_0_9999px_rgba(0,0,0,0.3)] in-[[data-slot=cropper]:focus-visible]:ring-[3px] in-[[data-slot=cropper]:focus-visible]:ring-white/50",
-        className,
+        'pointer-events-none absolute border-3 border-white shadow-[0_0_0_9999px_rgba(0,0,0,0.3)] in-[[data-slot=cropper]:focus-visible]:ring-[3px] in-[[data-slot=cropper]:focus-visible]:ring-white/50',
+        className
       )}
       data-slot="cropper-crop-area"
       {...props}

@@ -1,9 +1,9 @@
-import { source } from "@/lib/source";
-import { getMDXComponents } from "@/mdx-components";
-import { createRelativeLink } from "fumadocs-ui/mdx";
-import { DocsBody, DocsPage } from "fumadocs-ui/page";
-import { notFound } from "next/navigation";
-import { EditGitHub } from "./edit-gh";
+import { source } from '@/lib/source';
+import { getMDXComponents } from '@/mdx-components';
+import { createRelativeLink } from 'fumadocs-ui/mdx';
+import { DocsBody, DocsPage } from 'fumadocs-ui/page';
+import { notFound } from 'next/navigation';
+import { EditGitHub } from './edit-gh';
 
 export default async function Page(props: {
   params: Promise<{
@@ -16,10 +16,10 @@ export default async function Page(props: {
 
   const MDXContent = page.data.body;
 
-  let filePath = "";
-  if (page.file && typeof page.file === "object" && "path" in page.file) {
+  let filePath = '';
+  if (page.file && typeof page.file === 'object' && 'path' in page.file) {
     const path = page.file.path as string;
-    filePath = path.replace(/^.*?\/content\//, "content/");
+    filePath = path.replace(/^.*?\/content\//, 'content/');
   }
 
   return (

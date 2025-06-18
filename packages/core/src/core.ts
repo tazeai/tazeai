@@ -9,6 +9,6 @@ export class APIClient {
   }
 
   run() {
-    console.log("run", this.options);
+    console.log('run', this.options);
   }
 }

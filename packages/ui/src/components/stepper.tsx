@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import { CheckIcon, LoaderCircleIcon } from "lucide-react";
-import { Slot as SlotPrimitive } from "radix-ui";
-import * as React from "react";
-import { createContext, useContext } from "react";
+import { CheckIcon, LoaderCircleIcon } from 'lucide-react';
+import { Slot as SlotPrimitive } from 'radix-ui';
+import * as React from 'react';
+import { createContext, useContext } from 'react';
 
-import { cn } from "@tazeai/ui/lib/utils";
+import { cn } from '@tazeai/ui/lib/utils';
 
 // Types
 type StepperContextValue = {
   activeStep: number;
   setActiveStep: (step: number) => void;
-  orientation: "horizontal" | "vertical";
+  orientation: 'horizontal' | 'vertical';
 };
 
 type StepItemContextValue = {
@@ -21,20 +21,20 @@ type StepItemContextValue = {
   isLoading: boolean;
 };
 
-type StepState = "active" | "completed" | "inactive" | "loading";
+type StepState = 'active' | 'completed' | 'inactive' | 'loading';
 
 // Contexts
 const StepperContext = createContext<StepperContextValue | undefined>(
-  undefined,
+  undefined
 );
 const StepItemContext = createContext<StepItemContextValue | undefined>(
-  undefined,
+  undefined
 );
 
 const useStepper = () => {
   const context = useContext(StepperContext);
   if (!context) {
-    throw new Error("useStepper must be used within a Stepper");
+    throw new Error('useStepper must be used within a Stepper');
   }
   return context;
 };
@@ -42,7 +42,7 @@ const useStepper = () => {
 const useStepItem = () => {
   const context = useContext(StepItemContext);
   if (!context) {
-    throw new Error("useStepItem must be used within a StepperItem");
+    throw new Error('useStepItem must be used within a StepperItem');
   }
   return context;
 };
@@ -52,14 +52,14 @@ interface StepperProps extends React.HTMLAttributes<HTMLDivElement> {
   defaultValue?: number;
   value?: number;
   onValueChange?: (value: number) => void;
-  orientation?: "horizontal" | "vertical";
+  orientation?: 'horizontal' | 'vertical';
 }
 
 function Stepper({
   defaultValue = 0,
   value,
   onValueChange,
-  orientation = "horizontal",
+  orientation = 'horizontal',
   className,
   ...props
 }: StepperProps) {
@@ -72,7 +72,7 @@ function Stepper({
       }
       onValueChange?.(step);
     },
-    [value, onValueChange],
+    [value, onValueChange]
   );
 
   const currentStep = value ?? activeStep;
@@ -87,8 +87,8 @@ function Stepper({
     >
       <div
         className={cn(
-          "group/stepper inline-flex data-[orientation=horizontal]:w-full data-[orientation=horizontal]:flex-row data-[orientation=vertical]:flex-col",
-          className,
+          'group/stepper inline-flex data-[orientation=horizontal]:w-full data-[orientation=horizontal]:flex-row data-[orientation=vertical]:flex-col',
+          className
         )}
         data-orientation={orientation}
         data-slot="stepper"
@@ -119,10 +119,10 @@ function StepperItem({
 
   const state: StepState =
     completed || step < activeStep
-      ? "completed"
+      ? 'completed'
       : activeStep === step
-        ? "active"
-        : "inactive";
+        ? 'active'
+        : 'inactive';
 
   const isLoading = loading && step === activeStep;
 
@@ -132,12 +132,12 @@ function StepperItem({
     >
       <div
         className={cn(
-          "group/step flex items-center group-data-[orientation=horizontal]/stepper:flex-row group-data-[orientation=vertical]/stepper:flex-col",
-          className,
+          'group/step flex items-center group-data-[orientation=horizontal]/stepper:flex-row group-data-[orientation=vertical]/stepper:flex-col',
+          className
         )}
         data-slot="stepper-item"
         data-state={state}
-        {...(isLoading ? { "data-loading": true } : {})}
+        {...(isLoading ? { 'data-loading': true } : {})}
         {...props}
       >
         {children}
@@ -162,7 +162,7 @@ function StepperTrigger({
   const { step, isDisabled } = useStepItem();
 
   if (asChild) {
-    const Comp = asChild ? SlotPrimitive.Slot : "span";
+    const Comp = asChild ? SlotPrimitive.Slot : 'span';
     return (
       <Comp className={className} data-slot="stepper-trigger">
         {children}
@@ -173,8 +173,8 @@ function StepperTrigger({
   return (
     <button
       className={cn(
-        "inline-flex items-center gap-3 rounded-full outline-none focus-visible:z-10 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50",
-        className,
+        'inline-flex items-center gap-3 rounded-full outline-none focus-visible:z-10 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50',
+        className
       )}
       data-slot="stepper-trigger"
       disabled={isDisabled}
@@ -202,8 +202,8 @@ function StepperIndicator({
   return (
     <span
       className={cn(
-        "relative flex size-6 shrink-0 items-center justify-center rounded-full bg-muted font-medium text-muted-foreground text-xs data-[state=active]:bg-primary data-[state=completed]:bg-primary data-[state=active]:text-primary-foreground data-[state=completed]:text-primary-foreground",
-        className,
+        'relative flex size-6 shrink-0 items-center justify-center rounded-full bg-muted font-medium text-muted-foreground text-xs data-[state=active]:bg-primary data-[state=completed]:bg-primary data-[state=active]:text-primary-foreground data-[state=completed]:text-primary-foreground',
+        className
       )}
       data-slot="stepper-indicator"
       data-state={state}
@@ -243,7 +243,7 @@ function StepperTitle({
 }: React.HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h3
-      className={cn("font-medium text-sm", className)}
+      className={cn('font-medium text-sm', className)}
       data-slot="stepper-title"
       {...props}
     />
@@ -257,7 +257,7 @@ function StepperDescription({
 }: React.HTMLAttributes<HTMLParagraphElement>) {
   return (
     <p
-      className={cn("text-muted-foreground text-sm", className)}
+      className={cn('text-muted-foreground text-sm', className)}
       data-slot="stepper-description"
       {...props}
     />
@@ -272,8 +272,8 @@ function StepperSeparator({
   return (
     <div
       className={cn(
-        "m-0.5 bg-muted group-data-[orientation=horizontal]/stepper:h-0.5 group-data-[orientation=vertical]/stepper:h-12 group-data-[orientation=horizontal]/stepper:w-full group-data-[orientation=vertical]/stepper:w-0.5 group-data-[orientation=horizontal]/stepper:flex-1 group-data-[state=completed]/step:bg-primary",
-        className,
+        'm-0.5 bg-muted group-data-[orientation=horizontal]/stepper:h-0.5 group-data-[orientation=vertical]/stepper:h-12 group-data-[orientation=horizontal]/stepper:w-full group-data-[orientation=vertical]/stepper:w-0.5 group-data-[orientation=horizontal]/stepper:flex-1 group-data-[state=completed]/step:bg-primary',
+        className
       )}
       data-slot="stepper-separator"
       {...props}

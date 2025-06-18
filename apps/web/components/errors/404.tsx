@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { Button } from "@tazeai/ui/components/button";
-import Link from "next/link";
+import { Button } from '@tazeai/ui/components/button';
+import Link from 'next/link';
 
 export default function Error404() {
   return (

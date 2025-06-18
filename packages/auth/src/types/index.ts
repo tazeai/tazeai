@@ -1,4 +1,4 @@
 export type {
   Session,
   User,
-} from "better-auth/types";
+} from 'better-auth/types';

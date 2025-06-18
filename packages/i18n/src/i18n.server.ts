@@ -1,6 +1,6 @@
-import { type i18n as I18n, type InitOptions, createInstance } from "i18next";
-import resourcesToBackend from "i18next-resources-to-backend";
-import { initReactI18next } from "react-i18next/initReactI18next";
+import { type i18n as I18n, type InitOptions, createInstance } from 'i18next';
+import resourcesToBackend from 'i18next-resources-to-backend';
+import { initReactI18next } from 'react-i18next/initReactI18next';
 
 export type I18nInstance = I18n;
 
@@ -12,7 +12,7 @@ export type I18nInstance = I18n;
  */
 export async function initializeServerI18n(
   settings: InitOptions,
-  resolver: (language: string, namespace: string) => Promise<object>,
+  resolver: (language: string, namespace: string) => Promise<object>
 ) {
   const i18nInstance: I18nInstance = createInstance();
   const loadedNamespaces = new Set<string>();
@@ -29,15 +29,15 @@ export async function initializeServerI18n(
           } catch (error) {
             console.log(
               `Error loading i18n file: locales/${language}/${namespace}.json`,
-              error,
+              error
             );
 
             return callback(null, {});
           }
-        }),
+        })
       )
       .use({
-        type: "3rdParty",
+        type: '3rdParty',
         init: async (i18next: typeof i18nInstance) => {
           let iterations = 0;
           const maxIterations = 100;
@@ -48,7 +48,7 @@ export async function initializeServerI18n(
 
             if (iterations > maxIterations) {
               console.error(
-                `i18next is not initialized after ${maxIterations} iterations`,
+                `i18next is not initialized after ${maxIterations} iterations`
               );
 
               break;
@@ -81,7 +81,7 @@ export async function initializeServerI18n(
 
     while (Date.now() - startTime < maxWaitTime) {
       const allNamespacesLoaded = namespaces.every((ns) =>
-        loadedNamespaces.has(ns),
+        loadedNamespaces.has(ns)
       );
 
       if (allNamespacesLoaded) {
@@ -98,7 +98,7 @@ export async function initializeServerI18n(
 
   if (!success) {
     console.warn(
-      `Not all namespaces were loaded after ${maxWaitTime}ms. Initialization may be incomplete.`,
+      `Not all namespaces were loaded after ${maxWaitTime}ms. Initialization may be incomplete.`
     );
   }
 
@@ -112,7 +112,7 @@ export async function initializeServerI18n(
  */
 export function parseAcceptLanguageHeader(
   languageHeaderValue: string | null | undefined,
-  acceptedLanguages: string[],
+  acceptedLanguages: string[]
 ): string[] {
   // Return an empty array if the header value is not provided
   if (!languageHeaderValue) return [];
@@ -121,23 +121,23 @@ export function parseAcceptLanguageHeader(
 
   // Split the header value by comma and map each language to its quality value
   return languageHeaderValue
-    .split(",")
+    .split(',')
     .map((lang): [number, string] => {
-      const [locale, q = "q=1"] = lang.split(";");
+      const [locale, q = 'q=1'] = lang.split(';');
 
-      if (!locale) return [0, ""];
+      if (!locale) return [0, ''];
 
       const trimmedLocale = locale.trim();
-      const numQ = Number(q.replace(/q ?=/, ""));
+      const numQ = Number(q.replace(/q ?=/, ''));
 
       return [isNaN(numQ) ? 0 : numQ, trimmedLocale];
     })
     .sort(([q1], [q2]) => q2 - q1) // Sort by quality value in descending order
     .flatMap(([_, locale]) => {
       // Ignore wildcard '*' if 'ignoreWildcard' is true
-      if (locale === "*" && ignoreWildcard) return [];
+      if (locale === '*' && ignoreWildcard) return [];
 
-      const languageSegment = locale.split("-")[0];
+      const languageSegment = locale.split('-')[0];
 
       if (!languageSegment) return [];
 

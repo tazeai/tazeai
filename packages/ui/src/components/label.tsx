@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { Label as LabelPrimitive } from "radix-ui";
-import type * as React from "react";
+import { Label as LabelPrimitive } from 'radix-ui';
+import type * as React from 'react';
 
-import { cn } from "@tazeai/ui/lib/utils";
+import { cn } from '@tazeai/ui/lib/utils';
 
 function Label({
   className,
@@ -12,8 +12,8 @@ function Label({
   return (
     <LabelPrimitive.Root
       className={cn(
-        "select-none font-medium text-foreground text-sm leading-4 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50",
-        className,
+        'select-none font-medium text-foreground text-sm leading-4 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50',
+        className
       )}
       data-slot="label"
       {...props}

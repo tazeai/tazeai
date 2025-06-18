@@ -1,6 +1,6 @@
-import { isNil, transform } from "lodash-es";
-import { type RedisClientType, createClient } from "redis";
-import { MAX_COMMANDS_QUEUE_LENGTH } from "./consts";
+import { isNil, transform } from 'lodash-es';
+import { type RedisClientType, createClient } from 'redis';
+import { MAX_COMMANDS_QUEUE_LENGTH } from './consts';
 
 // TODO: Use superjson
 const json = {
@@ -13,7 +13,7 @@ const json = {
 };
 
 // Define the constant for successful Redis operation response
-export const REDIS_SUCCESS = "OK";
+export const REDIS_SUCCESS = 'OK';
 
 /**
  * Type representing a value that can be a promise or a value.
@@ -38,7 +38,7 @@ type CacheOptions = {
  * Class representing a cache store using Redis.
  */
 export class Cache {
-  #prefix = ""; // Prefix for cache keys
+  #prefix = ''; // Prefix for cache keys
   protected readonly redis: RedisClientType; // Redis client instance
 
   /**
@@ -52,7 +52,7 @@ export class Cache {
       url: connection,
       commandsQueueMaxLength: MAX_COMMANDS_QUEUE_LENGTH,
     });
-    this.#prefix = opts.prefix ?? "";
+    this.#prefix = opts.prefix ?? '';
   }
 
   /**
@@ -61,7 +61,7 @@ export class Cache {
    * @returns The current cache key prefix.
    */
   getPrefix = (): string => {
-    return this.#prefix || "";
+    return this.#prefix || '';
   };
 
   /**
@@ -106,7 +106,7 @@ export class Cache {
   set = async (
     key: string,
     value: unknown,
-    seconds?: number,
+    seconds?: number
   ): Promise<boolean> => {
     await this.connect();
     const cacheKey = this.getKey(key);
@@ -114,7 +114,7 @@ export class Cache {
     const res = await (ttl
       ? this.redis.set(cacheKey, this.serialize(value), {
           expiration: {
-            type: "EX",
+            type: 'EX',
             value: ttl,
           },
         })
@@ -131,7 +131,7 @@ export class Cache {
    */
   rememberForever = async <T>(
     key: string,
-    fn: CacheClosure<T>,
+    fn: CacheClosure<T>
   ): Promise<{
     value: T | null;
     cached: boolean;
@@ -161,7 +161,7 @@ export class Cache {
   remember = async <T>(
     key: string,
     fn?: CacheClosure<T>,
-    seconds?: number,
+    seconds?: number
   ): Promise<{
     value: T | null;
     cached: boolean;
@@ -249,7 +249,7 @@ export class Cache {
    */
   getMultiple = async <T, R = Record<string, T | null>>(
     keys: string[],
-    defaultVal: T | null = null,
+    defaultVal: T | null = null
   ): Promise<R> => {
     await this.connect();
     const values = await this.redis.mGet(keys.map(this.getKey));
@@ -269,7 +269,7 @@ export class Cache {
         (results as Record<string, T | null>)[key] = val;
         return results;
       },
-      {} as unknown as R,
+      {} as unknown as R
     );
   };
 
@@ -292,7 +292,7 @@ export class Cache {
    */
   get = async <T>(
     key: string,
-    defaultVal: T | null = null,
+    defaultVal: T | null = null
   ): Promise<T | null> => {
     await this.connect();
     const start = Date.now();
@@ -396,8 +396,8 @@ export class Cache {
     await this.connect();
     const results = await Promise.all(
       Object.entries(values).map(([key, value]) =>
-        this.put(key, value, seconds),
-      ),
+        this.put(key, value, seconds)
+      )
     );
     return results.every(Boolean);
   };
@@ -439,7 +439,7 @@ export class Cache {
       (results: Record<string, unknown>, value: string | null, key: number) => {
         results[key] = value ? this.unserialize<unknown>(value) : null;
       },
-      keys,
+      keys
     );
   };
 
@@ -454,7 +454,7 @@ export class Cache {
   add = async <T>(
     key: string,
     value: T,
-    seconds?: number,
+    seconds?: number
   ): Promise<boolean> => {
     await this.connect();
     const exist = await this.has(key);
