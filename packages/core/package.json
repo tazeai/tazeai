@@ -17,12 +17,12 @@
     "@tazeai/db": "workspace:*",
     "@tazeai/env": "workspace:*",
     "dayjs": "^1.11.13",
-    "hono": "^4.8.0",
+    "hono": "catalog:",
     "pino": "^9.7.0"
   },
   "devDependencies": {
     "@tazeai/typescript": "workspace:*",
-    "@types/node": "^22.15.32",
+    "@types/node": "catalog:",
     "typescript": "^5.8.3"
   }
 }

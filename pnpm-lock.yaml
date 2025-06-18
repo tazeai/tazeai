@@ -4,6 +4,15 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+catalogs:
+  default:
+    '@types/node':
+      specifier: 22.15.32
+      version: 22.15.32
+    hono:
+      specifier: 4.7.11
+      version: 4.7.11
+
 importers:
 
   .:
@@ -12,7 +21,7 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0
       '@types/node':
-        specifier: ^22.15.32
+        specifier: 'catalog:'
         version: 22.15.32
       dotenv-cli:
         specifier: ^8.0.0
@@ -78,8 +87,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui
       hono:
-        specifier: ^4.8.0
-        version: 4.8.0
+        specifier: 'catalog:'
+        version: 4.7.11
       i18next:
         specifier: ^25.2.1
         version: 25.2.1(typescript@5.8.3)
@@ -121,7 +130,7 @@ importers:
         specifier: workspace:*
         version: link:../../packages/tooling/typescript
       '@types/node':
-        specifier: ^22.15.32
+        specifier: 'catalog:'
         version: 22.15.32
       '@types/react':
         specifier: ^19.1.8
@@ -178,8 +187,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui
       hono:
-        specifier: ^4.8.0
-        version: 4.8.0
+        specifier: 'catalog:'
+        version: 4.7.11
       i18next:
         specifier: ^25.2.1
         version: 25.2.1(typescript@5.8.3)
@@ -221,7 +230,7 @@ importers:
         specifier: workspace:*
         version: link:../../packages/tooling/typescript
       '@types/node':
-        specifier: ^22.15.32
+        specifier: 'catalog:'
         version: 22.15.32
       '@types/react':
         specifier: ^19.1.8
@@ -273,7 +282,7 @@ importers:
         specifier: ^2.0.13
         version: 2.0.13
       '@types/node':
-        specifier: ^22.15.32
+        specifier: 'catalog:'
         version: 22.15.32
       '@types/react':
         specifier: ^19.1.8
@@ -295,7 +304,7 @@ importers:
     dependencies:
       '@langchain/community':
         specifier: ^0.3.46
-        version: 0.3.46(@browserbasehq/sdk@2.6.0)(@browserbasehq/stagehand@1.14.0(@playwright/test@1.53.0)(deepmerge@4.3.1)(dotenv@16.5.0)(openai@4.104.0(ws@8.18.2)(zod@3.25.32))(zod@3.25.32))(@ibm-cloud/watsonx-ai@1.6.7)(@langchain/core@0.3.59(openai@4.104.0(ws@8.18.2)(zod@3.25.32)))(@langchain/deepseek@0.0.2(@langchain/core@0.3.59(openai@4.104.0(ws@8.18.2)(zod@3.25.32)))(ws@8.18.2))(@neondatabase/serverless@1.0.1)(axios@1.10.0)(handlebars@4.7.8)(html-to-text@9.0.5)(ibm-cloud-sdk-core@5.4.0)(ignore@5.3.2)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.104.0(ws@8.18.2)(zod@3.25.32))(playwright@1.53.0)(redis@5.5.6)(weaviate-client@3.6.1)(ws@8.18.2)
+        version: 0.3.46(@browserbasehq/sdk@2.6.0)(@browserbasehq/stagehand@1.14.0(@playwright/test@1.53.0)(deepmerge@4.3.1)(dotenv@16.5.0)(openai@4.104.0(ws@8.18.2)(zod@3.25.32))(zod@3.25.32))(@ibm-cloud/watsonx-ai@1.6.7)(@langchain/core@0.3.59(openai@4.104.0(ws@8.18.2)(zod@3.25.32)))(@langchain/deepseek@0.0.2(@langchain/core@0.3.59(openai@4.104.0(ws@8.18.2)(zod@3.25.32)))(ws@8.18.2))(@neondatabase/serverless@1.0.1)(axios@1.10.0)(handlebars@4.7.8)(html-to-text@9.0.5)(ibm-cloud-sdk-core@5.4.0)(ignore@5.3.2)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.104.0(ws@8.18.2)(zod@3.25.32))(playwright@1.53.0)(redis@5.5.6)(weaviate-client@3.6.2)(ws@8.18.2)
       '@langchain/core':
         specifier: ^0.3.59
         version: 0.3.59(openai@4.104.0(ws@8.18.2)(zod@3.25.32))
@@ -325,7 +334,7 @@ importers:
         specifier: workspace:*
         version: link:../tooling/typescript
       '@types/node':
-        specifier: ^22.15.32
+        specifier: 'catalog:'
         version: 22.15.32
       typescript:
         specifier: ^5.8.3
@@ -353,7 +362,7 @@ importers:
         specifier: workspace:*
         version: link:../tooling/typescript
       '@types/node':
-        specifier: ^22.15.32
+        specifier: 'catalog:'
         version: 22.15.32
       '@types/react':
         specifier: ^19.1.8
@@ -417,7 +426,7 @@ importers:
         specifier: ^4.17.12
         version: 4.17.12
       '@types/node':
-        specifier: ^22.15.32
+        specifier: 'catalog:'
         version: 22.15.32
       '@types/react':
         specifier: ^19.1.8
@@ -454,7 +463,7 @@ importers:
         specifier: ^4.17.12
         version: 4.17.12
       '@types/node':
-        specifier: ^22.15.32
+        specifier: 'catalog:'
         version: 22.15.32
       '@types/react':
         specifier: ^19.1.8
@@ -476,7 +485,7 @@ importers:
         specifier: workspace:*
         version: link:../tooling/typescript
       '@types/node':
-        specifier: ^22.15.32
+        specifier: 'catalog:'
         version: 22.15.32
       typescript:
         specifier: ^5.8.3
@@ -503,8 +512,8 @@ importers:
         specifier: ^1.11.13
         version: 1.11.13
       hono:
-        specifier: ^4.8.0
-        version: 4.8.0
+        specifier: 'catalog:'
+        version: 4.7.11
       pino:
         specifier: ^9.7.0
         version: 9.7.0
@@ -513,7 +522,7 @@ importers:
         specifier: workspace:*
         version: link:../tooling/typescript
       '@types/node':
-        specifier: ^22.15.32
+        specifier: 'catalog:'
         version: 22.15.32
       typescript:
         specifier: ^5.8.3
@@ -593,7 +602,7 @@ importers:
         specifier: workspace:*
         version: link:../tooling/typescript
       '@types/node':
-        specifier: ^22.15.32
+        specifier: 'catalog:'
         version: 22.15.32
       '@types/react':
         specifier: ^19.1.8
@@ -618,7 +627,7 @@ importers:
         specifier: workspace:*
         version: link:../tooling/typescript
       '@types/node':
-        specifier: ^22.15.32
+        specifier: 'catalog:'
         version: 22.15.32
       typescript:
         specifier: ^5.8.3
@@ -643,7 +652,7 @@ importers:
         specifier: workspace:*
         version: link:../tooling/typescript
       '@types/node':
-        specifier: ^22.15.32
+        specifier: 'catalog:'
         version: 22.15.32
       '@types/react':
         specifier: ^19.1.8
@@ -668,7 +677,7 @@ importers:
         specifier: workspace:*
         version: link:../tooling/typescript
       '@types/node':
-        specifier: ^22.15.32
+        specifier: 'catalog:'
         version: 22.15.32
       typescript:
         specifier: ^5.8.3
@@ -680,7 +689,7 @@ importers:
         specifier: workspace:*
         version: link:../tooling/typescript
       '@types/node':
-        specifier: ^22.15.32
+        specifier: 'catalog:'
         version: 22.15.32
       '@types/react':
         specifier: ^19.1.8
@@ -698,7 +707,7 @@ importers:
         specifier: workspace:*
         version: link:../typescript
       '@types/node':
-        specifier: ^22.15.32
+        specifier: 'catalog:'
         version: 22.15.32
       typescript:
         specifier: ^5.8.3
@@ -810,7 +819,7 @@ importers:
         specifier: ^3.0.6
         version: 3.0.6
       '@types/node':
-        specifier: ^22.15.32
+        specifier: 'catalog:'
         version: 22.15.32
       '@types/react':
         specifier: ^19.1.8
@@ -838,7 +847,7 @@ importers:
         specifier: workspace:*
         version: link:../tooling/typescript
       '@types/node':
-        specifier: ^22.15.32
+        specifier: 'catalog:'
         version: 22.15.32
       typescript:
         specifier: ^5.8.3
@@ -3875,8 +3884,8 @@ packages:
   '@types/lodash-es@4.17.12':
     resolution: {integrity: sha512-0NgftHUcV4v34VhXm8QBSftKVXtbkBG3ViCjs6+eJ5a6y6Mi/jiFGPc1sC7QK+9BFhWrURE3EOggmWaSxL9OzQ==}
 
-  '@types/lodash@4.17.17':
-    resolution: {integrity: sha512-RRVJ+J3J+WmyOTqnz3PiBLA501eKwXl2noseKOrNo/6+XEHjTAxO4xHvxQB6QuNm+s4WRbn6rSiap8+EA+ykFQ==}
+  '@types/lodash@4.17.18':
+    resolution: {integrity: sha512-KJ65INaxqxmU6EoCiJmRPZC9H9RVWCRd349tXM2M3O5NA7cY6YL7c0bHAHQ93NOfTObEQ004kd2QVHs/r0+m4g==}
 
   '@types/mdast@4.0.4':
     resolution: {integrity: sha512-kGaNbPh1k7AFzgpud/gMdvIm5xuECykRR+JnWKQno9TAXVa6WIVCGTPvYGekIDL4uwCZQSYbUxNBSb1aUo79oA==}
@@ -4194,8 +4203,8 @@ packages:
     resolution: {integrity: sha512-Gmy6FhYlCY7uOElZUSbxo2UCDH8owEk996gkbrpsgGtrJLM3J7jGxl9Ic7Qwwj4ivOE5AWZWRMecDdF7hqGjFA==}
     engines: {node: '>=10'}
 
-  caniuse-lite@1.0.30001722:
-    resolution: {integrity: sha512-DCQHBBZtiK6JVkAGw7drvAMK0Q0POD/xZvEmDp6baiMMP6QXXk9HpD6mNYBZWhOPG6LvIDb82ITqtWjhDckHCA==}
+  caniuse-lite@1.0.30001723:
+    resolution: {integrity: sha512-1R/elMjtehrFejxwmexeXAtae5UO9iSyFn6G/I806CYC/BLyyBk1EPhrKBkWhy6wM6Xnm47dSJQec+tLJ39WHw==}
 
   ccount@2.0.1:
     resolution: {integrity: sha512-eyrF0jiFpY+3drT6383f1qhkbGsLSifNAjA61IUjZjmLCWjItY6LB9ft9YhoDgwfmclB2zhu51Lc7+95b8NRAg==}
@@ -5182,8 +5191,8 @@ packages:
   header-case@1.0.1:
     resolution: {integrity: sha512-i0q9mkOeSuhXw6bGgiQCCBgY/jlZuV/7dZXyZ9c6LcBrqwvT8eT719E9uxE5LiZftdl+z81Ugbg/VvXV4OJOeQ==}
 
-  hono@4.8.0:
-    resolution: {integrity: sha512-NoiHrqJxoe1MYXqW+/0/Q4NCizKj2Ivm4KmX8mOSBtw9UJ7KYaOGKkO7csIwO5UlZpfvVRdcgiMb0GGyjEjtcw==}
+  hono@4.7.11:
+    resolution: {integrity: sha512-rv0JMwC0KALbbmwJDEnxvQCeJh+xbS3KEWW5PC9cMJ08Ur9xgatI0HmtgYZfOdOSOeYsp5LO2cOhdI8cLEbDEQ==}
     engines: {node: '>=16.9.0'}
 
   html-escaper@2.0.2:
@@ -6265,10 +6274,6 @@ packages:
     resolution: {integrity: sha512-PS08Iboia9mts/2ygV3eLpY5ghnUcfLV/EXTOW1E2qYxJKGGBUtNjN76FYHnMs36RmARn41bC0AZmn+rR0OVpQ==}
     engines: {node: ^10 || ^12 || >=14}
 
-  postcss@8.5.5:
-    resolution: {integrity: sha512-d/jtm+rdNT8tpXuHY5MMtcbJFBkhXE6593XVR9UoGCH8jSFGci7jGvMGH5RYd5PBJW+00NZQt6gf7CbagJCrhg==}
-    engines: {node: ^10 || ^12 || >=14}
-
   postcss@8.5.6:
     resolution: {integrity: sha512-3Ybi1tAuwAP9s0r1UQ2J4n5Y0G05bJkpUIO0/bI9MhwmD70S5aTWbXGBwxHrelT+XM1k6dM0pk+SwNkpTRN7Pg==}
     engines: {node: ^10 || ^12 || >=14}
@@ -6784,8 +6789,8 @@ packages:
   simple-swizzle@0.2.2:
     resolution: {integrity: sha512-JA//kQgZtbuY83m+xT+tXJkmJncGMTFT+C+g2h2R9uxkYIrE2yy9sgmcLhCnw57/WSD+Eh3J97FPEDFnbXnDUg==}
 
-  simple-wcswidth@1.0.1:
-    resolution: {integrity: sha512-xMO/8eNREtaROt7tJvWJqHBDTMFN4eiQ5I4JRMuilwfnFcV5W9u7RUkueNkdw0jPqGMX36iCywelS5yilTuOxg==}
+  simple-wcswidth@1.1.1:
+    resolution: {integrity: sha512-R3q3/eoeNBp24CNTASEUrffXi0j9TwPIEvSStlvSrsFimM17sV5EHcMOc86j3K+UWZyLYvH0hRmYGCpCoaJ4vw==}
 
   sirv@2.0.4:
     resolution: {integrity: sha512-94Bdh3cC2PKrbgSOUqTiGPWVZeSiXfKOVZNJniWoqrWrRkB1CJzBU3NEbiTsPcYy1lDsANA/THzS+9WBiy5nfQ==}
@@ -7345,8 +7350,8 @@ packages:
   wcwidth@1.0.1:
     resolution: {integrity: sha512-XHPEwS0q6TaxcvG85+8EYkbiCux2XtWG2mkc47Ng2A77BQu9+DqIOJldST4HgPkuea7dvKSj5VgX3P1d4rW8Tg==}
 
-  weaviate-client@3.6.1:
-    resolution: {integrity: sha512-C/sVYLqLuRQn2FeP3YQFNSOV61gNNtswNDRnb117ZfweSU/DIGAYeZZn63DpNI11qDSWTS3Cbz/aQjUzZXbA6Q==}
+  weaviate-client@3.6.2:
+    resolution: {integrity: sha512-6z+Du0Sp+nVp4Mhsn25sd+Qw6fr60vbyUS1e3gTZqtMrxLuNC1xgA0J/MHu5oHcm6moCBqT/2AQCt4ZV4fYSaw==}
     engines: {node: '>=18.0.0'}
 
   web-streams-polyfill@4.0.0-beta.3:
@@ -8001,7 +8006,7 @@ snapshots:
 
   '@js-sdsl/ordered-map@4.4.2': {}
 
-  '@langchain/community@0.3.46(@browserbasehq/sdk@2.6.0)(@browserbasehq/stagehand@1.14.0(@playwright/test@1.53.0)(deepmerge@4.3.1)(dotenv@16.5.0)(openai@4.104.0(ws@8.18.2)(zod@3.25.32))(zod@3.25.32))(@ibm-cloud/watsonx-ai@1.6.7)(@langchain/core@0.3.59(openai@4.104.0(ws@8.18.2)(zod@3.25.32)))(@langchain/deepseek@0.0.2(@langchain/core@0.3.59(openai@4.104.0(ws@8.18.2)(zod@3.25.32)))(ws@8.18.2))(@neondatabase/serverless@1.0.1)(axios@1.10.0)(handlebars@4.7.8)(html-to-text@9.0.5)(ibm-cloud-sdk-core@5.4.0)(ignore@5.3.2)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.104.0(ws@8.18.2)(zod@3.25.32))(playwright@1.53.0)(redis@5.5.6)(weaviate-client@3.6.1)(ws@8.18.2)':
+  '@langchain/community@0.3.46(@browserbasehq/sdk@2.6.0)(@browserbasehq/stagehand@1.14.0(@playwright/test@1.53.0)(deepmerge@4.3.1)(dotenv@16.5.0)(openai@4.104.0(ws@8.18.2)(zod@3.25.32))(zod@3.25.32))(@ibm-cloud/watsonx-ai@1.6.7)(@langchain/core@0.3.59(openai@4.104.0(ws@8.18.2)(zod@3.25.32)))(@langchain/deepseek@0.0.2(@langchain/core@0.3.59(openai@4.104.0(ws@8.18.2)(zod@3.25.32)))(ws@8.18.2))(@neondatabase/serverless@1.0.1)(axios@1.10.0)(handlebars@4.7.8)(html-to-text@9.0.5)(ibm-cloud-sdk-core@5.4.0)(ignore@5.3.2)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.104.0(ws@8.18.2)(zod@3.25.32))(playwright@1.53.0)(redis@5.5.6)(weaviate-client@3.6.2)(ws@8.18.2)':
     dependencies:
       '@browserbasehq/stagehand': 1.14.0(@playwright/test@1.53.0)(deepmerge@4.3.1)(dotenv@16.5.0)(openai@4.104.0(ws@8.18.2)(zod@3.25.32))(zod@3.25.32)
       '@ibm-cloud/watsonx-ai': 1.6.7
@@ -8027,7 +8032,7 @@ snapshots:
       lodash: 4.17.21
       playwright: 1.53.0
       redis: 5.5.6
-      weaviate-client: 3.6.1
+      weaviate-client: 3.6.2
       ws: 8.18.2
     transitivePeerDependencies:
       - '@langchain/anthropic'
@@ -8091,7 +8096,7 @@ snapshots:
     dependencies:
       '@langchain/core': 0.3.59(openai@4.104.0(ws@8.18.2)(zod@3.25.32))
       uuid: 10.0.0
-      weaviate-client: 3.6.1
+      weaviate-client: 3.6.2
     transitivePeerDependencies:
       - encoding
 
@@ -10419,7 +10424,7 @@ snapshots:
       '@alloc/quick-lru': 5.2.0
       '@tailwindcss/node': 4.1.10
       '@tailwindcss/oxide': 4.1.10
-      postcss: 8.5.5
+      postcss: 8.5.6
       tailwindcss: 4.1.10
 
   '@tokenizer/token@0.3.0': {}
@@ -10530,9 +10535,9 @@ snapshots:
 
   '@types/lodash-es@4.17.12':
     dependencies:
-      '@types/lodash': 4.17.17
+      '@types/lodash': 4.17.18
 
-  '@types/lodash@4.17.17': {}
+  '@types/lodash@4.17.18': {}
 
   '@types/mdast@4.0.4':
     dependencies:
@@ -10853,7 +10858,7 @@ snapshots:
 
   camelcase@6.3.0: {}
 
-  caniuse-lite@1.0.30001722: {}
+  caniuse-lite@1.0.30001723: {}
 
   ccount@2.0.1: {}
 
@@ -11017,7 +11022,7 @@ snapshots:
 
   console-table-printer@2.14.3:
     dependencies:
-      simple-wcswidth: 1.0.1
+      simple-wcswidth: 1.1.1
 
   constant-case@2.0.0:
     dependencies:
@@ -11889,7 +11894,7 @@ snapshots:
       no-case: 2.3.2
       upper-case: 1.1.3
 
-  hono@4.8.0: {}
+  hono@4.7.11: {}
 
   html-escaper@2.0.2: {}
 
@@ -12901,7 +12906,7 @@ snapshots:
       '@swc/counter': 0.1.3
       '@swc/helpers': 0.5.15
       busboy: 1.6.0
-      caniuse-lite: 1.0.30001722
+      caniuse-lite: 1.0.30001723
       postcss: 8.4.31
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
@@ -13190,12 +13195,6 @@ snapshots:
       util-deprecate: 1.0.2
 
   postcss@8.4.31:
-    dependencies:
-      nanoid: 3.3.11
-      picocolors: 1.1.1
-      source-map-js: 1.2.1
-
-  postcss@8.5.5:
     dependencies:
       nanoid: 3.3.11
       picocolors: 1.1.1
@@ -13985,7 +13984,7 @@ snapshots:
       is-arrayish: 0.3.2
     optional: true
 
-  simple-wcswidth@1.0.1: {}
+  simple-wcswidth@1.1.1: {}
 
   sirv@2.0.4:
     dependencies:
@@ -14532,7 +14531,7 @@ snapshots:
     dependencies:
       defaults: 1.0.4
 
-  weaviate-client@3.6.1:
+  weaviate-client@3.6.2:
     dependencies:
       abort-controller-x: 0.4.3
       graphql: 16.11.0

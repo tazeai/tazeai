@@ -8,7 +8,7 @@
   },
   "devDependencies": {
     "@tazeai/typescript": "workspace:*",
-    "@types/node": "^22.15.32",
+    "@types/node": "catalog:",
     "typescript": "^5.8.3"
   }
 }

@@ -10,10 +10,7 @@ app.use(logger());
 app.use(
   '*',
   cors({
-    origin: (origin) => {
-      console.log(origin);
-      return origin;
-    },
+    origin: origin => origin,
     credentials: true,
   })
 );
