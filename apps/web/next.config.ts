@@ -16,6 +16,14 @@ let nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  webpack: (config, { webpack }) => {
+    config.plugins.push(
+      new webpack.IgnorePlugin({
+        resourceRegExp: /^cloudflare:workers$/,
+      })
+    );
+    return config;
+  },
 };
 
 if (process.env.ANALYZE === 'true') {
