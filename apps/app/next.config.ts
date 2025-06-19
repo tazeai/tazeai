@@ -20,15 +20,6 @@ let nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
-  webpack: (config, { webpack }) => {
-    config.plugins.push(
-      new webpack.IgnorePlugin({
-        resourceRegExp: /^cloudflare:workers$/,
-      })
-    );
-    return config;
-  },
-
   assetPrefix: isProd ? undefined : `http://${internalHost}:3001`,
 };
 

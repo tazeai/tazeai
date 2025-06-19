@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "analyze": "ANALYZE=true next build",
-    "build": "pnpm with-env next build",
+    "build": "pnpm with-env next build --turbopack",
     "clean": "rimraf dist .turbo .next",
     "with-env": "dotenv -e ../../.env --",
     "dev": "next dev --turbopack",
@@ -27,7 +27,7 @@
     "@tazeai/ui": "workspace:*",
     "hono": "catalog:",
     "i18next": "^25.2.1",
-    "next": "^15.3.3",
+    "next": "^15.3.4",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-hook-form": "^7.58.1",
@@ -38,7 +38,7 @@
     "zod": "^3.25.67"
   },
   "devDependencies": {
-    "@next/bundle-analyzer": "^15.3.3",
+    "@next/bundle-analyzer": "^15.3.4",
     "@tailwindcss/postcss": "^4.1.10",
     "@tazeai/typescript": "workspace:*",
     "@types/node": "catalog:",
