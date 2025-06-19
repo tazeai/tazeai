@@ -1,9 +1,5 @@
 'use client';
 
-import { DataTable } from '@/components/data-table';
-import { DataTablePagination } from '@/components/data-table/data-table-pagination';
-import { DataTableToolbar } from '@/components/data-table/data-table-toolbar';
-import type { Column } from '@/components/data-table/types';
 import {
   Avatar,
   AvatarFallback,
@@ -12,6 +8,12 @@ import {
 import { Badge } from '@tazeai/ui/components/badge';
 import { Button } from '@tazeai/ui/components/button';
 import { Checkbox } from '@tazeai/ui/components/checkbox';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@tazeai/ui/components/dropdown-menu';
 import {
   ChevronDown,
   Trash,
@@ -23,6 +25,10 @@ import { cn } from '@tazeai/ui/lib/utils';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import useSWR, { mutate } from 'swr';
+import { DataTable } from '@/components/data-table';
+import { DataTablePagination } from '@/components/data-table/data-table-pagination';
+import { DataTableToolbar } from '@/components/data-table/data-table-toolbar';
+import type { Column } from '@/components/data-table/types';
 import { ConfirmDialog } from './dialogs/confirm-dialog';
 import { FormDialog } from './dialogs/form-dialog';
 import { fetcher } from './fetcher';
@@ -30,13 +36,6 @@ import type { User, UserFormData } from './types';
 import { UserActions } from './user-actions';
 import { UserFilters } from './user-filters';
 import { UserForm } from './user-form';
-
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@tazeai/ui/components/dropdown-menu';
 
 export default function UserManagementList() {
   // SWR hook for fetching users

@@ -1,10 +1,9 @@
 'use client';
 
+import { cn } from '@tazeai/ui/lib/utils';
 import { CheckIcon, ChevronRightIcon, CircleIcon } from 'lucide-react';
 import { DropdownMenu as DropdownMenuPrimitive } from 'radix-ui';
 import * as React from 'react';
-
-import { cn } from '@tazeai/ui/lib/utils';
 
 type PointerDownEvent = Parameters<
   NonNullable<DropdownMenuPrimitive.DropdownMenuContentProps['onPointerDown']>

@@ -1,5 +1,7 @@
 'use client';
 
+import { Label } from '@tazeai/ui/components/label';
+import { cn } from '@tazeai/ui/lib/utils';
 import { type Label as LabelPrimitive, Slot as SlotPrimitive } from 'radix-ui';
 import * as React from 'react';
 import {
@@ -11,9 +13,6 @@ import {
   useFormContext,
   useFormState,
 } from 'react-hook-form';
-
-import { Label } from '@tazeai/ui/components/label';
-import { cn } from '@tazeai/ui/lib/utils';
 
 const Form = FormProvider;
 

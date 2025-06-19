@@ -1,9 +1,5 @@
 'use client';
 
-import OneTap from '@/app/(auth)/_components/one-tap';
-import { Logo } from '@/components/logo';
-import { UserButton } from '@/components/user-button';
-import { authConfig } from '@/config/auth';
 import { useSession } from '@tazeai/auth/client';
 import { Button } from '@tazeai/ui/components/button';
 import { Menu, X } from '@tazeai/ui/components/icons';
@@ -12,6 +8,10 @@ import { ThemeSwitcher } from '@tazeai/ui/components/theme-switch';
 import { cn } from '@tazeai/ui/lib/utils';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import OneTap from '@/app/(auth)/_components/one-tap';
+import { Logo } from '@/components/logo';
+import { UserButton } from '@/components/user-button';
+import { authConfig } from '@/config/auth';
 
 const NavLink = ({
   href,
@@ -104,7 +104,7 @@ const Navbar = () => {
               <div className="flex flex-col gap-4 px-6">
                 <div className="mb-8 flex items-center justify-between">
                   <a className="flex items-center space-x-2" href="/">
-                    <div className="h-6 w-6 rounded-full bg-primary"></div>
+                    <div className="h-6 w-6 rounded-full bg-primary" />
                     <span className="font-bold text-xl">TazeAI</span>
                   </a>
                   <SheetTrigger asChild>

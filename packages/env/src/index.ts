@@ -18,7 +18,10 @@ type Options<
   TClient extends Record<`${ClientPrefix}${string}`, StandardSchemaV1>,
   TShared extends StandardSchemaDictionary,
   TExtends extends Array<Record<string, unknown>>,
-  TFinalSchema extends StandardSchemaV1<{}, {}>,
+  TFinalSchema extends StandardSchemaV1<
+    Record<string, unknown>,
+    Record<string, unknown>
+  >,
 > = Omit<
   StrictOptions<ClientPrefix, TServer, TClient, TShared, TExtends> &
     ServerClientOptions<ClientPrefix, TServer, TClient> &
@@ -60,11 +63,10 @@ export function createEnv<
   > = NonNullable<unknown>,
   TShared extends StandardSchemaDictionary = NonNullable<unknown>,
   const TExtends extends Array<Record<string, unknown>> = [],
-  TFinalSchema extends StandardSchemaV1<{}, {}> = DefaultCombinedSchema<
-    TServer,
-    TClient,
-    TShared
-  >,
+  TFinalSchema extends StandardSchemaV1<
+    Record<string, unknown>,
+    Record<string, unknown>
+  > = DefaultCombinedSchema<TServer, TClient, TShared>,
 >(
   options:
     | Options<TServer, TClient, TShared, TExtends, TFinalSchema>
@@ -114,11 +116,10 @@ export function definedEnvs<
   > = NonNullable<unknown>,
   TShared extends StandardSchemaDictionary = NonNullable<unknown>,
   const TExtends extends Array<Record<string, unknown>> = [],
-  TFinalSchema extends StandardSchemaV1<{}, {}> = DefaultCombinedSchema<
-    TServer,
-    TClient,
-    TShared
-  >,
+  TFinalSchema extends StandardSchemaV1<
+    Record<string, unknown>,
+    Record<string, unknown>
+  > = DefaultCombinedSchema<TServer, TClient, TShared>,
 >(
   options:
     | Options<TServer, TClient, TShared, TExtends, TFinalSchema>

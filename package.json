@@ -23,7 +23,7 @@
     "dev": "NODE_ENV=development turbo dev --parallel",
     "format": "biome format --write ./",
     "postinstall": "[ ! -f .env ] && cp .env.example .env || true",
-    "lint": "biome check ./",
+    "lint": "biome check --write ./",
     "prepare": "husky",
     "start": "turbo run start --filter=\"./apps/*\"",
     "test": "turbo test --cache-dir=.turbo",

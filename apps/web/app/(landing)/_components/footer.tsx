@@ -1,8 +1,8 @@
 'use client';
 
-import { Logo } from '@/components/logo';
 import { Github } from '@tazeai/ui/components/icons';
 import { Separator } from '@tazeai/ui/components/separator';
+import { Logo } from '@/components/logo';
 
 const Footer = () => {
   const startYear = 2024;
@@ -40,7 +40,7 @@ const Footer = () => {
               <li>
                 <a
                   className="text-muted-foreground hover:text-primary"
-                  href="#"
+                  href="/features"
                 >
                   Features
                 </a>
@@ -48,7 +48,7 @@ const Footer = () => {
               <li>
                 <a
                   className="text-muted-foreground hover:text-primary"
-                  href="#"
+                  href="/pricing"
                 >
                   Pricing
                 </a>
@@ -56,7 +56,7 @@ const Footer = () => {
               <li>
                 <a
                   className="text-muted-foreground hover:text-primary"
-                  href="#"
+                  href="/integrations"
                 >
                   Integrations
                 </a>
@@ -64,7 +64,7 @@ const Footer = () => {
               <li>
                 <a
                   className="text-muted-foreground hover:text-primary"
-                  href="#"
+                  href="/faq"
                 >
                   FAQ
                 </a>
@@ -78,7 +78,7 @@ const Footer = () => {
               <li>
                 <a
                   className="text-muted-foreground hover:text-primary"
-                  href="#"
+                  href="/about"
                 >
                   About
                 </a>
@@ -86,7 +86,7 @@ const Footer = () => {
               <li>
                 <a
                   className="text-muted-foreground hover:text-primary"
-                  href="#"
+                  href="/blog"
                 >
                   Blog
                 </a>
@@ -94,7 +94,7 @@ const Footer = () => {
               <li>
                 <a
                   className="text-muted-foreground hover:text-primary"
-                  href="#"
+                  href="/careers"
                 >
                   Careers
                 </a>
@@ -102,7 +102,7 @@ const Footer = () => {
               <li>
                 <a
                   className="text-muted-foreground hover:text-primary"
-                  href="#"
+                  href="/contact"
                 >
                   Contact
                 </a>
@@ -116,7 +116,7 @@ const Footer = () => {
               <li>
                 <a
                   className="text-muted-foreground hover:text-primary"
-                  href="#"
+                  href="/terms"
                 >
                   Terms
                 </a>
@@ -124,7 +124,7 @@ const Footer = () => {
               <li>
                 <a
                   className="text-muted-foreground hover:text-primary"
-                  href="#"
+                  href="/privacy"
                 >
                   Privacy
                 </a>
@@ -132,7 +132,7 @@ const Footer = () => {
               <li>
                 <a
                   className="text-muted-foreground hover:text-primary"
-                  href="#"
+                  href="/cookies"
                 >
                   Cookies
                 </a>
@@ -140,7 +140,7 @@ const Footer = () => {
               <li>
                 <a
                   className="text-muted-foreground hover:text-primary"
-                  href="#"
+                  href="/licenses"
                 >
                   Licenses
                 </a>
@@ -158,19 +158,19 @@ const Footer = () => {
           <div className="flex items-center space-x-4">
             <a
               className="text-muted-foreground text-sm hover:text-primary"
-              href="#"
+              href="/terms"
             >
               Terms of Service
             </a>
             <a
               className="text-muted-foreground text-sm hover:text-primary"
-              href="#"
+              href="/privacy"
             >
               Privacy Policy
             </a>
             <a
               className="text-muted-foreground text-sm hover:text-primary"
-              href="#"
+              href="/cookies"
             >
               Cookie Settings
             </a>

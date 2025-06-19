@@ -1,7 +1,5 @@
 'use client';
 
-import { authConfig } from '@/config/auth';
-import { env } from '@/env';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signIn, signUp } from '@tazeai/auth/client';
 import { Button } from '@tazeai/ui/components/button';
@@ -30,6 +28,8 @@ import { useTranslation } from 'react-i18next';
 import { FaGithub, FaGoogle } from 'react-icons/fa';
 import { toast } from 'sonner';
 import { z } from 'zod';
+import { authConfig } from '@/config/auth';
+import { env } from '@/env';
 
 const formSchema = z.object({
   email: z.string().email({
@@ -191,8 +191,9 @@ export function SignUpForm({
         </CardContent>
       </Card>
       <div className="text-balance text-center text-muted-foreground text-xs [&_a]:underline [&_a]:underline-offset-4 [&_a]:hover:text-primary ">
-        By clicking continue, you agree to our <a href="#">Terms of Service</a>{' '}
-        and <a href="#">Privacy Policy</a>.
+        By clicking continue, you agree to our{' '}
+        <a href="/terms">Terms of Service</a> and{' '}
+        <a href="/privacy">Privacy Policy</a>.
       </div>
     </div>
   );

@@ -1,8 +1,8 @@
-import { source } from '@/lib/source';
-import { getMDXComponents } from '@/mdx-components';
 import { createRelativeLink } from 'fumadocs-ui/mdx';
 import { DocsBody, DocsPage } from 'fumadocs-ui/page';
 import { notFound } from 'next/navigation';
+import { source } from '@/lib/source';
+import { getMDXComponents } from '@/mdx-components';
 import { EditGitHub } from './edit-gh';
 
 export default async function Page(props: {

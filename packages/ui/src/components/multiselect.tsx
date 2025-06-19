@@ -1,10 +1,5 @@
 'use client';
 
-import { Command as CommandPrimitive, useCommandState } from 'cmdk';
-import { XIcon } from 'lucide-react';
-import * as React from 'react';
-import { useEffect } from 'react';
-
 import { cn } from '@tazeai/ui/lib/utils';
 import {
   Command,
@@ -12,6 +7,10 @@ import {
   CommandItem,
   CommandList,
 } from '@tazeai/ui/ui/command';
+import { Command as CommandPrimitive, useCommandState } from 'cmdk';
+import { XIcon } from 'lucide-react';
+import * as React from 'react';
+import { useEffect } from 'react';
 
 export interface Option {
   value: string;
@@ -237,8 +236,8 @@ const MultipleSelector = ({
         ) {
           const lastSelectOption = selected[selected.length - 1];
           // If last item is fixed, we should not remove it.
-          if (!lastSelectOption.fixed) {
-            handleUnselect(selected[selected.length - 1]);
+          if (!lastSelectOption?.fixed) {
+            handleUnselect(lastSelectOption);
           }
         }
         // This is not a default behavior of the <input /> field
@@ -332,7 +331,7 @@ const MultipleSelector = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedSearchTerm, groupBy, open, triggerSearchOnFocus]);
 
-  const CreatableItem = () => {
+  const CreatableItem = React.useCallback(() => {
     if (!creatable) return undefined;
     if (
       isOptionsExist(options, [{ value: inputValue, label: inputValue }]) ||
@@ -375,7 +374,17 @@ const MultipleSelector = ({
     }
 
     return undefined;
-  };
+  }, [
+    creatable,
+    debouncedSearchTerm,
+    isLoading,
+    maxSelected,
+    onChange,
+    onMaxSelected,
+    options,
+    selected,
+    inputValue,
+  ]);
 
   const EmptyItem = React.useCallback(() => {
     if (!emptyIndicator) return undefined;
@@ -559,7 +568,7 @@ const MultipleSelector = ({
               }}
             >
               {isLoading ? (
-                <>{loadingIndicator}</>
+                loadingIndicator
               ) : (
                 <>
                   {EmptyItem()}
@@ -573,38 +582,36 @@ const MultipleSelector = ({
                       heading={key}
                       key={key}
                     >
-                      <>
-                        {dropdowns.map((option) => {
-                          return (
-                            <CommandItem
-                              className={cn(
-                                'cursor-pointer',
-                                option.disable &&
-                                  'pointer-events-none cursor-not-allowed opacity-50'
-                              )}
-                              disabled={option.disable}
-                              key={option.value}
-                              onMouseDown={(e) => {
-                                e.preventDefault();
-                                e.stopPropagation();
-                              }}
-                              onSelect={() => {
-                                if (selected.length >= maxSelected) {
-                                  onMaxSelected?.(selected.length);
-                                  return;
-                                }
-                                setInputValue('');
-                                const newOptions = [...selected, option];
-                                setSelected(newOptions);
-                                onChange?.(newOptions);
-                              }}
-                              value={option.value}
-                            >
-                              {option.label}
-                            </CommandItem>
-                          );
-                        })}
-                      </>
+                      {dropdowns.map((option) => {
+                        return (
+                          <CommandItem
+                            className={cn(
+                              'cursor-pointer',
+                              option.disable &&
+                                'pointer-events-none cursor-not-allowed opacity-50'
+                            )}
+                            disabled={option.disable}
+                            key={option.value}
+                            onMouseDown={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                            }}
+                            onSelect={() => {
+                              if (selected.length >= maxSelected) {
+                                onMaxSelected?.(selected.length);
+                                return;
+                              }
+                              setInputValue('');
+                              const newOptions = [...selected, option];
+                              setSelected(newOptions);
+                              onChange?.(newOptions);
+                            }}
+                            value={option.value}
+                          >
+                            {option.label}
+                          </CommandItem>
+                        );
+                      })}
                     </CommandGroup>
                   ))}
                 </>

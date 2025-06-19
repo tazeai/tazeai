@@ -1,6 +1,5 @@
-import { Inter as SansFont } from 'next/font/google';
-
 import { cn } from '@tazeai/ui/lib/utils';
+import { Inter as SansFont } from 'next/font/google';
 
 /**
  * @sans
@@ -36,10 +35,10 @@ export function getFontsClassName(theme?: string) {
   const font = [sans.variable, heading.variable].reduce<string[]>(
     (acc, curr) => {
       if (acc.includes(curr)) return acc;
-
-      return [...acc, curr];
+      acc.push(curr);
+      return acc;
     },
-    []
+    [] as string[]
   );
 
   return cn('min-h-screen bg-background antialiased', ...font, {

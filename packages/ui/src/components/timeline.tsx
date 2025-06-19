@@ -1,9 +1,8 @@
 'use client';
 
+import { cn } from '@tazeai/ui/lib/utils';
 import { Slot as SlotPrimitive } from 'radix-ui';
 import * as React from 'react';
-
-import { cn } from '@tazeai/ui/lib/utils';
 
 // Types
 type TimelineContextValue = {

@@ -9,4 +9,4 @@ export const languages = [
   },
 ];
 
-export const defaultLanguage = languages[0]!;
+export const defaultLanguage = languages[0];

@@ -20,7 +20,7 @@ app.get('/', async (c) => {
         type as ProviderType,
         'deepseek-ai/DeepSeek-R1-Distill-Qwen-7B'
       );
-      const result = await model!.stream(prompt);
+      const result = await model?.stream(prompt);
       for await (const chunk of result) {
         console.log('chunk', chunk);
         await stream.writeSSE({

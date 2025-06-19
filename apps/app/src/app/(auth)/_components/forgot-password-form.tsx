@@ -86,7 +86,7 @@ export function ForgotPasswordForm({
         setShowOtpForm(true);
         otpForm.setValue('email', values.email);
       }
-    } catch (_error) {
+    } catch (error) {
       toast.error('Send email link failed');
     } finally {
       setIsLoading(false);
@@ -106,7 +106,7 @@ export function ForgotPasswordForm({
         toast.success('Verify email successful');
         setShowOtpForm(false);
       }
-    } catch (_error) {
+    } catch (error) {
       toast.error('Verify email failed');
     } finally {
       setIsLoading(false);

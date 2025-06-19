@@ -1,7 +1,6 @@
+import { cn } from '@tazeai/ui/lib/utils';
 import { ChevronDownIcon } from 'lucide-react';
 import type * as React from 'react';
-
-import { cn } from '@tazeai/ui/lib/utils';
 
 const SelectNative = ({
   className,

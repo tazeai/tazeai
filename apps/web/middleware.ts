@@ -1,5 +1,5 @@
-import { authConfig } from '@/config/auth';
 import type { NextRequest } from 'next/server';
+import { authConfig } from '@/config/auth';
 
 export const config = {
   matcher: [

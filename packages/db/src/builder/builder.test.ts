@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { Builder } from '.';
 import { db, schemas } from '../index';
+import { Builder } from '.';
 
 describe('Builder', () => {
   it('should paginate', async () => {

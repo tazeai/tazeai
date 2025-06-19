@@ -7,13 +7,6 @@ import { ProviderType } from './types';
 const env = envs();
 
 export class LangChain {
-  // private cache: RedisCache;
-  constructor() {
-    // this.cache = new RedisCache({
-    //   client: createRedis(),
-    // });
-  }
-
   getProvider(type: ProviderType, modelName: string) {
     if (type === ProviderType.OPENAI) {
       const apiKey = env.OPENAI_API_KEY;
@@ -30,7 +23,8 @@ export class LangChain {
         // cache: this.cache,
       });
       return llm;
-    } else if (type === ProviderType.DEEPSEEK) {
+    }
+    if (type === ProviderType.DEEPSEEK) {
       const apiKey = env.DEEPSEEK_API_KEY;
       console.log('apiKey', apiKey);
       const llm = new ChatDeepSeek({

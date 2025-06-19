@@ -1,9 +1,8 @@
 'use client';
 
+import { cn } from '@tazeai/ui/lib/utils';
 import { Separator as SeparatorPrimitive } from 'radix-ui';
 import type * as React from 'react';
-
-import { cn } from '@tazeai/ui/lib/utils';
 
 function Separator({
   className,

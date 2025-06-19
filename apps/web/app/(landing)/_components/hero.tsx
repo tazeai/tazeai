@@ -104,7 +104,7 @@ const Hero = () => {
               <span className="bg-gradient-to-r from-foreground via-primary to-purple-600 bg-clip-text text-transparent">
                 {text}
               </span>
-              <span className="ml-1 inline-block h-12 w-[3px] animate-pulse bg-gradient-to-b from-primary to-purple-600"></span>
+              <span className="ml-1 inline-block h-12 w-[3px] animate-pulse bg-gradient-to-b from-primary to-purple-600" />
               <span className="mt-4 block bg-gradient-to-r from-primary via-purple-600 to-pink-600 bg-clip-text text-transparent">
                 智能创作的未来已来
               </span>
@@ -191,9 +191,9 @@ const Hero = () => {
                   {/* 增强的窗口控制按钮 */}
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-2">
-                      <div className="h-3 w-3 animate-pulse rounded-full bg-red-500"></div>
-                      <div className="h-3 w-3 animate-pulse rounded-full bg-yellow-500 delay-100"></div>
-                      <div className="h-3 w-3 animate-pulse rounded-full bg-green-500 delay-200"></div>
+                      <div className="h-3 w-3 animate-pulse rounded-full bg-red-500" />
+                      <div className="h-3 w-3 animate-pulse rounded-full bg-yellow-500 delay-100" />
+                      <div className="h-3 w-3 animate-pulse rounded-full bg-green-500 delay-200" />
                     </div>
                     <div className="font-mono text-muted-foreground text-xs">
                       TazeAI v2.0
@@ -205,16 +205,16 @@ const Hero = () => {
                     <div className="space-y-6 text-center">
                       <div className="relative inline-flex h-20 w-20 animate-pulse items-center justify-center rounded-full bg-gradient-to-br from-primary/20 to-purple-500/20">
                         <Sparkles className="h-10 w-10 animate-spin text-primary" />
-                        <div className="absolute inset-0 animate-ping rounded-full border-2 border-primary/30"></div>
+                        <div className="absolute inset-0 animate-ping rounded-full border-2 border-primary/30" />
                       </div>
                       <div className="space-y-3">
                         <p className="bg-gradient-to-r from-primary to-purple-600 bg-clip-text font-medium text-lg text-transparent">
                           AI正在创作中...
                         </p>
                         <div className="flex justify-center space-x-2">
-                          <span className="h-3 w-3 animate-bounce rounded-full bg-primary"></span>
-                          <span className="h-3 w-3 animate-bounce rounded-full bg-purple-500 delay-100"></span>
-                          <span className="h-3 w-3 animate-bounce rounded-full bg-pink-500 delay-200"></span>
+                          <span className="h-3 w-3 animate-bounce rounded-full bg-primary" />
+                          <span className="h-3 w-3 animate-bounce rounded-full bg-purple-500 delay-100" />
+                          <span className="h-3 w-3 animate-bounce rounded-full bg-pink-500 delay-200" />
                         </div>
                         <div className="text-muted-foreground text-sm">
                           正在分析您的需求并生成内容

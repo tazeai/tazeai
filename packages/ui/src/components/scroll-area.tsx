@@ -1,9 +1,8 @@
 'use client';
 
+import { cn } from '@tazeai/ui/lib/utils';
 import { ScrollArea as ScrollAreaPrimitive } from 'radix-ui';
 import type * as React from 'react';
-
-import { cn } from '@tazeai/ui/lib/utils';
 
 function ScrollArea({
   className,

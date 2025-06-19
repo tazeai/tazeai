@@ -13,7 +13,8 @@ import superjson from 'superjson';
 export function unserialize<T>(value: string): T | null {
   if (isNumber(value)) {
     return toNumber(value) as T;
-  } else if (typeof value === 'string') {
+  }
+  if (typeof value === 'string') {
     return superjson.parse<T>(value);
   }
   return value as T;
@@ -28,7 +29,8 @@ export function unserialize<T>(value: string): T | null {
 export function serialize(value: unknown): string | number {
   if (isNumber(value)) {
     return toNumber(value);
-  } else if (typeof value === 'string') {
+  }
+  if (typeof value === 'string') {
     return value;
   }
   return superjson.stringify(value);

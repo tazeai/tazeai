@@ -5,10 +5,10 @@
   "type": "module",
   "scripts": {
     "analyze": "ANALYZE=true next build",
-    "build": "pnpm with-env next build --turbopack",
+    "build": "pnpm with-env next build --turbo",
     "clean": "rimraf dist .turbo .next",
     "with-env": "dotenv -e ../../.env --",
-    "dev": "next dev --turbopack",
+    "dev": "next dev --turbo",
     "lint": "next lint",
     "start": "next start"
   },

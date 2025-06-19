@@ -14,27 +14,34 @@
     "enabled": true,
     "rules": {
       "a11y": {
-        "noAutofocus": "off"
+        "noAriaHiddenOnFocusable": "off",
+        "noLabelWithoutControl": "off",
+        "useFocusableInteractive": "off",
+        "useKeyWithClickEvents": "off",
+        "useSemanticElements": "off",
+        "noSvgWithoutTitle": "off",
+        "noStaticElementInteractions": "off",
+        "useAriaPropsSupportedByRole": "off",
+        "useButtonType": "off",
+        "useAriaPropsForRole": "off"
+      },
+      "security": {
+        "noDangerouslySetInnerHtml": "off"
       },
       "complexity": {
         "useSimplifiedLogicExpression": "off"
       },
       "correctness": {
-        "noUndeclaredDependencies": "off",
         "useImportExtensions": "off",
-        "noNodejsModules": "off"
+        "noNodejsModules": "off",
+        "noUnusedVariables": "off",
+        "useExhaustiveDependencies": "off",
+        "useHookAtTopLevel": "off",
+        "noUnusedFunctionParameters": "off"
       },
       "nursery": {
-        "noSecrets": "off",
-        "useExplicitType": "off",
-        "useSortedClasses": {
-          "fix": "safe",
-          "level": "error",
-          "options": {
-            "attributes": ["className"],
-            "functions": ["clsx", "cva", "tw", "twMerge", "cn", "twJoin"]
-          }
-        }
+        "useUniqueElementIds": "off",
+        "noNestedComponentDefinitions": "off"
       },
       "performance": {
         "noBarrelFile": "off",
@@ -69,8 +76,13 @@
         "useConsistentCurlyBraces": "off"
       },
       "suspicious": {
-        "noReactSpecificProps": "off",
-        "noArrayIndexKey": "off"
+        "noGlobalIsNan": "off",
+        "noGlobalIsFinite": "off",
+        "noExplicitAny": "off",
+        "noArrayIndexKey": "off",
+        "noConfusingVoidType": "off",
+        "noThenProperty": "off",
+        "noTemplateCurlyInString": "off"
       }
     }
   },

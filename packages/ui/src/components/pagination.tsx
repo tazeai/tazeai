@@ -1,3 +1,5 @@
+import { cn } from '@tazeai/ui/lib/utils';
+import { type Button, buttonVariants } from '@tazeai/ui/ui/button';
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
@@ -5,16 +7,12 @@ import {
 } from 'lucide-react';
 import type * as React from 'react';
 
-import { cn } from '@tazeai/ui/lib/utils';
-import { type Button, buttonVariants } from '@tazeai/ui/ui/button';
-
 function Pagination({ className, ...props }: React.ComponentProps<'nav'>) {
   return (
     <nav
       aria-label="pagination"
       className={cn('mx-auto flex w-full justify-center', className)}
       data-slot="pagination"
-      role="navigation"
       {...props}
     />
   );

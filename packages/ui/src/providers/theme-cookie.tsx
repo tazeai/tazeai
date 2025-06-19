@@ -1,8 +1,8 @@
 'use client';
 
 import cookies from 'js-cookie';
-import { useTheme } from 'next-themes';
 import type { ThemeProviderProps } from 'next-themes';
+import { useTheme } from 'next-themes';
 import { useEffect } from 'react';
 
 const setCookieTheme = (theme: ThemeProviderProps['defaultTheme']) => {

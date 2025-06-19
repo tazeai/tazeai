@@ -1,11 +1,10 @@
 'use client';
 
+import { cn } from '@tazeai/ui/lib/utils';
 import { CheckIcon, LoaderCircleIcon } from 'lucide-react';
 import { Slot as SlotPrimitive } from 'radix-ui';
 import * as React from 'react';
 import { createContext, useContext } from 'react';
-
-import { cn } from '@tazeai/ui/lib/utils';
 
 // Types
 type StepperContextValue = {

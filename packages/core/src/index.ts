@@ -5,10 +5,6 @@ export interface Options extends core.APIClientOptions {
 }
 
 export class TazeAI extends core.APIClient {
-  constructor(options: Options) {
-    super(options);
-  }
-
   run() {
     console.log('run');
   }

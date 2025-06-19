@@ -1,16 +1,14 @@
-import { cache } from 'react';
-
-import { cookies, headers } from 'next/headers';
-
 import {
   initializeServerI18n,
   parseAcceptLanguageHeader,
 } from '@tazeai/i18n/server';
 
-import featuresFlagConfig from '@/config/feature-flags.config';
-import { I18N_COOKIE_NAME, getI18nSettings, languages } from './i18n.settings';
+import { cookies, headers } from 'next/headers';
+import { cache } from 'react';
 
+import featuresFlagConfig from '@/config/feature-flags.config';
 import { i18nResolver } from './i18n.resolver';
+import { getI18nSettings, I18N_COOKIE_NAME, languages } from './i18n.settings';
 
 /**
  * @name priority

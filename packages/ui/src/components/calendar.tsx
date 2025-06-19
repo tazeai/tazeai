@@ -1,11 +1,10 @@
 'use client';
 
+import { buttonVariants } from '@tazeai/ui/components/button';
+import { cn } from '@tazeai/ui/lib/utils';
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 import type * as React from 'react';
 import { DayPicker } from 'react-day-picker';
-
-import { buttonVariants } from '@tazeai/ui/components/button';
-import { cn } from '@tazeai/ui/lib/utils';
 
 function Calendar({
   className,
@@ -47,15 +46,13 @@ function Calendar({
   const mergedClassNames: typeof defaultClassNames = Object.keys(
     defaultClassNames
   ).reduce(
-    (acc, key) => ({
-      ...acc,
-      [key]: classNames?.[key as keyof typeof classNames]
-        ? cn(
-            defaultClassNames[key as keyof typeof defaultClassNames],
-            classNames[key as keyof typeof classNames]
-          )
-        : defaultClassNames[key as keyof typeof defaultClassNames],
-    }),
+    (acc, k) => {
+      const key = k as keyof typeof defaultClassNames;
+      acc[key] = classNames?.[key]
+        ? cn(defaultClassNames[key], classNames[key])
+        : defaultClassNames[key];
+      return acc;
+    },
     {} as typeof defaultClassNames
   );
 

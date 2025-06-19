@@ -1,6 +1,7 @@
 'use client';
 
 import { getLocalTimeZone, today } from '@internationalized/date';
+import { cn } from '@tazeai/ui/lib/utils';
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 import type { ComponentProps } from 'react';
 import {
@@ -11,12 +12,10 @@ import {
   CalendarGrid as CalendarGridRac,
   CalendarHeaderCell as CalendarHeaderCellRac,
   Calendar as CalendarRac,
+  composeRenderProps,
   Heading as HeadingRac,
   RangeCalendar as RangeCalendarRac,
-  composeRenderProps,
 } from 'react-aria-components';
-
-import { cn } from '@tazeai/ui/lib/utils';
 
 interface BaseCalendarProps {
   className?: string;

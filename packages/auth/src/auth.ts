@@ -79,7 +79,7 @@ const createConfig = (): BetterAuthOptions => {
             const name =
               user.name.trim() || user.email.split('@')[0] || nanoid();
             const image =
-              user.image || 'https://ui-avatars.com/api/?name=' + name;
+              user.image || `https://ui-avatars.com/api/?name=${name}`;
             return {
               data: {
                 name,

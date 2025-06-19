@@ -1,5 +1,5 @@
 import { isNil, transform } from 'lodash-es';
-import { type RedisClientType, createClient } from 'redis';
+import { createClient, type RedisClientType } from 'redis';
 import { MAX_COMMANDS_QUEUE_LENGTH } from './consts';
 
 // TODO: Use superjson

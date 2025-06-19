@@ -1,6 +1,5 @@
 'use client';
 
-import { authConfig } from '@/config/auth';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signIn } from '@tazeai/auth/client';
 import { Button } from '@tazeai/ui/components/button';
@@ -30,6 +29,7 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 import { z } from 'zod';
+import { authConfig } from '@/config/auth';
 import { Social } from './social';
 
 const formSchema = z.object({
@@ -174,8 +174,9 @@ export function SignInForm({
         </CardContent>
       </Card>
       <div className="text-balance text-center text-muted-foreground text-xs [&_a]:underline [&_a]:underline-offset-4 [&_a]:hover:text-primary ">
-        By clicking continue, you agree to our <a href="#">Terms of Service</a>{' '}
-        and <a href="#">Privacy Policy</a>.
+        By clicking continue, you agree to our{' '}
+        <a href="/terms">Terms of Service</a> and{' '}
+        <a href="/privacy">Privacy Policy</a>.
       </div>
     </div>
   );

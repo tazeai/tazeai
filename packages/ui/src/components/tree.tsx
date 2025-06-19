@@ -1,11 +1,10 @@
 'use client';
 
 import type { ItemInstance } from '@headless-tree/core';
+import { cn } from '@tazeai/ui/lib/utils';
 import { ChevronDownIcon } from 'lucide-react';
 import { Slot as SlotPrimitive } from 'radix-ui';
 import * as React from 'react';
-
-import { cn } from '@tazeai/ui/lib/utils';
 
 interface TreeContextValue<T = any> {
   indent: number;

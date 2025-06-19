@@ -1,10 +1,9 @@
 'use client';
 
+import { cn } from '@tazeai/ui/lib/utils';
 import { ChevronDownIcon } from 'lucide-react';
 import { Accordion as AccordionPrimitive } from 'radix-ui';
 import type * as React from 'react';
-
-import { cn } from '@tazeai/ui/lib/utils';
 
 function Accordion({
   ...props

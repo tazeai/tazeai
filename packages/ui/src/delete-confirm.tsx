@@ -13,8 +13,7 @@ import {
 } from '@tazeai/ui/components/dialog';
 import { Input } from '@tazeai/ui/components/input';
 import { Label } from '@tazeai/ui/components/label';
-import { CircleAlertIcon } from 'lucide-react';
-import { Loader2Icon } from 'lucide-react';
+import { CircleAlertIcon, Loader2Icon } from 'lucide-react';
 import { useId, useState } from 'react';
 
 export type DeleteConfirmProps = {
