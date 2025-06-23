@@ -20,7 +20,7 @@ const plugins = [
   adminClient(),
   emailOTPClient(),
   oneTapClient({
-    clientId: env.NEXT_PUBLIC_AUTH_GOOGLE_ID,
+    clientId: env.NEXT_PUBLIC_AUTH_GOOGLE_ID!,
   }),
 ];
 

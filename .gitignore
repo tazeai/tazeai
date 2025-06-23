@@ -56,3 +56,6 @@ next-env.d.ts
 # AI Rules
 .cursorrules
 .github/copilot-instructions.md
+
+# Docs
+.source

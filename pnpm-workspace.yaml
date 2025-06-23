@@ -6,4 +6,4 @@ packages:
 
 catalog:
   '@types/node': 22.15.32
-  hono: ^4.8.0
+  hono: ^4.8.2
