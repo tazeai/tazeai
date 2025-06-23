@@ -24,6 +24,10 @@
     "start": {
       "cache": false,
       "dependsOn": ["^start"]
+    },
+    "test": {
+      "cache": false,
+      "dependsOn": ["^test"]
     }
   },
   "ui": "stream"

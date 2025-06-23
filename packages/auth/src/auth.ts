@@ -43,10 +43,11 @@ const createConfig = (): BetterAuthOptions => {
         clientSecret: env.AUTH_GOOGLE_SECRET ?? '',
       },
     },
-    trustedOrigins: (req) => [
-      req.headers.get('origin') ?? '',
-      req.headers.get('referer') ?? '',
-    ],
+    trustedOrigins: (req) =>
+      [
+        req.headers.get('origin') ?? '',
+        req.headers.get('referer') ?? '',
+      ].filter(Boolean) as string[],
     session: {
       cookieCache: {
         enabled: true,
@@ -59,9 +60,6 @@ const createConfig = (): BetterAuthOptions => {
       provider: 'pg',
       schema: schemas,
     }),
-    rateLimit: {
-      enabled: false,
-    },
     advanced: {
       database: {
         generateId: () => uuidv7(),

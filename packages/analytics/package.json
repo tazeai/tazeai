@@ -10,7 +10,7 @@
   },
   "scripts": {
     "clean": "rimraf dist .turbo",
-    "test": "vitest run",
+    "test": "vitest",
     "test:watch": "vitest"
   },
   "dependencies": {

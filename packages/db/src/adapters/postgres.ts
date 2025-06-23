@@ -11,6 +11,7 @@ export const createClient = <TSchema extends Record<string, unknown>>({
   const client = postgres(databaseUrl, {
     prepare: true,
     keep_alive: 1000,
+    debug: true,
   });
   return drizzle(client, {
     schema,
