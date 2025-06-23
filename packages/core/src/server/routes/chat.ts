@@ -28,7 +28,7 @@ app.post('/completions', async (c) => {
           throw new Error('Model not found');
         }
         const result = await llm.stream(data.messages);
-        for await (const chunk of result) {
+        for await (const chunk of result ?? []) {
           await stream.writeSSE({
             data: JSON.stringify(chunk),
           });

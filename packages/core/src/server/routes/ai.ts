@@ -21,7 +21,7 @@ app.get('/', async (c) => {
         'deepseek-ai/DeepSeek-R1-Distill-Qwen-7B'
       );
       const result = await model?.stream(prompt);
-      for await (const chunk of result) {
+      for await (const chunk of result ?? []) {
         console.log('chunk', chunk);
         await stream.writeSSE({
           data: JSON.stringify({
