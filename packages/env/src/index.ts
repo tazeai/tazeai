@@ -13,6 +13,8 @@ import { z } from 'zod';
 const CLIENT_PREFIX = 'NEXT_PUBLIC_' as const;
 type ClientPrefix = typeof CLIENT_PREFIX;
 
+type Env = Record<string, string | undefined>;
+
 type Options<
   TServer extends StandardSchemaDictionary,
   TClient extends Record<`${ClientPrefix}${string}`, StandardSchemaV1>,
@@ -72,12 +74,14 @@ export function createEnv<
     | Options<TServer, TClient, TShared, TExtends, TFinalSchema>
     | ((p: {
         z: typeof z;
+        env: Env;
       }) => Options<TServer, TClient, TShared, TExtends, TFinalSchema>)
 ): CreateEnv<TFinalSchema, TExtends> {
   const opts =
     typeof options === 'function'
       ? options({
           z,
+          env: typeof process !== 'undefined' ? process.env : import.meta.env,
         })
       : options;
   const client = typeof opts.client === 'object' ? opts.client : {};
@@ -87,7 +91,7 @@ export function createEnv<
   const runtimeEnv = opts.runtimeEnv
     ? opts.runtimeEnv
     : {
-        ...process.env,
+        ...(typeof process !== 'undefined' ? process.env : import.meta.env),
         ...opts.experimental__runtimeEnv,
       };
 
@@ -125,6 +129,7 @@ export function definedEnvs<
     | Options<TServer, TClient, TShared, TExtends, TFinalSchema>
     | ((p: {
         z: typeof z;
+        env: Env;
       }) => Options<TServer, TClient, TShared, TExtends, TFinalSchema>)
 ): () => CreateEnv<TFinalSchema, TExtends> {
   return () => createEnv(options);

@@ -16,6 +16,7 @@
   "devDependencies": {
     "@tazeai/typescript": "workspace:*",
     "@types/node": "catalog:",
+    "vite": "catalog:",
     "typescript": "^5.8.3"
   }
 }

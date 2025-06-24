@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "baseUrl": "."
+    "baseUrl": ".",
+    "types": ["vite/client"]
   },
   "exclude": ["node_modules", "dist"],
   "extends": "@tazeai/typescript/nextjs.json",

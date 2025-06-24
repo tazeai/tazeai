@@ -1,0 +1,35 @@
+{
+  "name": "@tazeai/studio",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "pnpm with-env react-router build",
+    "dev": "pnpm with-env react-router dev",
+    "start": "react-router-serve ./build/server/index.js",
+    "with-env": "dotenv -e ../../.env --",
+    "clean": "rimraf dist .turbo .react-router",
+    "typecheck": "react-router typegen && tsc"
+  },
+  "dependencies": {
+    "@react-router/node": "nightly",
+    "@react-router/serve": "nightly",
+    "@tazeai/ui": "workspace:*",
+    "isbot": "^5.1.28",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "@tazeai/analytics": "workspace:*",
+    "react-router": "nightly",
+    "sonner": "^2.0.5"
+  },
+  "devDependencies": {
+    "@react-router/dev": "nightly",
+    "@tailwindcss/vite": "^4.1.8",
+    "@types/node": "catalog:",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "tailwindcss": "^4.1.8",
+    "typescript": "^5.8.3",
+    "vite": "catalog:",
+    "vite-tsconfig-paths": "^5.1.4"
+  }
+}

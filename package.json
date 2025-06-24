@@ -27,7 +27,7 @@
     "prepare": "husky",
     "start": "turbo run start --filter=\"./apps/*\"",
     "test": "turbo test --cache-dir=.turbo",
-    "update:deps": "pnpm update -r -i -L"
+    "update:deps": "pnpm update --recursive --interactive --latest"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json}": [
@@ -35,7 +35,7 @@
     ]
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.0.4",
+    "@biomejs/biome": "^2.0.5",
     "@types/node": "catalog:",
     "dotenv-cli": "^8.0.0",
     "husky": "^9.1.7",
@@ -44,6 +44,7 @@
     "turbo": "^2.5.4",
     "type-fest": "^4.41.0",
     "typescript": "^5.8.3",
+    "vite": "catalog:",
     "vitest": "^3.2.4"
   },
   "packageManager": "pnpm@10.12.2",
