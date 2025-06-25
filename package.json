@@ -27,7 +27,15 @@
     "prepare": "husky",
     "start": "turbo run start --filter=\"./apps/*\"",
     "test": "turbo test --cache-dir=.turbo",
-    "update:deps": "pnpm update --recursive --interactive --latest"
+    "update:deps": "pnpm update --recursive --interactive --latest",
+    "dedupe": "pnpm dedupe",
+    "audit": "pnpm audit --audit-level moderate",
+    "audit:fix": "pnpm audit --fix",
+    "deps:check": "pnpm outdated --recursive",
+    "deps:analyze": "pnpm list --depth=0 --long",
+    "security:check": "pnpm audit && pnpm dedupe --check",
+    "typecheck": "turbo typecheck",
+    "ci": "pnpm lint && pnpm typecheck && pnpm test && pnpm build"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json}": [

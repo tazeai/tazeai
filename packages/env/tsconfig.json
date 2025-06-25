@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "types": ["node", "vite/client"]
+    "types": ["node"]
   },
   "exclude": ["node_modules", "dist"],
   "extends": "@tazeai/typescript/base.json",

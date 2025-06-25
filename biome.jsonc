@@ -14,45 +14,45 @@
     "enabled": true,
     "rules": {
       "a11y": {
-        "noAriaHiddenOnFocusable": "off",
+        "noAriaHiddenOnFocusable": "warn",
         "noLabelWithoutControl": "off",
-        "useFocusableInteractive": "off",
-        "useKeyWithClickEvents": "off",
-        "useSemanticElements": "off",
+        "useFocusableInteractive": "warn",
+        "useKeyWithClickEvents": "warn",
+        "useSemanticElements": "warn",
         "noSvgWithoutTitle": "off",
         "noStaticElementInteractions": "off",
-        "useAriaPropsSupportedByRole": "off",
-        "useButtonType": "off",
-        "useAriaPropsForRole": "off"
+        "useAriaPropsSupportedByRole": "warn",
+        "useButtonType": "warn",
+        "useAriaPropsForRole": "warn"
       },
       "security": {
-        "noDangerouslySetInnerHtml": "off"
+        "noDangerouslySetInnerHtml": "warn"
       },
       "complexity": {
-        "useSimplifiedLogicExpression": "off"
+        "useSimplifiedLogicExpression": "warn"
       },
       "correctness": {
         "useImportExtensions": "off",
         "noNodejsModules": "off",
-        "noUnusedVariables": "off",
-        "useExhaustiveDependencies": "off",
-        "useHookAtTopLevel": "off",
-        "noUnusedFunctionParameters": "off"
+        "noUnusedVariables": "error",
+        "useExhaustiveDependencies": "warn",
+        "useHookAtTopLevel": "error",
+        "noUnusedFunctionParameters": "warn"
       },
       "nursery": {
-        "useUniqueElementIds": "off",
-        "noNestedComponentDefinitions": "off"
+        "useUniqueElementIds": "warn",
+        "noNestedComponentDefinitions": "error"
       },
       "performance": {
-        "noBarrelFile": "off",
-        "noReExportAll": "off",
+        "noBarrelFile": "warn",
+        "noReExportAll": "warn",
         "noNamespaceImport": "off"
       },
       "style": {
         "noDefaultExport": "off",
-        "noImplicitBoolean": "off",
-        "useExplicitLengthCheck": "off",
-        "noNonNullAssertion": "off",
+        "noImplicitBoolean": "warn",
+        "useExplicitLengthCheck": "warn",
+        "noNonNullAssertion": "warn",
         "useFilenamingConvention": {
           "level": "error",
           "options": {
@@ -77,13 +77,13 @@
         "useConsistentCurlyBraces": "off"
       },
       "suspicious": {
-        "noGlobalIsNan": "off",
-        "noGlobalIsFinite": "off",
-        "noExplicitAny": "off",
-        "noArrayIndexKey": "off",
-        "noConfusingVoidType": "off",
-        "noThenProperty": "off",
-        "noTemplateCurlyInString": "off"
+        "noGlobalIsNan": "error",
+        "noGlobalIsFinite": "error",
+        "noExplicitAny": "warn",
+        "noArrayIndexKey": "warn",
+        "noConfusingVoidType": "warn",
+        "noThenProperty": "error",
+        "noTemplateCurlyInString": "warn"
       }
     }
   },

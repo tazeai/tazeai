@@ -13,7 +13,7 @@ import { z } from 'zod';
 const CLIENT_PREFIX = 'NEXT_PUBLIC_' as const;
 type ClientPrefix = typeof CLIENT_PREFIX;
 
-type Env = Record<string, string | undefined>;
+type Env = typeof process.env;
 
 type Options<
   TServer extends StandardSchemaDictionary,
@@ -81,7 +81,7 @@ export function createEnv<
     typeof options === 'function'
       ? options({
           z,
-          env: typeof process !== 'undefined' ? process.env : import.meta.env,
+          env: process.env,
         })
       : options;
   const client = typeof opts.client === 'object' ? opts.client : {};
@@ -91,7 +91,7 @@ export function createEnv<
   const runtimeEnv = opts.runtimeEnv
     ? opts.runtimeEnv
     : {
-        ...(typeof process !== 'undefined' ? process.env : import.meta.env),
+        ...(process.env || {}),
         ...opts.experimental__runtimeEnv,
       };
 
@@ -134,3 +134,6 @@ export function definedEnvs<
 ): () => CreateEnv<TFinalSchema, TExtends> {
   return () => createEnv(options);
 }
+
+// Re-export validation utilities
+export * from './validate.js';
