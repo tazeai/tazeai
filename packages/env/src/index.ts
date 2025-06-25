@@ -136,4 +136,4 @@ export function definedEnvs<
 }
 
 // Re-export validation utilities
-export * from './validate.js';
+export * from './validate';
