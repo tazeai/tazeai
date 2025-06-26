@@ -23,16 +23,16 @@ let nextConfig: NextConfig = {
     domains: ['localhost'],
     formats: ['image/webp', 'image/avif'],
   },
-  experimental: {
-    optimizePackageImports: ['@tazeai/ui', '@radix-ui/react-icons'],
-    turbo: {
-      rules: {
-        '*.svg': {
-          loaders: ['@svgr/webpack'],
-          as: '*.js',
-        },
+  turbopack: {
+    rules: {
+      '*.svg': {
+        loaders: ['@svgr/webpack'],
+        as: '*.js',
       },
     },
+  },
+  experimental: {
+    optimizePackageImports: ['@tazeai/ui', '@radix-ui/react-icons'],
   },
   headers: async () => [
     {

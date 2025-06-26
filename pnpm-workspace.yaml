@@ -5,9 +5,9 @@ packages:
   - '!**/__tests__/*'
 
 catalog:
-  '@types/node': ^22.15.32
-  hono: ^4.8.2
-  vite: ^6.3.5
+  '@types/node': ^22.15.33
+  hono: ^4.8.3
+  vite: ^7.0.0
 
 updateConfig:
   ignoreDependencies:

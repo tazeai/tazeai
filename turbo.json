@@ -6,8 +6,22 @@
     "build": {
       "cache": true,
       "dependsOn": ["^build"],
-      "inputs": ["$TURBO_DEFAULT$", ".env", "next.config.*", "tailwind.config.*", "postcss.config.*", "react-router.config.*"],
-      "outputs": ["dist/**", ".output/**", ".vercel/*", ".next/**", "build/**", ".react-router/**"]
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        ".env",
+        "next.config.*",
+        "tailwind.config.*",
+        "postcss.config.*",
+        "react-router.config.*"
+      ],
+      "outputs": [
+        "dist/**",
+        ".output/**",
+        ".vercel/*",
+        ".next/**",
+        "build/**",
+        ".react-router/**"
+      ]
     },
     "clean": {
       "cache": false,
@@ -25,7 +39,12 @@
     },
     "lint": {
       "cache": true,
-      "inputs": ["$TURBO_DEFAULT$", "biome.jsonc", ".eslintrc.*", "**/.eslintrc.*"],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "biome.jsonc",
+        ".eslintrc.*",
+        "**/.eslintrc.*"
+      ],
       "outputs": []
     },
     "format": {
@@ -46,7 +65,13 @@
     "test": {
       "cache": true,
       "dependsOn": ["^build"],
-      "inputs": ["$TURBO_DEFAULT$", "vitest.config.*", "jest.config.*", "**/*.test.*", "**/*.spec.*"],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "vitest.config.*",
+        "jest.config.*",
+        "**/*.test.*",
+        "**/*.spec.*"
+      ],
       "outputs": ["coverage/**", "test-results/**"]
     }
   },

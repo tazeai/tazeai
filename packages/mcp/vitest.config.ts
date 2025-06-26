@@ -1,9 +1,6 @@
-import { defineConfig } from 'vitest/config';
+import { mergeConfig, defineProject, type ViteUserConfig } from 'vitest/config';
+import sharedConfig from '../../vitest.shared';
 
-export default defineConfig({
-  test: {
-    globals: true,
-    exclude: ['**/node_modules/**', '**/dist/**'],
-    environment: 'node',
-  },
-});
+const config: ViteUserConfig = {};
+
+export default mergeConfig(sharedConfig, config);

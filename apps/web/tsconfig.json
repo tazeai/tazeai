@@ -18,6 +18,7 @@
     "next.config.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "vitest.config.ts"
   ]
 }

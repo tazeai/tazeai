@@ -25,17 +25,17 @@ let nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
+  turbopack: {
+    rules: {
+      '*.svg': {
+        loaders: ['@svgr/webpack'],
+        as: '*.js',
+      },
+    },
+  },
   assetPrefix: isProd ? undefined : `http://${internalHost}:3001`,
   experimental: {
     optimizePackageImports: ['@tazeai/ui', '@radix-ui/react-icons'],
-    turbo: {
-      rules: {
-        '*.svg': {
-          loaders: ['@svgr/webpack'],
-          as: '*.js',
-        },
-      },
-    },
   },
 };
 

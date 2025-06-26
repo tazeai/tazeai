@@ -22,7 +22,6 @@
     "coverage": "vitest --coverage",
     "dev": "NODE_ENV=development turbo dev --parallel",
     "format": "biome format --write ./",
-    "postinstall": "[ ! -f .env ] && cp .env.example .env || true",
     "lint": "biome check --write ./",
     "prepare": "husky",
     "start": "turbo run start --filter=\"./apps/*\"",
@@ -44,8 +43,10 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.0.5",
+    "@tazeai/vitest": "workspace:*",
     "@types/node": "catalog:",
     "dotenv-cli": "^8.0.0",
+    "fast-glob": "^3.3.3",
     "husky": "^9.1.7",
     "lint-staged": "^16.1.2",
     "rimraf": "^6.0.1",
@@ -55,7 +56,7 @@
     "vite": "catalog:",
     "vitest": "^3.2.4"
   },
-  "packageManager": "pnpm@10.12.2",
+  "packageManager": "pnpm@10.12.3",
   "engines": {
     "node": "^20 || >=22",
     "pnpm": ">=9.10.0"

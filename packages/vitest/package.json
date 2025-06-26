@@ -1,0 +1,26 @@
+{
+  "name": "@tazeai/vitest",
+  "version": "0.0.1",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "clean": "rimraf dist .turbo"
+  },
+  "dependencies": {
+    "@tazeai/ai": "workspace:*",
+    "@tazeai/auth": "workspace:*",
+    "@tazeai/cache": "workspace:*",
+    "@tazeai/db": "workspace:*",
+    "@tazeai/env": "workspace:*",
+    "dayjs": "^1.11.13",
+    "hono": "catalog:",
+    "pino": "^9.7.0"
+  },
+  "devDependencies": {
+    "@tazeai/typescript": "workspace:*",
+    "@types/node": "catalog:",
+    "typescript": "^5.8.3"
+  }
+}

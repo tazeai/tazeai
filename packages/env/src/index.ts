@@ -15,6 +15,11 @@ type ClientPrefix = typeof CLIENT_PREFIX;
 
 type Env = typeof process.env;
 
+/**
+ * Cached environment instance to avoid recreating environments
+ */
+const envCache = new Map<string, unknown>();
+
 type Options<
   TServer extends StandardSchemaDictionary,
   TClient extends Record<`${ClientPrefix}${string}`, StandardSchemaV1>,
@@ -57,6 +62,31 @@ type Options<
       }
   );
 
+/**
+ * Creates a type-safe environment configuration with validation
+ *
+ * @template TServer - Server-side environment variables schema
+ * @template TClient - Client-side environment variables schema (must start with NEXT_PUBLIC_)
+ * @template TShared - Shared environment variables schema
+ * @template TExtends - Additional schemas to extend
+ * @template TFinalSchema - Final combined schema type
+ *
+ * @param options - Configuration options or a function that returns options
+ * @returns Validated environment configuration
+ *
+ * @example
+ * ```typescript
+ * const env = createEnv({
+ *   server: {
+ *     DATABASE_URL: z.string().url(),
+ *   },
+ *   client: {
+ *     NEXT_PUBLIC_API_URL: z.string().url(),
+ *   },
+ *   runtimeEnv: process.env,
+ * });
+ * ```
+ */
 export function createEnv<
   TServer extends StandardSchemaDictionary = NonNullable<unknown>,
   TClient extends Record<
@@ -77,6 +107,14 @@ export function createEnv<
         env: Env;
       }) => Options<TServer, TClient, TShared, TExtends, TFinalSchema>)
 ): CreateEnv<TFinalSchema, TExtends> {
+  // Create cache key for memoization
+  const cacheKey =
+    typeof options === 'function' ? 'dynamic' : JSON.stringify(options);
+
+  if (envCache.has(cacheKey)) {
+    return envCache.get(cacheKey) as CreateEnv<TFinalSchema, TExtends>;
+  }
+
   const opts =
     typeof options === 'function'
       ? options({
@@ -84,6 +122,7 @@ export function createEnv<
           env: process.env,
         })
       : options;
+
   const client = typeof opts.client === 'object' ? opts.client : {};
   const server = typeof opts.server === 'object' ? opts.server : {};
   const shared = opts.shared;
@@ -95,7 +134,7 @@ export function createEnv<
         ...opts.experimental__runtimeEnv,
       };
 
-  return createEnvCore<
+  const result = createEnvCore<
     ClientPrefix,
     TServer,
     TClient,
@@ -110,8 +149,40 @@ export function createEnv<
     clientPrefix: CLIENT_PREFIX,
     runtimeEnv,
   });
+
+  // Cache the result for future use (only for static options)
+  if (typeof options !== 'function') {
+    envCache.set(cacheKey, result);
+  }
+
+  return result;
 }
 
+/**
+ * Creates a lazy-evaluated environment configuration factory
+ * Useful for deferring environment validation until runtime
+ *
+ * @template TServer - Server-side environment variables schema
+ * @template TClient - Client-side environment variables schema
+ * @template TShared - Shared environment variables schema
+ * @template TExtends - Additional schemas to extend
+ * @template TFinalSchema - Final combined schema type
+ *
+ * @param options - Configuration options or a function that returns options
+ * @returns Factory function that creates the environment configuration when called
+ *
+ * @example
+ * ```typescript
+ * const createAppEnv = definedEnvs({
+ *   server: { DATABASE_URL: z.string().url() },
+ *   client: { NEXT_PUBLIC_API_URL: z.string().url() },
+ *   runtimeEnv: process.env,
+ * });
+ *
+ * // Later in your app
+ * const env = createAppEnv();
+ * ```
+ */
 export function definedEnvs<
   TServer extends StandardSchemaDictionary = NonNullable<unknown>,
   TClient extends Record<
@@ -132,8 +203,23 @@ export function definedEnvs<
         env: Env;
       }) => Options<TServer, TClient, TShared, TExtends, TFinalSchema>)
 ): () => CreateEnv<TFinalSchema, TExtends> {
-  return () => createEnv(options);
+  let cached: CreateEnv<TFinalSchema, TExtends> | null = null;
+
+  return () => {
+    if (!cached) {
+      cached = createEnv(options);
+    }
+    return cached;
+  };
 }
 
-// Re-export validation utilities
+/**
+ * Clears all environment caches
+ * Useful for testing or development hot reloading
+ */
+export function clearEnvCache(): void {
+  envCache.clear();
+}
+
+// Re-export utilities
 export * from './validate';

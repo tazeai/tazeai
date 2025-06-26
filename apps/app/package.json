@@ -4,12 +4,14 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "analyze": "ANALYZE=true next build",
-    "build": "next build --turbo",
+    "analyze": "pnpm with-env ANALYZE=true next build",
+    "build": "pnpm with-env next build --turbo",
     "clean": "rimraf dist .turbo .next",
-    "dev": "next dev --turbo --hostname 0.0.0.0 --port 3001",
-    "lint": "next lint",
-    "start": "next start"
+    "with-env": "dotenv -e ../../.env --",
+    "dev": "pnpm with-env next dev --turbo --hostname 0.0.0.0 --port 3001",
+    "start": "pnpm with-env next start",
+    "test": "vitest",
+    "test:watch": "vitest --watch"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",
