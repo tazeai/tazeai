@@ -46,14 +46,14 @@
     "zod": "^3.25.67"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.1.10",
+    "@tailwindcss/postcss": "^4.1.11",
     "@tazeai/typescript": "workspace:*",
     "@turbo/gen": "^2.5.4",
     "@types/js-cookie": "^3.0.6",
     "@types/node": "catalog:",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
-    "tailwindcss": "^4.1.10",
+    "tailwindcss": "^4.1.11",
     "typescript": "^5.8.3"
   }
 }
