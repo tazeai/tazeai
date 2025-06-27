@@ -15,11 +15,6 @@ type ClientPrefix = typeof CLIENT_PREFIX;
 
 type Env = typeof process.env;
 
-/**
- * Cached environment instance to avoid recreating environments
- */
-const envCache = new Map<string, unknown>();
-
 type Options<
   TServer extends StandardSchemaDictionary,
   TClient extends Record<`${ClientPrefix}${string}`, StandardSchemaV1>,
@@ -107,14 +102,6 @@ export function createEnv<
         env: Env;
       }) => Options<TServer, TClient, TShared, TExtends, TFinalSchema>)
 ): CreateEnv<TFinalSchema, TExtends> {
-  // Create cache key for memoization
-  const cacheKey =
-    typeof options === 'function' ? 'dynamic' : JSON.stringify(options);
-
-  if (envCache.has(cacheKey)) {
-    return envCache.get(cacheKey) as CreateEnv<TFinalSchema, TExtends>;
-  }
-
   const opts =
     typeof options === 'function'
       ? options({
@@ -149,11 +136,6 @@ export function createEnv<
     clientPrefix: CLIENT_PREFIX,
     runtimeEnv,
   });
-
-  // Cache the result for future use (only for static options)
-  if (typeof options !== 'function') {
-    envCache.set(cacheKey, result);
-  }
 
   return result;
 }
@@ -212,14 +194,3 @@ export function definedEnvs<
     return cached;
   };
 }
-
-/**
- * Clears all environment caches
- * Useful for testing or development hot reloading
- */
-export function clearEnvCache(): void {
-  envCache.clear();
-}
-
-// Re-export utilities
-export * from './validate';
