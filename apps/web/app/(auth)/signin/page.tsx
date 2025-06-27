@@ -20,7 +20,7 @@ export default function SignInPage() {
               <Image
                 alt="TazeAI"
                 height={24}
-                objectFit="cover"
+                className="object-cover"
                 src="/images/logo.png"
                 width={24}
               />

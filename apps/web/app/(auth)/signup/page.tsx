@@ -18,7 +18,7 @@ export default function SignUpPage() {
               <Image
                 alt="TazeAI"
                 height={24}
-                objectFit="cover"
+                className="object-cover"
                 src="/images/logo.png"
                 width={24}
               />

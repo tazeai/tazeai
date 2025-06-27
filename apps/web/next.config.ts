@@ -20,7 +20,7 @@ let nextConfig: NextConfig = {
     ignoreBuildErrors: false,
   },
   images: {
-    domains: ['localhost'],
+    remotePatterns: [{ hostname: 'localhost' }],
     formats: ['image/webp', 'image/avif'],
   },
   turbopack: {

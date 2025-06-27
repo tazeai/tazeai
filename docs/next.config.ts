@@ -8,6 +8,17 @@ let nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  turbopack: {
+    rules: {
+      '*.svg': {
+        loaders: ['@svgr/webpack'],
+        as: '*.js',
+      },
+    },
+  },
+  experimental: {
+    optimizePackageImports: ['@tazeai/ui', '@radix-ui/react-icons'],
+  },
 };
 
 nextConfig = withMDX(nextConfig);

@@ -2,25 +2,28 @@
 
 import { useEffect, useRef } from 'react';
 
+// Pointer represents a pointer (mouse or touch) for fluid interaction
 interface Pointer {
-  id: number;
-  texcoordX: number;
-  texcoordY: number;
-  prevTexcoordX: number;
-  prevTexcoordY: number;
-  deltaX: number;
-  deltaY: number;
-  down: boolean;
-  moved: boolean;
-  color: Color;
+  id: number; // Pointer ID
+  texcoordX: number; // Current normalized X coordinate
+  texcoordY: number; // Current normalized Y coordinate
+  prevTexcoordX: number; // Previous normalized X coordinate
+  prevTexcoordY: number; // Previous normalized Y coordinate
+  deltaX: number; // Movement in X direction
+  deltaY: number; // Movement in Y direction
+  down: boolean; // Whether pointer is pressed
+  moved: boolean; // Whether pointer has moved
+  color: Color; // Current pointer color
 }
 
+// RGB color structure
 interface Color {
   r: number;
   g: number;
   b: number;
 }
 
+// WebGL extension capabilities
 interface WebGLExtensions {
   formatRGBA: { internalFormat: number; format: number };
   formatRG: { internalFormat: number; format: number };
@@ -29,11 +32,13 @@ interface WebGLExtensions {
   supportLinearFiltering: boolean;
 }
 
+// WebGL context and extension info
 interface WebGLContextResult {
   gl: WebGLRenderingContext | WebGL2RenderingContext;
   ext: WebGLExtensions;
 }
 
+// Single Frame Buffer Object (FBO)
 interface FBO {
   texture: WebGLTexture;
   fbo: WebGLFramebuffer;
@@ -44,6 +49,7 @@ interface FBO {
   attach(id: number): number;
 }
 
+// Double FBO, contains read/write FBOs
 interface DoubleFBO {
   width: number;
   height: number;
@@ -54,22 +60,23 @@ interface DoubleFBO {
   swap(): void;
 }
 
+// Splash component: fluid animation background
 export function Splash({
-  // Add whatever props you like for customization
-  SIM_RESOLUTION = 128,
-  DYE_RESOLUTION = 1440,
-  CAPTURE_RESOLUTION = 512,
-  DENSITY_DISSIPATION = 3.5,
-  VELOCITY_DISSIPATION = 2,
-  PRESSURE = 0.1,
-  PRESSURE_ITERATIONS = 20,
-  CURL = 3,
-  SPLAT_RADIUS = 0.2,
-  SPLAT_FORCE = 6000,
-  SHADING = true,
-  COLOR_UPDATE_SPEED = 10,
-  BACK_COLOR = { r: 0.5, g: 0, b: 0 },
-  TRANSPARENT = true,
+  // Customizable parameters, see comments below
+  SIM_RESOLUTION = 128, // Simulation resolution
+  DYE_RESOLUTION = 1440, // Dye (color) resolution
+  CAPTURE_RESOLUTION = 512, // Capture resolution
+  DENSITY_DISSIPATION = 3.5, // Density dissipation
+  VELOCITY_DISSIPATION = 2, // Velocity dissipation
+  PRESSURE = 0.1, // Pressure
+  PRESSURE_ITERATIONS = 20, // Pressure solver iterations
+  CURL = 3, // Vorticity
+  SPLAT_RADIUS = 0.2, // Splat (splash) radius
+  SPLAT_FORCE = 6000, // Splat force
+  SHADING = true, // Enable shading
+  COLOR_UPDATE_SPEED = 10, // Color update speed
+  BACK_COLOR = { r: 0.5, g: 0, b: 0 }, // Background color
+  TRANSPARENT = true, // Transparent background
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -320,27 +327,76 @@ export function Splash({
       return uniforms;
     }
 
+    // Shader cache to avoid recompiling identical shaders
+    // This significantly improves performance by caching compiled shaders
+    const shaderCache = new Map<string, WebGLShader>();
+
+    /**
+     * Compiles a WebGL shader with caching and error handling
+     * @param type - Shader type (VERTEX_SHADER or FRAGMENT_SHADER)
+     * @param source - Shader source code
+     * @param keywords - Optional preprocessor keywords to add
+     * @returns Compiled WebGL shader
+     * @throws Error if shader creation or compilation fails
+     */
     function compileShader(
       type: number,
       source: string,
       keywords?: string[]
     ): WebGLShader {
-      source = addKeywords(source, keywords);
-      const shader = gl.createShader(type)!;
-      gl.shaderSource(shader, source);
+      // Create cache key from shader type, source and keywords
+      // This ensures identical shaders are only compiled once
+      const cacheKey = `${type}:${source}:${keywords?.join(',') || ''}`;
+
+      // Check if shader is already compiled and cached
+      if (shaderCache.has(cacheKey)) {
+        return shaderCache.get(cacheKey)!;
+      }
+
+      // Preprocess source with keywords (adds #define statements)
+      const processedSource = addKeywords(source, keywords);
+
+      // Create shader object
+      const shader = gl.createShader(type);
+      if (!shader) {
+        throw new Error(`Failed to create shader of type ${type}`);
+      }
+
+      // Set shader source code
+      gl.shaderSource(shader, processedSource);
+
+      // Compile the shader
       gl.compileShader(shader);
-      if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS))
-        console.trace(gl.getShaderInfoLog(shader));
+
+      // Check compilation status and handle errors
+      if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+        const errorLog = gl.getShaderInfoLog(shader);
+        gl.deleteShader(shader); // Clean up failed shader to prevent memory leaks
+        throw new Error(`Shader compilation failed: ${errorLog}`);
+      }
+
+      // Cache the successfully compiled shader for future use
+      shaderCache.set(cacheKey, shader);
+
       return shader;
     }
 
+    /**
+     * Adds preprocessor keywords to shader source code
+     * @param source - Original shader source
+     * @param keywords - Array of keywords to add as #define statements
+     * @returns Processed shader source with keywords
+     */
     function addKeywords(source: string, keywords?: string[]): string {
-      if (!keywords) return source;
-      let keywordsString = '';
-      keywords.forEach((keyword) => {
-        keywordsString += '#define ' + keyword + '\n';
-      });
-      return keywordsString + source;
+      if (!keywords || keywords.length === 0) return source;
+
+      // Use more efficient string concatenation with map and join
+      // This is faster than string concatenation in a loop
+      const keywordDefines = keywords
+        .map((keyword) => `#define ${keyword}`)
+        .join('\n');
+
+      return `${keywordDefines}\n${source}`;
     }
 
     const baseVertexShader = compileShader(
@@ -968,7 +1024,10 @@ export function Splash({
         velocity.texelSizeX,
         velocity.texelSizeY
       );
-      gl.uniform1i(curlProgram.uniforms.uVelocity ?? null, velocity.read.attach(0));
+      gl.uniform1i(
+        curlProgram.uniforms.uVelocity ?? null,
+        velocity.read.attach(0)
+      );
       blit(curl);
 
       // Vorticity
@@ -1003,7 +1062,10 @@ export function Splash({
 
       // Clear pressure
       clearProgram.bind();
-      gl.uniform1i(clearProgram.uniforms.uTexture ?? null, pressure.read.attach(0));
+      gl.uniform1i(
+        clearProgram.uniforms.uTexture ?? null,
+        pressure.read.attach(0)
+      );
       gl.uniform1f(clearProgram.uniforms.value ?? null, config.PRESSURE);
       blit(pressure.write);
       pressure.swap();
@@ -1015,7 +1077,10 @@ export function Splash({
         velocity.texelSizeX,
         velocity.texelSizeY
       );
-      gl.uniform1i(pressureProgram.uniforms.uDivergence ?? null, divergence.attach(0));
+      gl.uniform1i(
+        pressureProgram.uniforms.uDivergence ?? null,
+        divergence.attach(0)
+      );
       for (let i = 0; i < config.PRESSURE_ITERATIONS; i++) {
         gl.uniform1i(
           pressureProgram.uniforms.uPressure ?? null,
@@ -1077,7 +1142,10 @@ export function Splash({
         advectionProgram.uniforms.uVelocity ?? null,
         velocity.read.attach(0)
       );
-      gl.uniform1i(advectionProgram.uniforms.uSource ?? null, dye.read.attach(1));
+      gl.uniform1i(
+        advectionProgram.uniforms.uSource ?? null,
+        dye.read.attach(1)
+      );
       gl.uniform1f(
         advectionProgram.uniforms.dissipation ?? null,
         config.DENSITY_DISSIPATION
@@ -1102,7 +1170,10 @@ export function Splash({
           1.0 / width,
           1.0 / height
         );
-      gl.uniform1i(displayMaterial.uniforms.uTexture ?? null, dye.read.attach(0));
+      gl.uniform1i(
+        displayMaterial.uniforms.uTexture ?? null,
+        dye.read.attach(0)
+      );
       blit(target);
     }
 
@@ -1130,7 +1201,10 @@ export function Splash({
       color: Color
     ): void {
       splatProgram.bind();
-      gl.uniform1i(splatProgram.uniforms.uTarget ?? null, velocity.read.attach(0));
+      gl.uniform1i(
+        splatProgram.uniforms.uTarget ?? null,
+        velocity.read.attach(0)
+      );
       gl.uniform1f(
         splatProgram.uniforms.aspectRatio ?? null,
         canvas!.width / canvas!.height
@@ -1145,7 +1219,12 @@ export function Splash({
       velocity.swap();
 
       gl.uniform1i(splatProgram.uniforms.uTarget ?? null, dye.read.attach(0));
-      gl.uniform3f(splatProgram.uniforms.color ?? null, color.r, color.g, color.b);
+      gl.uniform3f(
+        splatProgram.uniforms.color ?? null,
+        color.r,
+        color.g,
+        color.b
+      );
       blit(dye.write);
       dye.swap();
     }

@@ -31,7 +31,7 @@
     "react-i18next": "^15.5.3",
     "server-only": "^0.0.1",
     "sonner": "^2.0.5",
-    "zustand": "^5.0.5"
+    "zustand": "^5.0.6"
   },
   "devDependencies": {
     "@tazeai/typescript": "workspace:*",
