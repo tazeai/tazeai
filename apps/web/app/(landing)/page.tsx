@@ -1,5 +1,6 @@
 'use client';
 
+import { AnimatedBackground } from './_components/animated-background';
 import CTASection from './_components/cta-section';
 import DemoSection from './_components/demo-section';
 import Features from './_components/features';
@@ -11,9 +12,10 @@ import Testimonials from './_components/testimonials';
 
 export default function LandingPage() {
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="relative flex min-h-screen flex-col overflow-hidden scroll-smooth">
+      <AnimatedBackground />
       <Navbar />
-      <main className="flex-1">
+      <main className="relative z-10 flex-1">
         <Hero />
         <Features />
         <DemoSection />

@@ -18,6 +18,7 @@ const Hero = () => {
     x: 0,
     y: 0,
   });
+  const [scrollY, setScrollY] = useState(0);
   const fullText = '创意无限，智能对话';
 
   useEffect(() => {
@@ -40,8 +41,17 @@ const Hero = () => {
         y: e.clientY,
       });
     };
+    
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    
     window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   return (
@@ -49,12 +59,32 @@ const Hero = () => {
       {/* 增强的动态背景效果 */}
       <div className="-z-10 absolute inset-0 overflow-hidden">
         {/* 渐变背景 */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-purple-500/5 to-pink-500/5" />
+        <div 
+          className="absolute inset-0 bg-gradient-to-br from-primary/5 via-purple-500/5 to-pink-500/5"
+          style={{
+            transform: `translateY(${scrollY * 0.1}px)`,
+          }}
+        />
 
-        {/* 动态光球 */}
-        <div className="-translate-y-1/4 absolute top-0 right-0 h-[600px] w-[600px] translate-x-1/4 animate-pulse rounded-full bg-gradient-to-br from-primary/10 to-purple-500/10 blur-[120px]" />
-        <div className="-translate-x-1/4 absolute bottom-0 left-0 h-[500px] w-[500px] translate-y-1/4 animate-pulse rounded-full bg-gradient-to-tr from-purple-500/10 to-pink-500/10 blur-[100px] delay-700" />
-        <div className="-translate-x-1/2 -translate-y-1/2 absolute top-1/2 left-1/2 h-[400px] w-[400px] animate-pulse rounded-full bg-gradient-to-r from-blue-500/5 to-cyan-500/5 blur-[80px] delay-1000" />
+        {/* 动态光球 - 添加视差效果 */}
+        <div 
+          className="-translate-y-1/4 absolute top-0 right-0 h-[600px] w-[600px] translate-x-1/4 animate-pulse rounded-full bg-gradient-to-br from-primary/10 to-purple-500/10 blur-[120px]"
+          style={{
+            transform: `translate(25%, -25%) translateY(${scrollY * 0.15}px)`,
+          }}
+        />
+        <div 
+          className="-translate-x-1/4 absolute bottom-0 left-0 h-[500px] w-[500px] translate-y-1/4 animate-pulse rounded-full bg-gradient-to-tr from-purple-500/10 to-pink-500/10 blur-[100px] delay-700"
+          style={{
+            transform: `translate(-25%, 25%) translateY(${scrollY * -0.1}px)`,
+          }}
+        />
+        <div 
+          className="-translate-x-1/2 -translate-y-1/2 absolute top-1/2 left-1/2 h-[400px] w-[400px] animate-pulse rounded-full bg-gradient-to-r from-blue-500/5 to-cyan-500/5 blur-[80px] delay-1000"
+          style={{
+            transform: `translate(-50%, -50%) translateY(${scrollY * 0.08}px)`,
+          }}
+        />
 
         {/* 鼠标跟随光效 */}
         <div
@@ -122,15 +152,16 @@ const Hero = () => {
             {/* 增强的按钮组 */}
             <div className="flex flex-col gap-4 pt-6 sm:flex-row">
               <Button
-                className="group transform bg-gradient-to-r from-primary to-purple-600 text-white shadow-lg transition-all duration-300 hover:scale-105 hover:from-primary/90 hover:to-purple-600/90 hover:shadow-xl"
+                className="group relative transform overflow-hidden bg-gradient-to-r from-primary to-purple-600 text-white shadow-lg transition-all duration-500 hover:scale-105 hover:from-primary/90 hover:to-purple-600/90 hover:shadow-2xl"
                 size="lg"
               >
-                <Zap className="mr-2 h-5 w-5" />
-                立即体验
-                <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -skew-x-12 -translate-x-full transition-transform duration-700 group-hover:translate-x-full" />
+                <Zap className="relative mr-2 h-5 w-5" />
+                <span className="relative">立即体验</span>
+                <ChevronRight className="relative ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
               <Button
-                className="group transform border-2 transition-all duration-300 hover:scale-105 hover:border-primary/50 hover:bg-primary/5"
+                className="group transform border-2 backdrop-blur-sm transition-all duration-500 hover:scale-105 hover:border-primary/50 hover:bg-primary/5 hover:shadow-lg"
                 size="lg"
                 variant="outline"
               >
@@ -178,11 +209,15 @@ const Hero = () => {
           {/* 增强的演示区域 */}
           <div
             className={cn(
-              'relative transform overflow-hidden rounded-2xl border bg-gradient-to-br from-background/50 to-background/30 shadow-2xl backdrop-blur-sm transition-all delay-500 duration-1000 hover:scale-105',
+              'group relative transform overflow-hidden rounded-2xl border bg-gradient-to-br from-background/50 to-background/30 shadow-2xl backdrop-blur-sm transition-all delay-500 duration-1000 hover:scale-105 hover:rotate-1',
+              'perspective-1000 hover:shadow-3xl',
               isVisible
                 ? 'translate-y-0 opacity-100'
                 : 'translate-y-12 opacity-0'
             )}
+            style={{
+              transform: `translateY(${scrollY * -0.05}px) ${isVisible ? 'translateY(0)' : 'translateY(48px)'} rotateX(${mousePosition.y * 0.01}deg) rotateY(${mousePosition.x * 0.01}deg)`,
+            }}
           >
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-purple-500/5 to-pink-500/5" />
             <div className="relative m-3 aspect-video rounded-2xl bg-gradient-to-br from-card/80 to-card/60 p-3 shadow-inner">
@@ -225,6 +260,24 @@ const Hero = () => {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 浮动操作按钮 */}
+      <div className="absolute bottom-8 right-8 z-20">
+        <div className="group relative">
+          <Button
+            className="h-14 w-14 animate-bounce rounded-full bg-gradient-to-r from-primary to-purple-600 p-0 shadow-lg transition-all duration-300 hover:scale-110 hover:animate-none hover:shadow-xl"
+            onClick={() => {
+              document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+          >
+            <ChevronRight className="h-6 w-6 rotate-90 text-white" />
+          </Button>
+          <div className="absolute inset-0 animate-ping rounded-full bg-primary/20"></div>
+          <div className="absolute -top-12 right-0 hidden rounded-lg bg-background/90 px-3 py-1 text-sm backdrop-blur-sm transition-opacity group-hover:block">
+            探索更多
           </div>
         </div>
       </div>
