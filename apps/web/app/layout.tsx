@@ -26,8 +26,6 @@ export const metadata: Metadata = {
   manifest: isProduction ? '/manifest.json' : undefined,
 };
 
-export const dynamic = 'force-dynamic';
-
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -37,7 +35,7 @@ export default async function RootLayout({
   const theme = await getTheme();
   const className = getFontsClassName(theme);
   return (
-    <html className={className} lang={language} suppressHydrationWarning>
+    <html className={className} lang={language}>
       <body>
         <Providers
           lang={language}

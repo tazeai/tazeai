@@ -48,10 +48,17 @@ export const AnimatedBackground = () => {
 
     // Initialize floating shapes
     const initialShapes: FloatingShape[] = [];
-    const shapeTypes: Array<'circle' | 'triangle' | 'square'> = ['circle', 'triangle', 'square'];
+    const shapeTypes: Array<'circle' | 'triangle' | 'square'> = [
+      'circle',
+      'triangle',
+      'square',
+    ];
     for (let i = 0; i < 15; i++) {
       const randomIndex = Math.floor(Math.random() * shapeTypes.length);
-      const shapeType = shapeTypes[randomIndex] as 'circle' | 'triangle' | 'square';
+      const shapeType = shapeTypes[randomIndex] as
+        | 'circle'
+        | 'triangle'
+        | 'square';
       initialShapes.push({
         id: i,
         x: Math.random() * window.innerWidth,
@@ -77,18 +84,32 @@ export const AnimatedBackground = () => {
 
   useEffect(() => {
     const animateParticles = () => {
-      setParticles(prev => prev.map(particle => ({
-        ...particle,
-        x: particle.x < 0 ? window.innerWidth : particle.x > window.innerWidth ? 0 : particle.x + particle.speedX,
-        y: particle.y < 0 ? window.innerHeight : particle.y > window.innerHeight ? 0 : particle.y + particle.speedY,
-      })));
+      setParticles((prev) =>
+        prev.map((particle) => ({
+          ...particle,
+          x:
+            particle.x < 0
+              ? window.innerWidth
+              : particle.x > window.innerWidth
+                ? 0
+                : particle.x + particle.speedX,
+          y:
+            particle.y < 0
+              ? window.innerHeight
+              : particle.y > window.innerHeight
+                ? 0
+                : particle.y + particle.speedY,
+        }))
+      );
 
-      setShapes(prev => prev.map(shape => ({
-        ...shape,
-        rotation: shape.rotation + shape.rotationSpeed,
-        x: shape.x + Math.sin(Date.now() * 0.001 + shape.id) * 0.2,
-        y: shape.y + Math.cos(Date.now() * 0.0008 + shape.id) * 0.15,
-      })));
+      setShapes((prev) =>
+        prev.map((shape) => ({
+          ...shape,
+          rotation: shape.rotation + shape.rotationSpeed,
+          x: shape.x + Math.sin(Date.now() * 0.001 + shape.id) * 0.2,
+          y: shape.y + Math.cos(Date.now() * 0.0008 + shape.id) * 0.15,
+        }))
+      );
     };
 
     const interval = setInterval(animateParticles, 16);
@@ -166,13 +187,14 @@ export const AnimatedBackground = () => {
         style={{
           left: mousePosition.x - 192,
           top: mousePosition.y - 192,
-          background: 'radial-gradient(circle, hsl(210 100% 70% / 0.3) 0%, hsl(280 100% 70% / 0.2) 30%, transparent 70%)',
+          background:
+            'radial-gradient(circle, hsl(210 100% 70% / 0.3) 0%, hsl(280 100% 70% / 0.2) 30%, transparent 70%)',
           filter: 'blur(40px)',
         }}
       />
 
       {/* Floating particles */}
-      {particles.map(particle => (
+      {particles.map((particle) => (
         <div
           key={particle.id}
           className="absolute rounded-full animate-pulse"
@@ -190,7 +212,6 @@ export const AnimatedBackground = () => {
 
       {/* Floating geometric shapes */}
       {shapes.map(renderShape)}
-
     </div>
   );
 };

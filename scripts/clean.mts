@@ -1,5 +1,5 @@
-import * as glob from 'fast-glob';
 import * as fs from 'node:fs';
+import * as glob from 'fast-glob';
 
 const dirs = ['.', ...glob.sync('packages/*/'), ...glob.sync('packages/ai/*/')];
 

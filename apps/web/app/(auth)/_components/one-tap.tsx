@@ -11,7 +11,7 @@ function OneTap() {
   useEffect(() => {
     const isEnabled = env.NEXT_PUBLIC_AUTH_GOOGLE_ENABLED;
     if (!isEnabled) return;
-    if (!session.data?.user && !session.isPending && !taped) {
+    if (!(session.data?.user || session.isPending || taped)) {
       client.oneTap();
       setTaped(true);
     }

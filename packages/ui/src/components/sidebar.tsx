@@ -79,7 +79,7 @@ function Slider({
     return (
       <TooltipProvider>
         <Tooltip open={showTooltipState}>
-          <TooltipTrigger asChild>{thumb}</TooltipTrigger>
+          <TooltipTrigger asChild={true}>{thumb}</TooltipTrigger>
           <TooltipContent
             className="px-2 py-1 text-xs"
             side={props.orientation === 'vertical' ? 'right' : 'top'}

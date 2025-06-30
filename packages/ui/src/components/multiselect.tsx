@@ -290,7 +290,7 @@ const MultipleSelector = ({
     };
 
     const exec = async () => {
-      if (!onSearchSync || !open) return;
+      if (!(onSearchSync && open)) return;
 
       if (triggerSearchOnFocus) {
         doSearchSync();
@@ -316,7 +316,7 @@ const MultipleSelector = ({
     };
 
     const exec = async () => {
-      if (!onSearch || !open) return;
+      if (!(onSearch && open)) return;
 
       if (triggerSearchOnFocus) {
         await doSearch();
@@ -392,7 +392,7 @@ const MultipleSelector = ({
     // For async search that showing emptyIndicator
     if (onSearch && !creatable && Object.keys(options).length === 0) {
       return (
-        <CommandItem disabled value="-">
+        <CommandItem disabled={true} value="-">
           {emptyIndicator}
         </CommandItem>
       );

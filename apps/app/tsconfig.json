@@ -3,7 +3,7 @@
     "baseUrl": ".",
     "lib": ["webworker", "DOM"],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./*"]
     },
     "plugins": [
       {

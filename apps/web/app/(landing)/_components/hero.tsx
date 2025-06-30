@@ -41,11 +41,11 @@ const Hero = () => {
         y: e.clientY,
       });
     };
-    
+
     const handleScroll = () => {
       setScrollY(window.scrollY);
     };
-    
+
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('scroll', handleScroll);
     return () => {
@@ -59,7 +59,7 @@ const Hero = () => {
       {/* 增强的动态背景效果 */}
       <div className="-z-10 absolute inset-0 overflow-hidden">
         {/* 渐变背景 */}
-        <div 
+        <div
           className="absolute inset-0 bg-gradient-to-br from-primary/5 via-purple-500/5 to-pink-500/5"
           style={{
             transform: `translateY(${scrollY * 0.1}px)`,
@@ -67,19 +67,19 @@ const Hero = () => {
         />
 
         {/* 动态光球 - 添加视差效果 */}
-        <div 
+        <div
           className="-translate-y-1/4 absolute top-0 right-0 h-[600px] w-[600px] translate-x-1/4 animate-pulse rounded-full bg-gradient-to-br from-primary/10 to-purple-500/10 blur-[120px]"
           style={{
             transform: `translate(25%, -25%) translateY(${scrollY * 0.15}px)`,
           }}
         />
-        <div 
+        <div
           className="-translate-x-1/4 absolute bottom-0 left-0 h-[500px] w-[500px] translate-y-1/4 animate-pulse rounded-full bg-gradient-to-tr from-purple-500/10 to-pink-500/10 blur-[100px] delay-700"
           style={{
             transform: `translate(-25%, 25%) translateY(${scrollY * -0.1}px)`,
           }}
         />
-        <div 
+        <div
           className="-translate-x-1/2 -translate-y-1/2 absolute top-1/2 left-1/2 h-[400px] w-[400px] animate-pulse rounded-full bg-gradient-to-r from-blue-500/5 to-cyan-500/5 blur-[80px] delay-1000"
           style={{
             transform: `translate(-50%, -50%) translateY(${scrollY * 0.08}px)`,
@@ -270,12 +270,14 @@ const Hero = () => {
           <Button
             className="h-14 w-14 animate-bounce rounded-full bg-gradient-to-r from-primary to-purple-600 p-0 shadow-lg transition-all duration-300 hover:scale-110 hover:animate-none hover:shadow-xl"
             onClick={() => {
-              document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' });
+              document
+                .getElementById('features')
+                ?.scrollIntoView({ behavior: 'smooth' });
             }}
           >
             <ChevronRight className="h-6 w-6 rotate-90 text-white" />
           </Button>
-          <div className="absolute inset-0 animate-ping rounded-full bg-primary/20"></div>
+          <div className="absolute inset-0 animate-ping rounded-full bg-primary/20" />
           <div className="absolute -top-12 right-0 hidden rounded-lg bg-background/90 px-3 py-1 text-sm backdrop-blur-sm transition-opacity group-hover:block">
             探索更多
           </div>

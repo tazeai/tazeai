@@ -1,16 +1,16 @@
 'use client';
 
 import { Check, ChevronsUpDown } from '@tazeai/ui/components/icons';
-import { type ComponentProps, type ReactNode, useMemo, useState } from 'react';
-import Link from 'fumadocs-core/link';
-import { usePathname } from 'fumadocs-core/framework';
-import { cn } from '@tazeai/ui/lib/utils';
-import { useSidebar } from 'fumadocs-ui/contexts/sidebar';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@tazeai/ui/components/popover';
+import { cn } from '@tazeai/ui/lib/utils';
+import { usePathname } from 'fumadocs-core/framework';
+import Link from 'fumadocs-core/link';
+import { useSidebar } from 'fumadocs-ui/contexts/sidebar';
+import { type ComponentProps, type ReactNode, useMemo, useState } from 'react';
 import { isActive } from '../../lib/is-active';
 
 export interface Option {

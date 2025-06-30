@@ -94,7 +94,7 @@ const Navbar = () => {
           </div>
 
           <Sheet>
-            <SheetTrigger asChild>
+            <SheetTrigger asChild={true}>
               <Button className="md:hidden" size="icon" variant="ghost">
                 <Menu className="h-5 w-5" />
                 <span className="sr-only">Toggle menu</span>
@@ -107,7 +107,7 @@ const Navbar = () => {
                     <div className="h-6 w-6 rounded-full bg-primary" />
                     <span className="font-bold text-xl">TazeAI</span>
                   </a>
-                  <SheetTrigger asChild>
+                  <SheetTrigger asChild={true}>
                     <Button size="icon" variant="ghost">
                       <X className="h-5 w-5" />
                       <span className="sr-only">Close menu</span>

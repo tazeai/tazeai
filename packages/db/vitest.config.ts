@@ -1,4 +1,4 @@
-import { mergeConfig, defineProject, type ViteUserConfig } from 'vitest/config';
+import { defineProject, mergeConfig, type ViteUserConfig } from 'vitest/config';
 import sharedConfig from '../../vitest.shared';
 
 const config: ViteUserConfig = {};

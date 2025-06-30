@@ -95,28 +95,22 @@ function TreeItem<T = any>({
         )}
         data-drag-target={
           typeof item.isDragTarget === 'function'
-            ? item.isDragTarget() || false
+            ? item.isDragTarget()
             : undefined
         }
         data-focus={
-          typeof item.isFocused === 'function'
-            ? item.isFocused() || false
-            : undefined
+          typeof item.isFocused === 'function' ? item.isFocused() : undefined
         }
         data-folder={
-          typeof item.isFolder === 'function'
-            ? item.isFolder() || false
-            : undefined
+          typeof item.isFolder === 'function' ? item.isFolder() : undefined
         }
         data-search-match={
           typeof item.isMatchingSearch === 'function'
-            ? item.isMatchingSearch() || false
+            ? item.isMatchingSearch()
             : undefined
         }
         data-selected={
-          typeof item.isSelected === 'function'
-            ? item.isSelected() || false
-            : undefined
+          typeof item.isSelected === 'function' ? item.isSelected() : undefined
         }
         data-slot="tree-item"
         style={mergedStyle}

@@ -88,7 +88,7 @@ function Carousel({
   );
 
   React.useEffect(() => {
-    if (!api || !setApi) return;
+    if (!(api && setApi)) return;
     setApi(api);
   }, [api, setApi]);
 

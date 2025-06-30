@@ -38,7 +38,9 @@ const Feature = ({ icon, title, description, delay }: FeatureProps) => {
           <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-primary/10 to-purple-500/10 text-primary transition-all duration-500 group-hover:scale-110 group-hover:rotate-3">
             {icon}
           </div>
-          <h3 className="mb-3 font-semibold text-xl transition-colors group-hover:text-primary">{title}</h3>
+          <h3 className="mb-3 font-semibold text-xl transition-colors group-hover:text-primary">
+            {title}
+          </h3>
           <p className="text-muted-foreground leading-relaxed">{description}</p>
         </div>
       </div>
@@ -48,7 +50,10 @@ const Feature = ({ icon, title, description, delay }: FeatureProps) => {
 
 const Features = () => {
   return (
-    <section className="relative bg-gradient-to-b from-muted/30 to-background/50 py-24 backdrop-blur-sm" id="features">
+    <section
+      className="relative bg-gradient-to-b from-muted/30 to-background/50 py-24 backdrop-blur-sm"
+      id="features"
+    >
       <div className="container mx-auto max-w-7xl px-4 md:px-6">
         <ScrollReveal direction="up" duration={1000}>
           <div className="mb-16 space-y-6 text-center">
@@ -58,7 +63,7 @@ const Features = () => {
             <p className="mx-auto max-w-[700px] text-lg text-muted-foreground leading-relaxed">
               探索AI驱动的创新功能，释放创作潜能，让灵感自由流动。
             </p>
-            <div className="mx-auto h-1 w-24 bg-gradient-to-r from-primary to-purple-600 rounded-full"></div>
+            <div className="mx-auto h-1 w-24 bg-gradient-to-r from-primary to-purple-600 rounded-full" />
           </div>
         </ScrollReveal>
 

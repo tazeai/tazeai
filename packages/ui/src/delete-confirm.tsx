@@ -37,7 +37,7 @@ export default function DeleteConfirm(props: DeleteConfirmProps) {
 
   return (
     <Dialog>
-      <DialogTrigger asChild>
+      <DialogTrigger asChild={true}>
         <Button variant="outline">Delete project</Button>
       </DialogTrigger>
       <DialogContent>
@@ -71,7 +71,7 @@ export default function DeleteConfirm(props: DeleteConfirmProps) {
             />
           </div>
           <DialogFooter>
-            <DialogClose asChild>
+            <DialogClose asChild={true}>
               <Button className="flex-1" type="button" variant="outline">
                 Cancel
               </Button>

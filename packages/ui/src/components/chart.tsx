@@ -185,7 +185,7 @@ function ChartTooltipContent({
     labelKey,
   ]);
 
-  if (!active || !payload?.length) {
+  if (!(active && payload?.length)) {
     return null;
   }
 

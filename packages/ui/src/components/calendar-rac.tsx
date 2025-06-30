@@ -105,7 +105,7 @@ function RangeCalendar({ className, ...props }: RangeCalendarProps) {
       )}
     >
       <CalendarHeader />
-      <CalendarGridComponent isRange />
+      <CalendarGridComponent isRange={true} />
     </RangeCalendarRac>
   );
 }

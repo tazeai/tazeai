@@ -29,7 +29,7 @@ export default function Rating(props: RatingProps) {
 
   return (
     <Dialog>
-      <DialogTrigger asChild>
+      <DialogTrigger asChild={true}>
         <Button variant="outline">{title}</Button>
       </DialogTrigger>
       <DialogContent className="flex flex-col gap-0 p-0 [&>button:last-child]:top-3.5">

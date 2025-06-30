@@ -46,7 +46,7 @@ export function ThemeSwitcher() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger asChild={true}>
         <Button aria-label="Select theme" size="icon" variant="outline">
           {currentTheme?.icon && (
             <currentTheme.icon className="h-[1.2rem] w-[1.2rem] transition-all" />

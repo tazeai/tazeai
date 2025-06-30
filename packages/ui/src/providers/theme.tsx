@@ -9,8 +9,8 @@ export const NextThemeProvider = ({
   <ThemeProvider
     attribute="class"
     defaultTheme="system"
-    disableTransitionOnChange
-    enableSystem
+    disableTransitionOnChange={true}
+    enableSystem={true}
     {...properties}
   >
     <ThemeCookieProvider theme={properties.defaultTheme ?? 'system'}>

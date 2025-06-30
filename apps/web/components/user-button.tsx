@@ -40,7 +40,7 @@ export function UserButton() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger asChild={true}>
         <Button
           className="flex h-auto items-center gap-2 rounded-full p-1 pr-4"
           variant="ghost"
@@ -55,7 +55,7 @@ export function UserButton() {
           <span className="font-medium text-sm">{data.user.name}</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-56" forceMount>
+      <DropdownMenuContent align="end" className="w-56" forceMount={true}>
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
             <p className="font-medium text-sm leading-none">{data.user.name}</p>
@@ -66,7 +66,7 @@ export function UserButton() {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem asChild>
+          <DropdownMenuItem asChild={true}>
             <Link
               className="flex w-full cursor-pointer items-center"
               href="/dashboard"
@@ -75,7 +75,7 @@ export function UserButton() {
               <span>Dashboard</span>
             </Link>
           </DropdownMenuItem>
-          <DropdownMenuItem asChild>
+          <DropdownMenuItem asChild={true}>
             <Link
               className="flex w-full cursor-pointer items-center"
               href="/profile"
@@ -84,7 +84,7 @@ export function UserButton() {
               <span>Profile</span>
             </Link>
           </DropdownMenuItem>
-          <DropdownMenuItem asChild>
+          <DropdownMenuItem asChild={true}>
             <Link
               className="flex w-full cursor-pointer items-center"
               href="/settings"
@@ -93,7 +93,7 @@ export function UserButton() {
               <span>Settings</span>
             </Link>
           </DropdownMenuItem>
-          <DropdownMenuItem asChild>
+          <DropdownMenuItem asChild={true}>
             <Link
               className="flex w-full cursor-pointer items-center"
               href="/help"
