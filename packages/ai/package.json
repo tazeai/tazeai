@@ -19,7 +19,7 @@
     "@tazeai/env": "workspace:*",
     "ai": "^4.3.16",
     "langchain": "^0.3.29",
-    "langsmith": "^0.3.34"
+    "langsmith": "^0.3.37"
   },
   "devDependencies": {
     "@tazeai/typescript": "workspace:*",

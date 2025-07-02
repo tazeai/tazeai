@@ -17,7 +17,7 @@
     "@next/third-parties": "^15.3.4",
     "@tazeai/env": "workspace:*",
     "@vercel/analytics": "^1.5.0",
-    "posthog-js": "^1.255.1",
+    "posthog-js": "^1.256.1",
     "posthog-node": "^5.1.1"
   },
   "devDependencies": {

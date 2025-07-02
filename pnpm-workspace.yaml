@@ -5,7 +5,7 @@ packages:
   - '!**/__tests__/*'
 
 catalog:
-  '@types/node': ^22.15.34
+  '@types/node': ^22.16.0
   hono: ^4.8.3
   vite: 6.3.5
 

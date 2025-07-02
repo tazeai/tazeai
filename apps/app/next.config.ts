@@ -7,11 +7,11 @@ const isProd = process.env.NODE_ENV === 'production';
 let nextConfig: NextConfig = {
   transpilePackages: [
     '@tazeai/analytics',
-    '@tazeai/auth',
+    // '@tazeai/auth',
     '@tazeai/cache',
     '@tazeai/core',
     '@tazeai/db',
-    '@tazeai/env',
+    // '@tazeai/env',
     '@tazeai/shared',
     '@tazeai/ui',
   ],

@@ -3,15 +3,63 @@
   "version": "0.0.1",
   "type": "module",
   "exports": {
-    ".": "./src/index.ts",
-    "./envs": "./src/envs.ts",
-    "./types": "./src/types/index.ts",
-    "./client": "./src/client/index.ts",
-    "./server": "./src/server/index.ts",
-    "./middleware": "./src/middleware.ts",
-    "./components/*": "./src/components/*.tsx"
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./envs": {
+      "import": {
+        "types": "./dist/envs.d.ts",
+        "default": "./dist/envs.mjs"
+      },
+      "require": {
+        "types": "./dist/envs.d.cts",
+        "default": "./dist/envs.cjs"
+      }
+    },
+    "./types": {
+      "types": "./dist/types.d.ts"
+    },
+    "./client": {
+      "import": {
+        "types": "./dist/client.d.ts",
+        "default": "./dist/client.mjs"
+      },
+      "require": {
+        "types": "./dist/client.d.cts",
+        "default": "./dist/client.cjs"
+      }
+    },
+    "./server": {
+      "import": {
+        "types": "./dist/server.d.ts",
+        "default": "./dist/server.mjs"
+      },
+      "require": {
+        "types": "./dist/server.d.cts",
+        "default": "./dist/server.cjs"
+      }
+    },
+    "./middleware": {
+      "import": {
+        "types": "./dist/middleware.d.ts",
+        "default": "./dist/middleware.mjs"
+      },
+      "require": {
+        "types": "./dist/middleware.d.cts",
+        "default": "./dist/middleware.cjs"
+      }
+    }
   },
   "scripts": {
+    "build": "unbuild",
+    "dev": "unbuild --watch",
     "clean": "rimraf dist .turbo",
     "generate": "pnpm with-env pnpx @better-auth/cli generate --config=src/auth.ts",
     "test": "vitest",
@@ -40,6 +88,7 @@
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "typescript": "^5.8.3",
+    "unbuild": "^3.5.0",
     "vitest": "^3.2.4"
   }
 }

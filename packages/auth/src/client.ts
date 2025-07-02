@@ -8,7 +8,7 @@ import {
 } from 'better-auth/client/plugins';
 import { createAuthClient } from 'better-auth/react';
 
-import { envs } from '../envs';
+import { envs } from './envs';
 
 // Environment variables
 const env = envs();
@@ -35,5 +35,5 @@ export const { signIn, signUp, useSession, signOut } = client;
 
 // Export the types
 export * from 'better-auth/react';
-export * from '../types';
-export * from './socials';
+export * from './types';
+export * from './client/socials';

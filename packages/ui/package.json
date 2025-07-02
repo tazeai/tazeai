@@ -16,7 +16,7 @@
     "clean": "rimraf dist .turbo"
   },
   "dependencies": {
-    "@headless-tree/core": "^1.2.0",
+    "@headless-tree/core": "^1.2.1",
     "@hookform/resolvers": "^5.1.1",
     "@internationalized/date": "^3.8.2",
     "@origin-space/image-cropper": "^0.1.9",
