@@ -35,8 +35,8 @@
     "react-i18next": "^15.5.3",
     "react-icons": "^5.5.0",
     "sonner": "^2.0.5",
-    "swr": "^2.3.3",
-    "zod": "^3.25.67"
+    "swr": "^2.3.4",
+    "zod": "^3.25.71"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^15.3.4",

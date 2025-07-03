@@ -16,7 +16,7 @@
     "email": "lorenx@163.com"
   },
   "scripts": {
-    "build": "turbo build --filter=\"./packages/**\"",
+    "build": "turbo build",
     "bump-ui": "pnpx shadcn@canary add --all --overwrite -c packages/ui && pnpm format",
     "clean": "turbo run clean --parallel",
     "coverage": "vitest --coverage",
@@ -53,6 +53,7 @@
     "turbo": "^2.5.4",
     "type-fest": "^4.41.0",
     "typescript": "^5.8.3",
+    "unbuild": "^3.5.0",
     "vite": "catalog:",
     "vitest": "^3.2.4"
   },
