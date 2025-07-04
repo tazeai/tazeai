@@ -10,12 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@tazeai/ui/components/select';
-import {
-  MessageCircle,
-  Send,
-  Cpu,
-  Loader2,
-} from '@tazeai/ui/components/icons';
+import { MessageCircle, Send, Cpu, Loader2 } from '@tazeai/ui/components/icons';
 import { useState } from 'react';
 import ScrollReveal from './scroll-reveal';
 
@@ -34,25 +29,31 @@ const AIDemo = () => {
     if (!input.trim() || isLoading) return;
 
     const userMessage: Message = { role: 'user', content: input };
-    setMessages(prev => [...prev, userMessage]);
+    setMessages((prev) => [...prev, userMessage]);
     setInput('');
     setIsLoading(true);
 
     try {
-      const response = await fetch(`/api/v1/chat/completions?type=${provider}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          model: provider === 'openai' ? 'gpt-3.5-turbo' : 'deepseek-ai/DeepSeek-R1-Distill-Qwen-7B',
-          messages: [...messages, userMessage].map(msg => ({
-            role: msg.role,
-            content: msg.content,
-          })),
-          stream: true,
-        }),
-      });
+      const response = await fetch(
+        `/api/v1/chat/completions?type=${provider}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            model:
+              provider === 'openai'
+                ? 'gpt-3.5-turbo'
+                : 'deepseek-ai/DeepSeek-R1-Distill-Qwen-7B',
+            messages: [...messages, userMessage].map((msg) => ({
+              role: msg.role,
+              content: msg.content,
+            })),
+            stream: true,
+          }),
+        }
+      );
 
       if (!response.body) {
         throw new Error('No response body');
@@ -62,7 +63,7 @@ const AIDemo = () => {
       const decoder = new TextDecoder();
       let assistantMessage = '';
 
-      setMessages(prev => [...prev, { role: 'assistant', content: '' }]);
+      setMessages((prev) => [...prev, { role: 'assistant', content: '' }]);
 
       while (true) {
         const { done, value } = await reader.read();
@@ -77,9 +78,9 @@ const AIDemo = () => {
               const data = JSON.parse(line.slice(6));
               if (data.content) {
                 assistantMessage += data.content;
-                setMessages(prev => 
-                  prev.map((msg, index) => 
-                    index === prev.length - 1 
+                setMessages((prev) =>
+                  prev.map((msg, index) =>
+                    index === prev.length - 1
                       ? { ...msg, content: assistantMessage }
                       : msg
                   )
@@ -93,10 +94,13 @@ const AIDemo = () => {
       }
     } catch (error) {
       console.error('Error:', error);
-      setMessages(prev => [...prev, { 
-        role: 'assistant', 
-        content: '抱歉，请求失败。请检查网络连接或稍后再试。' 
-      }]);
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: 'assistant',
+          content: '抱歉，请求失败。请检查网络连接或稍后再试。',
+        },
+      ]);
     } finally {
       setIsLoading(false);
     }
@@ -131,7 +135,12 @@ const AIDemo = () => {
                 <Cpu className="h-4 w-4 text-muted-foreground" />
                 <span className="text-sm font-medium">模型:</span>
               </div>
-              <Select value={provider} onValueChange={(value: 'openai' | 'deepseek') => setProvider(value)}>
+              <Select
+                value={provider}
+                onValueChange={(value: 'openai' | 'deepseek') =>
+                  setProvider(value)
+                }
+              >
                 <SelectTrigger className="w-48">
                   <SelectValue />
                 </SelectTrigger>
@@ -153,17 +162,25 @@ const AIDemo = () => {
                 </div>
               ) : (
                 messages.map((message, index) => (
-                  <div key={index} className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                    <div className={`max-w-[80%] rounded-lg p-3 ${
-                      message.role === 'user' 
-                        ? 'bg-primary text-primary-foreground' 
-                        : 'bg-muted'
-                    }`}>
+                  <div
+                    key={index}
+                    className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                  >
+                    <div
+                      className={`max-w-[80%] rounded-lg p-3 ${
+                        message.role === 'user'
+                          ? 'bg-primary text-primary-foreground'
+                          : 'bg-muted'
+                      }`}
+                    >
                       <div className="text-xs font-medium mb-1 opacity-70">
                         {message.role === 'user' ? '你' : `AI (${provider})`}
                       </div>
                       <div className="text-sm whitespace-pre-wrap">
-                        {message.content || (isLoading && index === messages.length - 1 ? '正在思考...' : '')}
+                        {message.content ||
+                          (isLoading && index === messages.length - 1
+                            ? '正在思考...'
+                            : '')}
                       </div>
                     </div>
                   </div>
@@ -181,8 +198,8 @@ const AIDemo = () => {
                 disabled={isLoading}
                 className="flex-1"
               />
-              <Button 
-                onClick={handleSend} 
+              <Button
+                onClick={handleSend}
                 disabled={!input.trim() || isLoading}
                 size="sm"
               >
@@ -196,7 +213,10 @@ const AIDemo = () => {
 
             {/* 状态信息 */}
             <div className="mt-2 flex items-center justify-between text-xs text-muted-foreground">
-              <span>当前模型: {provider === 'openai' ? 'OpenAI GPT-3.5' : 'DeepSeek R1'}</span>
+              <span>
+                当前模型:{' '}
+                {provider === 'openai' ? 'OpenAI GPT-3.5' : 'DeepSeek R1'}
+              </span>
               <span>流式响应: {isLoading ? '进行中...' : '就绪'}</span>
             </div>
           </Card>

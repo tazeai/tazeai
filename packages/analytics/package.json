@@ -4,20 +4,49 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./src/index.tsx",
-    "./envs": "./src/envs.ts",
-    "./posthog/server": "./src/posthog/server.ts"
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./envs": {
+      "import": {
+        "types": "./dist/envs.d.ts",
+        "default": "./dist/envs.mjs"
+      },
+      "require": {
+        "types": "./dist/envs.d.cts",
+        "default": "./dist/envs.cjs"
+      }
+    },
+    "./posthog/server": {
+      "import": {
+        "types": "./dist/posthog/server.d.ts",
+        "default": "./dist/posthog/server.mjs"
+      },
+      "require": {
+        "types": "./dist/posthog/server.d.cts",
+        "default": "./dist/posthog/server.cjs"
+      }
+    }
   },
   "scripts": {
     "clean": "rimraf dist .turbo",
+    "build": "unbuild",
+    "dev": "unbuild --watch",
     "test": "vitest",
     "test:watch": "vitest"
   },
   "dependencies": {
-    "@next/third-parties": "^15.3.4",
+    "@next/third-parties": "^15.3.5",
     "@tazeai/env": "workspace:*",
     "@vercel/analytics": "^1.5.0",
-    "posthog-js": "^1.256.1",
+    "posthog-js": "^1.256.2",
     "posthog-node": "^5.1.1"
   },
   "devDependencies": {
@@ -25,6 +54,7 @@
     "@types/node": "catalog:",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "unbuild": "^3.5.0"
   }
 }

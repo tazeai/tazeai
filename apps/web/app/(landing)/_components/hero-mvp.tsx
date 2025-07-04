@@ -51,7 +51,7 @@ const HeroMVP = () => {
       {/* 简化的背景效果 */}
       <div className="-z-10 absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-purple-500/5 to-background" />
-        
+
         {/* 简化的光效 */}
         <div
           className="pointer-events-none absolute h-[200px] w-[200px] rounded-full bg-gradient-to-r from-primary/10 to-transparent blur-[40px] transition-all duration-300 ease-out"
@@ -75,9 +75,7 @@ const HeroMVP = () => {
             {/* 简化的标签 */}
             <div className="inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-4 py-2 font-medium text-sm">
               <MessageCircle className="mr-2 h-4 w-4 text-primary" />
-              <span className="text-primary">
-                基于LangChain的AI对话
-              </span>
+              <span className="text-primary">基于LangChain的AI对话</span>
             </div>
 
             {/* 简化的标题 */}
@@ -107,11 +105,7 @@ const HeroMVP = () => {
                 开始对话
                 <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
-              <Button
-                className="group"
-                size="lg"
-                variant="outline"
-              >
+              <Button className="group" size="lg" variant="outline">
                 查看API文档
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>

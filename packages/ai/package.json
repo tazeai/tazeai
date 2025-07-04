@@ -4,26 +4,47 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./src/index.ts",
-    "./langchain": "./src/langchain.ts"
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./langchain": {
+      "import": {
+        "types": "./dist/langchain.d.ts",
+        "default": "./dist/langchain.mjs"
+      },
+      "require": {
+        "types": "./dist/langchain.d.cts",
+        "default": "./dist/langchain.cjs"
+      }
+    }
   },
   "scripts": {
-    "clean": "rimraf dist .turbo"
+    "clean": "rimraf dist .turbo",
+    "build": "unbuild",
+    "dev": "unbuild --watch"
   },
   "dependencies": {
-    "@langchain/community": "^0.3.47",
-    "@langchain/core": "^0.3.61",
+    "@langchain/community": "^0.3.48",
+    "@langchain/core": "^0.3.62",
     "@langchain/deepseek": "^0.0.2",
     "@langchain/openai": "^0.5.16",
     "@tazeai/cache": "workspace:*",
     "@tazeai/env": "workspace:*",
     "ai": "^4.3.16",
     "langchain": "^0.3.29",
-    "langsmith": "^0.3.37"
+    "langsmith": "^0.3.38"
   },
   "devDependencies": {
     "@tazeai/typescript": "workspace:*",
     "@types/node": "catalog:",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "unbuild": "^3.5.0"
   }
 }

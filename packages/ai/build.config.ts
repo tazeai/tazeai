@@ -1,7 +1,7 @@
 import { defineBuildConfig } from 'unbuild';
 
 export default defineBuildConfig({
-  entries: ['src/index.ts'],
+  entries: ['src/index.ts', 'src/langchain.ts'],
   rollup: {
     emitCJS: true,
     esbuild: {

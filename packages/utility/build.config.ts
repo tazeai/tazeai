@@ -1,20 +1,18 @@
-import { defineBuildConfig } from 'unbuild'
-  
+import { defineBuildConfig } from 'unbuild';
+
 export default defineBuildConfig({
-  entries: [
-    "src/index.ts",
-  ],
+  entries: ['src/index.ts'],
   rollup: {
-		emitCJS: true,
-		esbuild: {
-			treeShaking: true,
-		},
-	},
-	declaration: true,
-	outDir: "dist",
-	clean: false,
-	failOnWarn: false,
+    emitCJS: true,
+    esbuild: {
+      treeShaking: true,
+    },
+  },
+  declaration: true,
+  outDir: 'dist',
+  clean: false,
+  failOnWarn: false,
   externals: [
-    // 
+    //
   ],
-})
+});

@@ -4,8 +4,26 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./src/index.ts",
-    "./envs": "./src/envs.ts"
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./envs": {
+      "import": {
+        "types": "./dist/envs.d.ts",
+        "default": "./dist/envs.mjs"
+      },
+      "require": {
+        "types": "./dist/envs.d.cts",
+        "default": "./dist/envs.cjs"
+      }
+    }
   },
   "scripts": {
     "build": "unbuild",

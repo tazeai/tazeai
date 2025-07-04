@@ -28,18 +28,18 @@
     "@tazeai/ui": "workspace:*",
     "hono": "catalog:",
     "i18next": "^25.3.0",
-    "next": "^15.3.4",
+    "next": "^15.3.5",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-hook-form": "^7.59.0",
-    "react-i18next": "^15.5.3",
+    "react-i18next": "^15.6.0",
     "react-icons": "^5.5.0",
-    "sonner": "^2.0.5",
+    "sonner": "^2.0.6",
     "swr": "^2.3.4",
-    "zod": "^3.25.71"
+    "zod": "^3.25.72"
   },
   "devDependencies": {
-    "@next/bundle-analyzer": "^15.3.4",
+    "@next/bundle-analyzer": "^15.3.5",
     "@tailwindcss/postcss": "^4.1.11",
     "@tazeai/typescript": "workspace:*",
     "@types/node": "catalog:",

@@ -3,13 +3,6 @@ import type { NextConfig } from 'next';
 
 let nextConfig: NextConfig = {
   transpilePackages: [
-    '@tazeai/analytics',
-    '@tazeai/auth',
-    '@tazeai/cache',
-    '@tazeai/core',
-    '@tazeai/db',
-    '@tazeai/env',
-    '@tazeai/shared',
     '@tazeai/ui',
   ],
   allowedDevOrigins: ['http://local.tazeai.com:3000'],

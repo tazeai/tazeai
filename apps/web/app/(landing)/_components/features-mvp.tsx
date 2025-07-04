@@ -1,10 +1,6 @@
 'use client';
 
-import {
-  MessageCircle,
-  Cpu,
-  Zap,
-} from '@tazeai/ui/components/icons';
+import { MessageCircle, Cpu, Zap } from '@tazeai/ui/components/icons';
 import { useInView } from '@tazeai/ui/hooks/use-in-view';
 import { cn } from '@tazeai/ui/lib/utils';
 import { useRef } from 'react';
@@ -18,7 +14,13 @@ type FeatureProps = {
   techDetails: string;
 };
 
-const Feature = ({ icon, title, description, delay, techDetails }: FeatureProps) => {
+const Feature = ({
+  icon,
+  title,
+  description,
+  delay,
+  techDetails,
+}: FeatureProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, {
     once: true,
@@ -36,10 +38,10 @@ const Feature = ({ icon, title, description, delay, techDetails }: FeatureProps)
         <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
           {icon}
         </div>
-        <h3 className="mb-3 font-semibold text-lg">
-          {title}
-        </h3>
-        <p className="text-muted-foreground text-sm leading-relaxed mb-3">{description}</p>
+        <h3 className="mb-3 font-semibold text-lg">{title}</h3>
+        <p className="text-muted-foreground text-sm leading-relaxed mb-3">
+          {description}
+        </p>
         <div className="text-xs text-muted-foreground/70 font-mono">
           {techDetails}
         </div>
@@ -50,10 +52,7 @@ const Feature = ({ icon, title, description, delay, techDetails }: FeatureProps)
 
 const FeaturesMVP = () => {
   return (
-    <section
-      className="relative py-16"
-      id="features"
-    >
+    <section className="relative py-16" id="features">
       <div className="container mx-auto max-w-6xl px-4 md:px-6">
         <ScrollReveal direction="up" duration={1000}>
           <div className="mb-12 space-y-4 text-center">

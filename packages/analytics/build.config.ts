@@ -1,7 +1,7 @@
 import { defineBuildConfig } from 'unbuild';
 
 export default defineBuildConfig({
-  entries: ['src/index.ts'],
+  entries: ['src/index.tsx', 'src/envs.ts', 'src/posthog/server.ts'],
   rollup: {
     emitCJS: true,
     esbuild: {

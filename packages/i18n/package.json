@@ -4,25 +4,64 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./src/index.ts",
-    "./server": "./src/i18n.server.ts",
-    "./client": "./src/i18n.client.ts",
-    "./provider": "./src/i18n-provider.tsx"
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./server": {
+      "import": {
+        "types": "./dist/i18n.server.d.ts",
+        "default": "./dist/i18n.server.mjs"
+      },
+      "require": {
+        "types": "./dist/i18n.server.d.cts",
+        "default": "./dist/i18n.server.cjs"
+      }
+    },
+    "./client": {
+      "import": {
+        "types": "./dist/i18n.client.d.ts",
+        "default": "./dist/i18n.client.mjs"
+      },
+      "require": {
+        "types": "./dist/i18n.client.d.cts",
+        "default": "./dist/i18n.client.cjs"
+      }
+    },
+    "./provider": {
+      "import": {
+        "types": "./dist/i18n-provider.d.ts",
+        "default": "./dist/i18n-provider.mjs"
+      },
+      "require": {
+        "types": "./dist/i18n-provider.d.cts",
+        "default": "./dist/i18n-provider.cjs"
+      }
+    }
   },
   "scripts": {
-    "clean": "rimraf dist .turbo"
+    "clean": "rimraf dist .turbo",
+    "build": "unbuild",
+    "dev": "unbuild --watch"
   },
   "dependencies": {
     "i18next": "^25.3.0",
     "i18next-browser-languagedetector": "^8.2.0",
     "i18next-resources-to-backend": "^1.2.1",
-    "react-i18next": "^15.5.3"
+    "react-i18next": "^15.6.0"
   },
   "devDependencies": {
     "@tazeai/typescript": "workspace:*",
     "@types/node": "catalog:",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "unbuild": "^3.5.0"
   }
 }

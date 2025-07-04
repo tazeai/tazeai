@@ -3,13 +3,51 @@
   "version": "0.1.0",
   "type": "module",
   "exports": {
-    ".": "./src/index.ts",
-    "./envs": "./src/envs.ts",
-    "./schemas": "./src/schemas.ts",
-    "./query": "./src/query/index.ts"
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./envs": {
+      "import": {
+        "types": "./dist/envs.d.ts",
+        "default": "./dist/envs.mjs"
+      },
+      "require": {
+        "types": "./dist/envs.d.cts",
+        "default": "./dist/envs.cjs"
+      }
+    },
+    "./schemas": {
+      "import": {
+        "types": "./dist/schemas.d.ts",
+        "default": "./dist/schemas.mjs"
+      },
+      "require": {
+        "types": "./dist/schemas.d.cts",
+        "default": "./dist/schemas.cjs"
+      }
+    },
+    "./query": {
+      "import": {
+        "types": "./dist/query/index.d.ts",
+        "default": "./dist/query/index.mjs"
+      },
+      "require": {
+        "types": "./dist/query/index.d.cts",
+        "default": "./dist/query/index.cjs"
+      }
+    }
   },
   "scripts": {
     "clean": "rimraf dist .turbo",
+    "build": "unbuild",
+    "dev": "unbuild --watch",
     "generate": "pnpm with-env drizzle-kit generate",
     "migrate": "pnpm with-env drizzle-kit migrate",
     "push": "pnpm with-env drizzle-kit push",
@@ -34,6 +72,7 @@
     "dotenv-cli": "^8.0.0",
     "drizzle-kit": "^0.31.4",
     "tsx": "^4.20.3",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "unbuild": "^3.5.0"
   }
 }
