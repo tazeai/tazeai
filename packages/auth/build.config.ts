@@ -20,6 +20,8 @@ export default defineBuildConfig({
   clean: false,
   failOnWarn: false,
   externals: [
-    //
+    'zod',
+    'react',
+    'react-dom',
   ],
 });

@@ -18,6 +18,8 @@ export default defineBuildConfig({
   clean: false,
   failOnWarn: false,
   externals: [
-    //
+    'react-i18next',
+    'react',
+    'react-dom',
   ],
 });

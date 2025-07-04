@@ -1,7 +1,7 @@
 'use client';
 
 import type { ThemeProviderProps } from 'next-themes';
-import type { FC } from 'react';
+import React, { type FC } from 'react';
 import { NextThemeProvider } from './theme';
 
 export type UIProviderProps = ThemeProviderProps;
